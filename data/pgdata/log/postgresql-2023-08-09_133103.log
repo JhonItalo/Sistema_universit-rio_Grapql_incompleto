@@ -1,0 +1,2388 @@
+2023-08-09 13:31:03.059 UTC [1] LOG:  starting PostgreSQL 15.3 (Debian 15.3-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+2023-08-09 13:31:03.061 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2023-08-09 13:31:03.062 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2023-08-09 13:31:03.073 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2023-08-09 13:31:03.152 UTC [30] LOG:  database system was shut down at 2023-08-09 13:30:54 UTC
+2023-08-09 13:31:03.254 UTC [1] LOG:  database system is ready to accept connections
+2023-08-09 13:32:20.906 UTC [36] LOG:  statement: SELECT CURRENT_SCHEMA() AS schema
+2023-08-09 13:32:21.365 UTC [36] LOG:  statement: select version()
+2023-08-09 13:32:21.434 UTC [36] LOG:  statement: 
+	      SELECT      n.nspname as schema, t.typname as typename, t.oid::int4 as typeid
+	      FROM        pg_type t
+	      LEFT JOIN   pg_catalog.pg_namespace n ON n.oid = t.typnamespace
+	      WHERE       (t.typrelid = 0 OR (SELECT c.relkind = 'c' FROM pg_catalog.pg_class c WHERE c.oid = t.typrelid))
+	      AND     NOT EXISTS(SELECT 1 FROM pg_catalog.pg_type el WHERE el.oid = t.typelem AND el.typarray = t.oid)
+	      AND     n.nspname NOT IN ('pg_catalog', 'information_schema');
+	    
+2023-08-09 13:32:21.450 UTC [35] LOG:  statement: SELECT CURRENT_SCHEMA() AS schema
+2023-08-09 13:32:21.476 UTC [35] LOG:  statement: select version()
+2023-08-09 13:32:21.494 UTC [35] LOG:  statement: 
+	      SELECT      n.nspname as schema, t.typname as typename, t.oid::int4 as typeid
+	      FROM        pg_type t
+	      LEFT JOIN   pg_catalog.pg_namespace n ON n.oid = t.typnamespace
+	      WHERE       (t.typrelid = 0 OR (SELECT c.relkind = 'c' FROM pg_catalog.pg_class c WHERE c.oid = t.typrelid))
+	      AND     NOT EXISTS(SELECT 1 FROM pg_catalog.pg_type el WHERE el.oid = t.typelem AND el.typarray = t.oid)
+	      AND     n.nspname NOT IN ('pg_catalog', 'information_schema');
+	    
+2023-08-09 13:32:23.856 UTC [36] LOG:  statement: select version()
+2023-08-09 13:32:23.858 UTC [35] LOG:  statement: select version()
+2023-08-09 13:32:24.580 UTC [35] LOG:  execute <unnamed>: 
+	    SELECT datname
+	    FROM pg_database
+	    WHERE datistemplate = $1
+	    
+	    ORDER BY datname
+	  
+2023-08-09 13:32:24.580 UTC [35] DETAIL:  parameters: $1 = 'f'
+2023-08-09 13:32:25.629 UTC [37] LOG:  statement: select version()
+2023-08-09 13:32:25.633 UTC [37] LOG:  statement: 
+	    SELECT
+	      t.table_schema as schema,
+	      t.table_name as name,
+	  
+	        pc.relkind as tabletype
+	      FROM information_schema.tables AS t
+	      JOIN pg_class AS pc
+	        ON t.table_name = pc.relname AND quote_ident(t.table_schema) = pc.relnamespace::regnamespace::text
+	      LEFT OUTER JOIN pg_inherits AS i
+	        ON pc.oid = i.inhrelid
+	      WHERE t.table_type NOT LIKE '%VIEW%'
+	      AND i.inhrelid::regclass IS NULL
+	    
+	    
+	    ORDER BY t.table_schema, t.table_name
+	  
+2023-08-09 13:32:25.873 UTC [36] LOG:  statement: 
+	    SELECT
+	      table_schema as schema,
+	      table_name as name
+	    FROM information_schema.views
+	    
+	    ORDER BY table_schema, table_name
+	  
+2023-08-09 13:32:25.886 UTC [36] LOG:  statement: select version()
+2023-08-09 13:32:25.890 UTC [36] LOG:  statement: 
+	    SELECT
+	      schemaname as schema,
+	      matviewname as name
+	    FROM pg_matviews
+	    
+	    order by schemaname, matviewname;
+	  
+2023-08-09 13:32:26.015 UTC [36] LOG:  statement: select version()
+2023-08-09 13:32:26.059 UTC [36] LOG:  statement: 
+	    SELECT
+	      r.specific_name as id,
+	      r.routine_schema as routine_schema,
+	      r.routine_name as name,
+	      r.routine_type as routine_type,
+	      r.data_type as data_type
+	    FROM INFORMATION_SCHEMA.ROUTINES r
+	    where r.routine_schema not in ('sys', 'information_schema',
+	                                'pg_catalog', 'performance_schema')
+	    
+	    ORDER BY routine_schema, routine_name
+	  
+2023-08-09 13:32:26.255 UTC [36] LOG:  statement: 
+	    select
+	        r.routine_schema as routine_schema,
+	        r.specific_name as specific_name,
+	        p.parameter_name as parameter_name,
+	        p.character_maximum_length as char_length,
+	        p.data_type as data_type
+	  from information_schema.routines r
+	  left join information_schema.parameters p
+	            on p.specific_schema = r.routine_schema
+	            and p.specific_name = r.specific_name
+	  where r.routine_schema not in ('sys', 'information_schema',
+	                                'pg_catalog', 'performance_schema')
+	    
+	
+	      AND p.parameter_mode = 'IN'
+	  order by r.routine_schema,
+	          r.specific_name,
+	          p.ordinal_position;
+	
+	  
+2023-08-09 13:32:29.615 UTC [36] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-08-09 13:32:29.615 UTC [36] DETAIL:  parameters: $1 = 'public', $2 = 'CursoDisciplina'
+2023-08-09 13:32:29.819 UTC [36] LOG:  execute <unnamed>: 
+	    SELECT
+	        tc.table_schema as from_schema,
+	        tc.table_name as from_table,
+	        kcu.column_name as from_column,
+	        ccu.table_schema AS to_schema,
+	        ccu.table_name AS to_table,
+	        ccu.column_name AS to_column,
+	        tc.constraint_name,
+	        rc.update_rule as update_rule,
+	        rc.delete_rule as delete_rule
+	    FROM
+	        information_schema.table_constraints AS tc
+	        JOIN information_schema.key_column_usage AS kcu
+	          ON tc.constraint_name = kcu.constraint_name
+	          AND tc.table_schema = kcu.table_schema
+	        JOIN information_schema.constraint_column_usage AS ccu
+	          ON ccu.constraint_name = tc.constraint_name
+	          AND ccu.table_schema = tc.table_schema
+	         JOIN information_schema.referential_constraints rc
+	          on tc.constraint_name = rc.constraint_name
+	          and tc.table_schema = rc.constraint_schema
+	    WHERE tc.constraint_type = 'FOREIGN KEY'
+	    AND tc.table_name= $1 and tc.table_schema = $2;
+	
+	  
+2023-08-09 13:32:29.819 UTC [36] DETAIL:  parameters: $1 = 'CursoDisciplina', $2 = 'public'
+2023-08-09 13:32:29.840 UTC [36] LOG:  statement: select version()
+2023-08-09 13:32:29.845 UTC [36] LOG:  statement: 
+	    SELECT
+	      a.attname as column_name,
+	      format_type(a.atttypid, a.atttypmod) AS data_type,
+	      a.attnum as position
+	    FROM   pg_index i
+	    JOIN   pg_attribute a ON a.attrelid = i.indrelid
+	                        AND a.attnum = ANY(i.indkey)
+	    WHERE  i.indrelid = '"public"."CursoDisciplina"'::regclass
+	    AND    i.indisprimary
+	    ORDER BY a.attnum
+	  
+2023-08-09 13:32:29.985 UTC [36] LOG:  statement: select version()
+2023-08-09 13:32:30.012 UTC [36] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."CursoDisciplina"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-08-09 13:36:03.218 UTC [28] LOG:  checkpoint starting: time
+2023-08-09 13:36:03.340 UTC [28] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.034 s, sync=0.014 s, total=0.122 s; sync files=3, longest=0.006 s, average=0.005 s; distance=0 kB, estimate=0 kB
+2023-08-09 14:14:58.306 UTC [80] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:14:58.306 UTC [80] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:26:13.760 UTC [93] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:26:13.760 UTC [93] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:26:13.820 UTC [93] LOG:  execute s1: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2) OFFSET $3
+2023-08-09 14:26:13.820 UTC [93] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '0'
+2023-08-09 14:28:12.578 UTC [96] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:28:12.578 UTC [96] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:28:12.588 UTC [96] LOG:  execute s1: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2) OFFSET $3
+2023-08-09 14:28:12.588 UTC [96] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '0'
+2023-08-09 14:28:52.279 UTC [96] LOG:  statement: SELECT 1
+2023-08-09 14:28:52.283 UTC [96] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:28:52.283 UTC [96] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:28:52.285 UTC [96] LOG:  execute s1: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2) OFFSET $3
+2023-08-09 14:28:52.285 UTC [96] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '0'
+2023-08-09 14:31:11.374 UTC [96] LOG:  statement: SELECT 1
+2023-08-09 14:31:11.376 UTC [96] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:31:11.376 UTC [96] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:31:11.378 UTC [96] LOG:  execute s1: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2) OFFSET $3
+2023-08-09 14:31:11.378 UTC [96] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '0'
+2023-08-09 14:35:20.999 UTC [104] LOG:  statement: SET search_path = "public";
+	
+2023-08-09 14:35:21.004 UTC [104] LOG:  execute s0: SELECT version()
+2023-08-09 14:35:21.041 UTC [104] LOG:  execute s1: SELECT EXISTS(SELECT 1 FROM pg_namespace WHERE nspname = $1), version(), current_setting('server_version_num')::integer as numeric_version;
+2023-08-09 14:35:21.041 UTC [104] DETAIL:  parameters: $1 = 'public'
+2023-08-09 14:35:21.257 UTC [105] LOG:  statement: SET search_path = "public";
+	
+2023-08-09 14:35:21.260 UTC [105] LOG:  execute s0: SELECT version()
+2023-08-09 14:35:21.268 UTC [105] LOG:  execute s1: SELECT EXISTS(SELECT 1 FROM pg_namespace WHERE nspname = $1), version(), current_setting('server_version_num')::integer as numeric_version;
+2023-08-09 14:35:21.268 UTC [105] DETAIL:  parameters: $1 = 'public'
+2023-08-09 14:35:21.302 UTC [105] LOG:  execute s2: SELECT "id", "checksum", "finished_at", "migration_name", "logs", "rolled_back_at", "started_at", "applied_steps_count" FROM "_prisma_migrations" ORDER BY "started_at" ASC
+2023-08-09 14:35:21.431 UTC [105] LOG:  statement: CREATE DATABASE "prisma_migrate_shadow_db_ff794e44-818c-4cbf-a0a8-8ae1495f9a8a"
+2023-08-09 14:35:29.143 UTC [106] LOG:  statement: SET search_path = "public";
+	
+2023-08-09 14:35:29.147 UTC [106] LOG:  execute s3: SELECT version()
+2023-08-09 14:35:29.158 UTC [106] LOG:  execute s4: SELECT EXISTS(SELECT 1 FROM pg_namespace WHERE nspname = $1), version(), current_setting('server_version_num')::integer as numeric_version;
+2023-08-09 14:35:29.158 UTC [106] DETAIL:  parameters: $1 = 'public'
+2023-08-09 14:35:29.164 UTC [106] LOG:  statement: -- CreateTable
+	CREATE TABLE "Departamento" (
+	    "id" SERIAL NOT NULL,
+	    "nome" VARCHAR(15) NOT NULL,
+	
+	    CONSTRAINT "Departamento_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- CreateIndex
+	CREATE UNIQUE INDEX "Departamento_nome_key" ON "Departamento"("nome");
+	
+2023-08-09 14:35:29.282 UTC [106] LOG:  statement: -- CreateTable
+	CREATE TABLE "Curso" (
+	    "id" SERIAL NOT NULL,
+	    "nome" VARCHAR(15) NOT NULL,
+	    "id_departamento" INTEGER NOT NULL,
+	
+	    CONSTRAINT "Curso_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- CreateIndex
+	CREATE UNIQUE INDEX "Curso_nome_key" ON "Curso"("nome");
+	
+	-- AddForeignKey
+	ALTER TABLE "Curso" ADD CONSTRAINT "Curso_id_departamento_fkey" FOREIGN KEY ("id_departamento") REFERENCES "Departamento"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:35:29.380 UTC [106] LOG:  statement: -- CreateEnum
+	CREATE TYPE "Sexo" AS ENUM ('M', 'F');
+	
+	-- CreateTable
+	CREATE TABLE "Professor" (
+	    "id" TEXT NOT NULL,
+	    "nome" VARCHAR NOT NULL,
+	    "email" VARCHAR(25) NOT NULL,
+	    "cpf" VARCHAR(15) NOT NULL,
+	    "sexo" "Sexo" NOT NULL,
+	    "telefone" VARCHAR NOT NULL,
+	    "createt_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	    "id_departamento" INTEGER NOT NULL,
+	
+	    CONSTRAINT "Professor_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- CreateIndex
+	CREATE UNIQUE INDEX "Professor_email_key" ON "Professor"("email");
+	
+	-- CreateIndex
+	CREATE UNIQUE INDEX "Professor_cpf_key" ON "Professor"("cpf");
+	
+	-- AddForeignKey
+	ALTER TABLE "Professor" ADD CONSTRAINT "Professor_id_departamento_fkey" FOREIGN KEY ("id_departamento") REFERENCES "Departamento"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:35:29.689 UTC [106] LOG:  statement: -- CreateTable
+	CREATE TABLE "Turma" (
+	    "id" SERIAL NOT NULL,
+	    "nome" VARCHAR NOT NULL,
+	    "id_curso" INTEGER NOT NULL,
+	
+	    CONSTRAINT "Turma_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- AddForeignKey
+	ALTER TABLE "Turma" ADD CONSTRAINT "Turma_id_curso_fkey" FOREIGN KEY ("id_curso") REFERENCES "Curso"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+	
+2023-08-09 14:35:30.208 UTC [106] LOG:  statement: /*
+	  Warnings:
+	
+	  - The primary key for the `Professor` table will be changed. If it partially fails, the table could be left without primary key constraint.
+	
+	*/
+	-- AlterTable
+	ALTER TABLE "Professor" DROP CONSTRAINT "Professor_pkey",
+	ALTER COLUMN "id" SET DATA TYPE VARCHAR,
+	ADD CONSTRAINT "Professor_pkey" PRIMARY KEY ("id");
+	
+2023-08-09 14:35:30.249 UTC [106] LOG:  statement: -- CreateTable
+	CREATE TABLE "Aluno" (
+	    "id" VARCHAR NOT NULL,
+	    "nome" VARCHAR NOT NULL,
+	    "email" VARCHAR(25) NOT NULL,
+	    "cpf" VARCHAR(15) NOT NULL,
+	    "sexo" "Sexo" NOT NULL,
+	    "telefone" VARCHAR NOT NULL,
+	    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	    "id_turma" INTEGER NOT NULL,
+	    "id_curso" INTEGER NOT NULL,
+	
+	    CONSTRAINT "Aluno_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- AddForeignKey
+	ALTER TABLE "Aluno" ADD CONSTRAINT "Aluno_id_turma_fkey" FOREIGN KEY ("id_turma") REFERENCES "Turma"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+	-- AddForeignKey
+	ALTER TABLE "Aluno" ADD CONSTRAINT "Aluno_id_curso_fkey" FOREIGN KEY ("id_curso") REFERENCES "Curso"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:35:30.303 UTC [106] LOG:  statement: -- CreateTable
+	CREATE TABLE "Disciplina" (
+	    "id" SERIAL NOT NULL,
+	    "nome" VARCHAR NOT NULL,
+	
+	    CONSTRAINT "Disciplina_pkey" PRIMARY KEY ("id")
+	);
+	
+2023-08-09 14:35:30.338 UTC [106] LOG:  statement: -- CreateTable
+	CREATE TABLE "CursoDisciplina" (
+	    "id" SERIAL NOT NULL,
+	    "id_curso" INTEGER NOT NULL,
+	    "id_disciplina" INTEGER NOT NULL,
+	
+	    CONSTRAINT "CursoDisciplina_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- AddForeignKey
+	ALTER TABLE "CursoDisciplina" ADD CONSTRAINT "CursoDisciplina_id_curso_fkey" FOREIGN KEY ("id_curso") REFERENCES "Curso"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+	-- AddForeignKey
+	ALTER TABLE "CursoDisciplina" ADD CONSTRAINT "CursoDisciplina_id_disciplina_fkey" FOREIGN KEY ("id_disciplina") REFERENCES "Disciplina"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:35:30.388 UTC [106] LOG:  statement: -- CreateTable
+	CREATE TABLE "AlunoDisciplina" (
+	    "id" SERIAL NOT NULL,
+	    "id_aluno" TEXT NOT NULL,
+	    "id_disciplina" INTEGER NOT NULL,
+	
+	    CONSTRAINT "AlunoDisciplina_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- AddForeignKey
+	ALTER TABLE "AlunoDisciplina" ADD CONSTRAINT "AlunoDisciplina_id_aluno_fkey" FOREIGN KEY ("id_aluno") REFERENCES "Aluno"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+	-- AddForeignKey
+	ALTER TABLE "AlunoDisciplina" ADD CONSTRAINT "AlunoDisciplina_id_disciplina_fkey" FOREIGN KEY ("id_disciplina") REFERENCES "Disciplina"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:35:30.447 UTC [106] LOG:  statement: -- CreateTable
+	CREATE TABLE "ProfessorDisciplina" (
+	    "id" SERIAL NOT NULL,
+	    "id_professor" TEXT NOT NULL,
+	    "id_disciplina" INTEGER NOT NULL,
+	
+	    CONSTRAINT "ProfessorDisciplina_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- AddForeignKey
+	ALTER TABLE "ProfessorDisciplina" ADD CONSTRAINT "ProfessorDisciplina_id_professor_fkey" FOREIGN KEY ("id_professor") REFERENCES "Professor"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+	-- AddForeignKey
+	ALTER TABLE "ProfessorDisciplina" ADD CONSTRAINT "ProfessorDisciplina_id_disciplina_fkey" FOREIGN KEY ("id_disciplina") REFERENCES "Disciplina"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:35:30.515 UTC [106] LOG:  statement: -- CreateEnum
+	CREATE TYPE "UserStatus" AS ENUM ('departamento', 'professor', 'aluno');
+	
+	-- CreateTable
+	CREATE TABLE "User" (
+	    "id" TEXT NOT NULL,
+	    "email" VARCHAR NOT NULL,
+	    "password" VARCHAR NOT NULL,
+	    "status" "UserStatus" NOT NULL,
+	    "id_departamento" INTEGER,
+	    "id_professor" TEXT,
+	    "id_aluno" TEXT,
+	
+	    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- CreateIndex
+	CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+	
+	-- AddForeignKey
+	ALTER TABLE "User" ADD CONSTRAINT "User_id_departamento_fkey" FOREIGN KEY ("id_departamento") REFERENCES "Departamento"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+	-- AddForeignKey
+	ALTER TABLE "User" ADD CONSTRAINT "User_id_professor_fkey" FOREIGN KEY ("id_professor") REFERENCES "Professor"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+	-- AddForeignKey
+	ALTER TABLE "User" ADD CONSTRAINT "User_id_aluno_fkey" FOREIGN KEY ("id_aluno") REFERENCES "Aluno"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:35:30.592 UTC [106] LOG:  statement: -- AlterTable
+	ALTER TABLE "Curso" ALTER COLUMN "nome" SET DATA TYPE VARCHAR(40);
+	
+2023-08-09 14:35:30.597 UTC [106] LOG:  statement: -- DropForeignKey
+	ALTER TABLE "Turma" DROP CONSTRAINT "Turma_id_curso_fkey";
+	
+	-- AddForeignKey
+	ALTER TABLE "Turma" ADD CONSTRAINT "Turma_id_curso_fkey" FOREIGN KEY ("id_curso") REFERENCES "Curso"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:35:30.606 UTC [106] LOG:  statement: /*
+	  Warnings:
+	
+	  - Added the required column `carga_horaria` to the `Disciplina` table without a default value. This is not possible if the table is not empty.
+	
+	*/
+	-- AlterTable
+	ALTER TABLE "Disciplina" ADD COLUMN     "carga_horaria" INTEGER NOT NULL;
+	
+2023-08-09 14:35:30.613 UTC [106] LOG:  execute s5: SELECT namespace.nspname as namespace_name
+	FROM pg_namespace as namespace
+	WHERE namespace.nspname = ANY ( $1 )
+	ORDER BY namespace_name;
+	
+2023-08-09 14:35:30.613 UTC [106] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:30.627 UTC [106] LOG:  execute s6: SELECT
+	  tbl.relname AS table_name,
+	  namespace.nspname as namespace,
+	  (tbl.relhassubclass and tbl.relkind = 'p') as is_partition,
+	  (tbl.relhassubclass and tbl.relkind = 'r') as has_subclass,
+	  tbl.relrowsecurity as has_row_level_security,
+	  reloptions,
+	  pd.description as description
+	FROM pg_class AS tbl
+	INNER JOIN pg_namespace AS namespace ON namespace.oid = tbl.relnamespace
+	LEFT JOIN pg_description pd ON pd.objoid = tbl.oid AND pd.objsubid = 0
+	WHERE
+	  ( -- (relkind = 'r' and relispartition = 't') matches partition table "duplicates"
+	    (tbl.relkind = 'r' AND tbl.relispartition = 'f')
+	      OR -- when it's a partition
+	    tbl.relkind = 'p'
+	  )
+	  AND namespace.nspname = ANY ( $1 )
+	ORDER BY namespace, table_name;
+	
+2023-08-09 14:35:30.627 UTC [106] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:30.638 UTC [106] LOG:  execute s7: SELECT
+	    schemainfo.nspname AS namespace,
+	    tableinfo.relname AS table_name,
+		constr.conname AS constraint_name,
+		constr.contype AS constraint_type,
+		pg_get_constraintdef(constr.oid) AS constraint_definition,
+		constr.condeferrable AS is_deferrable,
+		constr.condeferred AS is_deferred
+	FROM pg_constraint constr
+	JOIN pg_class AS tableinfo
+		ON tableinfo.oid = constr.conrelid
+	JOIN pg_namespace AS schemainfo
+		ON schemainfo.oid = tableinfo.relnamespace
+	WHERE schemainfo.nspname = ANY ( $1 )
+		AND contype NOT IN ('p', 'u', 'f')
+	ORDER BY namespace, table_name, constr.contype, constraint_name;
+	
+2023-08-09 14:35:30.638 UTC [106] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:30.645 UTC [106] LOG:  execute s8: SELECT
+	    views.viewname AS view_name,
+	    views.definition AS view_sql,
+	    views.schemaname AS namespace,
+	    description.description AS description
+	FROM pg_catalog.pg_views views
+	INNER JOIN pg_catalog.pg_namespace ns ON views.schemaname = ns.nspname
+	INNER JOIN pg_catalog.pg_class class ON class.relnamespace = ns.oid AND class.relname = views.viewname
+	LEFT JOIN pg_catalog.pg_description description ON description.objoid = class.oid AND description.objsubid = 0
+	WHERE schemaname = ANY ( $1 )
+	
+2023-08-09 14:35:30.645 UTC [106] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:30.653 UTC [106] LOG:  execute s9: 
+	            SELECT t.typname as name, e.enumlabel as value, n.nspname as namespace, d.description
+	            FROM pg_type t
+	            JOIN pg_enum e ON t.oid = e.enumtypid
+	            JOIN pg_catalog.pg_namespace n ON n.oid = t.typnamespace
+	            LEFT OUTER JOIN pg_description d ON d.objoid = t.oid
+	            WHERE n.nspname = ANY ( $1 )
+	            ORDER BY e.enumsortorder
+2023-08-09 14:35:30.653 UTC [106] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:30.679 UTC [106] LOG:  execute s10: 
+	            SELECT
+	                oid.namespace,
+	                info.table_name,
+	                info.column_name,
+	                format_type(att.atttypid, att.atttypmod) as formatted_type,
+	                info.numeric_precision,
+	                info.numeric_scale,
+	                info.numeric_precision_radix,
+	                info.datetime_precision,
+	                info.data_type,
+	                info.udt_schema as type_schema_name,
+	                info.udt_name as full_data_type,
+	                pg_get_expr(attdef.adbin, attdef.adrelid) AS column_default,
+	                info.is_nullable,
+	                info.is_identity,
+	                info.character_maximum_length,
+	                description.description
+	            FROM information_schema.columns info
+	            JOIN pg_attribute att ON att.attname = info.column_name
+	            JOIN (
+	                 SELECT pg_class.oid, relname, pg_namespace.nspname as namespace
+	                 FROM pg_class
+	                 JOIN pg_namespace on pg_namespace.oid = pg_class.relnamespace
+	                 AND pg_namespace.nspname = ANY ( $1 )
+	                ) as oid on oid.oid = att.attrelid 
+	                  AND relname = info.table_name
+	                  AND namespace = info.table_schema
+	            LEFT OUTER JOIN pg_attrdef attdef ON attdef.adrelid = att.attrelid AND attdef.adnum = att.attnum AND table_schema = namespace
+	            LEFT OUTER JOIN pg_description description ON description.objoid = att.attrelid AND description.objsubid = ordinal_position
+	            WHERE table_schema = ANY ( $1 ) 
+	            ORDER BY namespace, table_name, ordinal_position;
+	        
+2023-08-09 14:35:30.679 UTC [106] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:30.695 UTC [106] LOG:  execute s11: 
+	            SELECT
+	                con.oid         AS "con_id",
+	                att2.attname    AS "child_column",
+	                cl.relname      AS "parent_table",
+	                att.attname     AS "parent_column",
+	                con.confdeltype,
+	                con.confupdtype,
+	                rel_ns.nspname  AS "referenced_schema_name",
+	                conname         AS constraint_name,
+	                child,
+	                parent,
+	                table_name, 
+	                namespace,
+	                condeferrable,
+	                condeferred
+	            FROM (SELECT 
+	                        ns.nspname AS "namespace",
+	                        unnest(con1.conkey)                AS "parent",
+	                        unnest(con1.confkey)                AS "child",
+	                        cl.relname                          AS table_name,
+	                        ns.nspname                          AS schema_name,
+	                        generate_subscripts(con1.conkey, 1) AS colidx,
+	                        con1.oid,
+	                        con1.confrelid,
+	                        con1.conrelid,
+	                        con1.conname,
+	                        con1.confdeltype,
+	                        con1.confupdtype,
+	                        con1.condeferrable                  AS condeferrable,
+	                        con1.condeferred                    AS condeferred
+	                FROM pg_class cl
+	                        join pg_constraint con1 on con1.conrelid = cl.oid
+	                        join pg_namespace ns on cl.relnamespace = ns.oid
+	                WHERE
+	                    ns.nspname = ANY ( $1 )
+	                    and con1.contype = 'f'
+	                ORDER BY colidx
+	                ) con
+	                    JOIN pg_attribute att on att.attrelid = con.confrelid and att.attnum = con.child
+	                    JOIN pg_class cl on cl.oid = con.confrelid
+	                    JOIN pg_attribute att2 on att2.attrelid = con.conrelid and att2.attnum = con.parent
+	                    JOIN pg_class rel_cl on con.confrelid = rel_cl.oid
+	                    JOIN pg_namespace rel_ns on rel_cl.relnamespace = rel_ns.oid
+	            ORDER BY namespace, table_name, constraint_name, con_id, con.colidx;
+	        
+2023-08-09 14:35:30.695 UTC [106] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:30.712 UTC [106] LOG:  execute s12: WITH rawindex AS (
+	    SELECT
+	        indrelid, 
+	        indexrelid,
+	        indisunique,
+	        indisprimary,
+	        unnest(indkey) AS indkeyid,
+	        generate_subscripts(indkey, 1) AS indkeyidx,
+	        unnest(indclass) AS indclass,
+	        unnest(indoption) AS indoption
+	    FROM pg_index -- https://www.postgresql.org/docs/current/catalog-pg-index.html
+	    WHERE
+	        indpred IS NULL -- filter out partial indexes
+	        AND NOT indisexclusion -- filter out exclusion constraints
+	)
+	SELECT
+	    schemainfo.nspname AS namespace,
+	    indexinfo.relname AS index_name,
+	    tableinfo.relname AS table_name,
+	    columninfo.attname AS column_name,
+	    rawindex.indisunique AS is_unique,
+	    rawindex.indisprimary AS is_primary_key,
+	    rawindex.indkeyidx AS column_index,
+	    opclass.opcname AS opclass,
+	    opclass.opcdefault AS opcdefault,
+	    indexaccess.amname AS index_algo,
+	    CASE rawindex.indoption & 1
+	        WHEN 1 THEN 'DESC'
+	        ELSE 'ASC' END
+	        AS column_order,
+	    CASE rawindex.indoption & 2
+	        WHEN 2 THEN true
+	        ELSE false END
+	        AS nulls_first,
+	    pc.condeferrable AS condeferrable,
+	    pc.condeferred AS condeferred
+	FROM
+	    rawindex
+	    INNER JOIN pg_class AS tableinfo ON tableinfo.oid = rawindex.indrelid
+	    INNER JOIN pg_class AS indexinfo ON indexinfo.oid = rawindex.indexrelid
+	    INNER JOIN pg_namespace AS schemainfo ON schemainfo.oid = tableinfo.relnamespace
+	    LEFT JOIN pg_attribute AS columninfo
+	        ON columninfo.attrelid = tableinfo.oid AND columninfo.attnum = rawindex.indkeyid
+	    INNER JOIN pg_am AS indexaccess ON indexaccess.oid = indexinfo.relam
+	    LEFT JOIN pg_opclass AS opclass -- left join because crdb has no opclasses
+	        ON opclass.oid = rawindex.indclass
+	    LEFT JOIN pg_constraint pc ON rawindex.indexrelid = pc.conindid AND pc.contype <> 'f'
+	WHERE schemainfo.nspname = ANY ( $1 )
+	ORDER BY namespace, table_name, index_name, column_index;
+	
+2023-08-09 14:35:30.712 UTC [106] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:30.727 UTC [106] LOG:  execute s13: 
+	            SELECT p.proname AS name, n.nspname as namespace,
+	                CASE WHEN l.lanname = 'internal' THEN p.prosrc
+	                     ELSE pg_get_functiondef(p.oid)
+	                     END as definition
+	            FROM pg_proc p
+	            LEFT JOIN pg_namespace n ON p.pronamespace = n.oid
+	            LEFT JOIN pg_language l ON p.prolang = l.oid
+	            WHERE n.nspname = ANY ( $1 )
+	        
+2023-08-09 14:35:30.727 UTC [106] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:30.735 UTC [106] LOG:  execute s14: SELECT
+	    ext.extname AS extension_name,
+	    ext.extversion AS extension_version,
+	    ext.extrelocatable AS extension_relocatable,
+	    pn.nspname AS extension_schema
+	FROM pg_extension ext
+	INNER JOIN pg_namespace pn ON ext.extnamespace = pn.oid
+	ORDER BY ext.extname ASC
+	
+2023-08-09 14:35:30.739 UTC [106] LOG:  execute s15: 
+	              SELECT
+	                  sequence_name,
+	                  sequence_schema AS namespace,
+	                  start_value::INT8,
+	                  minimum_value::INT8 AS min_value,
+	                  maximum_value::INT8 AS max_value,
+	                  increment::INT8 AS increment_by,
+	                  (CASE cycle_option WHEN 'yes' THEN TRUE ELSE FALSE END) AS cycle,
+	                  0::INT8 AS cache_size
+	              FROM information_schema.sequences
+	              WHERE sequence_schema = ANY ( $1 )
+	              ORDER BY sequence_name
+	            
+2023-08-09 14:35:30.739 UTC [106] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:30.742 UTC [105] LOG:  statement: DROP DATABASE IF EXISTS "prisma_migrate_shadow_db_ff794e44-818c-4cbf-a0a8-8ae1495f9a8a"
+2023-08-09 14:35:30.836 UTC [28] LOG:  checkpoint starting: immediate force wait
+2023-08-09 14:35:31.068 UTC [28] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.072 s, sync=0.009 s, total=0.250 s; sync files=5, longest=0.005 s, average=0.002 s; distance=4529 kB, estimate=4529 kB
+2023-08-09 14:35:33.390 UTC [105] LOG:  execute s16: SELECT namespace.nspname as namespace_name
+	FROM pg_namespace as namespace
+	WHERE namespace.nspname = ANY ( $1 )
+	ORDER BY namespace_name;
+	
+2023-08-09 14:35:33.390 UTC [105] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:33.474 UTC [105] LOG:  execute s17: SELECT
+	  tbl.relname AS table_name,
+	  namespace.nspname as namespace,
+	  (tbl.relhassubclass and tbl.relkind = 'p') as is_partition,
+	  (tbl.relhassubclass and tbl.relkind = 'r') as has_subclass,
+	  tbl.relrowsecurity as has_row_level_security,
+	  reloptions,
+	  pd.description as description
+	FROM pg_class AS tbl
+	INNER JOIN pg_namespace AS namespace ON namespace.oid = tbl.relnamespace
+	LEFT JOIN pg_description pd ON pd.objoid = tbl.oid AND pd.objsubid = 0
+	WHERE
+	  ( -- (relkind = 'r' and relispartition = 't') matches partition table "duplicates"
+	    (tbl.relkind = 'r' AND tbl.relispartition = 'f')
+	      OR -- when it's a partition
+	    tbl.relkind = 'p'
+	  )
+	  AND namespace.nspname = ANY ( $1 )
+	ORDER BY namespace, table_name;
+	
+2023-08-09 14:35:33.474 UTC [105] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:33.554 UTC [105] LOG:  execute s18: SELECT
+	    schemainfo.nspname AS namespace,
+	    tableinfo.relname AS table_name,
+		constr.conname AS constraint_name,
+		constr.contype AS constraint_type,
+		pg_get_constraintdef(constr.oid) AS constraint_definition,
+		constr.condeferrable AS is_deferrable,
+		constr.condeferred AS is_deferred
+	FROM pg_constraint constr
+	JOIN pg_class AS tableinfo
+		ON tableinfo.oid = constr.conrelid
+	JOIN pg_namespace AS schemainfo
+		ON schemainfo.oid = tableinfo.relnamespace
+	WHERE schemainfo.nspname = ANY ( $1 )
+		AND contype NOT IN ('p', 'u', 'f')
+	ORDER BY namespace, table_name, constr.contype, constraint_name;
+	
+2023-08-09 14:35:33.554 UTC [105] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:33.572 UTC [105] LOG:  execute s19: SELECT
+	    views.viewname AS view_name,
+	    views.definition AS view_sql,
+	    views.schemaname AS namespace,
+	    description.description AS description
+	FROM pg_catalog.pg_views views
+	INNER JOIN pg_catalog.pg_namespace ns ON views.schemaname = ns.nspname
+	INNER JOIN pg_catalog.pg_class class ON class.relnamespace = ns.oid AND class.relname = views.viewname
+	LEFT JOIN pg_catalog.pg_description description ON description.objoid = class.oid AND description.objsubid = 0
+	WHERE schemaname = ANY ( $1 )
+	
+2023-08-09 14:35:33.572 UTC [105] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:33.649 UTC [105] LOG:  execute s20: 
+	            SELECT t.typname as name, e.enumlabel as value, n.nspname as namespace, d.description
+	            FROM pg_type t
+	            JOIN pg_enum e ON t.oid = e.enumtypid
+	            JOIN pg_catalog.pg_namespace n ON n.oid = t.typnamespace
+	            LEFT OUTER JOIN pg_description d ON d.objoid = t.oid
+	            WHERE n.nspname = ANY ( $1 )
+	            ORDER BY e.enumsortorder
+2023-08-09 14:35:33.649 UTC [105] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:33.858 UTC [105] LOG:  execute s21: 
+	            SELECT
+	                oid.namespace,
+	                info.table_name,
+	                info.column_name,
+	                format_type(att.atttypid, att.atttypmod) as formatted_type,
+	                info.numeric_precision,
+	                info.numeric_scale,
+	                info.numeric_precision_radix,
+	                info.datetime_precision,
+	                info.data_type,
+	                info.udt_schema as type_schema_name,
+	                info.udt_name as full_data_type,
+	                pg_get_expr(attdef.adbin, attdef.adrelid) AS column_default,
+	                info.is_nullable,
+	                info.is_identity,
+	                info.character_maximum_length,
+	                description.description
+	            FROM information_schema.columns info
+	            JOIN pg_attribute att ON att.attname = info.column_name
+	            JOIN (
+	                 SELECT pg_class.oid, relname, pg_namespace.nspname as namespace
+	                 FROM pg_class
+	                 JOIN pg_namespace on pg_namespace.oid = pg_class.relnamespace
+	                 AND pg_namespace.nspname = ANY ( $1 )
+	                ) as oid on oid.oid = att.attrelid 
+	                  AND relname = info.table_name
+	                  AND namespace = info.table_schema
+	            LEFT OUTER JOIN pg_attrdef attdef ON attdef.adrelid = att.attrelid AND attdef.adnum = att.attnum AND table_schema = namespace
+	            LEFT OUTER JOIN pg_description description ON description.objoid = att.attrelid AND description.objsubid = ordinal_position
+	            WHERE table_schema = ANY ( $1 ) 
+	            ORDER BY namespace, table_name, ordinal_position;
+	        
+2023-08-09 14:35:33.858 UTC [105] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:33.899 UTC [105] LOG:  execute s22: 
+	            SELECT
+	                con.oid         AS "con_id",
+	                att2.attname    AS "child_column",
+	                cl.relname      AS "parent_table",
+	                att.attname     AS "parent_column",
+	                con.confdeltype,
+	                con.confupdtype,
+	                rel_ns.nspname  AS "referenced_schema_name",
+	                conname         AS constraint_name,
+	                child,
+	                parent,
+	                table_name, 
+	                namespace,
+	                condeferrable,
+	                condeferred
+	            FROM (SELECT 
+	                        ns.nspname AS "namespace",
+	                        unnest(con1.conkey)                AS "parent",
+	                        unnest(con1.confkey)                AS "child",
+	                        cl.relname                          AS table_name,
+	                        ns.nspname                          AS schema_name,
+	                        generate_subscripts(con1.conkey, 1) AS colidx,
+	                        con1.oid,
+	                        con1.confrelid,
+	                        con1.conrelid,
+	                        con1.conname,
+	                        con1.confdeltype,
+	                        con1.confupdtype,
+	                        con1.condeferrable                  AS condeferrable,
+	                        con1.condeferred                    AS condeferred
+	                FROM pg_class cl
+	                        join pg_constraint con1 on con1.conrelid = cl.oid
+	                        join pg_namespace ns on cl.relnamespace = ns.oid
+	                WHERE
+	                    ns.nspname = ANY ( $1 )
+	                    and con1.contype = 'f'
+	                ORDER BY colidx
+	                ) con
+	                    JOIN pg_attribute att on att.attrelid = con.confrelid and att.attnum = con.child
+	                    JOIN pg_class cl on cl.oid = con.confrelid
+	                    JOIN pg_attribute att2 on att2.attrelid = con.conrelid and att2.attnum = con.parent
+	                    JOIN pg_class rel_cl on con.confrelid = rel_cl.oid
+	                    JOIN pg_namespace rel_ns on rel_cl.relnamespace = rel_ns.oid
+	            ORDER BY namespace, table_name, constraint_name, con_id, con.colidx;
+	        
+2023-08-09 14:35:33.899 UTC [105] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:34.022 UTC [105] LOG:  execute s23: WITH rawindex AS (
+	    SELECT
+	        indrelid, 
+	        indexrelid,
+	        indisunique,
+	        indisprimary,
+	        unnest(indkey) AS indkeyid,
+	        generate_subscripts(indkey, 1) AS indkeyidx,
+	        unnest(indclass) AS indclass,
+	        unnest(indoption) AS indoption
+	    FROM pg_index -- https://www.postgresql.org/docs/current/catalog-pg-index.html
+	    WHERE
+	        indpred IS NULL -- filter out partial indexes
+	        AND NOT indisexclusion -- filter out exclusion constraints
+	)
+	SELECT
+	    schemainfo.nspname AS namespace,
+	    indexinfo.relname AS index_name,
+	    tableinfo.relname AS table_name,
+	    columninfo.attname AS column_name,
+	    rawindex.indisunique AS is_unique,
+	    rawindex.indisprimary AS is_primary_key,
+	    rawindex.indkeyidx AS column_index,
+	    opclass.opcname AS opclass,
+	    opclass.opcdefault AS opcdefault,
+	    indexaccess.amname AS index_algo,
+	    CASE rawindex.indoption & 1
+	        WHEN 1 THEN 'DESC'
+	        ELSE 'ASC' END
+	        AS column_order,
+	    CASE rawindex.indoption & 2
+	        WHEN 2 THEN true
+	        ELSE false END
+	        AS nulls_first,
+	    pc.condeferrable AS condeferrable,
+	    pc.condeferred AS condeferred
+	FROM
+	    rawindex
+	    INNER JOIN pg_class AS tableinfo ON tableinfo.oid = rawindex.indrelid
+	    INNER JOIN pg_class AS indexinfo ON indexinfo.oid = rawindex.indexrelid
+	    INNER JOIN pg_namespace AS schemainfo ON schemainfo.oid = tableinfo.relnamespace
+	    LEFT JOIN pg_attribute AS columninfo
+	        ON columninfo.attrelid = tableinfo.oid AND columninfo.attnum = rawindex.indkeyid
+	    INNER JOIN pg_am AS indexaccess ON indexaccess.oid = indexinfo.relam
+	    LEFT JOIN pg_opclass AS opclass -- left join because crdb has no opclasses
+	        ON opclass.oid = rawindex.indclass
+	    LEFT JOIN pg_constraint pc ON rawindex.indexrelid = pc.conindid AND pc.contype <> 'f'
+	WHERE schemainfo.nspname = ANY ( $1 )
+	ORDER BY namespace, table_name, index_name, column_index;
+	
+2023-08-09 14:35:34.022 UTC [105] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:34.088 UTC [105] LOG:  execute s24: 
+	            SELECT p.proname AS name, n.nspname as namespace,
+	                CASE WHEN l.lanname = 'internal' THEN p.prosrc
+	                     ELSE pg_get_functiondef(p.oid)
+	                     END as definition
+	            FROM pg_proc p
+	            LEFT JOIN pg_namespace n ON p.pronamespace = n.oid
+	            LEFT JOIN pg_language l ON p.prolang = l.oid
+	            WHERE n.nspname = ANY ( $1 )
+	        
+2023-08-09 14:35:34.088 UTC [105] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:34.125 UTC [105] LOG:  execute s25: SELECT
+	    ext.extname AS extension_name,
+	    ext.extversion AS extension_version,
+	    ext.extrelocatable AS extension_relocatable,
+	    pn.nspname AS extension_schema
+	FROM pg_extension ext
+	INNER JOIN pg_namespace pn ON ext.extnamespace = pn.oid
+	ORDER BY ext.extname ASC
+	
+2023-08-09 14:35:34.131 UTC [105] LOG:  execute s26: 
+	              SELECT
+	                  sequence_name,
+	                  sequence_schema AS namespace,
+	                  start_value::INT8,
+	                  minimum_value::INT8 AS min_value,
+	                  maximum_value::INT8 AS max_value,
+	                  increment::INT8 AS increment_by,
+	                  (CASE cycle_option WHEN 'yes' THEN TRUE ELSE FALSE END) AS cycle,
+	                  0::INT8 AS cache_size
+	              FROM information_schema.sequences
+	              WHERE sequence_schema = ANY ( $1 )
+	              ORDER BY sequence_name
+	            
+2023-08-09 14:35:34.131 UTC [105] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:34.135 UTC [105] LOG:  statement: CREATE DATABASE "prisma_migrate_shadow_db_b9358376-2011-4916-a06d-c88ab23e8e54"
+2023-08-09 14:35:38.038 UTC [107] LOG:  statement: SET search_path = "public";
+	
+2023-08-09 14:35:38.042 UTC [107] LOG:  execute s27: SELECT version()
+2023-08-09 14:35:38.059 UTC [107] LOG:  execute s28: SELECT EXISTS(SELECT 1 FROM pg_namespace WHERE nspname = $1), version(), current_setting('server_version_num')::integer as numeric_version;
+2023-08-09 14:35:38.059 UTC [107] DETAIL:  parameters: $1 = 'public'
+2023-08-09 14:35:38.061 UTC [107] LOG:  statement: -- CreateTable
+	CREATE TABLE "Departamento" (
+	    "id" SERIAL NOT NULL,
+	    "nome" VARCHAR(15) NOT NULL,
+	
+	    CONSTRAINT "Departamento_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- CreateIndex
+	CREATE UNIQUE INDEX "Departamento_nome_key" ON "Departamento"("nome");
+	
+2023-08-09 14:35:38.132 UTC [107] LOG:  statement: -- CreateTable
+	CREATE TABLE "Curso" (
+	    "id" SERIAL NOT NULL,
+	    "nome" VARCHAR(15) NOT NULL,
+	    "id_departamento" INTEGER NOT NULL,
+	
+	    CONSTRAINT "Curso_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- CreateIndex
+	CREATE UNIQUE INDEX "Curso_nome_key" ON "Curso"("nome");
+	
+	-- AddForeignKey
+	ALTER TABLE "Curso" ADD CONSTRAINT "Curso_id_departamento_fkey" FOREIGN KEY ("id_departamento") REFERENCES "Departamento"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:35:38.209 UTC [107] LOG:  statement: -- CreateEnum
+	CREATE TYPE "Sexo" AS ENUM ('M', 'F');
+	
+	-- CreateTable
+	CREATE TABLE "Professor" (
+	    "id" TEXT NOT NULL,
+	    "nome" VARCHAR NOT NULL,
+	    "email" VARCHAR(25) NOT NULL,
+	    "cpf" VARCHAR(15) NOT NULL,
+	    "sexo" "Sexo" NOT NULL,
+	    "telefone" VARCHAR NOT NULL,
+	    "createt_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	    "id_departamento" INTEGER NOT NULL,
+	
+	    CONSTRAINT "Professor_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- CreateIndex
+	CREATE UNIQUE INDEX "Professor_email_key" ON "Professor"("email");
+	
+	-- CreateIndex
+	CREATE UNIQUE INDEX "Professor_cpf_key" ON "Professor"("cpf");
+	
+	-- AddForeignKey
+	ALTER TABLE "Professor" ADD CONSTRAINT "Professor_id_departamento_fkey" FOREIGN KEY ("id_departamento") REFERENCES "Departamento"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:35:38.323 UTC [107] LOG:  statement: -- CreateTable
+	CREATE TABLE "Turma" (
+	    "id" SERIAL NOT NULL,
+	    "nome" VARCHAR NOT NULL,
+	    "id_curso" INTEGER NOT NULL,
+	
+	    CONSTRAINT "Turma_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- AddForeignKey
+	ALTER TABLE "Turma" ADD CONSTRAINT "Turma_id_curso_fkey" FOREIGN KEY ("id_curso") REFERENCES "Curso"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+	
+2023-08-09 14:35:38.384 UTC [107] LOG:  statement: /*
+	  Warnings:
+	
+	  - The primary key for the `Professor` table will be changed. If it partially fails, the table could be left without primary key constraint.
+	
+	*/
+	-- AlterTable
+	ALTER TABLE "Professor" DROP CONSTRAINT "Professor_pkey",
+	ALTER COLUMN "id" SET DATA TYPE VARCHAR,
+	ADD CONSTRAINT "Professor_pkey" PRIMARY KEY ("id");
+	
+2023-08-09 14:35:38.404 UTC [107] LOG:  statement: -- CreateTable
+	CREATE TABLE "Aluno" (
+	    "id" VARCHAR NOT NULL,
+	    "nome" VARCHAR NOT NULL,
+	    "email" VARCHAR(25) NOT NULL,
+	    "cpf" VARCHAR(15) NOT NULL,
+	    "sexo" "Sexo" NOT NULL,
+	    "telefone" VARCHAR NOT NULL,
+	    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	    "id_turma" INTEGER NOT NULL,
+	    "id_curso" INTEGER NOT NULL,
+	
+	    CONSTRAINT "Aluno_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- AddForeignKey
+	ALTER TABLE "Aluno" ADD CONSTRAINT "Aluno_id_turma_fkey" FOREIGN KEY ("id_turma") REFERENCES "Turma"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+	-- AddForeignKey
+	ALTER TABLE "Aluno" ADD CONSTRAINT "Aluno_id_curso_fkey" FOREIGN KEY ("id_curso") REFERENCES "Curso"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:35:38.468 UTC [107] LOG:  statement: -- CreateTable
+	CREATE TABLE "Disciplina" (
+	    "id" SERIAL NOT NULL,
+	    "nome" VARCHAR NOT NULL,
+	
+	    CONSTRAINT "Disciplina_pkey" PRIMARY KEY ("id")
+	);
+	
+2023-08-09 14:35:38.507 UTC [107] LOG:  statement: -- CreateTable
+	CREATE TABLE "CursoDisciplina" (
+	    "id" SERIAL NOT NULL,
+	    "id_curso" INTEGER NOT NULL,
+	    "id_disciplina" INTEGER NOT NULL,
+	
+	    CONSTRAINT "CursoDisciplina_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- AddForeignKey
+	ALTER TABLE "CursoDisciplina" ADD CONSTRAINT "CursoDisciplina_id_curso_fkey" FOREIGN KEY ("id_curso") REFERENCES "Curso"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+	-- AddForeignKey
+	ALTER TABLE "CursoDisciplina" ADD CONSTRAINT "CursoDisciplina_id_disciplina_fkey" FOREIGN KEY ("id_disciplina") REFERENCES "Disciplina"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:35:38.557 UTC [107] LOG:  statement: -- CreateTable
+	CREATE TABLE "AlunoDisciplina" (
+	    "id" SERIAL NOT NULL,
+	    "id_aluno" TEXT NOT NULL,
+	    "id_disciplina" INTEGER NOT NULL,
+	
+	    CONSTRAINT "AlunoDisciplina_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- AddForeignKey
+	ALTER TABLE "AlunoDisciplina" ADD CONSTRAINT "AlunoDisciplina_id_aluno_fkey" FOREIGN KEY ("id_aluno") REFERENCES "Aluno"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+	-- AddForeignKey
+	ALTER TABLE "AlunoDisciplina" ADD CONSTRAINT "AlunoDisciplina_id_disciplina_fkey" FOREIGN KEY ("id_disciplina") REFERENCES "Disciplina"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:35:38.617 UTC [107] LOG:  statement: -- CreateTable
+	CREATE TABLE "ProfessorDisciplina" (
+	    "id" SERIAL NOT NULL,
+	    "id_professor" TEXT NOT NULL,
+	    "id_disciplina" INTEGER NOT NULL,
+	
+	    CONSTRAINT "ProfessorDisciplina_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- AddForeignKey
+	ALTER TABLE "ProfessorDisciplina" ADD CONSTRAINT "ProfessorDisciplina_id_professor_fkey" FOREIGN KEY ("id_professor") REFERENCES "Professor"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+	-- AddForeignKey
+	ALTER TABLE "ProfessorDisciplina" ADD CONSTRAINT "ProfessorDisciplina_id_disciplina_fkey" FOREIGN KEY ("id_disciplina") REFERENCES "Disciplina"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:35:38.682 UTC [107] LOG:  statement: -- CreateEnum
+	CREATE TYPE "UserStatus" AS ENUM ('departamento', 'professor', 'aluno');
+	
+	-- CreateTable
+	CREATE TABLE "User" (
+	    "id" TEXT NOT NULL,
+	    "email" VARCHAR NOT NULL,
+	    "password" VARCHAR NOT NULL,
+	    "status" "UserStatus" NOT NULL,
+	    "id_departamento" INTEGER,
+	    "id_professor" TEXT,
+	    "id_aluno" TEXT,
+	
+	    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- CreateIndex
+	CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+	
+	-- AddForeignKey
+	ALTER TABLE "User" ADD CONSTRAINT "User_id_departamento_fkey" FOREIGN KEY ("id_departamento") REFERENCES "Departamento"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+	-- AddForeignKey
+	ALTER TABLE "User" ADD CONSTRAINT "User_id_professor_fkey" FOREIGN KEY ("id_professor") REFERENCES "Professor"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+	-- AddForeignKey
+	ALTER TABLE "User" ADD CONSTRAINT "User_id_aluno_fkey" FOREIGN KEY ("id_aluno") REFERENCES "Aluno"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:35:38.772 UTC [107] LOG:  statement: -- AlterTable
+	ALTER TABLE "Curso" ALTER COLUMN "nome" SET DATA TYPE VARCHAR(40);
+	
+2023-08-09 14:35:38.797 UTC [107] LOG:  statement: -- DropForeignKey
+	ALTER TABLE "Turma" DROP CONSTRAINT "Turma_id_curso_fkey";
+	
+	-- AddForeignKey
+	ALTER TABLE "Turma" ADD CONSTRAINT "Turma_id_curso_fkey" FOREIGN KEY ("id_curso") REFERENCES "Curso"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:35:38.813 UTC [107] LOG:  statement: /*
+	  Warnings:
+	
+	  - Added the required column `carga_horaria` to the `Disciplina` table without a default value. This is not possible if the table is not empty.
+	
+	*/
+	-- AlterTable
+	ALTER TABLE "Disciplina" ADD COLUMN     "carga_horaria" INTEGER NOT NULL;
+	
+2023-08-09 14:35:38.826 UTC [107] LOG:  execute s29: SELECT namespace.nspname as namespace_name
+	FROM pg_namespace as namespace
+	WHERE namespace.nspname = ANY ( $1 )
+	ORDER BY namespace_name;
+	
+2023-08-09 14:35:38.826 UTC [107] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:38.847 UTC [107] LOG:  execute s30: SELECT
+	  tbl.relname AS table_name,
+	  namespace.nspname as namespace,
+	  (tbl.relhassubclass and tbl.relkind = 'p') as is_partition,
+	  (tbl.relhassubclass and tbl.relkind = 'r') as has_subclass,
+	  tbl.relrowsecurity as has_row_level_security,
+	  reloptions,
+	  pd.description as description
+	FROM pg_class AS tbl
+	INNER JOIN pg_namespace AS namespace ON namespace.oid = tbl.relnamespace
+	LEFT JOIN pg_description pd ON pd.objoid = tbl.oid AND pd.objsubid = 0
+	WHERE
+	  ( -- (relkind = 'r' and relispartition = 't') matches partition table "duplicates"
+	    (tbl.relkind = 'r' AND tbl.relispartition = 'f')
+	      OR -- when it's a partition
+	    tbl.relkind = 'p'
+	  )
+	  AND namespace.nspname = ANY ( $1 )
+	ORDER BY namespace, table_name;
+	
+2023-08-09 14:35:38.847 UTC [107] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:38.862 UTC [107] LOG:  execute s31: SELECT
+	    schemainfo.nspname AS namespace,
+	    tableinfo.relname AS table_name,
+		constr.conname AS constraint_name,
+		constr.contype AS constraint_type,
+		pg_get_constraintdef(constr.oid) AS constraint_definition,
+		constr.condeferrable AS is_deferrable,
+		constr.condeferred AS is_deferred
+	FROM pg_constraint constr
+	JOIN pg_class AS tableinfo
+		ON tableinfo.oid = constr.conrelid
+	JOIN pg_namespace AS schemainfo
+		ON schemainfo.oid = tableinfo.relnamespace
+	WHERE schemainfo.nspname = ANY ( $1 )
+		AND contype NOT IN ('p', 'u', 'f')
+	ORDER BY namespace, table_name, constr.contype, constraint_name;
+	
+2023-08-09 14:35:38.862 UTC [107] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:38.873 UTC [107] LOG:  execute s32: SELECT
+	    views.viewname AS view_name,
+	    views.definition AS view_sql,
+	    views.schemaname AS namespace,
+	    description.description AS description
+	FROM pg_catalog.pg_views views
+	INNER JOIN pg_catalog.pg_namespace ns ON views.schemaname = ns.nspname
+	INNER JOIN pg_catalog.pg_class class ON class.relnamespace = ns.oid AND class.relname = views.viewname
+	LEFT JOIN pg_catalog.pg_description description ON description.objoid = class.oid AND description.objsubid = 0
+	WHERE schemaname = ANY ( $1 )
+	
+2023-08-09 14:35:38.873 UTC [107] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:38.883 UTC [107] LOG:  execute s33: 
+	            SELECT t.typname as name, e.enumlabel as value, n.nspname as namespace, d.description
+	            FROM pg_type t
+	            JOIN pg_enum e ON t.oid = e.enumtypid
+	            JOIN pg_catalog.pg_namespace n ON n.oid = t.typnamespace
+	            LEFT OUTER JOIN pg_description d ON d.objoid = t.oid
+	            WHERE n.nspname = ANY ( $1 )
+	            ORDER BY e.enumsortorder
+2023-08-09 14:35:38.883 UTC [107] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:38.923 UTC [107] LOG:  execute s34: 
+	            SELECT
+	                oid.namespace,
+	                info.table_name,
+	                info.column_name,
+	                format_type(att.atttypid, att.atttypmod) as formatted_type,
+	                info.numeric_precision,
+	                info.numeric_scale,
+	                info.numeric_precision_radix,
+	                info.datetime_precision,
+	                info.data_type,
+	                info.udt_schema as type_schema_name,
+	                info.udt_name as full_data_type,
+	                pg_get_expr(attdef.adbin, attdef.adrelid) AS column_default,
+	                info.is_nullable,
+	                info.is_identity,
+	                info.character_maximum_length,
+	                description.description
+	            FROM information_schema.columns info
+	            JOIN pg_attribute att ON att.attname = info.column_name
+	            JOIN (
+	                 SELECT pg_class.oid, relname, pg_namespace.nspname as namespace
+	                 FROM pg_class
+	                 JOIN pg_namespace on pg_namespace.oid = pg_class.relnamespace
+	                 AND pg_namespace.nspname = ANY ( $1 )
+	                ) as oid on oid.oid = att.attrelid 
+	                  AND relname = info.table_name
+	                  AND namespace = info.table_schema
+	            LEFT OUTER JOIN pg_attrdef attdef ON attdef.adrelid = att.attrelid AND attdef.adnum = att.attnum AND table_schema = namespace
+	            LEFT OUTER JOIN pg_description description ON description.objoid = att.attrelid AND description.objsubid = ordinal_position
+	            WHERE table_schema = ANY ( $1 ) 
+	            ORDER BY namespace, table_name, ordinal_position;
+	        
+2023-08-09 14:35:38.923 UTC [107] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:38.943 UTC [107] LOG:  execute s35: 
+	            SELECT
+	                con.oid         AS "con_id",
+	                att2.attname    AS "child_column",
+	                cl.relname      AS "parent_table",
+	                att.attname     AS "parent_column",
+	                con.confdeltype,
+	                con.confupdtype,
+	                rel_ns.nspname  AS "referenced_schema_name",
+	                conname         AS constraint_name,
+	                child,
+	                parent,
+	                table_name, 
+	                namespace,
+	                condeferrable,
+	                condeferred
+	            FROM (SELECT 
+	                        ns.nspname AS "namespace",
+	                        unnest(con1.conkey)                AS "parent",
+	                        unnest(con1.confkey)                AS "child",
+	                        cl.relname                          AS table_name,
+	                        ns.nspname                          AS schema_name,
+	                        generate_subscripts(con1.conkey, 1) AS colidx,
+	                        con1.oid,
+	                        con1.confrelid,
+	                        con1.conrelid,
+	                        con1.conname,
+	                        con1.confdeltype,
+	                        con1.confupdtype,
+	                        con1.condeferrable                  AS condeferrable,
+	                        con1.condeferred                    AS condeferred
+	                FROM pg_class cl
+	                        join pg_constraint con1 on con1.conrelid = cl.oid
+	                        join pg_namespace ns on cl.relnamespace = ns.oid
+	                WHERE
+	                    ns.nspname = ANY ( $1 )
+	                    and con1.contype = 'f'
+	                ORDER BY colidx
+	                ) con
+	                    JOIN pg_attribute att on att.attrelid = con.confrelid and att.attnum = con.child
+	                    JOIN pg_class cl on cl.oid = con.confrelid
+	                    JOIN pg_attribute att2 on att2.attrelid = con.conrelid and att2.attnum = con.parent
+	                    JOIN pg_class rel_cl on con.confrelid = rel_cl.oid
+	                    JOIN pg_namespace rel_ns on rel_cl.relnamespace = rel_ns.oid
+	            ORDER BY namespace, table_name, constraint_name, con_id, con.colidx;
+	        
+2023-08-09 14:35:38.943 UTC [107] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:38.970 UTC [107] LOG:  execute s36: WITH rawindex AS (
+	    SELECT
+	        indrelid, 
+	        indexrelid,
+	        indisunique,
+	        indisprimary,
+	        unnest(indkey) AS indkeyid,
+	        generate_subscripts(indkey, 1) AS indkeyidx,
+	        unnest(indclass) AS indclass,
+	        unnest(indoption) AS indoption
+	    FROM pg_index -- https://www.postgresql.org/docs/current/catalog-pg-index.html
+	    WHERE
+	        indpred IS NULL -- filter out partial indexes
+	        AND NOT indisexclusion -- filter out exclusion constraints
+	)
+	SELECT
+	    schemainfo.nspname AS namespace,
+	    indexinfo.relname AS index_name,
+	    tableinfo.relname AS table_name,
+	    columninfo.attname AS column_name,
+	    rawindex.indisunique AS is_unique,
+	    rawindex.indisprimary AS is_primary_key,
+	    rawindex.indkeyidx AS column_index,
+	    opclass.opcname AS opclass,
+	    opclass.opcdefault AS opcdefault,
+	    indexaccess.amname AS index_algo,
+	    CASE rawindex.indoption & 1
+	        WHEN 1 THEN 'DESC'
+	        ELSE 'ASC' END
+	        AS column_order,
+	    CASE rawindex.indoption & 2
+	        WHEN 2 THEN true
+	        ELSE false END
+	        AS nulls_first,
+	    pc.condeferrable AS condeferrable,
+	    pc.condeferred AS condeferred
+	FROM
+	    rawindex
+	    INNER JOIN pg_class AS tableinfo ON tableinfo.oid = rawindex.indrelid
+	    INNER JOIN pg_class AS indexinfo ON indexinfo.oid = rawindex.indexrelid
+	    INNER JOIN pg_namespace AS schemainfo ON schemainfo.oid = tableinfo.relnamespace
+	    LEFT JOIN pg_attribute AS columninfo
+	        ON columninfo.attrelid = tableinfo.oid AND columninfo.attnum = rawindex.indkeyid
+	    INNER JOIN pg_am AS indexaccess ON indexaccess.oid = indexinfo.relam
+	    LEFT JOIN pg_opclass AS opclass -- left join because crdb has no opclasses
+	        ON opclass.oid = rawindex.indclass
+	    LEFT JOIN pg_constraint pc ON rawindex.indexrelid = pc.conindid AND pc.contype <> 'f'
+	WHERE schemainfo.nspname = ANY ( $1 )
+	ORDER BY namespace, table_name, index_name, column_index;
+	
+2023-08-09 14:35:38.970 UTC [107] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:38.988 UTC [107] LOG:  execute s37: 
+	            SELECT p.proname AS name, n.nspname as namespace,
+	                CASE WHEN l.lanname = 'internal' THEN p.prosrc
+	                     ELSE pg_get_functiondef(p.oid)
+	                     END as definition
+	            FROM pg_proc p
+	            LEFT JOIN pg_namespace n ON p.pronamespace = n.oid
+	            LEFT JOIN pg_language l ON p.prolang = l.oid
+	            WHERE n.nspname = ANY ( $1 )
+	        
+2023-08-09 14:35:38.988 UTC [107] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:38.998 UTC [107] LOG:  execute s38: SELECT
+	    ext.extname AS extension_name,
+	    ext.extversion AS extension_version,
+	    ext.extrelocatable AS extension_relocatable,
+	    pn.nspname AS extension_schema
+	FROM pg_extension ext
+	INNER JOIN pg_namespace pn ON ext.extnamespace = pn.oid
+	ORDER BY ext.extname ASC
+	
+2023-08-09 14:35:39.004 UTC [107] LOG:  execute s39: 
+	              SELECT
+	                  sequence_name,
+	                  sequence_schema AS namespace,
+	                  start_value::INT8,
+	                  minimum_value::INT8 AS min_value,
+	                  maximum_value::INT8 AS max_value,
+	                  increment::INT8 AS increment_by,
+	                  (CASE cycle_option WHEN 'yes' THEN TRUE ELSE FALSE END) AS cycle,
+	                  0::INT8 AS cache_size
+	              FROM information_schema.sequences
+	              WHERE sequence_schema = ANY ( $1 )
+	              ORDER BY sequence_name
+	            
+2023-08-09 14:35:39.004 UTC [107] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:39.006 UTC [105] LOG:  statement: DROP DATABASE IF EXISTS "prisma_migrate_shadow_db_b9358376-2011-4916-a06d-c88ab23e8e54"
+2023-08-09 14:35:39.009 UTC [28] LOG:  checkpoint starting: immediate force wait
+2023-08-09 14:35:39.238 UTC [28] LOG:  checkpoint complete: wrote 4 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.041 s, sync=0.013 s, total=0.229 s; sync files=4, longest=0.010 s, average=0.004 s; distance=4530 kB, estimate=4530 kB
+2023-08-09 14:35:41.307 UTC [105] LOG:  statement: SELECT pg_advisory_lock(72707369)
+2023-08-09 14:35:41.393 UTC [105] LOG:  execute s40: 
+	                SELECT tbl.relname AS table_name
+	                FROM pg_class AS tbl
+	                INNER JOIN pg_namespace AS namespace ON namespace.oid = tbl.relnamespace
+	                WHERE tbl.relkind = 'r' AND namespace.nspname = ANY ( $1 )
+	            
+2023-08-09 14:35:41.393 UTC [105] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:41.422 UTC [105] LOG:  execute s41: SELECT "id", "checksum", "finished_at", "migration_name", "logs", "rolled_back_at", "started_at", "applied_steps_count" FROM "_prisma_migrations" ORDER BY "started_at" ASC
+2023-08-09 14:35:41.430 UTC [105] LOG:  statement: CREATE DATABASE "prisma_migrate_shadow_db_1391ac63-d7ee-4151-a298-70e2184d5924"
+2023-08-09 14:35:45.109 UTC [108] LOG:  statement: SET search_path = "public";
+	
+2023-08-09 14:35:45.113 UTC [108] LOG:  execute s42: SELECT version()
+2023-08-09 14:35:45.124 UTC [108] LOG:  execute s43: SELECT EXISTS(SELECT 1 FROM pg_namespace WHERE nspname = $1), version(), current_setting('server_version_num')::integer as numeric_version;
+2023-08-09 14:35:45.124 UTC [108] DETAIL:  parameters: $1 = 'public'
+2023-08-09 14:35:45.126 UTC [108] LOG:  statement: -- CreateTable
+	CREATE TABLE "Departamento" (
+	    "id" SERIAL NOT NULL,
+	    "nome" VARCHAR(15) NOT NULL,
+	
+	    CONSTRAINT "Departamento_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- CreateIndex
+	CREATE UNIQUE INDEX "Departamento_nome_key" ON "Departamento"("nome");
+	
+2023-08-09 14:35:45.221 UTC [108] LOG:  statement: -- CreateTable
+	CREATE TABLE "Curso" (
+	    "id" SERIAL NOT NULL,
+	    "nome" VARCHAR(15) NOT NULL,
+	    "id_departamento" INTEGER NOT NULL,
+	
+	    CONSTRAINT "Curso_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- CreateIndex
+	CREATE UNIQUE INDEX "Curso_nome_key" ON "Curso"("nome");
+	
+	-- AddForeignKey
+	ALTER TABLE "Curso" ADD CONSTRAINT "Curso_id_departamento_fkey" FOREIGN KEY ("id_departamento") REFERENCES "Departamento"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:35:45.295 UTC [108] LOG:  statement: -- CreateEnum
+	CREATE TYPE "Sexo" AS ENUM ('M', 'F');
+	
+	-- CreateTable
+	CREATE TABLE "Professor" (
+	    "id" TEXT NOT NULL,
+	    "nome" VARCHAR NOT NULL,
+	    "email" VARCHAR(25) NOT NULL,
+	    "cpf" VARCHAR(15) NOT NULL,
+	    "sexo" "Sexo" NOT NULL,
+	    "telefone" VARCHAR NOT NULL,
+	    "createt_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	    "id_departamento" INTEGER NOT NULL,
+	
+	    CONSTRAINT "Professor_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- CreateIndex
+	CREATE UNIQUE INDEX "Professor_email_key" ON "Professor"("email");
+	
+	-- CreateIndex
+	CREATE UNIQUE INDEX "Professor_cpf_key" ON "Professor"("cpf");
+	
+	-- AddForeignKey
+	ALTER TABLE "Professor" ADD CONSTRAINT "Professor_id_departamento_fkey" FOREIGN KEY ("id_departamento") REFERENCES "Departamento"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:35:45.384 UTC [108] LOG:  statement: -- CreateTable
+	CREATE TABLE "Turma" (
+	    "id" SERIAL NOT NULL,
+	    "nome" VARCHAR NOT NULL,
+	    "id_curso" INTEGER NOT NULL,
+	
+	    CONSTRAINT "Turma_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- AddForeignKey
+	ALTER TABLE "Turma" ADD CONSTRAINT "Turma_id_curso_fkey" FOREIGN KEY ("id_curso") REFERENCES "Curso"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+	
+2023-08-09 14:35:45.444 UTC [108] LOG:  statement: /*
+	  Warnings:
+	
+	  - The primary key for the `Professor` table will be changed. If it partially fails, the table could be left without primary key constraint.
+	
+	*/
+	-- AlterTable
+	ALTER TABLE "Professor" DROP CONSTRAINT "Professor_pkey",
+	ALTER COLUMN "id" SET DATA TYPE VARCHAR,
+	ADD CONSTRAINT "Professor_pkey" PRIMARY KEY ("id");
+	
+2023-08-09 14:35:45.463 UTC [108] LOG:  statement: -- CreateTable
+	CREATE TABLE "Aluno" (
+	    "id" VARCHAR NOT NULL,
+	    "nome" VARCHAR NOT NULL,
+	    "email" VARCHAR(25) NOT NULL,
+	    "cpf" VARCHAR(15) NOT NULL,
+	    "sexo" "Sexo" NOT NULL,
+	    "telefone" VARCHAR NOT NULL,
+	    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	    "id_turma" INTEGER NOT NULL,
+	    "id_curso" INTEGER NOT NULL,
+	
+	    CONSTRAINT "Aluno_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- AddForeignKey
+	ALTER TABLE "Aluno" ADD CONSTRAINT "Aluno_id_turma_fkey" FOREIGN KEY ("id_turma") REFERENCES "Turma"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+	-- AddForeignKey
+	ALTER TABLE "Aluno" ADD CONSTRAINT "Aluno_id_curso_fkey" FOREIGN KEY ("id_curso") REFERENCES "Curso"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:35:45.521 UTC [108] LOG:  statement: -- CreateTable
+	CREATE TABLE "Disciplina" (
+	    "id" SERIAL NOT NULL,
+	    "nome" VARCHAR NOT NULL,
+	
+	    CONSTRAINT "Disciplina_pkey" PRIMARY KEY ("id")
+	);
+	
+2023-08-09 14:35:45.556 UTC [108] LOG:  statement: -- CreateTable
+	CREATE TABLE "CursoDisciplina" (
+	    "id" SERIAL NOT NULL,
+	    "id_curso" INTEGER NOT NULL,
+	    "id_disciplina" INTEGER NOT NULL,
+	
+	    CONSTRAINT "CursoDisciplina_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- AddForeignKey
+	ALTER TABLE "CursoDisciplina" ADD CONSTRAINT "CursoDisciplina_id_curso_fkey" FOREIGN KEY ("id_curso") REFERENCES "Curso"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+	-- AddForeignKey
+	ALTER TABLE "CursoDisciplina" ADD CONSTRAINT "CursoDisciplina_id_disciplina_fkey" FOREIGN KEY ("id_disciplina") REFERENCES "Disciplina"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:35:45.604 UTC [108] LOG:  statement: -- CreateTable
+	CREATE TABLE "AlunoDisciplina" (
+	    "id" SERIAL NOT NULL,
+	    "id_aluno" TEXT NOT NULL,
+	    "id_disciplina" INTEGER NOT NULL,
+	
+	    CONSTRAINT "AlunoDisciplina_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- AddForeignKey
+	ALTER TABLE "AlunoDisciplina" ADD CONSTRAINT "AlunoDisciplina_id_aluno_fkey" FOREIGN KEY ("id_aluno") REFERENCES "Aluno"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+	-- AddForeignKey
+	ALTER TABLE "AlunoDisciplina" ADD CONSTRAINT "AlunoDisciplina_id_disciplina_fkey" FOREIGN KEY ("id_disciplina") REFERENCES "Disciplina"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:35:45.661 UTC [108] LOG:  statement: -- CreateTable
+	CREATE TABLE "ProfessorDisciplina" (
+	    "id" SERIAL NOT NULL,
+	    "id_professor" TEXT NOT NULL,
+	    "id_disciplina" INTEGER NOT NULL,
+	
+	    CONSTRAINT "ProfessorDisciplina_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- AddForeignKey
+	ALTER TABLE "ProfessorDisciplina" ADD CONSTRAINT "ProfessorDisciplina_id_professor_fkey" FOREIGN KEY ("id_professor") REFERENCES "Professor"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+	-- AddForeignKey
+	ALTER TABLE "ProfessorDisciplina" ADD CONSTRAINT "ProfessorDisciplina_id_disciplina_fkey" FOREIGN KEY ("id_disciplina") REFERENCES "Disciplina"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:35:45.750 UTC [108] LOG:  statement: -- CreateEnum
+	CREATE TYPE "UserStatus" AS ENUM ('departamento', 'professor', 'aluno');
+	
+	-- CreateTable
+	CREATE TABLE "User" (
+	    "id" TEXT NOT NULL,
+	    "email" VARCHAR NOT NULL,
+	    "password" VARCHAR NOT NULL,
+	    "status" "UserStatus" NOT NULL,
+	    "id_departamento" INTEGER,
+	    "id_professor" TEXT,
+	    "id_aluno" TEXT,
+	
+	    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- CreateIndex
+	CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+	
+	-- AddForeignKey
+	ALTER TABLE "User" ADD CONSTRAINT "User_id_departamento_fkey" FOREIGN KEY ("id_departamento") REFERENCES "Departamento"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+	-- AddForeignKey
+	ALTER TABLE "User" ADD CONSTRAINT "User_id_professor_fkey" FOREIGN KEY ("id_professor") REFERENCES "Professor"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+	-- AddForeignKey
+	ALTER TABLE "User" ADD CONSTRAINT "User_id_aluno_fkey" FOREIGN KEY ("id_aluno") REFERENCES "Aluno"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:35:45.983 UTC [108] LOG:  statement: -- AlterTable
+	ALTER TABLE "Curso" ALTER COLUMN "nome" SET DATA TYPE VARCHAR(40);
+	
+2023-08-09 14:35:45.990 UTC [108] LOG:  statement: -- DropForeignKey
+	ALTER TABLE "Turma" DROP CONSTRAINT "Turma_id_curso_fkey";
+	
+	-- AddForeignKey
+	ALTER TABLE "Turma" ADD CONSTRAINT "Turma_id_curso_fkey" FOREIGN KEY ("id_curso") REFERENCES "Curso"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:35:46.007 UTC [108] LOG:  statement: /*
+	  Warnings:
+	
+	  - Added the required column `carga_horaria` to the `Disciplina` table without a default value. This is not possible if the table is not empty.
+	
+	*/
+	-- AlterTable
+	ALTER TABLE "Disciplina" ADD COLUMN     "carga_horaria" INTEGER NOT NULL;
+	
+2023-08-09 14:35:46.016 UTC [108] LOG:  execute s44: SELECT namespace.nspname as namespace_name
+	FROM pg_namespace as namespace
+	WHERE namespace.nspname = ANY ( $1 )
+	ORDER BY namespace_name;
+	
+2023-08-09 14:35:46.016 UTC [108] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:46.030 UTC [108] LOG:  execute s45: SELECT
+	  tbl.relname AS table_name,
+	  namespace.nspname as namespace,
+	  (tbl.relhassubclass and tbl.relkind = 'p') as is_partition,
+	  (tbl.relhassubclass and tbl.relkind = 'r') as has_subclass,
+	  tbl.relrowsecurity as has_row_level_security,
+	  reloptions,
+	  pd.description as description
+	FROM pg_class AS tbl
+	INNER JOIN pg_namespace AS namespace ON namespace.oid = tbl.relnamespace
+	LEFT JOIN pg_description pd ON pd.objoid = tbl.oid AND pd.objsubid = 0
+	WHERE
+	  ( -- (relkind = 'r' and relispartition = 't') matches partition table "duplicates"
+	    (tbl.relkind = 'r' AND tbl.relispartition = 'f')
+	      OR -- when it's a partition
+	    tbl.relkind = 'p'
+	  )
+	  AND namespace.nspname = ANY ( $1 )
+	ORDER BY namespace, table_name;
+	
+2023-08-09 14:35:46.030 UTC [108] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:46.046 UTC [108] LOG:  execute s46: SELECT
+	    schemainfo.nspname AS namespace,
+	    tableinfo.relname AS table_name,
+		constr.conname AS constraint_name,
+		constr.contype AS constraint_type,
+		pg_get_constraintdef(constr.oid) AS constraint_definition,
+		constr.condeferrable AS is_deferrable,
+		constr.condeferred AS is_deferred
+	FROM pg_constraint constr
+	JOIN pg_class AS tableinfo
+		ON tableinfo.oid = constr.conrelid
+	JOIN pg_namespace AS schemainfo
+		ON schemainfo.oid = tableinfo.relnamespace
+	WHERE schemainfo.nspname = ANY ( $1 )
+		AND contype NOT IN ('p', 'u', 'f')
+	ORDER BY namespace, table_name, constr.contype, constraint_name;
+	
+2023-08-09 14:35:46.046 UTC [108] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:46.057 UTC [108] LOG:  execute s47: SELECT
+	    views.viewname AS view_name,
+	    views.definition AS view_sql,
+	    views.schemaname AS namespace,
+	    description.description AS description
+	FROM pg_catalog.pg_views views
+	INNER JOIN pg_catalog.pg_namespace ns ON views.schemaname = ns.nspname
+	INNER JOIN pg_catalog.pg_class class ON class.relnamespace = ns.oid AND class.relname = views.viewname
+	LEFT JOIN pg_catalog.pg_description description ON description.objoid = class.oid AND description.objsubid = 0
+	WHERE schemaname = ANY ( $1 )
+	
+2023-08-09 14:35:46.057 UTC [108] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:46.064 UTC [108] LOG:  execute s48: 
+	            SELECT t.typname as name, e.enumlabel as value, n.nspname as namespace, d.description
+	            FROM pg_type t
+	            JOIN pg_enum e ON t.oid = e.enumtypid
+	            JOIN pg_catalog.pg_namespace n ON n.oid = t.typnamespace
+	            LEFT OUTER JOIN pg_description d ON d.objoid = t.oid
+	            WHERE n.nspname = ANY ( $1 )
+	            ORDER BY e.enumsortorder
+2023-08-09 14:35:46.064 UTC [108] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:46.102 UTC [108] LOG:  execute s49: 
+	            SELECT
+	                oid.namespace,
+	                info.table_name,
+	                info.column_name,
+	                format_type(att.atttypid, att.atttypmod) as formatted_type,
+	                info.numeric_precision,
+	                info.numeric_scale,
+	                info.numeric_precision_radix,
+	                info.datetime_precision,
+	                info.data_type,
+	                info.udt_schema as type_schema_name,
+	                info.udt_name as full_data_type,
+	                pg_get_expr(attdef.adbin, attdef.adrelid) AS column_default,
+	                info.is_nullable,
+	                info.is_identity,
+	                info.character_maximum_length,
+	                description.description
+	            FROM information_schema.columns info
+	            JOIN pg_attribute att ON att.attname = info.column_name
+	            JOIN (
+	                 SELECT pg_class.oid, relname, pg_namespace.nspname as namespace
+	                 FROM pg_class
+	                 JOIN pg_namespace on pg_namespace.oid = pg_class.relnamespace
+	                 AND pg_namespace.nspname = ANY ( $1 )
+	                ) as oid on oid.oid = att.attrelid 
+	                  AND relname = info.table_name
+	                  AND namespace = info.table_schema
+	            LEFT OUTER JOIN pg_attrdef attdef ON attdef.adrelid = att.attrelid AND attdef.adnum = att.attnum AND table_schema = namespace
+	            LEFT OUTER JOIN pg_description description ON description.objoid = att.attrelid AND description.objsubid = ordinal_position
+	            WHERE table_schema = ANY ( $1 ) 
+	            ORDER BY namespace, table_name, ordinal_position;
+	        
+2023-08-09 14:35:46.102 UTC [108] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:46.126 UTC [108] LOG:  execute s50: 
+	            SELECT
+	                con.oid         AS "con_id",
+	                att2.attname    AS "child_column",
+	                cl.relname      AS "parent_table",
+	                att.attname     AS "parent_column",
+	                con.confdeltype,
+	                con.confupdtype,
+	                rel_ns.nspname  AS "referenced_schema_name",
+	                conname         AS constraint_name,
+	                child,
+	                parent,
+	                table_name, 
+	                namespace,
+	                condeferrable,
+	                condeferred
+	            FROM (SELECT 
+	                        ns.nspname AS "namespace",
+	                        unnest(con1.conkey)                AS "parent",
+	                        unnest(con1.confkey)                AS "child",
+	                        cl.relname                          AS table_name,
+	                        ns.nspname                          AS schema_name,
+	                        generate_subscripts(con1.conkey, 1) AS colidx,
+	                        con1.oid,
+	                        con1.confrelid,
+	                        con1.conrelid,
+	                        con1.conname,
+	                        con1.confdeltype,
+	                        con1.confupdtype,
+	                        con1.condeferrable                  AS condeferrable,
+	                        con1.condeferred                    AS condeferred
+	                FROM pg_class cl
+	                        join pg_constraint con1 on con1.conrelid = cl.oid
+	                        join pg_namespace ns on cl.relnamespace = ns.oid
+	                WHERE
+	                    ns.nspname = ANY ( $1 )
+	                    and con1.contype = 'f'
+	                ORDER BY colidx
+	                ) con
+	                    JOIN pg_attribute att on att.attrelid = con.confrelid and att.attnum = con.child
+	                    JOIN pg_class cl on cl.oid = con.confrelid
+	                    JOIN pg_attribute att2 on att2.attrelid = con.conrelid and att2.attnum = con.parent
+	                    JOIN pg_class rel_cl on con.confrelid = rel_cl.oid
+	                    JOIN pg_namespace rel_ns on rel_cl.relnamespace = rel_ns.oid
+	            ORDER BY namespace, table_name, constraint_name, con_id, con.colidx;
+	        
+2023-08-09 14:35:46.126 UTC [108] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:46.181 UTC [108] LOG:  execute s51: WITH rawindex AS (
+	    SELECT
+	        indrelid, 
+	        indexrelid,
+	        indisunique,
+	        indisprimary,
+	        unnest(indkey) AS indkeyid,
+	        generate_subscripts(indkey, 1) AS indkeyidx,
+	        unnest(indclass) AS indclass,
+	        unnest(indoption) AS indoption
+	    FROM pg_index -- https://www.postgresql.org/docs/current/catalog-pg-index.html
+	    WHERE
+	        indpred IS NULL -- filter out partial indexes
+	        AND NOT indisexclusion -- filter out exclusion constraints
+	)
+	SELECT
+	    schemainfo.nspname AS namespace,
+	    indexinfo.relname AS index_name,
+	    tableinfo.relname AS table_name,
+	    columninfo.attname AS column_name,
+	    rawindex.indisunique AS is_unique,
+	    rawindex.indisprimary AS is_primary_key,
+	    rawindex.indkeyidx AS column_index,
+	    opclass.opcname AS opclass,
+	    opclass.opcdefault AS opcdefault,
+	    indexaccess.amname AS index_algo,
+	    CASE rawindex.indoption & 1
+	        WHEN 1 THEN 'DESC'
+	        ELSE 'ASC' END
+	        AS column_order,
+	    CASE rawindex.indoption & 2
+	        WHEN 2 THEN true
+	        ELSE false END
+	        AS nulls_first,
+	    pc.condeferrable AS condeferrable,
+	    pc.condeferred AS condeferred
+	FROM
+	    rawindex
+	    INNER JOIN pg_class AS tableinfo ON tableinfo.oid = rawindex.indrelid
+	    INNER JOIN pg_class AS indexinfo ON indexinfo.oid = rawindex.indexrelid
+	    INNER JOIN pg_namespace AS schemainfo ON schemainfo.oid = tableinfo.relnamespace
+	    LEFT JOIN pg_attribute AS columninfo
+	        ON columninfo.attrelid = tableinfo.oid AND columninfo.attnum = rawindex.indkeyid
+	    INNER JOIN pg_am AS indexaccess ON indexaccess.oid = indexinfo.relam
+	    LEFT JOIN pg_opclass AS opclass -- left join because crdb has no opclasses
+	        ON opclass.oid = rawindex.indclass
+	    LEFT JOIN pg_constraint pc ON rawindex.indexrelid = pc.conindid AND pc.contype <> 'f'
+	WHERE schemainfo.nspname = ANY ( $1 )
+	ORDER BY namespace, table_name, index_name, column_index;
+	
+2023-08-09 14:35:46.181 UTC [108] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:46.213 UTC [108] LOG:  execute s52: 
+	            SELECT p.proname AS name, n.nspname as namespace,
+	                CASE WHEN l.lanname = 'internal' THEN p.prosrc
+	                     ELSE pg_get_functiondef(p.oid)
+	                     END as definition
+	            FROM pg_proc p
+	            LEFT JOIN pg_namespace n ON p.pronamespace = n.oid
+	            LEFT JOIN pg_language l ON p.prolang = l.oid
+	            WHERE n.nspname = ANY ( $1 )
+	        
+2023-08-09 14:35:46.213 UTC [108] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:46.242 UTC [108] LOG:  execute s53: SELECT
+	    ext.extname AS extension_name,
+	    ext.extversion AS extension_version,
+	    ext.extrelocatable AS extension_relocatable,
+	    pn.nspname AS extension_schema
+	FROM pg_extension ext
+	INNER JOIN pg_namespace pn ON ext.extnamespace = pn.oid
+	ORDER BY ext.extname ASC
+	
+2023-08-09 14:35:46.248 UTC [108] LOG:  execute s54: 
+	              SELECT
+	                  sequence_name,
+	                  sequence_schema AS namespace,
+	                  start_value::INT8,
+	                  minimum_value::INT8 AS min_value,
+	                  maximum_value::INT8 AS max_value,
+	                  increment::INT8 AS increment_by,
+	                  (CASE cycle_option WHEN 'yes' THEN TRUE ELSE FALSE END) AS cycle,
+	                  0::INT8 AS cache_size
+	              FROM information_schema.sequences
+	              WHERE sequence_schema = ANY ( $1 )
+	              ORDER BY sequence_name
+	            
+2023-08-09 14:35:46.248 UTC [108] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:35:46.252 UTC [105] LOG:  statement: DROP DATABASE IF EXISTS "prisma_migrate_shadow_db_1391ac63-d7ee-4151-a298-70e2184d5924"
+2023-08-09 14:35:46.278 UTC [28] LOG:  checkpoint starting: immediate force wait
+2023-08-09 14:35:46.711 UTC [28] LOG:  checkpoint complete: wrote 4 buffers (0.0%); 0 WAL file(s) added, 0 removed, 1 recycled; write=0.134 s, sync=0.009 s, total=0.434 s; sync files=4, longest=0.004 s, average=0.003 s; distance=4530 kB, estimate=4530 kB
+2023-08-09 14:35:49.042 UTC [105] LOG:  execute s55: SELECT COUNT(*) FROM "ProfessorDisciplina"
+2023-08-09 14:36:42.175 UTC [105] LOG:  statement: CREATE DATABASE "prisma_migrate_shadow_db_a6f80561-7600-4861-a94a-f644c9fa697d"
+2023-08-09 14:36:45.923 UTC [110] LOG:  statement: SET search_path = "public";
+	
+2023-08-09 14:36:45.927 UTC [110] LOG:  execute s56: SELECT version()
+2023-08-09 14:36:45.937 UTC [110] LOG:  execute s57: SELECT EXISTS(SELECT 1 FROM pg_namespace WHERE nspname = $1), version(), current_setting('server_version_num')::integer as numeric_version;
+2023-08-09 14:36:45.937 UTC [110] DETAIL:  parameters: $1 = 'public'
+2023-08-09 14:36:45.940 UTC [110] LOG:  statement: -- CreateTable
+	CREATE TABLE "Departamento" (
+	    "id" SERIAL NOT NULL,
+	    "nome" VARCHAR(15) NOT NULL,
+	
+	    CONSTRAINT "Departamento_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- CreateIndex
+	CREATE UNIQUE INDEX "Departamento_nome_key" ON "Departamento"("nome");
+	
+2023-08-09 14:36:46.016 UTC [110] LOG:  statement: -- CreateTable
+	CREATE TABLE "Curso" (
+	    "id" SERIAL NOT NULL,
+	    "nome" VARCHAR(15) NOT NULL,
+	    "id_departamento" INTEGER NOT NULL,
+	
+	    CONSTRAINT "Curso_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- CreateIndex
+	CREATE UNIQUE INDEX "Curso_nome_key" ON "Curso"("nome");
+	
+	-- AddForeignKey
+	ALTER TABLE "Curso" ADD CONSTRAINT "Curso_id_departamento_fkey" FOREIGN KEY ("id_departamento") REFERENCES "Departamento"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:36:46.078 UTC [110] LOG:  statement: -- CreateEnum
+	CREATE TYPE "Sexo" AS ENUM ('M', 'F');
+	
+	-- CreateTable
+	CREATE TABLE "Professor" (
+	    "id" TEXT NOT NULL,
+	    "nome" VARCHAR NOT NULL,
+	    "email" VARCHAR(25) NOT NULL,
+	    "cpf" VARCHAR(15) NOT NULL,
+	    "sexo" "Sexo" NOT NULL,
+	    "telefone" VARCHAR NOT NULL,
+	    "createt_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	    "id_departamento" INTEGER NOT NULL,
+	
+	    CONSTRAINT "Professor_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- CreateIndex
+	CREATE UNIQUE INDEX "Professor_email_key" ON "Professor"("email");
+	
+	-- CreateIndex
+	CREATE UNIQUE INDEX "Professor_cpf_key" ON "Professor"("cpf");
+	
+	-- AddForeignKey
+	ALTER TABLE "Professor" ADD CONSTRAINT "Professor_id_departamento_fkey" FOREIGN KEY ("id_departamento") REFERENCES "Departamento"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:36:46.163 UTC [110] LOG:  statement: -- CreateTable
+	CREATE TABLE "Turma" (
+	    "id" SERIAL NOT NULL,
+	    "nome" VARCHAR NOT NULL,
+	    "id_curso" INTEGER NOT NULL,
+	
+	    CONSTRAINT "Turma_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- AddForeignKey
+	ALTER TABLE "Turma" ADD CONSTRAINT "Turma_id_curso_fkey" FOREIGN KEY ("id_curso") REFERENCES "Curso"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+	
+2023-08-09 14:36:46.229 UTC [110] LOG:  statement: /*
+	  Warnings:
+	
+	  - The primary key for the `Professor` table will be changed. If it partially fails, the table could be left without primary key constraint.
+	
+	*/
+	-- AlterTable
+	ALTER TABLE "Professor" DROP CONSTRAINT "Professor_pkey",
+	ALTER COLUMN "id" SET DATA TYPE VARCHAR,
+	ADD CONSTRAINT "Professor_pkey" PRIMARY KEY ("id");
+	
+2023-08-09 14:36:46.249 UTC [110] LOG:  statement: -- CreateTable
+	CREATE TABLE "Aluno" (
+	    "id" VARCHAR NOT NULL,
+	    "nome" VARCHAR NOT NULL,
+	    "email" VARCHAR(25) NOT NULL,
+	    "cpf" VARCHAR(15) NOT NULL,
+	    "sexo" "Sexo" NOT NULL,
+	    "telefone" VARCHAR NOT NULL,
+	    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	    "id_turma" INTEGER NOT NULL,
+	    "id_curso" INTEGER NOT NULL,
+	
+	    CONSTRAINT "Aluno_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- AddForeignKey
+	ALTER TABLE "Aluno" ADD CONSTRAINT "Aluno_id_turma_fkey" FOREIGN KEY ("id_turma") REFERENCES "Turma"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+	-- AddForeignKey
+	ALTER TABLE "Aluno" ADD CONSTRAINT "Aluno_id_curso_fkey" FOREIGN KEY ("id_curso") REFERENCES "Curso"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:36:46.310 UTC [110] LOG:  statement: -- CreateTable
+	CREATE TABLE "Disciplina" (
+	    "id" SERIAL NOT NULL,
+	    "nome" VARCHAR NOT NULL,
+	
+	    CONSTRAINT "Disciplina_pkey" PRIMARY KEY ("id")
+	);
+	
+2023-08-09 14:36:46.351 UTC [110] LOG:  statement: -- CreateTable
+	CREATE TABLE "CursoDisciplina" (
+	    "id" SERIAL NOT NULL,
+	    "id_curso" INTEGER NOT NULL,
+	    "id_disciplina" INTEGER NOT NULL,
+	
+	    CONSTRAINT "CursoDisciplina_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- AddForeignKey
+	ALTER TABLE "CursoDisciplina" ADD CONSTRAINT "CursoDisciplina_id_curso_fkey" FOREIGN KEY ("id_curso") REFERENCES "Curso"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+	-- AddForeignKey
+	ALTER TABLE "CursoDisciplina" ADD CONSTRAINT "CursoDisciplina_id_disciplina_fkey" FOREIGN KEY ("id_disciplina") REFERENCES "Disciplina"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:36:46.440 UTC [110] LOG:  statement: -- CreateTable
+	CREATE TABLE "AlunoDisciplina" (
+	    "id" SERIAL NOT NULL,
+	    "id_aluno" TEXT NOT NULL,
+	    "id_disciplina" INTEGER NOT NULL,
+	
+	    CONSTRAINT "AlunoDisciplina_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- AddForeignKey
+	ALTER TABLE "AlunoDisciplina" ADD CONSTRAINT "AlunoDisciplina_id_aluno_fkey" FOREIGN KEY ("id_aluno") REFERENCES "Aluno"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+	-- AddForeignKey
+	ALTER TABLE "AlunoDisciplina" ADD CONSTRAINT "AlunoDisciplina_id_disciplina_fkey" FOREIGN KEY ("id_disciplina") REFERENCES "Disciplina"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:36:46.523 UTC [110] LOG:  statement: -- CreateTable
+	CREATE TABLE "ProfessorDisciplina" (
+	    "id" SERIAL NOT NULL,
+	    "id_professor" TEXT NOT NULL,
+	    "id_disciplina" INTEGER NOT NULL,
+	
+	    CONSTRAINT "ProfessorDisciplina_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- AddForeignKey
+	ALTER TABLE "ProfessorDisciplina" ADD CONSTRAINT "ProfessorDisciplina_id_professor_fkey" FOREIGN KEY ("id_professor") REFERENCES "Professor"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+	-- AddForeignKey
+	ALTER TABLE "ProfessorDisciplina" ADD CONSTRAINT "ProfessorDisciplina_id_disciplina_fkey" FOREIGN KEY ("id_disciplina") REFERENCES "Disciplina"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:36:46.605 UTC [110] LOG:  statement: -- CreateEnum
+	CREATE TYPE "UserStatus" AS ENUM ('departamento', 'professor', 'aluno');
+	
+	-- CreateTable
+	CREATE TABLE "User" (
+	    "id" TEXT NOT NULL,
+	    "email" VARCHAR NOT NULL,
+	    "password" VARCHAR NOT NULL,
+	    "status" "UserStatus" NOT NULL,
+	    "id_departamento" INTEGER,
+	    "id_professor" TEXT,
+	    "id_aluno" TEXT,
+	
+	    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- CreateIndex
+	CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+	
+	-- AddForeignKey
+	ALTER TABLE "User" ADD CONSTRAINT "User_id_departamento_fkey" FOREIGN KEY ("id_departamento") REFERENCES "Departamento"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+	-- AddForeignKey
+	ALTER TABLE "User" ADD CONSTRAINT "User_id_professor_fkey" FOREIGN KEY ("id_professor") REFERENCES "Professor"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+	-- AddForeignKey
+	ALTER TABLE "User" ADD CONSTRAINT "User_id_aluno_fkey" FOREIGN KEY ("id_aluno") REFERENCES "Aluno"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:36:46.693 UTC [110] LOG:  statement: -- AlterTable
+	ALTER TABLE "Curso" ALTER COLUMN "nome" SET DATA TYPE VARCHAR(40);
+	
+2023-08-09 14:36:46.698 UTC [110] LOG:  statement: -- DropForeignKey
+	ALTER TABLE "Turma" DROP CONSTRAINT "Turma_id_curso_fkey";
+	
+	-- AddForeignKey
+	ALTER TABLE "Turma" ADD CONSTRAINT "Turma_id_curso_fkey" FOREIGN KEY ("id_curso") REFERENCES "Curso"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:36:46.707 UTC [110] LOG:  statement: /*
+	  Warnings:
+	
+	  - Added the required column `carga_horaria` to the `Disciplina` table without a default value. This is not possible if the table is not empty.
+	
+	*/
+	-- AlterTable
+	ALTER TABLE "Disciplina" ADD COLUMN     "carga_horaria" INTEGER NOT NULL;
+	
+2023-08-09 14:36:46.714 UTC [110] LOG:  execute s58: SELECT namespace.nspname as namespace_name
+	FROM pg_namespace as namespace
+	WHERE namespace.nspname = ANY ( $1 )
+	ORDER BY namespace_name;
+	
+2023-08-09 14:36:46.714 UTC [110] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:36:46.727 UTC [110] LOG:  execute s59: SELECT
+	  tbl.relname AS table_name,
+	  namespace.nspname as namespace,
+	  (tbl.relhassubclass and tbl.relkind = 'p') as is_partition,
+	  (tbl.relhassubclass and tbl.relkind = 'r') as has_subclass,
+	  tbl.relrowsecurity as has_row_level_security,
+	  reloptions,
+	  pd.description as description
+	FROM pg_class AS tbl
+	INNER JOIN pg_namespace AS namespace ON namespace.oid = tbl.relnamespace
+	LEFT JOIN pg_description pd ON pd.objoid = tbl.oid AND pd.objsubid = 0
+	WHERE
+	  ( -- (relkind = 'r' and relispartition = 't') matches partition table "duplicates"
+	    (tbl.relkind = 'r' AND tbl.relispartition = 'f')
+	      OR -- when it's a partition
+	    tbl.relkind = 'p'
+	  )
+	  AND namespace.nspname = ANY ( $1 )
+	ORDER BY namespace, table_name;
+	
+2023-08-09 14:36:46.727 UTC [110] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:36:46.736 UTC [110] LOG:  execute s60: SELECT
+	    schemainfo.nspname AS namespace,
+	    tableinfo.relname AS table_name,
+		constr.conname AS constraint_name,
+		constr.contype AS constraint_type,
+		pg_get_constraintdef(constr.oid) AS constraint_definition,
+		constr.condeferrable AS is_deferrable,
+		constr.condeferred AS is_deferred
+	FROM pg_constraint constr
+	JOIN pg_class AS tableinfo
+		ON tableinfo.oid = constr.conrelid
+	JOIN pg_namespace AS schemainfo
+		ON schemainfo.oid = tableinfo.relnamespace
+	WHERE schemainfo.nspname = ANY ( $1 )
+		AND contype NOT IN ('p', 'u', 'f')
+	ORDER BY namespace, table_name, constr.contype, constraint_name;
+	
+2023-08-09 14:36:46.736 UTC [110] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:36:46.742 UTC [110] LOG:  execute s61: SELECT
+	    views.viewname AS view_name,
+	    views.definition AS view_sql,
+	    views.schemaname AS namespace,
+	    description.description AS description
+	FROM pg_catalog.pg_views views
+	INNER JOIN pg_catalog.pg_namespace ns ON views.schemaname = ns.nspname
+	INNER JOIN pg_catalog.pg_class class ON class.relnamespace = ns.oid AND class.relname = views.viewname
+	LEFT JOIN pg_catalog.pg_description description ON description.objoid = class.oid AND description.objsubid = 0
+	WHERE schemaname = ANY ( $1 )
+	
+2023-08-09 14:36:46.742 UTC [110] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:36:46.749 UTC [110] LOG:  execute s62: 
+	            SELECT t.typname as name, e.enumlabel as value, n.nspname as namespace, d.description
+	            FROM pg_type t
+	            JOIN pg_enum e ON t.oid = e.enumtypid
+	            JOIN pg_catalog.pg_namespace n ON n.oid = t.typnamespace
+	            LEFT OUTER JOIN pg_description d ON d.objoid = t.oid
+	            WHERE n.nspname = ANY ( $1 )
+	            ORDER BY e.enumsortorder
+2023-08-09 14:36:46.749 UTC [110] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:36:46.774 UTC [110] LOG:  execute s63: 
+	            SELECT
+	                oid.namespace,
+	                info.table_name,
+	                info.column_name,
+	                format_type(att.atttypid, att.atttypmod) as formatted_type,
+	                info.numeric_precision,
+	                info.numeric_scale,
+	                info.numeric_precision_radix,
+	                info.datetime_precision,
+	                info.data_type,
+	                info.udt_schema as type_schema_name,
+	                info.udt_name as full_data_type,
+	                pg_get_expr(attdef.adbin, attdef.adrelid) AS column_default,
+	                info.is_nullable,
+	                info.is_identity,
+	                info.character_maximum_length,
+	                description.description
+	            FROM information_schema.columns info
+	            JOIN pg_attribute att ON att.attname = info.column_name
+	            JOIN (
+	                 SELECT pg_class.oid, relname, pg_namespace.nspname as namespace
+	                 FROM pg_class
+	                 JOIN pg_namespace on pg_namespace.oid = pg_class.relnamespace
+	                 AND pg_namespace.nspname = ANY ( $1 )
+	                ) as oid on oid.oid = att.attrelid 
+	                  AND relname = info.table_name
+	                  AND namespace = info.table_schema
+	            LEFT OUTER JOIN pg_attrdef attdef ON attdef.adrelid = att.attrelid AND attdef.adnum = att.attnum AND table_schema = namespace
+	            LEFT OUTER JOIN pg_description description ON description.objoid = att.attrelid AND description.objsubid = ordinal_position
+	            WHERE table_schema = ANY ( $1 ) 
+	            ORDER BY namespace, table_name, ordinal_position;
+	        
+2023-08-09 14:36:46.774 UTC [110] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:36:46.789 UTC [110] LOG:  execute s64: 
+	            SELECT
+	                con.oid         AS "con_id",
+	                att2.attname    AS "child_column",
+	                cl.relname      AS "parent_table",
+	                att.attname     AS "parent_column",
+	                con.confdeltype,
+	                con.confupdtype,
+	                rel_ns.nspname  AS "referenced_schema_name",
+	                conname         AS constraint_name,
+	                child,
+	                parent,
+	                table_name, 
+	                namespace,
+	                condeferrable,
+	                condeferred
+	            FROM (SELECT 
+	                        ns.nspname AS "namespace",
+	                        unnest(con1.conkey)                AS "parent",
+	                        unnest(con1.confkey)                AS "child",
+	                        cl.relname                          AS table_name,
+	                        ns.nspname                          AS schema_name,
+	                        generate_subscripts(con1.conkey, 1) AS colidx,
+	                        con1.oid,
+	                        con1.confrelid,
+	                        con1.conrelid,
+	                        con1.conname,
+	                        con1.confdeltype,
+	                        con1.confupdtype,
+	                        con1.condeferrable                  AS condeferrable,
+	                        con1.condeferred                    AS condeferred
+	                FROM pg_class cl
+	                        join pg_constraint con1 on con1.conrelid = cl.oid
+	                        join pg_namespace ns on cl.relnamespace = ns.oid
+	                WHERE
+	                    ns.nspname = ANY ( $1 )
+	                    and con1.contype = 'f'
+	                ORDER BY colidx
+	                ) con
+	                    JOIN pg_attribute att on att.attrelid = con.confrelid and att.attnum = con.child
+	                    JOIN pg_class cl on cl.oid = con.confrelid
+	                    JOIN pg_attribute att2 on att2.attrelid = con.conrelid and att2.attnum = con.parent
+	                    JOIN pg_class rel_cl on con.confrelid = rel_cl.oid
+	                    JOIN pg_namespace rel_ns on rel_cl.relnamespace = rel_ns.oid
+	            ORDER BY namespace, table_name, constraint_name, con_id, con.colidx;
+	        
+2023-08-09 14:36:46.789 UTC [110] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:36:46.807 UTC [110] LOG:  execute s65: WITH rawindex AS (
+	    SELECT
+	        indrelid, 
+	        indexrelid,
+	        indisunique,
+	        indisprimary,
+	        unnest(indkey) AS indkeyid,
+	        generate_subscripts(indkey, 1) AS indkeyidx,
+	        unnest(indclass) AS indclass,
+	        unnest(indoption) AS indoption
+	    FROM pg_index -- https://www.postgresql.org/docs/current/catalog-pg-index.html
+	    WHERE
+	        indpred IS NULL -- filter out partial indexes
+	        AND NOT indisexclusion -- filter out exclusion constraints
+	)
+	SELECT
+	    schemainfo.nspname AS namespace,
+	    indexinfo.relname AS index_name,
+	    tableinfo.relname AS table_name,
+	    columninfo.attname AS column_name,
+	    rawindex.indisunique AS is_unique,
+	    rawindex.indisprimary AS is_primary_key,
+	    rawindex.indkeyidx AS column_index,
+	    opclass.opcname AS opclass,
+	    opclass.opcdefault AS opcdefault,
+	    indexaccess.amname AS index_algo,
+	    CASE rawindex.indoption & 1
+	        WHEN 1 THEN 'DESC'
+	        ELSE 'ASC' END
+	        AS column_order,
+	    CASE rawindex.indoption & 2
+	        WHEN 2 THEN true
+	        ELSE false END
+	        AS nulls_first,
+	    pc.condeferrable AS condeferrable,
+	    pc.condeferred AS condeferred
+	FROM
+	    rawindex
+	    INNER JOIN pg_class AS tableinfo ON tableinfo.oid = rawindex.indrelid
+	    INNER JOIN pg_class AS indexinfo ON indexinfo.oid = rawindex.indexrelid
+	    INNER JOIN pg_namespace AS schemainfo ON schemainfo.oid = tableinfo.relnamespace
+	    LEFT JOIN pg_attribute AS columninfo
+	        ON columninfo.attrelid = tableinfo.oid AND columninfo.attnum = rawindex.indkeyid
+	    INNER JOIN pg_am AS indexaccess ON indexaccess.oid = indexinfo.relam
+	    LEFT JOIN pg_opclass AS opclass -- left join because crdb has no opclasses
+	        ON opclass.oid = rawindex.indclass
+	    LEFT JOIN pg_constraint pc ON rawindex.indexrelid = pc.conindid AND pc.contype <> 'f'
+	WHERE schemainfo.nspname = ANY ( $1 )
+	ORDER BY namespace, table_name, index_name, column_index;
+	
+2023-08-09 14:36:46.807 UTC [110] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:36:46.820 UTC [110] LOG:  execute s66: 
+	            SELECT p.proname AS name, n.nspname as namespace,
+	                CASE WHEN l.lanname = 'internal' THEN p.prosrc
+	                     ELSE pg_get_functiondef(p.oid)
+	                     END as definition
+	            FROM pg_proc p
+	            LEFT JOIN pg_namespace n ON p.pronamespace = n.oid
+	            LEFT JOIN pg_language l ON p.prolang = l.oid
+	            WHERE n.nspname = ANY ( $1 )
+	        
+2023-08-09 14:36:46.820 UTC [110] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:36:46.830 UTC [110] LOG:  execute s67: SELECT
+	    ext.extname AS extension_name,
+	    ext.extversion AS extension_version,
+	    ext.extrelocatable AS extension_relocatable,
+	    pn.nspname AS extension_schema
+	FROM pg_extension ext
+	INNER JOIN pg_namespace pn ON ext.extnamespace = pn.oid
+	ORDER BY ext.extname ASC
+	
+2023-08-09 14:36:46.835 UTC [110] LOG:  execute s68: 
+	              SELECT
+	                  sequence_name,
+	                  sequence_schema AS namespace,
+	                  start_value::INT8,
+	                  minimum_value::INT8 AS min_value,
+	                  maximum_value::INT8 AS max_value,
+	                  increment::INT8 AS increment_by,
+	                  (CASE cycle_option WHEN 'yes' THEN TRUE ELSE FALSE END) AS cycle,
+	                  0::INT8 AS cache_size
+	              FROM information_schema.sequences
+	              WHERE sequence_schema = ANY ( $1 )
+	              ORDER BY sequence_name
+	            
+2023-08-09 14:36:46.835 UTC [110] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:36:46.837 UTC [105] LOG:  statement: DROP DATABASE IF EXISTS "prisma_migrate_shadow_db_a6f80561-7600-4861-a94a-f644c9fa697d"
+2023-08-09 14:36:46.848 UTC [28] LOG:  checkpoint starting: immediate force wait
+2023-08-09 14:36:47.164 UTC [28] LOG:  checkpoint complete: wrote 4 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.044 s, sync=0.008 s, total=0.316 s; sync files=4, longest=0.004 s, average=0.002 s; distance=4530 kB, estimate=4530 kB
+2023-08-09 14:36:49.356 UTC [105] LOG:  statement: SELECT pg_advisory_lock(72707369)
+2023-08-09 14:36:49.377 UTC [105] LOG:  execute s69: 
+	                SELECT tbl.relname AS table_name
+	                FROM pg_class AS tbl
+	                INNER JOIN pg_namespace AS namespace ON namespace.oid = tbl.relnamespace
+	                WHERE tbl.relkind = 'r' AND namespace.nspname = ANY ( $1 )
+	            
+2023-08-09 14:36:49.377 UTC [105] DETAIL:  parameters: $1 = '{public}'
+2023-08-09 14:36:49.384 UTC [105] LOG:  execute s70: SELECT "id", "checksum", "finished_at", "migration_name", "logs", "rolled_back_at", "started_at", "applied_steps_count" FROM "_prisma_migrations" ORDER BY "started_at" ASC
+2023-08-09 14:36:49.391 UTC [105] LOG:  execute s71: INSERT INTO "_prisma_migrations" ("id","checksum","started_at","migration_name") VALUES ($1,$2,$3,$4)
+2023-08-09 14:36:49.391 UTC [105] DETAIL:  parameters: $1 = '322d7f6b-560b-48be-b42c-31de1e2b2100', $2 = '339486c352b2f32886252489cef95c74369ed0015515ffa347d368a2e2a82204', $3 = '2023-08-09 14:36:49.387434+00', $4 = '20230809143649_alter_table_professor_disciplina_to_professor_curso_disciplina'
+2023-08-09 14:36:49.400 UTC [105] LOG:  statement: /*
+	  Warnings:
+	
+	  - You are about to drop the `ProfessorDisciplina` table. If the table is not empty, all the data it contains will be lost.
+	
+	*/
+	-- DropForeignKey
+	ALTER TABLE "ProfessorDisciplina" DROP CONSTRAINT "ProfessorDisciplina_id_disciplina_fkey";
+	
+	-- DropForeignKey
+	ALTER TABLE "ProfessorDisciplina" DROP CONSTRAINT "ProfessorDisciplina_id_professor_fkey";
+	
+	-- DropTable
+	DROP TABLE "ProfessorDisciplina";
+	
+	-- CreateTable
+	CREATE TABLE "ProfessorCursoDisciplina" (
+	    "id" SERIAL NOT NULL,
+	    "id_professor" TEXT NOT NULL,
+	    "id_cursoDisciplina" INTEGER NOT NULL,
+	
+	    CONSTRAINT "ProfessorCursoDisciplina_pkey" PRIMARY KEY ("id")
+	);
+	
+	-- AddForeignKey
+	ALTER TABLE "ProfessorCursoDisciplina" ADD CONSTRAINT "ProfessorCursoDisciplina_id_professor_fkey" FOREIGN KEY ("id_professor") REFERENCES "Professor"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+	-- AddForeignKey
+	ALTER TABLE "ProfessorCursoDisciplina" ADD CONSTRAINT "ProfessorCursoDisciplina_id_cursoDisciplina_fkey" FOREIGN KEY ("id_cursoDisciplina") REFERENCES "CursoDisciplina"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+	
+2023-08-09 14:36:49.680 UTC [105] LOG:  execute s72: UPDATE "_prisma_migrations" SET "applied_steps_count" = ("applied_steps_count" + $1) WHERE "id" = $2
+2023-08-09 14:36:49.680 UTC [105] DETAIL:  parameters: $1 = '1', $2 = '322d7f6b-560b-48be-b42c-31de1e2b2100'
+2023-08-09 14:36:49.704 UTC [105] LOG:  execute s73: UPDATE "_prisma_migrations" SET "finished_at" = $1 WHERE "id" = $2
+2023-08-09 14:36:49.704 UTC [105] DETAIL:  parameters: $1 = '2023-08-09 14:36:49.702043+00', $2 = '322d7f6b-560b-48be-b42c-31de1e2b2100'
+2023-08-09 14:41:46.266 UTC [28] LOG:  checkpoint starting: time
+2023-08-09 14:41:51.944 UTC [28] LOG:  checkpoint complete: wrote 49 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=5.525 s, sync=0.054 s, total=5.679 s; sync files=36, longest=0.005 s, average=0.002 s; distance=228 kB, estimate=4100 kB
+2023-08-09 14:42:22.111 UTC [117] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:42:22.111 UTC [117] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:42:22.120 UTC [117] LOG:  execute s1: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2) OFFSET $3
+2023-08-09 14:42:22.120 UTC [117] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '0'
+2023-08-09 14:42:28.444 UTC [117] LOG:  execute s2: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:42:28.444 UTC [117] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:42:28.455 UTC [117] LOG:  statement: BEGIN
+2023-08-09 14:42:28.458 UTC [117] LOG:  execute s3: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND "public"."CursoDisciplina"."id_disciplina" IN ($2)) OFFSET $3
+2023-08-09 14:42:28.458 UTC [117] DETAIL:  parameters: $1 = '6', $2 = '11', $3 = '0'
+2023-08-09 14:42:28.461 UTC [117] LOG:  execute s4: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND "public"."CursoDisciplina"."id_disciplina" IN ($2))
+2023-08-09 14:42:28.461 UTC [117] DETAIL:  parameters: $1 = '6', $2 = '11'
+2023-08-09 14:42:28.465 UTC [117] LOG:  execute s5: DELETE FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id" IN ($1) AND ("public"."CursoDisciplina"."id_curso" = $2 AND "public"."CursoDisciplina"."id_disciplina" IN ($3)))
+2023-08-09 14:42:28.465 UTC [117] DETAIL:  parameters: $1 = '45', $2 = '6', $3 = '11'
+2023-08-09 14:42:28.475 UTC [117] LOG:  statement: COMMIT
+2023-08-09 14:42:28.499 UTC [117] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:42:28.499 UTC [117] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:42:28.506 UTC [117] LOG:  execute s6: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1) OFFSET $2
+2023-08-09 14:42:28.506 UTC [117] DETAIL:  parameters: $1 = '12', $2 = '0'
+2023-08-09 14:42:41.493 UTC [117] LOG:  statement: SELECT 1
+2023-08-09 14:42:41.496 UTC [117] LOG:  execute s2: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:42:41.496 UTC [117] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:42:41.503 UTC [117] LOG:  statement: BEGIN
+2023-08-09 14:42:41.507 UTC [117] LOG:  execute s7: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0) OFFSET $2
+2023-08-09 14:42:41.507 UTC [117] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:42:41.511 UTC [117] LOG:  execute s8: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0)
+2023-08-09 14:42:41.511 UTC [117] DETAIL:  parameters: $1 = '6'
+2023-08-09 14:42:41.513 UTC [117] LOG:  statement: COMMIT
+2023-08-09 14:42:41.520 UTC [117] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:42:41.520 UTC [117] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:42:41.522 UTC [117] LOG:  execute s6: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1) OFFSET $2
+2023-08-09 14:42:41.522 UTC [117] DETAIL:  parameters: $1 = '12', $2 = '0'
+2023-08-09 14:42:45.065 UTC [117] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:42:45.065 UTC [117] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:42:45.068 UTC [117] LOG:  execute s6: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1) OFFSET $2
+2023-08-09 14:42:45.068 UTC [117] DETAIL:  parameters: $1 = '12', $2 = '0'
+2023-08-09 14:43:33.701 UTC [119] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:43:33.701 UTC [119] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:43:33.707 UTC [119] LOG:  execute s1: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1) OFFSET $2
+2023-08-09 14:43:33.707 UTC [119] DETAIL:  parameters: $1 = '12', $2 = '0'
+2023-08-09 14:43:36.860 UTC [119] LOG:  execute s2: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:43:36.860 UTC [119] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:43:36.869 UTC [119] LOG:  statement: BEGIN
+2023-08-09 14:43:36.872 UTC [119] LOG:  execute s3: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0) OFFSET $2
+2023-08-09 14:43:36.872 UTC [119] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:43:36.875 UTC [119] LOG:  execute s4: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0)
+2023-08-09 14:43:36.875 UTC [119] DETAIL:  parameters: $1 = '6'
+2023-08-09 14:43:36.877 UTC [119] LOG:  statement: COMMIT
+2023-08-09 14:43:36.882 UTC [119] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:43:36.882 UTC [119] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:44:59.799 UTC [121] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:44:59.799 UTC [121] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:44:59.808 UTC [121] LOG:  statement: BEGIN
+2023-08-09 14:44:59.812 UTC [121] LOG:  execute s1: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0) OFFSET $2
+2023-08-09 14:44:59.812 UTC [121] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:44:59.816 UTC [121] LOG:  execute s2: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0)
+2023-08-09 14:44:59.816 UTC [121] DETAIL:  parameters: $1 = '6'
+2023-08-09 14:44:59.818 UTC [121] LOG:  statement: COMMIT
+2023-08-09 14:44:59.825 UTC [121] LOG:  execute s3: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:44:59.825 UTC [121] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:45:02.563 UTC [121] LOG:  execute s3: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:45:02.563 UTC [121] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:45:02.569 UTC [121] LOG:  execute s4: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1) OFFSET $2
+2023-08-09 14:45:02.569 UTC [121] DETAIL:  parameters: $1 = '12', $2 = '0'
+2023-08-09 14:45:07.206 UTC [121] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:45:07.206 UTC [121] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:45:07.210 UTC [121] LOG:  statement: BEGIN
+2023-08-09 14:45:07.212 UTC [121] LOG:  execute s1: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0) OFFSET $2
+2023-08-09 14:45:07.212 UTC [121] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:45:07.214 UTC [121] LOG:  execute s2: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0)
+2023-08-09 14:45:07.214 UTC [121] DETAIL:  parameters: $1 = '6'
+2023-08-09 14:45:07.216 UTC [121] LOG:  statement: COMMIT
+2023-08-09 14:45:07.219 UTC [121] LOG:  execute s3: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:45:07.219 UTC [121] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:46:46.101 UTC [28] LOG:  checkpoint starting: time
+2023-08-09 14:46:47.262 UTC [28] LOG:  checkpoint complete: wrote 11 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=1.060 s, sync=0.013 s, total=1.161 s; sync files=8, longest=0.004 s, average=0.002 s; distance=18 kB, estimate=3692 kB
+2023-08-09 14:51:55.558 UTC [129] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:51:55.558 UTC [129] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:51:55.567 UTC [129] LOG:  statement: BEGIN
+2023-08-09 14:51:55.571 UTC [129] LOG:  execute s1: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0) OFFSET $2
+2023-08-09 14:51:55.571 UTC [129] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:51:55.575 UTC [129] LOG:  execute s2: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0)
+2023-08-09 14:51:55.575 UTC [129] DETAIL:  parameters: $1 = '6'
+2023-08-09 14:51:55.578 UTC [129] LOG:  statement: COMMIT
+2023-08-09 14:51:55.584 UTC [129] LOG:  execute s3: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:51:55.584 UTC [129] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:51:58.174 UTC [129] LOG:  execute s3: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:51:58.174 UTC [129] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:51:58.190 UTC [129] LOG:  execute s4: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1) OFFSET $2
+2023-08-09 14:51:58.190 UTC [129] DETAIL:  parameters: $1 = '12', $2 = '0'
+2023-08-09 14:52:00.348 UTC [129] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:52:00.348 UTC [129] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:52:00.353 UTC [129] LOG:  statement: BEGIN
+2023-08-09 14:52:00.356 UTC [129] LOG:  execute s1: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0) OFFSET $2
+2023-08-09 14:52:00.356 UTC [129] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:52:00.357 UTC [129] LOG:  execute s2: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0)
+2023-08-09 14:52:00.357 UTC [129] DETAIL:  parameters: $1 = '6'
+2023-08-09 14:52:00.359 UTC [129] LOG:  statement: COMMIT
+2023-08-09 14:52:00.366 UTC [129] LOG:  execute s3: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:52:00.366 UTC [129] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:52:53.165 UTC [131] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:52:53.165 UTC [131] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:52:53.171 UTC [131] LOG:  execute s1: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1) OFFSET $2
+2023-08-09 14:52:53.171 UTC [131] DETAIL:  parameters: $1 = '12', $2 = '0'
+2023-08-09 14:52:55.717 UTC [131] LOG:  execute s2: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:52:55.717 UTC [131] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:52:55.724 UTC [131] LOG:  statement: BEGIN
+2023-08-09 14:52:55.727 UTC [131] LOG:  execute s3: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0) OFFSET $2
+2023-08-09 14:52:55.727 UTC [131] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:52:55.733 UTC [131] LOG:  execute s4: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0)
+2023-08-09 14:52:55.733 UTC [131] DETAIL:  parameters: $1 = '6'
+2023-08-09 14:52:55.735 UTC [131] LOG:  statement: COMMIT
+2023-08-09 14:52:55.740 UTC [131] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:52:55.740 UTC [131] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:52:57.519 UTC [131] LOG:  execute s2: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:52:57.519 UTC [131] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:52:57.523 UTC [131] LOG:  statement: BEGIN
+2023-08-09 14:52:57.526 UTC [131] LOG:  execute s3: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0) OFFSET $2
+2023-08-09 14:52:57.526 UTC [131] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:52:57.527 UTC [131] LOG:  execute s4: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0)
+2023-08-09 14:52:57.527 UTC [131] DETAIL:  parameters: $1 = '6'
+2023-08-09 14:52:57.529 UTC [131] LOG:  statement: COMMIT
+2023-08-09 14:52:57.535 UTC [131] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:52:57.535 UTC [131] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:54:38.460 UTC [134] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:54:38.460 UTC [134] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:54:38.468 UTC [134] LOG:  execute s1: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1) OFFSET $2
+2023-08-09 14:54:38.468 UTC [134] DETAIL:  parameters: $1 = '12', $2 = '0'
+2023-08-09 14:54:40.909 UTC [134] LOG:  execute s2: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:54:40.909 UTC [134] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:54:40.919 UTC [134] LOG:  statement: BEGIN
+2023-08-09 14:54:40.924 UTC [134] LOG:  execute s3: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0) OFFSET $2
+2023-08-09 14:54:40.924 UTC [134] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:54:40.927 UTC [134] LOG:  execute s4: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0)
+2023-08-09 14:54:40.927 UTC [134] DETAIL:  parameters: $1 = '6'
+2023-08-09 14:54:40.929 UTC [134] LOG:  statement: COMMIT
+2023-08-09 14:54:40.936 UTC [134] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:54:40.936 UTC [134] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:54:44.863 UTC [134] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-09 14:54:44.863 UTC [134] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-09 14:54:44.866 UTC [134] LOG:  execute s1: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1) OFFSET $2
+2023-08-09 14:54:44.866 UTC [134] DETAIL:  parameters: $1 = '12', $2 = '0'

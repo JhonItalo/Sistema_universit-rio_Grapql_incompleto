@@ -1,0 +1,13 @@
+2023-09-18 22:35:46.468 UTC [1] LOG:  starting PostgreSQL 15.3 (Debian 15.3-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+2023-09-18 22:35:46.470 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2023-09-18 22:35:46.470 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2023-09-18 22:35:46.521 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2023-09-18 22:35:46.599 UTC [31] LOG:  database system was shut down at 2023-09-18 14:38:47 UTC
+2023-09-18 22:35:46.729 UTC [1] LOG:  database system is ready to accept connections
+2023-09-18 22:36:02.435 UTC [1] LOG:  received fast shutdown request
+2023-09-18 22:36:02.452 UTC [1] LOG:  aborting any active transactions
+2023-09-18 22:36:02.477 UTC [1] LOG:  background worker "logical replication launcher" (PID 34) exited with exit code 1
+2023-09-18 22:36:02.477 UTC [29] LOG:  shutting down
+2023-09-18 22:36:02.482 UTC [29] LOG:  checkpoint starting: shutdown immediate
+2023-09-18 22:36:02.703 UTC [29] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.065 s, sync=0.048 s, total=0.225 s; sync files=3, longest=0.031 s, average=0.016 s; distance=0 kB, estimate=0 kB
+2023-09-18 22:36:02.751 UTC [1] LOG:  database system is shut down

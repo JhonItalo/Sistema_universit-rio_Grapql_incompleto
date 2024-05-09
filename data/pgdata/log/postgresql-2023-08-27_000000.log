@@ -1,0 +1,2 @@
+2023-08-27 00:00:40.043 UTC [28] LOG:  checkpoint starting: time
+2023-08-27 00:00:40.834 UTC [28] LOG:  checkpoint complete: wrote 8 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.733 s, sync=0.010 s, total=0.791 s; sync files=8, longest=0.004 s, average=0.002 s; distance=12 kB, estimate=12 kB

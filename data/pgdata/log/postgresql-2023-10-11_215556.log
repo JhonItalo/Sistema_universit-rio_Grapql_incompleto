@@ -1,0 +1,448 @@
+2023-10-11 21:55:56.736 UTC [1] LOG:  starting PostgreSQL 15.3 (Debian 15.3-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+2023-10-11 21:55:56.738 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2023-10-11 21:55:56.738 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2023-10-11 21:55:56.758 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2023-10-11 21:55:56.850 UTC [30] LOG:  database system was interrupted; last known up at 2023-10-10 21:55:25 UTC
+2023-10-11 21:56:06.860 UTC [30] LOG:  syncing data directory (pre-fsync), elapsed time: 10.00 s, current path: ./base/4/1417
+2023-10-11 21:56:15.486 UTC [30] LOG:  database system was not properly shut down; automatic recovery in progress
+2023-10-11 21:56:15.549 UTC [30] LOG:  redo starts at 0/ADA9150
+2023-10-11 21:56:15.550 UTC [30] LOG:  invalid record length at 0/ADA9188: wanted 24, got 0
+2023-10-11 21:56:15.550 UTC [30] LOG:  redo done at 0/ADA9150 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2023-10-11 21:56:15.637 UTC [28] LOG:  checkpoint starting: end-of-recovery immediate wait
+2023-10-11 21:56:15.709 UTC [28] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.018 s, sync=0.010 s, total=0.078 s; sync files=3, longest=0.004 s, average=0.004 s; distance=0 kB, estimate=0 kB
+2023-10-11 21:56:15.734 UTC [1] LOG:  database system is ready to accept connections
+2023-10-11 23:29:34.023 UTC [34] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-11 23:29:34.023 UTC [34] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:29:34.040 UTC [34] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-11 23:29:34.040 UTC [34] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:29:34.055 UTC [34] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:29:34.055 UTC [34] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:29:34.102 UTC [34] LOG:  execute s3: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:29:34.102 UTC [34] DETAIL:  parameters: $1 = '2023.1', $2 = '1', $3 = '0'
+2023-10-11 23:29:41.669 UTC [34] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:29:41.669 UTC [34] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:29:41.674 UTC [34] LOG:  execute s3: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:29:41.674 UTC [34] DETAIL:  parameters: $1 = '2023.2', $2 = '1', $3 = '0'
+2023-10-11 23:29:50.695 UTC [34] LOG:  statement: SELECT 1
+2023-10-11 23:29:50.706 UTC [34] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:29:50.706 UTC [34] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:29:50.712 UTC [34] LOG:  execute s3: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:29:50.712 UTC [34] DETAIL:  parameters: $1 = '2023.2', $2 = '1', $3 = '0'
+2023-10-11 23:30:10.615 UTC [34] LOG:  statement: SELECT 1
+2023-10-11 23:30:10.618 UTC [34] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:30:10.618 UTC [34] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:30:10.631 UTC [34] LOG:  execute s4: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE 1=1 OFFSET $1
+2023-10-11 23:30:10.631 UTC [34] DETAIL:  parameters: $1 = '0'
+2023-10-11 23:30:25.433 UTC [34] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:30:25.433 UTC [34] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:30:25.438 UTC [34] LOG:  execute s3: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:30:25.438 UTC [34] DETAIL:  parameters: $1 = '2023.2', $2 = '1', $3 = '0'
+2023-10-11 23:30:29.326 UTC [34] LOG:  statement: SELECT 1
+2023-10-11 23:30:29.331 UTC [34] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:30:29.331 UTC [34] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:30:29.338 UTC [34] LOG:  execute s3: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:30:29.338 UTC [34] DETAIL:  parameters: $1 = '2023.2', $2 = '1', $3 = '0'
+2023-10-11 23:30:29.385 UTC [34] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:30:29.385 UTC [34] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:30:29.393 UTC [34] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:30:29.393 UTC [34] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:30:29.408 UTC [34] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:30:29.408 UTC [34] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:30:29.414 UTC [34] LOG:  execute s3: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:30:29.414 UTC [34] DETAIL:  parameters: $1 = '2023.2', $2 = '1', $3 = '0'
+2023-10-11 23:30:29.431 UTC [34] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:30:29.431 UTC [34] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:30:29.437 UTC [34] LOG:  execute s3: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:30:29.437 UTC [34] DETAIL:  parameters: $1 = '2023.2', $2 = '1', $3 = '0'
+2023-10-11 23:30:29.458 UTC [34] LOG:  execute s3: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:30:29.458 UTC [34] DETAIL:  parameters: $1 = '2023.2', $2 = '1', $3 = '0'
+2023-10-11 23:30:29.942 UTC [38] LOG:  execute s8: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-11 23:30:29.942 UTC [38] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:30:29.951 UTC [39] LOG:  execute s9: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:30:29.951 UTC [39] DETAIL:  parameters: $1 = '2023.2', $2 = '1', $3 = '0'
+2023-10-11 23:30:29.953 UTC [37] LOG:  execute s7: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-11 23:30:29.953 UTC [37] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:30:29.957 UTC [38] LOG:  execute s11: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-11 23:30:29.957 UTC [38] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:30:29.977 UTC [38] LOG:  execute s6: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:30:29.977 UTC [38] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:30:29.983 UTC [37] LOG:  execute s13: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-11 23:30:29.983 UTC [37] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:30:29.991 UTC [37] LOG:  execute s5: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:30:29.991 UTC [37] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:30:30.001 UTC [38] LOG:  execute s14: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:30:30.001 UTC [38] DETAIL:  parameters: $1 = '2023.2', $2 = '1', $3 = '0'
+2023-10-11 23:30:30.011 UTC [36] LOG:  execute s12: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-11 23:30:30.011 UTC [36] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:30:30.020 UTC [37] LOG:  execute s15: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:30:30.020 UTC [37] DETAIL:  parameters: $1 = '2023.2', $2 = '1', $3 = '0'
+2023-10-11 23:30:30.024 UTC [36] LOG:  execute s16: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-11 23:30:30.024 UTC [36] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:30:30.033 UTC [36] LOG:  execute s10: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:30:30.033 UTC [36] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:30:30.049 UTC [36] LOG:  execute s17: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:30:30.049 UTC [36] DETAIL:  parameters: $1 = '2023.2', $2 = '1', $3 = '0'
+2023-10-11 23:30:37.768 UTC [36] LOG:  execute s10: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:30:37.768 UTC [36] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:30:37.779 UTC [36] LOG:  execute s18: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE 1=1 OFFSET $1
+2023-10-11 23:30:37.779 UTC [36] DETAIL:  parameters: $1 = '0'
+2023-10-11 23:30:50.856 UTC [36] LOG:  statement: SELECT 1
+2023-10-11 23:30:50.858 UTC [36] LOG:  execute s10: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:30:50.858 UTC [36] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:30:50.863 UTC [36] LOG:  execute s17: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:30:50.863 UTC [36] DETAIL:  parameters: $1 = '2023.2', $2 = '1', $3 = '0'
+2023-10-11 23:31:23.863 UTC [41] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-11 23:31:23.863 UTC [41] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:31:23.872 UTC [41] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-11 23:31:23.872 UTC [41] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:31:23.881 UTC [41] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:31:23.881 UTC [41] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:31:23.904 UTC [41] LOG:  execute s3: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:31:23.904 UTC [41] DETAIL:  parameters: $1 = '2023.2', $2 = '1', $3 = '0'
+2023-10-11 23:31:59.251 UTC [42] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-11 23:31:59.251 UTC [42] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:31:59.261 UTC [42] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-11 23:31:59.261 UTC [42] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:31:59.270 UTC [42] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:31:59.270 UTC [42] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:31:59.294 UTC [42] LOG:  execute s3: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:31:59.294 UTC [42] DETAIL:  parameters: $1 = '2023.2', $2 = '1', $3 = '0'
+2023-10-11 23:33:07.702 UTC [44] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-11 23:33:07.702 UTC [44] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:33:07.712 UTC [44] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-11 23:33:07.712 UTC [44] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:33:07.721 UTC [44] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:33:07.721 UTC [44] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:33:07.740 UTC [44] LOG:  execute s3: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:33:07.740 UTC [44] DETAIL:  parameters: $1 = '2023.2', $2 = '1', $3 = '0'
+2023-10-11 23:33:53.489 UTC [46] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-11 23:33:53.489 UTC [46] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:33:53.500 UTC [46] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-11 23:33:53.500 UTC [46] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:33:53.506 UTC [46] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:33:53.506 UTC [46] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:33:53.526 UTC [46] LOG:  execute s3: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:33:53.526 UTC [46] DETAIL:  parameters: $1 = '2023.2', $2 = '1', $3 = '0'
+2023-10-11 23:34:25.360 UTC [48] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-11 23:34:25.360 UTC [48] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:34:25.372 UTC [48] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-11 23:34:25.372 UTC [48] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:34:25.379 UTC [48] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:34:25.379 UTC [48] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:34:25.399 UTC [48] LOG:  execute s3: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:34:25.399 UTC [48] DETAIL:  parameters: $1 = '2023.2', $2 = '1', $3 = '0'
+2023-10-11 23:35:18.116 UTC [49] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-11 23:35:18.116 UTC [49] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:35:18.129 UTC [49] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-11 23:35:18.129 UTC [49] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:35:18.135 UTC [49] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:35:18.135 UTC [49] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:35:18.159 UTC [49] LOG:  execute s3: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:35:18.159 UTC [49] DETAIL:  parameters: $1 = '2023.2', $2 = '1', $3 = '0'
+2023-10-11 23:37:00.592 UTC [49] LOG:  statement: SELECT 1
+2023-10-11 23:37:00.595 UTC [49] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:37:00.595 UTC [49] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:37:00.601 UTC [49] LOG:  execute s3: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:37:00.601 UTC [49] DETAIL:  parameters: $1 = '2023.2', $2 = '1', $3 = '0'
+2023-10-11 23:38:37.761 UTC [54] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-11 23:38:37.761 UTC [54] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:38:37.770 UTC [54] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-11 23:38:37.770 UTC [54] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:38:37.777 UTC [54] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:38:37.777 UTC [54] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:38:37.796 UTC [54] LOG:  execute s3: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:38:37.796 UTC [54] DETAIL:  parameters: $1 = '2023.2', $2 = '1', $3 = '0'
+2023-10-11 23:38:50.888 UTC [55] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-11 23:38:50.888 UTC [55] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:38:50.899 UTC [55] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-11 23:38:50.899 UTC [55] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:38:50.904 UTC [55] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:38:50.904 UTC [55] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:38:50.931 UTC [55] LOG:  execute s3: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:38:50.931 UTC [55] DETAIL:  parameters: $1 = '2023.2', $2 = '1', $3 = '0'
+2023-10-11 23:39:00.623 UTC [55] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:39:00.623 UTC [55] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:39:00.630 UTC [55] LOG:  execute s3: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:39:00.630 UTC [55] DETAIL:  parameters: $1 = '2023.2', $2 = '1', $3 = '0'
+2023-10-11 23:39:15.247 UTC [55] LOG:  statement: SELECT 1
+2023-10-11 23:39:15.249 UTC [55] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:39:15.249 UTC [55] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:39:15.254 UTC [55] LOG:  execute s3: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:39:15.254 UTC [55] DETAIL:  parameters: $1 = '2023.2', $2 = '1', $3 = '0'
+2023-10-11 23:40:19.095 UTC [57] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-11 23:40:19.095 UTC [57] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:40:19.103 UTC [57] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-11 23:40:19.103 UTC [57] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:40:19.110 UTC [57] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:40:19.110 UTC [57] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:40:19.120 UTC [57] LOG:  execute s3: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE 1=1 OFFSET $1
+2023-10-11 23:40:19.120 UTC [57] DETAIL:  parameters: $1 = '0'
+2023-10-11 23:40:25.028 UTC [57] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:40:25.028 UTC [57] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:40:25.043 UTC [57] LOG:  execute s4: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:40:25.043 UTC [57] DETAIL:  parameters: $1 = '2023.2', $2 = '1', $3 = '0'
+2023-10-11 23:41:14.168 UTC [59] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-11 23:41:14.168 UTC [59] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:41:14.178 UTC [59] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-11 23:41:14.178 UTC [59] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:41:14.184 UTC [59] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:41:14.184 UTC [59] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:41:14.212 UTC [59] LOG:  execute s3: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE ("public"."Turma"."nome" = $1 AND "public"."Turma"."id_curso" = $2) LIMIT $3 OFFSET $4
+2023-10-11 23:41:14.212 UTC [59] DETAIL:  parameters: $1 = '2023.2', $2 = '52', $3 = '1', $4 = '0'
+2023-10-11 23:41:14.228 UTC [59] LOG:  statement: BEGIN
+2023-10-11 23:41:14.236 UTC [59] LOG:  execute s4: SELECT "public"."Curso"."id" FROM "public"."Curso" WHERE ("public"."Curso"."id" = $1 AND 1=1) OFFSET $2
+2023-10-11 23:41:14.236 UTC [59] DETAIL:  parameters: $1 = '52', $2 = '0'
+2023-10-11 23:41:14.261 UTC [59] LOG:  execute s5: INSERT INTO "public"."Turma" ("nome","id_curso") VALUES ($1,$2) RETURNING "public"."Turma"."id"
+2023-10-11 23:41:14.261 UTC [59] DETAIL:  parameters: $1 = '2023.2', $2 = '52'
+2023-10-11 23:41:14.289 UTC [59] LOG:  execute s6: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:41:14.289 UTC [59] DETAIL:  parameters: $1 = '19', $2 = '1', $3 = '0'
+2023-10-11 23:41:14.291 UTC [59] LOG:  statement: COMMIT
+2023-10-11 23:41:17.465 UTC [28] LOG:  checkpoint starting: time
+2023-10-11 23:41:18.042 UTC [28] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.472 s, sync=0.013 s, total=0.577 s; sync files=5, longest=0.005 s, average=0.003 s; distance=3 kB, estimate=3 kB
+2023-10-11 23:41:23.211 UTC [59] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:41:23.211 UTC [59] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:41:23.217 UTC [59] LOG:  execute s7: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE 1=1 OFFSET $1
+2023-10-11 23:41:23.217 UTC [59] DETAIL:  parameters: $1 = '0'
+2023-10-11 23:41:27.490 UTC [59] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:41:27.490 UTC [59] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:41:27.494 UTC [59] LOG:  execute s3: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE ("public"."Turma"."nome" = $1 AND "public"."Turma"."id_curso" = $2) LIMIT $3 OFFSET $4
+2023-10-11 23:41:27.494 UTC [59] DETAIL:  parameters: $1 = '2023.2', $2 = '52', $3 = '1', $4 = '0'
+2023-10-11 23:41:54.923 UTC [61] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-11 23:41:54.923 UTC [61] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:41:54.937 UTC [61] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-11 23:41:54.937 UTC [61] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:41:54.943 UTC [61] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:41:54.943 UTC [61] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:41:54.968 UTC [61] LOG:  execute s3: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE ("public"."Turma"."nome" = $1 AND "public"."Turma"."id_curso" = $2) LIMIT $3 OFFSET $4
+2023-10-11 23:41:54.968 UTC [61] DETAIL:  parameters: $1 = '2023.2', $2 = '52', $3 = '1', $4 = '0'
+2023-10-11 23:41:58.761 UTC [61] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:41:58.761 UTC [61] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:41:58.767 UTC [61] LOG:  execute s3: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE ("public"."Turma"."nome" = $1 AND "public"."Turma"."id_curso" = $2) LIMIT $3 OFFSET $4
+2023-10-11 23:41:58.767 UTC [61] DETAIL:  parameters: $1 = '2024.2', $2 = '52', $3 = '1', $4 = '0'
+2023-10-11 23:41:58.770 UTC [61] LOG:  statement: BEGIN
+2023-10-11 23:41:58.780 UTC [61] LOG:  execute s4: SELECT "public"."Curso"."id" FROM "public"."Curso" WHERE ("public"."Curso"."id" = $1 AND 1=1) OFFSET $2
+2023-10-11 23:41:58.780 UTC [61] DETAIL:  parameters: $1 = '52', $2 = '0'
+2023-10-11 23:41:58.785 UTC [61] LOG:  execute s5: INSERT INTO "public"."Turma" ("nome","id_curso") VALUES ($1,$2) RETURNING "public"."Turma"."id"
+2023-10-11 23:41:58.785 UTC [61] DETAIL:  parameters: $1 = '2024.2', $2 = '52'
+2023-10-11 23:41:58.789 UTC [61] LOG:  execute s6: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:41:58.789 UTC [61] DETAIL:  parameters: $1 = '20', $2 = '1', $3 = '0'
+2023-10-11 23:41:58.791 UTC [61] LOG:  statement: COMMIT
+2023-10-11 23:42:02.125 UTC [61] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:42:02.125 UTC [61] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:42:02.132 UTC [61] LOG:  execute s7: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE 1=1 OFFSET $1
+2023-10-11 23:42:02.132 UTC [61] DETAIL:  parameters: $1 = '0'
+2023-10-11 23:46:17.076 UTC [28] LOG:  checkpoint starting: time
+2023-10-11 23:46:17.980 UTC [28] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.433 s, sync=0.010 s, total=0.905 s; sync files=5, longest=0.005 s, average=0.002 s; distance=4 kB, estimate=4 kB
+2023-10-11 23:48:45.828 UTC [69] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-11 23:48:45.828 UTC [69] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:48:45.838 UTC [69] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-11 23:48:45.838 UTC [69] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:48:45.843 UTC [69] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:48:45.843 UTC [69] DETAIL:  parameters: $1 = 'ifce@gmail.com', $2 = '1', $3 = '0'
+2023-10-11 23:57:04.676 UTC [78] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-11 23:57:04.676 UTC [78] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:57:04.686 UTC [78] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-11 23:57:04.686 UTC [78] DETAIL:  parameters: $1 = '16537'
+2023-10-11 23:57:04.691 UTC [78] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:57:04.691 UTC [78] DETAIL:  parameters: $1 = 'ifce@gmail.com', $2 = '1', $3 = '0'
+2023-10-11 23:57:24.574 UTC [78] LOG:  statement: SELECT 1
+2023-10-11 23:57:24.580 UTC [78] LOG:  execute s3: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:57:24.580 UTC [78] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:57:28.549 UTC [78] LOG:  execute s3: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:57:28.549 UTC [78] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:57:30.715 UTC [78] LOG:  execute s3: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:57:30.715 UTC [78] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:57:39.622 UTC [78] LOG:  statement: SELECT 1
+2023-10-11 23:57:39.625 UTC [78] LOG:  execute s3: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:57:39.625 UTC [78] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:57:39.641 UTC [78] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:57:39.641 UTC [78] DETAIL:  parameters: $1 = 'jhon_italo0@gmail.com', $2 = '1', $3 = '0'
+2023-10-11 23:57:44.039 UTC [78] LOG:  execute s3: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:57:44.039 UTC [78] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:58:06.298 UTC [78] LOG:  statement: SELECT 1
+2023-10-11 23:58:06.300 UTC [78] LOG:  execute s3: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-11 23:58:06.300 UTC [78] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-11 23:58:06.305 UTC [78] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:58:06.305 UTC [78] DETAIL:  parameters: $1 = 'jhon_italo08@gmail.com', $2 = '1', $3 = '0'
+2023-10-11 23:58:06.317 UTC [78] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-11 23:58:06.317 UTC [78] DETAIL:  parameters: $1 = '16419'
+2023-10-11 23:58:06.318 UTC [78] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-11 23:58:06.318 UTC [78] DETAIL:  parameters: $1 = '16419'
+2023-10-11 23:58:06.324 UTC [78] LOG:  execute s4: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."cpf" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:58:06.324 UTC [78] DETAIL:  parameters: $1 = '0680637435008', $2 = '1', $3 = '0'
+2023-10-11 23:58:06.331 UTC [78] LOG:  execute s5: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."email" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:58:06.331 UTC [78] DETAIL:  parameters: $1 = 'jhon_italo08@gmail.com', $2 = '1', $3 = '0'
+2023-10-11 23:58:06.440 UTC [78] LOG:  statement: BEGIN
+2023-10-11 23:58:06.448 UTC [78] LOG:  execute s6: SELECT "public"."Curso"."id" FROM "public"."Curso" WHERE ("public"."Curso"."id" = $1 AND 1=1) OFFSET $2
+2023-10-11 23:58:06.448 UTC [78] DETAIL:  parameters: $1 = '53', $2 = '0'
+2023-10-11 23:58:06.455 UTC [78] LOG:  execute s7: SELECT "public"."Turma"."id" FROM "public"."Turma" WHERE ("public"."Turma"."id" = $1 AND 1=1) OFFSET $2
+2023-10-11 23:58:06.455 UTC [78] DETAIL:  parameters: $1 = '18', $2 = '0'
+2023-10-11 23:58:06.470 UTC [78] LOG:  execute s8: INSERT INTO "public"."Aluno" ("id","nome","email","cpf","sexo","telefone","createdAt","id_turma","id_curso") VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING "public"."Aluno"."id"
+2023-10-11 23:58:06.470 UTC [78] DETAIL:  parameters: $1 = '467ee7bc-2d26-46f2-9dae-a08cb8fe4df1', $2 = 'john italo lucas lima', $3 = 'jhon_italo08@gmail.com', $4 = '0680637435008', $5 = 'F', $6 = '889997727240', $7 = '2023-10-11 23:58:06.439', $8 = '18', $9 = '53'
+2023-10-11 23:58:06.478 UTC [78] LOG:  execute s9: INSERT INTO "public"."User" ("id","email","password","status","id_aluno") VALUES ($1,$2,$3,$4,$5) RETURNING "public"."User"."id"
+2023-10-11 23:58:06.478 UTC [78] DETAIL:  parameters: $1 = '45942e22-4a78-4f66-86ed-9bf1a3e4048f', $2 = 'jhon_italo08@gmail.com', $3 = '$2b$10$8F1LU5VaAay/PrWzlaUzs.Ic8cnyJ96YNf76SO/ySwMX9PoftsGMi', $4 = 'aluno', $5 = '467ee7bc-2d26-46f2-9dae-a08cb8fe4df1'
+2023-10-11 23:58:06.486 UTC [78] LOG:  execute s10: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-11 23:58:06.486 UTC [78] DETAIL:  parameters: $1 = '467ee7bc-2d26-46f2-9dae-a08cb8fe4df1', $2 = '1', $3 = '0'
+2023-10-11 23:58:06.488 UTC [78] LOG:  statement: COMMIT

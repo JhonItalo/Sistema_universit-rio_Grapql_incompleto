@@ -1,0 +1,590 @@
+2023-10-14 22:10:51.749 UTC [1] LOG:  starting PostgreSQL 15.3 (Debian 15.3-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+2023-10-14 22:10:51.753 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2023-10-14 22:10:51.753 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2023-10-14 22:10:51.787 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2023-10-14 22:10:51.929 UTC [30] LOG:  database system was interrupted; last known up at 2023-10-12 21:54:00 UTC
+2023-10-14 22:11:01.951 UTC [30] LOG:  syncing data directory (pre-fsync), elapsed time: 10.00 s, current path: ./base/4/2689
+2023-10-14 22:11:11.624 UTC [30] LOG:  database system was not properly shut down; automatic recovery in progress
+2023-10-14 22:11:11.696 UTC [30] LOG:  redo starts at 0/ADE3F60
+2023-10-14 22:11:11.697 UTC [30] LOG:  invalid record length at 0/ADE4060: wanted 24, got 0
+2023-10-14 22:11:11.697 UTC [30] LOG:  redo done at 0/ADE4028 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2023-10-14 22:11:11.793 UTC [28] LOG:  checkpoint starting: end-of-recovery immediate wait
+2023-10-14 22:11:11.860 UTC [28] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.015 s, sync=0.009 s, total=0.071 s; sync files=3, longest=0.004 s, average=0.003 s; distance=0 kB, estimate=0 kB
+2023-10-14 22:11:11.897 UTC [1] LOG:  database system is ready to accept connections
+2023-10-14 22:20:08.672 UTC [34] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-14 22:20:08.672 UTC [34] DETAIL:  parameters: $1 = '16537'
+2023-10-14 22:20:08.686 UTC [34] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-14 22:20:08.686 UTC [34] DETAIL:  parameters: $1 = '16537'
+2023-10-14 22:20:08.707 UTC [34] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 22:20:08.707 UTC [34] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 22:20:08.743 UTC [34] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE 1=1 LIMIT $1 OFFSET $2
+2023-10-14 22:20:08.743 UTC [34] DETAIL:  parameters: $1 = '1', $2 = '0'
+2023-10-14 22:20:15.727 UTC [34] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 22:20:15.727 UTC [34] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 22:20:15.731 UTC [34] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE 1=1 LIMIT $1 OFFSET $2
+2023-10-14 22:20:15.731 UTC [34] DETAIL:  parameters: $1 = '1', $2 = '0'
+2023-10-14 22:20:20.806 UTC [34] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 22:20:20.806 UTC [34] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 22:20:20.811 UTC [34] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE 1=1 LIMIT $1 OFFSET $2
+2023-10-14 22:20:20.811 UTC [34] DETAIL:  parameters: $1 = '1', $2 = '0'
+2023-10-14 22:20:53.621 UTC [36] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-14 22:20:53.621 UTC [36] DETAIL:  parameters: $1 = '16537'
+2023-10-14 22:20:53.628 UTC [36] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-14 22:20:53.628 UTC [36] DETAIL:  parameters: $1 = '16537'
+2023-10-14 22:20:53.633 UTC [36] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 22:20:53.633 UTC [36] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 22:20:53.649 UTC [36] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE 1=1 LIMIT $1 OFFSET $2
+2023-10-14 22:20:53.649 UTC [36] DETAIL:  parameters: $1 = '1', $2 = '0'
+2023-10-14 22:21:46.070 UTC [38] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-14 22:21:46.070 UTC [38] DETAIL:  parameters: $1 = '16537'
+2023-10-14 22:21:46.080 UTC [38] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-14 22:21:46.080 UTC [38] DETAIL:  parameters: $1 = '16537'
+2023-10-14 22:21:46.087 UTC [38] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 22:21:46.087 UTC [38] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 22:21:46.106 UTC [38] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE 1=1 LIMIT $1 OFFSET $2
+2023-10-14 22:21:46.106 UTC [38] DETAIL:  parameters: $1 = '1', $2 = '0'
+2023-10-14 22:22:54.463 UTC [40] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-14 22:22:54.463 UTC [40] DETAIL:  parameters: $1 = '16537'
+2023-10-14 22:22:54.471 UTC [40] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-14 22:22:54.471 UTC [40] DETAIL:  parameters: $1 = '16537'
+2023-10-14 22:22:54.479 UTC [40] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 22:22:54.479 UTC [40] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 22:22:54.515 UTC [40] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-14 22:22:54.515 UTC [40] DETAIL:  parameters: $1 = 'aquicultura 4', $2 = '1', $3 = '0'
+2023-10-14 22:22:54.528 UTC [40] LOG:  statement: BEGIN
+2023-10-14 22:22:54.539 UTC [40] LOG:  execute s4: SELECT "public"."Departamento"."id" FROM "public"."Departamento" WHERE ("public"."Departamento"."id" = $1 AND 1=1) OFFSET $2
+2023-10-14 22:22:54.539 UTC [40] DETAIL:  parameters: $1 = '1', $2 = '0'
+2023-10-14 22:22:54.556 UTC [40] LOG:  execute s5: INSERT INTO "public"."Curso" ("nome","id_departamento") VALUES ($1,$2) RETURNING "public"."Curso"."id"
+2023-10-14 22:22:54.556 UTC [40] DETAIL:  parameters: $1 = 'aquicultura 4', $2 = '1'
+2023-10-14 22:22:54.580 UTC [40] LOG:  execute s6: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 22:22:54.580 UTC [40] DETAIL:  parameters: $1 = '55', $2 = '1', $3 = '0'
+2023-10-14 22:22:54.582 UTC [40] LOG:  statement: COMMIT
+2023-10-14 22:26:26.651 UTC [28] LOG:  checkpoint starting: time
+2023-10-14 22:26:27.266 UTC [28] LOG:  checkpoint complete: wrote 6 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.536 s, sync=0.010 s, total=0.615 s; sync files=6, longest=0.004 s, average=0.002 s; distance=4 kB, estimate=4 kB
+2023-10-14 22:36:20.608 UTC [54] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-14 22:36:20.608 UTC [54] DETAIL:  parameters: $1 = '16537'
+2023-10-14 22:36:20.619 UTC [54] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-14 22:36:20.619 UTC [54] DETAIL:  parameters: $1 = '16537'
+2023-10-14 22:36:20.624 UTC [54] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 22:36:20.624 UTC [54] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 22:36:20.638 UTC [54] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 22:36:20.638 UTC [54] DETAIL:  parameters: $1 = '55', $2 = '1', $3 = '0'
+2023-10-14 22:37:01.777 UTC [56] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-14 22:37:01.777 UTC [56] DETAIL:  parameters: $1 = '16537'
+2023-10-14 22:37:01.785 UTC [56] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-14 22:37:01.785 UTC [56] DETAIL:  parameters: $1 = '16537'
+2023-10-14 22:37:01.790 UTC [56] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 22:37:01.790 UTC [56] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 22:37:01.807 UTC [56] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 22:37:01.807 UTC [56] DETAIL:  parameters: $1 = '55', $2 = '1', $3 = '0'
+2023-10-14 22:37:33.418 UTC [58] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-14 22:37:33.418 UTC [58] DETAIL:  parameters: $1 = '16537'
+2023-10-14 22:37:33.428 UTC [58] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-14 22:37:33.428 UTC [58] DETAIL:  parameters: $1 = '16537'
+2023-10-14 22:37:33.434 UTC [58] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 22:37:33.434 UTC [58] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 22:37:33.485 UTC [58] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 22:37:33.485 UTC [58] DETAIL:  parameters: $1 = '55', $2 = '1', $3 = '0'
+2023-10-14 22:38:25.154 UTC [59] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-14 22:38:25.154 UTC [59] DETAIL:  parameters: $1 = '16537'
+2023-10-14 22:38:25.163 UTC [59] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-14 22:38:25.163 UTC [59] DETAIL:  parameters: $1 = '16537'
+2023-10-14 22:38:25.170 UTC [59] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 22:38:25.170 UTC [59] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 22:38:25.185 UTC [59] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 22:38:25.185 UTC [59] DETAIL:  parameters: $1 = '55', $2 = '1', $3 = '0'
+2023-10-14 22:38:49.850 UTC [61] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-14 22:38:49.850 UTC [61] DETAIL:  parameters: $1 = '16537'
+2023-10-14 22:38:49.880 UTC [61] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-14 22:38:49.880 UTC [61] DETAIL:  parameters: $1 = '16537'
+2023-10-14 22:38:49.885 UTC [61] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 22:38:49.885 UTC [61] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 22:38:49.900 UTC [61] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 22:38:49.900 UTC [61] DETAIL:  parameters: $1 = '55', $2 = '1', $3 = '0'
+2023-10-14 22:39:28.765 UTC [63] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-14 22:39:28.765 UTC [63] DETAIL:  parameters: $1 = '16537'
+2023-10-14 22:39:28.775 UTC [63] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-14 22:39:28.775 UTC [63] DETAIL:  parameters: $1 = '16537'
+2023-10-14 22:39:28.782 UTC [63] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 22:39:28.782 UTC [63] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 22:39:28.797 UTC [63] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 22:39:28.797 UTC [63] DETAIL:  parameters: $1 = '55', $2 = '1', $3 = '0'
+2023-10-14 22:42:15.450 UTC [66] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-14 22:42:15.450 UTC [66] DETAIL:  parameters: $1 = '16537'
+2023-10-14 22:42:15.461 UTC [66] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-14 22:42:15.461 UTC [66] DETAIL:  parameters: $1 = '16537'
+2023-10-14 22:42:15.467 UTC [66] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 22:42:15.467 UTC [66] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 22:42:15.492 UTC [66] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 22:42:15.492 UTC [66] DETAIL:  parameters: $1 = '55', $2 = '1', $3 = '0'
+2023-10-14 22:43:59.420 UTC [69] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-14 22:43:59.420 UTC [69] DETAIL:  parameters: $1 = '16537'
+2023-10-14 22:43:59.428 UTC [69] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-14 22:43:59.428 UTC [69] DETAIL:  parameters: $1 = '16537'
+2023-10-14 22:43:59.435 UTC [69] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 22:43:59.435 UTC [69] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 22:43:59.450 UTC [69] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 22:43:59.450 UTC [69] DETAIL:  parameters: $1 = '55', $2 = '1', $3 = '0'
+2023-10-14 22:43:59.457 UTC [69] LOG:  statement: BEGIN
+2023-10-14 22:43:59.461 UTC [69] LOG:  execute s4: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE ("public"."Curso"."id" = $1 AND 1=1) LIMIT $2 OFFSET $3
+2023-10-14 22:43:59.461 UTC [69] DETAIL:  parameters: $1 = '55', $2 = '1', $3 = '0'
+2023-10-14 22:43:59.471 UTC [69] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-14 22:43:59.471 UTC [69] DETAIL:  parameters: $1 = '16419'
+2023-10-14 22:43:59.472 UTC [69] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-14 22:43:59.472 UTC [69] DETAIL:  parameters: $1 = '16419'
+2023-10-14 22:43:59.477 UTC [69] LOG:  execute s5: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id_curso" IN ($1) OFFSET $2
+2023-10-14 22:43:59.477 UTC [69] DETAIL:  parameters: $1 = '55', $2 = '0'
+2023-10-14 22:43:59.490 UTC [69] LOG:  execute s6: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."id_curso" IN ($1) OFFSET $2
+2023-10-14 22:43:59.490 UTC [69] DETAIL:  parameters: $1 = '55', $2 = '0'
+2023-10-14 22:43:59.502 UTC [69] LOG:  execute s7: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" IN ($1) OFFSET $2
+2023-10-14 22:43:59.502 UTC [69] DETAIL:  parameters: $1 = '55', $2 = '0'
+2023-10-14 22:43:59.506 UTC [69] LOG:  execute s8: SELECT "public"."Curso"."id" FROM "public"."Curso" WHERE ("public"."Curso"."id" = $1 AND 1=1)
+2023-10-14 22:43:59.506 UTC [69] DETAIL:  parameters: $1 = '55'
+2023-10-14 22:43:59.511 UTC [69] LOG:  execute s9: DELETE FROM "public"."Curso" WHERE ("public"."Curso"."id" IN ($1) AND ("public"."Curso"."id" = $2 AND 1=1))
+2023-10-14 22:43:59.511 UTC [69] DETAIL:  parameters: $1 = '55', $2 = '55'
+2023-10-14 22:43:59.523 UTC [69] LOG:  statement: COMMIT
+2023-10-14 22:46:26.622 UTC [28] LOG:  checkpoint starting: time
+2023-10-14 22:46:26.924 UTC [28] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.143 s, sync=0.006 s, total=0.302 s; sync files=2, longest=0.005 s, average=0.003 s; distance=2 kB, estimate=3 kB
+2023-10-14 23:28:48.942 UTC [115] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-14 23:28:48.942 UTC [115] DETAIL:  parameters: $1 = '16537'
+2023-10-14 23:28:48.953 UTC [115] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-14 23:28:48.953 UTC [115] DETAIL:  parameters: $1 = '16537'
+2023-10-14 23:28:48.961 UTC [115] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:28:48.961 UTC [115] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:28:48.975 UTC [115] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE 1=1 OFFSET $1
+2023-10-14 23:28:48.975 UTC [115] DETAIL:  parameters: $1 = '0'
+2023-10-14 23:28:50.777 UTC [115] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:28:50.777 UTC [115] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:28:50.781 UTC [115] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE 1=1 OFFSET $1
+2023-10-14 23:28:50.781 UTC [115] DETAIL:  parameters: $1 = '0'
+2023-10-14 23:28:52.874 UTC [115] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:28:52.874 UTC [115] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:28:52.877 UTC [115] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE 1=1 OFFSET $1
+2023-10-14 23:28:52.877 UTC [115] DETAIL:  parameters: $1 = '0'
+2023-10-14 23:28:53.861 UTC [115] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:28:53.861 UTC [115] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:28:53.864 UTC [115] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE 1=1 OFFSET $1
+2023-10-14 23:28:53.864 UTC [115] DETAIL:  parameters: $1 = '0'
+2023-10-14 23:29:03.525 UTC [115] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:29:03.525 UTC [115] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:29:03.539 UTC [115] LOG:  execute s4: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE 1=1 LIMIT $1 OFFSET $2
+2023-10-14 23:29:03.539 UTC [115] DETAIL:  parameters: $1 = '1', $2 = '0'
+2023-10-14 23:40:27.966 UTC [127] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-14 23:40:27.966 UTC [127] DETAIL:  parameters: $1 = '16537'
+2023-10-14 23:40:27.977 UTC [127] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-14 23:40:27.977 UTC [127] DETAIL:  parameters: $1 = '16537'
+2023-10-14 23:40:27.985 UTC [127] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:40:27.985 UTC [127] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:40:27.997 UTC [127] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE 1=1 OFFSET $1
+2023-10-14 23:40:27.997 UTC [127] DETAIL:  parameters: $1 = '0'
+2023-10-14 23:40:30.639 UTC [127] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:40:30.639 UTC [127] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:40:30.655 UTC [127] LOG:  execute s4: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE 1=1 LIMIT $1 OFFSET $2
+2023-10-14 23:40:30.655 UTC [127] DETAIL:  parameters: $1 = '1', $2 = '0'
+2023-10-14 23:43:50.435 UTC [132] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-14 23:43:50.435 UTC [132] DETAIL:  parameters: $1 = '16537'
+2023-10-14 23:43:50.446 UTC [132] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-14 23:43:50.446 UTC [132] DETAIL:  parameters: $1 = '16537'
+2023-10-14 23:43:50.453 UTC [132] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:43:50.453 UTC [132] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:43:50.475 UTC [132] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:43:50.475 UTC [132] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:43:50.484 UTC [132] LOG:  execute s4: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:43:50.484 UTC [132] DETAIL:  parameters: $1 = 'BCC', $2 = '1', $3 = '0'
+2023-10-14 23:44:43.730 UTC [134] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-14 23:44:43.730 UTC [134] DETAIL:  parameters: $1 = '16537'
+2023-10-14 23:44:43.742 UTC [134] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-14 23:44:43.742 UTC [134] DETAIL:  parameters: $1 = '16537'
+2023-10-14 23:44:43.747 UTC [134] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:44:43.747 UTC [134] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:44:43.769 UTC [134] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:44:43.769 UTC [134] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:44:43.777 UTC [134] LOG:  execute s4: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:44:43.777 UTC [134] DETAIL:  parameters: $1 = 'BCC', $2 = '1', $3 = '0'
+2023-10-14 23:45:06.607 UTC [134] LOG:  statement: SELECT 1
+2023-10-14 23:45:06.611 UTC [134] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:45:06.611 UTC [134] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:45:06.619 UTC [134] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:45:06.619 UTC [134] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:45:06.623 UTC [134] LOG:  execute s4: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:45:06.623 UTC [134] DETAIL:  parameters: $1 = 'BCC 6', $2 = '1', $3 = '0'
+2023-10-14 23:45:06.630 UTC [134] LOG:  statement: BEGIN
+2023-10-14 23:45:06.635 UTC [134] LOG:  execute s5: SELECT "public"."Curso"."id" FROM "public"."Curso" WHERE ("public"."Curso"."id" = $1 AND 1=1)
+2023-10-14 23:45:06.635 UTC [134] DETAIL:  parameters: $1 = '52'
+2023-10-14 23:45:06.643 UTC [134] LOG:  execute s6: UPDATE "public"."Curso" SET "nome" = $1 WHERE ("public"."Curso"."id" IN ($2) AND ("public"."Curso"."id" = $3 AND 1=1))
+2023-10-14 23:45:06.643 UTC [134] DETAIL:  parameters: $1 = 'BCC 6', $2 = '52', $3 = '52'
+2023-10-14 23:45:06.654 UTC [134] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:45:06.654 UTC [134] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:45:06.655 UTC [134] LOG:  statement: COMMIT
+2023-10-14 23:45:26.483 UTC [134] LOG:  statement: SELECT 1
+2023-10-14 23:45:26.485 UTC [134] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:45:26.485 UTC [134] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:45:26.491 UTC [134] LOG:  execute s7: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE 1=1 OFFSET $1
+2023-10-14 23:45:26.491 UTC [134] DETAIL:  parameters: $1 = '0'
+2023-10-14 23:45:34.000 UTC [134] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:45:34.000 UTC [134] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:46:09.279 UTC [134] LOG:  statement: SELECT 1
+2023-10-14 23:46:09.281 UTC [134] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:46:09.281 UTC [134] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:46:27.709 UTC [28] LOG:  checkpoint starting: time
+2023-10-14 23:46:28.161 UTC [28] LOG:  checkpoint complete: wrote 4 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.351 s, sync=0.008 s, total=0.454 s; sync files=4, longest=0.004 s, average=0.002 s; distance=4 kB, estimate=4 kB
+2023-10-14 23:47:18.037 UTC [137] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-14 23:47:18.037 UTC [137] DETAIL:  parameters: $1 = '16537'
+2023-10-14 23:47:18.045 UTC [137] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-14 23:47:18.045 UTC [137] DETAIL:  parameters: $1 = '16537'
+2023-10-14 23:47:18.050 UTC [137] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:47:18.050 UTC [137] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:47:18.071 UTC [137] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:47:18.071 UTC [137] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:47:18.079 UTC [137] LOG:  execute s4: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:47:18.079 UTC [137] DETAIL:  parameters: $1 = 'bcc', $2 = '1', $3 = '0'
+2023-10-14 23:47:18.088 UTC [137] LOG:  statement: BEGIN
+2023-10-14 23:47:18.093 UTC [137] LOG:  execute s5: SELECT "public"."Curso"."id" FROM "public"."Curso" WHERE ("public"."Curso"."id" = $1 AND 1=1)
+2023-10-14 23:47:18.093 UTC [137] DETAIL:  parameters: $1 = '52'
+2023-10-14 23:47:18.098 UTC [137] LOG:  execute s6: UPDATE "public"."Curso" SET "nome" = $1, "id_departamento" = $2 WHERE ("public"."Curso"."id" IN ($3) AND ("public"."Curso"."id" = $4 AND 1=1))
+2023-10-14 23:47:18.098 UTC [137] DETAIL:  parameters: $1 = 'bcc', $2 = '1', $3 = '52', $4 = '52'
+2023-10-14 23:47:18.101 UTC [137] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:47:18.101 UTC [137] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:47:18.104 UTC [137] LOG:  statement: COMMIT
+2023-10-14 23:47:21.691 UTC [137] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:47:21.691 UTC [137] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:47:21.696 UTC [137] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:47:21.696 UTC [137] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:47:21.700 UTC [137] LOG:  execute s4: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:47:21.700 UTC [137] DETAIL:  parameters: $1 = 'bcc', $2 = '1', $3 = '0'
+2023-10-14 23:47:24.116 UTC [137] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:47:24.116 UTC [137] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:47:24.124 UTC [137] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:47:24.124 UTC [137] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:47:24.127 UTC [137] LOG:  execute s4: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:47:24.127 UTC [137] DETAIL:  parameters: $1 = 'bcc', $2 = '1', $3 = '0'
+2023-10-14 23:47:25.617 UTC [137] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:47:25.617 UTC [137] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:47:25.624 UTC [137] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:47:25.624 UTC [137] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:47:25.627 UTC [137] LOG:  execute s4: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:47:25.627 UTC [137] DETAIL:  parameters: $1 = 'bcc', $2 = '1', $3 = '0'
+2023-10-14 23:47:26.617 UTC [137] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:47:26.617 UTC [137] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:47:26.625 UTC [137] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:47:26.625 UTC [137] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:47:26.629 UTC [137] LOG:  execute s4: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:47:26.629 UTC [137] DETAIL:  parameters: $1 = 'bcc', $2 = '1', $3 = '0'
+2023-10-14 23:47:27.614 UTC [137] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:47:27.614 UTC [137] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:47:27.620 UTC [137] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:47:27.620 UTC [137] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:47:27.625 UTC [137] LOG:  execute s4: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:47:27.625 UTC [137] DETAIL:  parameters: $1 = 'bcc', $2 = '1', $3 = '0'
+2023-10-14 23:48:22.584 UTC [137] LOG:  statement: SELECT 1
+2023-10-14 23:48:22.587 UTC [137] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:48:22.587 UTC [137] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:48:22.593 UTC [137] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:48:22.593 UTC [137] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:48:22.597 UTC [137] LOG:  execute s4: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:48:22.597 UTC [137] DETAIL:  parameters: $1 = 'bcc', $2 = '1', $3 = '0'
+2023-10-14 23:49:18.122 UTC [140] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-14 23:49:18.122 UTC [140] DETAIL:  parameters: $1 = '16537'
+2023-10-14 23:49:18.132 UTC [140] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-14 23:49:18.132 UTC [140] DETAIL:  parameters: $1 = '16537'
+2023-10-14 23:49:18.137 UTC [140] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:49:18.137 UTC [140] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:49:18.156 UTC [140] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:49:18.156 UTC [140] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:49:18.165 UTC [140] LOG:  execute s4: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:49:18.165 UTC [140] DETAIL:  parameters: $1 = 'bcc', $2 = '1', $3 = '0'
+2023-10-14 23:50:01.959 UTC [140] LOG:  statement: SELECT 1
+2023-10-14 23:50:01.963 UTC [140] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:50:01.963 UTC [140] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:50:01.969 UTC [140] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:50:01.969 UTC [140] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:50:01.973 UTC [140] LOG:  execute s4: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:50:01.973 UTC [140] DETAIL:  parameters: $1 = 'undefined', $2 = '1', $3 = '0'
+2023-10-14 23:50:01.982 UTC [140] LOG:  statement: BEGIN
+2023-10-14 23:50:01.986 UTC [140] LOG:  execute s5: SELECT "public"."Curso"."id" FROM "public"."Curso" WHERE ("public"."Curso"."id" = $1 AND 1=1)
+2023-10-14 23:50:01.986 UTC [140] DETAIL:  parameters: $1 = '52'
+2023-10-14 23:50:01.995 UTC [140] LOG:  execute s6: UPDATE "public"."Curso" SET "nome" = $1, "id_departamento" = $2 WHERE ("public"."Curso"."id" IN ($3) AND ("public"."Curso"."id" = $4 AND 1=1))
+2023-10-14 23:50:01.995 UTC [140] DETAIL:  parameters: $1 = 'undefined', $2 = '1', $3 = '52', $4 = '52'
+2023-10-14 23:50:02.007 UTC [140] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:50:02.007 UTC [140] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:50:02.009 UTC [140] LOG:  statement: COMMIT
+2023-10-14 23:50:06.924 UTC [140] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:50:06.924 UTC [140] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:50:06.931 UTC [140] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:50:06.931 UTC [140] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:50:06.935 UTC [140] LOG:  execute s4: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:50:06.935 UTC [140] DETAIL:  parameters: $1 = 'bcc', $2 = '1', $3 = '0'
+2023-10-14 23:50:06.939 UTC [140] LOG:  statement: BEGIN
+2023-10-14 23:50:06.942 UTC [140] LOG:  execute s5: SELECT "public"."Curso"."id" FROM "public"."Curso" WHERE ("public"."Curso"."id" = $1 AND 1=1)
+2023-10-14 23:50:06.942 UTC [140] DETAIL:  parameters: $1 = '52'
+2023-10-14 23:50:06.944 UTC [140] LOG:  execute s6: UPDATE "public"."Curso" SET "nome" = $1, "id_departamento" = $2 WHERE ("public"."Curso"."id" IN ($3) AND ("public"."Curso"."id" = $4 AND 1=1))
+2023-10-14 23:50:06.944 UTC [140] DETAIL:  parameters: $1 = 'bcc', $2 = '1', $3 = '52', $4 = '52'
+2023-10-14 23:50:06.946 UTC [140] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:50:06.946 UTC [140] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:50:06.948 UTC [140] LOG:  statement: COMMIT
+2023-10-14 23:50:19.868 UTC [140] LOG:  statement: SELECT 1
+2023-10-14 23:50:19.871 UTC [140] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:50:19.871 UTC [140] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:50:19.878 UTC [140] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:50:19.878 UTC [140] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:50:19.882 UTC [140] LOG:  execute s4: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:50:19.882 UTC [140] DETAIL:  parameters: $1 = 'bcc', $2 = '1', $3 = '0'
+2023-10-14 23:50:29.510 UTC [140] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:50:29.510 UTC [140] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:50:29.516 UTC [140] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:50:29.516 UTC [140] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:50:29.520 UTC [140] LOG:  statement: BEGIN
+2023-10-14 23:50:29.522 UTC [140] LOG:  execute s5: SELECT "public"."Curso"."id" FROM "public"."Curso" WHERE ("public"."Curso"."id" = $1 AND 1=1)
+2023-10-14 23:50:29.522 UTC [140] DETAIL:  parameters: $1 = '52'
+2023-10-14 23:50:29.525 UTC [140] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:50:29.525 UTC [140] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:50:29.527 UTC [140] LOG:  statement: COMMIT
+2023-10-14 23:50:37.883 UTC [140] LOG:  statement: SELECT 1
+2023-10-14 23:50:37.885 UTC [140] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:50:37.885 UTC [140] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:50:37.891 UTC [140] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:50:37.891 UTC [140] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:50:37.895 UTC [140] LOG:  statement: BEGIN
+2023-10-14 23:50:37.897 UTC [140] LOG:  execute s5: SELECT "public"."Curso"."id" FROM "public"."Curso" WHERE ("public"."Curso"."id" = $1 AND 1=1)
+2023-10-14 23:50:37.897 UTC [140] DETAIL:  parameters: $1 = '52'
+2023-10-14 23:50:37.899 UTC [140] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:50:37.899 UTC [140] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:50:37.901 UTC [140] LOG:  statement: COMMIT
+2023-10-14 23:51:27.264 UTC [28] LOG:  checkpoint starting: time
+2023-10-14 23:51:27.672 UTC [28] LOG:  checkpoint complete: wrote 4 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.329 s, sync=0.010 s, total=0.409 s; sync files=4, longest=0.006 s, average=0.003 s; distance=4 kB, estimate=4 kB
+2023-10-14 23:52:28.276 UTC [144] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-10-14 23:52:28.276 UTC [144] DETAIL:  parameters: $1 = '16537'
+2023-10-14 23:52:28.285 UTC [144] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-10-14 23:52:28.285 UTC [144] DETAIL:  parameters: $1 = '16537'
+2023-10-14 23:52:28.290 UTC [144] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:52:28.290 UTC [144] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:52:28.310 UTC [144] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:52:28.310 UTC [144] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:52:28.319 UTC [144] LOG:  statement: BEGIN
+2023-10-14 23:52:28.323 UTC [144] LOG:  execute s4: SELECT "public"."Curso"."id" FROM "public"."Curso" WHERE ("public"."Curso"."id" = $1 AND 1=1)
+2023-10-14 23:52:28.323 UTC [144] DETAIL:  parameters: $1 = '52'
+2023-10-14 23:52:28.326 UTC [144] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:52:28.326 UTC [144] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:52:28.327 UTC [144] LOG:  statement: COMMIT
+2023-10-14 23:52:42.714 UTC [144] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:52:42.714 UTC [144] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:52:42.720 UTC [144] LOG:  execute s5: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE 1=1 OFFSET $1
+2023-10-14 23:52:42.720 UTC [144] DETAIL:  parameters: $1 = '0'
+2023-10-14 23:52:46.191 UTC [144] LOG:  statement: SELECT 1
+2023-10-14 23:52:46.194 UTC [144] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:52:46.194 UTC [144] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:52:46.201 UTC [144] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:52:46.201 UTC [144] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:52:46.207 UTC [144] LOG:  statement: BEGIN
+2023-10-14 23:52:46.209 UTC [144] LOG:  execute s4: SELECT "public"."Curso"."id" FROM "public"."Curso" WHERE ("public"."Curso"."id" = $1 AND 1=1)
+2023-10-14 23:52:46.209 UTC [144] DETAIL:  parameters: $1 = '52'
+2023-10-14 23:52:46.211 UTC [144] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:52:46.211 UTC [144] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:52:46.214 UTC [144] LOG:  statement: COMMIT
+2023-10-14 23:52:52.501 UTC [144] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:52:52.501 UTC [144] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:52:52.507 UTC [144] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:52:52.507 UTC [144] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:52:52.514 UTC [144] LOG:  statement: BEGIN
+2023-10-14 23:52:52.516 UTC [144] LOG:  execute s4: SELECT "public"."Curso"."id" FROM "public"."Curso" WHERE ("public"."Curso"."id" = $1 AND 1=1)
+2023-10-14 23:52:52.516 UTC [144] DETAIL:  parameters: $1 = '52'
+2023-10-14 23:52:52.519 UTC [144] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:52:52.519 UTC [144] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:52:52.521 UTC [144] LOG:  statement: COMMIT
+2023-10-14 23:53:06.606 UTC [144] LOG:  statement: SELECT 1
+2023-10-14 23:53:06.609 UTC [144] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-10-14 23:53:06.609 UTC [144] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-10-14 23:53:06.617 UTC [144] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:53:06.617 UTC [144] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:53:06.623 UTC [144] LOG:  execute s6: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."nome" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:53:06.623 UTC [144] DETAIL:  parameters: $1 = 'BCC 2', $2 = '1', $3 = '0'
+2023-10-14 23:53:06.630 UTC [144] LOG:  statement: BEGIN
+2023-10-14 23:53:06.632 UTC [144] LOG:  execute s4: SELECT "public"."Curso"."id" FROM "public"."Curso" WHERE ("public"."Curso"."id" = $1 AND 1=1)
+2023-10-14 23:53:06.632 UTC [144] DETAIL:  parameters: $1 = '52'
+2023-10-14 23:53:06.636 UTC [144] LOG:  execute s7: UPDATE "public"."Curso" SET "nome" = $1 WHERE ("public"."Curso"."id" IN ($2) AND ("public"."Curso"."id" = $3 AND 1=1))
+2023-10-14 23:53:06.636 UTC [144] DETAIL:  parameters: $1 = 'BCC 2', $2 = '52', $3 = '52'
+2023-10-14 23:53:06.640 UTC [144] LOG:  execute s3: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" = $1 LIMIT $2 OFFSET $3
+2023-10-14 23:53:06.640 UTC [144] DETAIL:  parameters: $1 = '52', $2 = '1', $3 = '0'
+2023-10-14 23:53:06.643 UTC [144] LOG:  statement: COMMIT
+2023-10-14 23:56:27.682 UTC [28] LOG:  checkpoint starting: time
+2023-10-14 23:56:28.085 UTC [28] LOG:  checkpoint complete: wrote 4 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.327 s, sync=0.012 s, total=0.403 s; sync files=4, longest=0.006 s, average=0.003 s; distance=4 kB, estimate=4 kB

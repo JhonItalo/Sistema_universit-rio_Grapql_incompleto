@@ -1,0 +1,51 @@
+2023-08-18 13:16:51.518 UTC [1] LOG:  starting PostgreSQL 15.3 (Debian 15.3-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+2023-08-18 13:16:51.519 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2023-08-18 13:16:51.519 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2023-08-18 13:16:51.551 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2023-08-18 13:16:51.655 UTC [31] LOG:  database system was interrupted; last known up at 2023-08-17 14:43:31 UTC
+2023-08-18 13:17:01.688 UTC [31] LOG:  syncing data directory (pre-fsync), elapsed time: 10.02 s, current path: ./base/16906/2602
+2023-08-18 13:17:11.673 UTC [31] LOG:  syncing data directory (pre-fsync), elapsed time: 20.00 s, current path: ./log/postgresql-2023-07-04_134818.log
+2023-08-18 13:17:16.675 UTC [31] LOG:  database system was not properly shut down; automatic recovery in progress
+2023-08-18 13:17:16.789 UTC [31] LOG:  redo starts at 0/AD23878
+2023-08-18 13:17:16.790 UTC [31] LOG:  invalid record length at 0/AD23960: wanted 24, got 0
+2023-08-18 13:17:16.790 UTC [31] LOG:  redo done at 0/AD23928 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2023-08-18 13:17:16.923 UTC [29] LOG:  checkpoint starting: end-of-recovery immediate wait
+2023-08-18 13:17:17.019 UTC [29] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.022 s, sync=0.011 s, total=0.101 s; sync files=3, longest=0.004 s, average=0.004 s; distance=0 kB, estimate=0 kB
+2023-08-18 13:17:17.058 UTC [1] LOG:  database system is ready to accept connections
+2023-08-18 21:55:39.593 UTC [35] LOG:  execute s0: SELECT "public"."ProfessorCursoDisciplina"."id", "public"."ProfessorCursoDisciplina"."id_professor", "public"."ProfessorCursoDisciplina"."id_cursoDisciplina" FROM "public"."ProfessorCursoDisciplina" WHERE ("public"."ProfessorCursoDisciplina"."id") IN (SELECT "t0"."id" FROM "public"."ProfessorCursoDisciplina" AS "t0" INNER JOIN "public"."CursoDisciplina" AS "j0" ON ("j0"."id") = ("t0"."id_cursoDisciplina") WHERE ("j0"."id_curso" = $1 AND "t0"."id" IS NOT NULL)) OFFSET $2
+2023-08-18 21:55:39.593 UTC [35] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-18 21:55:39.606 UTC [35] LOG:  execute s1: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id" IN ($1,$2) OFFSET $3
+2023-08-18 21:55:39.606 UTC [35] DETAIL:  parameters: $1 = '46', $2 = '44', $3 = '0'
+2023-08-18 21:55:39.621 UTC [35] LOG:  execute s2: SELECT "public"."Curso"."id", "public"."Curso"."nome" FROM "public"."Curso" WHERE "public"."Curso"."id" IN ($1) OFFSET $2
+2023-08-18 21:55:39.621 UTC [35] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-18 21:55:39.630 UTC [35] LOG:  execute s3: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2) OFFSET $3
+2023-08-18 21:55:39.630 UTC [35] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '0'
+2023-08-18 21:55:39.673 UTC [35] LOG:  execute s4: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" IN ($1,$2) OFFSET $3
+2023-08-18 21:55:39.673 UTC [35] DETAIL:  parameters: $1 = '0e99dc48-102c-4686-b5fb-b85ecb232d3a', $2 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $3 = '0'
+2023-08-18 21:55:39.687 UTC [35] LOG:  execute s5: SELECT "public"."Departamento"."id", "public"."Departamento"."nome" FROM "public"."Departamento" WHERE "public"."Departamento"."id" IN ($1) OFFSET $2
+2023-08-18 21:55:39.687 UTC [35] DETAIL:  parameters: $1 = '1', $2 = '0'
+2023-08-18 21:55:46.791 UTC [35] LOG:  execute s7: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-18 21:55:46.791 UTC [35] DETAIL:  parameters: $1 = '16419'
+2023-08-18 21:55:46.808 UTC [35] LOG:  execute s8: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-18 21:55:46.808 UTC [35] DETAIL:  parameters: $1 = '16419'
+2023-08-18 21:55:46.812 UTC [35] LOG:  execute s6: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-18 21:55:46.812 UTC [35] DETAIL:  parameters: $1 = 'mauro@gmail.com', $2 = '1', $3 = '0'
+2023-08-18 21:55:50.960 UTC [35] LOG:  execute s9: SELECT "public"."ProfessorCursoDisciplina"."id", "public"."ProfessorCursoDisciplina"."id_professor", "public"."ProfessorCursoDisciplina"."id_cursoDisciplina" FROM "public"."ProfessorCursoDisciplina" WHERE "public"."ProfessorCursoDisciplina"."id_professor" = $1 OFFSET $2
+2023-08-18 21:55:50.960 UTC [35] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-18 21:55:50.962 UTC [35] LOG:  execute s1: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id" IN ($1,$2) OFFSET $3
+2023-08-18 21:55:50.962 UTC [35] DETAIL:  parameters: $1 = '44', $2 = '46', $3 = '0'
+2023-08-18 21:55:50.965 UTC [35] LOG:  execute s10: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" IN ($1) OFFSET $2
+2023-08-18 21:55:50.965 UTC [35] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-18 21:55:50.967 UTC [35] LOG:  execute s3: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2) OFFSET $3
+2023-08-18 21:55:50.967 UTC [35] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '0'
+2023-08-18 21:57:35.876 UTC [29] LOG:  checkpoint starting: time
+2023-08-18 21:57:36.218 UTC [29] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.248 s, sync=0.003 s, total=0.338 s; sync files=2, longest=0.002 s, average=0.002 s; distance=8 kB, estimate=8 kB

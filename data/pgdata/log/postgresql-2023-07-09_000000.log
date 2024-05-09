@@ -1,0 +1,1 @@
+2023-07-09 13:28:16.453 UTC [29] LOG:  checkpoint complete: wrote 6 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.669 s, sync=0.012 s, total=0.782 s; sync files=6, longest=0.005 s, average=0.002 s; distance=8 kB, estimate=9 kB

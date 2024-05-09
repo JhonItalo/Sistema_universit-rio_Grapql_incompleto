@@ -1,0 +1,311 @@
+2023-08-10 13:45:18.766 UTC [1] LOG:  starting PostgreSQL 15.3 (Debian 15.3-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+2023-08-10 13:45:18.767 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2023-08-10 13:45:18.767 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2023-08-10 13:45:18.789 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2023-08-10 13:45:18.860 UTC [30] LOG:  database system was interrupted; last known up at 2023-08-09 23:00:14 UTC
+2023-08-10 13:45:28.870 UTC [30] LOG:  syncing data directory (pre-fsync), elapsed time: 10.00 s, current path: ./base/5/2678
+2023-08-10 13:45:34.030 UTC [30] LOG:  database system was not properly shut down; automatic recovery in progress
+2023-08-10 13:45:34.094 UTC [30] LOG:  redo starts at 0/8914720
+2023-08-10 13:45:34.095 UTC [30] LOG:  invalid record length at 0/8914808: wanted 24, got 0
+2023-08-10 13:45:34.095 UTC [30] LOG:  redo done at 0/89147D0 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2023-08-10 13:45:34.181 UTC [28] LOG:  checkpoint starting: end-of-recovery immediate wait
+2023-08-10 13:45:34.252 UTC [28] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.019 s, sync=0.009 s, total=0.076 s; sync files=3, longest=0.004 s, average=0.003 s; distance=0 kB, estimate=0 kB
+2023-08-10 13:45:34.287 UTC [1] LOG:  database system is ready to accept connections
+2023-08-10 14:02:47.176 UTC [34] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-10 14:02:47.176 UTC [34] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 14:02:47.188 UTC [34] LOG:  statement: BEGIN
+2023-08-10 14:02:47.194 UTC [34] LOG:  execute s1: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0) OFFSET $2
+2023-08-10 14:02:47.194 UTC [34] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 14:02:47.198 UTC [34] LOG:  execute s2: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0)
+2023-08-10 14:02:47.198 UTC [34] DETAIL:  parameters: $1 = '6'
+2023-08-10 14:02:47.200 UTC [34] LOG:  statement: COMMIT
+2023-08-10 14:02:47.207 UTC [34] LOG:  execute s3: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-10 14:02:47.207 UTC [34] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 14:03:02.825 UTC [34] LOG:  statement: SELECT 1
+2023-08-10 14:03:02.827 UTC [34] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-10 14:03:02.827 UTC [34] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 14:03:02.831 UTC [34] LOG:  statement: BEGIN
+2023-08-10 14:03:02.833 UTC [34] LOG:  execute s1: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0) OFFSET $2
+2023-08-10 14:03:02.833 UTC [34] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 14:03:02.835 UTC [34] LOG:  execute s2: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0)
+2023-08-10 14:03:02.835 UTC [34] DETAIL:  parameters: $1 = '6'
+2023-08-10 14:03:02.838 UTC [34] LOG:  statement: COMMIT
+2023-08-10 14:03:02.841 UTC [34] LOG:  execute s3: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-10 14:03:02.841 UTC [34] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 14:03:10.479 UTC [34] LOG:  execute s4: SELECT "public"."ProfessorCursoDisciplina"."id", "public"."ProfessorCursoDisciplina"."id_cursoDisciplina" FROM "public"."ProfessorCursoDisciplina" WHERE "public"."ProfessorCursoDisciplina"."id_professor" = $1 OFFSET $2
+2023-08-10 14:03:10.479 UTC [34] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 14:03:10.483 UTC [34] LOG:  statement: BEGIN
+2023-08-10 14:03:10.488 UTC [34] LOG:  execute s5: SELECT "public"."ProfessorCursoDisciplina"."id" FROM "public"."ProfessorCursoDisciplina" WHERE ("public"."ProfessorCursoDisciplina"."id_professor" = $1 AND 1=0) OFFSET $2
+2023-08-10 14:03:10.488 UTC [34] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 14:03:10.491 UTC [34] LOG:  execute s6: SELECT "public"."ProfessorCursoDisciplina"."id" FROM "public"."ProfessorCursoDisciplina" WHERE ("public"."ProfessorCursoDisciplina"."id_professor" = $1 AND 1=0)
+2023-08-10 14:03:10.491 UTC [34] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956'
+2023-08-10 14:03:10.492 UTC [34] LOG:  statement: COMMIT
+2023-08-10 14:03:10.498 UTC [34] LOG:  execute s7: SELECT "public"."ProfessorCursoDisciplina"."id", "public"."ProfessorCursoDisciplina"."id_professor", "public"."ProfessorCursoDisciplina"."id_cursoDisciplina" FROM "public"."ProfessorCursoDisciplina" WHERE "public"."ProfessorCursoDisciplina"."id_professor" = $1 OFFSET $2
+2023-08-10 14:03:10.498 UTC [34] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 14:03:10.515 UTC [34] LOG:  execute s8: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 14:03:10.515 UTC [34] DETAIL:  parameters: $1 = '44', $2 = '46', $3 = '47', $4 = '0'
+2023-08-10 14:03:10.528 UTC [34] LOG:  execute s9: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" IN ($1) OFFSET $2
+2023-08-10 14:03:10.528 UTC [34] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 14:03:10.539 UTC [34] LOG:  execute s10: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 14:03:10.539 UTC [34] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '14', $4 = '0'
+2023-08-10 14:03:32.149 UTC [35] LOG:  execute s0: SELECT "public"."ProfessorCursoDisciplina"."id", "public"."ProfessorCursoDisciplina"."id_cursoDisciplina" FROM "public"."ProfessorCursoDisciplina" WHERE "public"."ProfessorCursoDisciplina"."id_professor" = $1 OFFSET $2
+2023-08-10 14:03:32.149 UTC [35] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 14:03:32.157 UTC [35] LOG:  statement: BEGIN
+2023-08-10 14:03:32.160 UTC [35] LOG:  execute s1: SELECT "public"."ProfessorCursoDisciplina"."id" FROM "public"."ProfessorCursoDisciplina" WHERE ("public"."ProfessorCursoDisciplina"."id_professor" = $1 AND 1=0) OFFSET $2
+2023-08-10 14:03:32.160 UTC [35] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 14:03:32.163 UTC [35] LOG:  execute s2: SELECT "public"."ProfessorCursoDisciplina"."id" FROM "public"."ProfessorCursoDisciplina" WHERE ("public"."ProfessorCursoDisciplina"."id_professor" = $1 AND 1=0)
+2023-08-10 14:03:32.163 UTC [35] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956'
+2023-08-10 14:03:32.165 UTC [35] LOG:  statement: COMMIT
+2023-08-10 14:03:32.174 UTC [35] LOG:  execute s3: SELECT "public"."ProfessorCursoDisciplina"."id", "public"."ProfessorCursoDisciplina"."id_professor", "public"."ProfessorCursoDisciplina"."id_cursoDisciplina" FROM "public"."ProfessorCursoDisciplina" WHERE "public"."ProfessorCursoDisciplina"."id_professor" = $1 OFFSET $2
+2023-08-10 14:03:32.174 UTC [35] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 14:03:32.181 UTC [35] LOG:  execute s4: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 14:03:32.181 UTC [35] DETAIL:  parameters: $1 = '44', $2 = '46', $3 = '47', $4 = '0'
+2023-08-10 14:03:32.190 UTC [35] LOG:  execute s5: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" IN ($1) OFFSET $2
+2023-08-10 14:03:32.190 UTC [35] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 14:03:32.195 UTC [35] LOG:  execute s6: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 14:03:32.195 UTC [35] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '14', $4 = '0'
+2023-08-10 14:06:32.366 UTC [39] LOG:  execute s0: SELECT "public"."ProfessorCursoDisciplina"."id", "public"."ProfessorCursoDisciplina"."id_cursoDisciplina" FROM "public"."ProfessorCursoDisciplina" WHERE "public"."ProfessorCursoDisciplina"."id_professor" = $1 OFFSET $2
+2023-08-10 14:06:32.366 UTC [39] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 14:06:32.375 UTC [39] LOG:  statement: BEGIN
+2023-08-10 14:06:32.379 UTC [39] LOG:  execute s1: SELECT "public"."ProfessorCursoDisciplina"."id" FROM "public"."ProfessorCursoDisciplina" WHERE ("public"."ProfessorCursoDisciplina"."id_professor" = $1 AND 1=0) OFFSET $2
+2023-08-10 14:06:32.379 UTC [39] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 14:06:32.382 UTC [39] LOG:  execute s2: SELECT "public"."ProfessorCursoDisciplina"."id" FROM "public"."ProfessorCursoDisciplina" WHERE ("public"."ProfessorCursoDisciplina"."id_professor" = $1 AND 1=0)
+2023-08-10 14:06:32.382 UTC [39] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956'
+2023-08-10 14:06:32.383 UTC [39] LOG:  statement: COMMIT
+2023-08-10 14:06:32.390 UTC [39] LOG:  execute s3: SELECT "public"."ProfessorCursoDisciplina"."id", "public"."ProfessorCursoDisciplina"."id_professor", "public"."ProfessorCursoDisciplina"."id_cursoDisciplina" FROM "public"."ProfessorCursoDisciplina" WHERE "public"."ProfessorCursoDisciplina"."id_professor" = $1 OFFSET $2
+2023-08-10 14:06:32.390 UTC [39] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 14:06:32.397 UTC [39] LOG:  execute s4: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 14:06:32.397 UTC [39] DETAIL:  parameters: $1 = '44', $2 = '46', $3 = '47', $4 = '0'
+2023-08-10 14:06:32.405 UTC [39] LOG:  execute s5: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" IN ($1) OFFSET $2
+2023-08-10 14:06:32.405 UTC [39] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 14:06:32.411 UTC [39] LOG:  execute s6: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 14:06:32.411 UTC [39] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '14', $4 = '0'
+2023-08-10 14:06:37.440 UTC [39] LOG:  execute s0: SELECT "public"."ProfessorCursoDisciplina"."id", "public"."ProfessorCursoDisciplina"."id_cursoDisciplina" FROM "public"."ProfessorCursoDisciplina" WHERE "public"."ProfessorCursoDisciplina"."id_professor" = $1 OFFSET $2
+2023-08-10 14:06:37.440 UTC [39] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 14:06:37.444 UTC [39] LOG:  statement: BEGIN
+2023-08-10 14:06:37.447 UTC [39] LOG:  execute s1: SELECT "public"."ProfessorCursoDisciplina"."id" FROM "public"."ProfessorCursoDisciplina" WHERE ("public"."ProfessorCursoDisciplina"."id_professor" = $1 AND 1=0) OFFSET $2
+2023-08-10 14:06:37.447 UTC [39] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 14:06:37.448 UTC [39] LOG:  execute s2: SELECT "public"."ProfessorCursoDisciplina"."id" FROM "public"."ProfessorCursoDisciplina" WHERE ("public"."ProfessorCursoDisciplina"."id_professor" = $1 AND 1=0)
+2023-08-10 14:06:37.448 UTC [39] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956'
+2023-08-10 14:06:37.460 UTC [39] LOG:  execute s7: INSERT INTO "public"."ProfessorCursoDisciplina" ("id_professor","id_cursoDisciplina") VALUES ($1,$2)
+2023-08-10 14:06:37.460 UTC [39] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 14:06:37.496 UTC [39] ERROR:  insert or update on table "ProfessorCursoDisciplina" violates foreign key constraint "ProfessorCursoDisciplina_id_cursoDisciplina_fkey"
+2023-08-10 14:06:37.496 UTC [39] DETAIL:  Key (id_cursoDisciplina)=(0) is not present in table "CursoDisciplina".
+2023-08-10 14:06:37.496 UTC [39] STATEMENT:  INSERT INTO "public"."ProfessorCursoDisciplina" ("id_professor","id_cursoDisciplina") VALUES ($1,$2)
+2023-08-10 14:06:37.498 UTC [39] LOG:  statement: ROLLBACK
+2023-08-10 14:06:48.409 UTC [39] LOG:  statement: SELECT 1
+2023-08-10 14:06:48.411 UTC [39] LOG:  execute s0: SELECT "public"."ProfessorCursoDisciplina"."id", "public"."ProfessorCursoDisciplina"."id_cursoDisciplina" FROM "public"."ProfessorCursoDisciplina" WHERE "public"."ProfessorCursoDisciplina"."id_professor" = $1 OFFSET $2
+2023-08-10 14:06:48.411 UTC [39] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 14:06:48.415 UTC [39] LOG:  statement: BEGIN
+2023-08-10 14:06:48.417 UTC [39] LOG:  execute s1: SELECT "public"."ProfessorCursoDisciplina"."id" FROM "public"."ProfessorCursoDisciplina" WHERE ("public"."ProfessorCursoDisciplina"."id_professor" = $1 AND 1=0) OFFSET $2
+2023-08-10 14:06:48.417 UTC [39] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 14:06:48.420 UTC [39] LOG:  execute s2: SELECT "public"."ProfessorCursoDisciplina"."id" FROM "public"."ProfessorCursoDisciplina" WHERE ("public"."ProfessorCursoDisciplina"."id_professor" = $1 AND 1=0)
+2023-08-10 14:06:48.420 UTC [39] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956'
+2023-08-10 14:06:48.422 UTC [39] LOG:  statement: COMMIT
+2023-08-10 14:06:48.426 UTC [39] LOG:  execute s3: SELECT "public"."ProfessorCursoDisciplina"."id", "public"."ProfessorCursoDisciplina"."id_professor", "public"."ProfessorCursoDisciplina"."id_cursoDisciplina" FROM "public"."ProfessorCursoDisciplina" WHERE "public"."ProfessorCursoDisciplina"."id_professor" = $1 OFFSET $2
+2023-08-10 14:06:48.426 UTC [39] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 14:06:48.427 UTC [39] LOG:  execute s4: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 14:06:48.427 UTC [39] DETAIL:  parameters: $1 = '44', $2 = '46', $3 = '47', $4 = '0'
+2023-08-10 14:06:48.429 UTC [39] LOG:  execute s5: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" IN ($1) OFFSET $2
+2023-08-10 14:06:48.429 UTC [39] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 14:06:48.431 UTC [39] LOG:  execute s6: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 14:06:48.431 UTC [39] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '14', $4 = '0'
+2023-08-10 14:10:34.579 UTC [28] LOG:  checkpoint starting: time
+2023-08-10 14:10:35.068 UTC [28] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.424 s, sync=0.010 s, total=0.489 s; sync files=5, longest=0.005 s, average=0.002 s; distance=4 kB, estimate=4 kB
+2023-08-10 14:20:48.160 UTC [55] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-10 14:20:48.160 UTC [55] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 14:20:48.166 UTC [55] LOG:  execute s1: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 14:20:48.166 UTC [55] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '14', $4 = '0'
+2023-08-10 14:29:13.591 UTC [64] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-10 14:29:13.591 UTC [64] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 14:29:13.598 UTC [64] LOG:  execute s1: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 14:29:13.598 UTC [64] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '14', $4 = '0'
+2023-08-10 14:30:41.446 UTC [67] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-10 14:30:41.446 UTC [67] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 14:30:41.454 UTC [67] LOG:  execute s1: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 14:30:41.454 UTC [67] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '14', $4 = '0'
+2023-08-10 14:30:44.358 UTC [67] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-10 14:30:44.358 UTC [67] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 14:30:44.360 UTC [67] LOG:  execute s1: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 14:30:44.360 UTC [67] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '14', $4 = '0'
+2023-08-10 14:32:22.745 UTC [67] LOG:  statement: SELECT 1
+2023-08-10 14:32:22.747 UTC [67] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-10 14:32:22.747 UTC [67] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 14:32:22.749 UTC [67] LOG:  execute s1: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 14:32:22.749 UTC [67] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '14', $4 = '0'
+2023-08-10 14:51:00.574 UTC [88] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-10 14:51:00.574 UTC [88] DETAIL:  parameters: $1 = '16419'
+2023-08-10 14:51:00.590 UTC [88] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-10 14:51:00.590 UTC [88] DETAIL:  parameters: $1 = '16419'
+2023-08-10 14:51:00.599 UTC [88] LOG:  execute s0: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE 1=1 OFFSET $1
+2023-08-10 14:51:00.599 UTC [88] DETAIL:  parameters: $1 = '0'
+2023-08-10 14:52:17.991 UTC [88] LOG:  statement: SELECT 1
+2023-08-10 14:52:17.998 UTC [88] LOG:  execute s3: SELECT "public"."ProfessorCursoDisciplina"."id", "public"."ProfessorCursoDisciplina"."id_professor", "public"."ProfessorCursoDisciplina"."id_cursoDisciplina" FROM "public"."ProfessorCursoDisciplina" WHERE "public"."ProfessorCursoDisciplina"."id_professor" = $1 OFFSET $2
+2023-08-10 14:52:17.998 UTC [88] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 14:52:18.006 UTC [88] LOG:  execute s4: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 14:52:18.006 UTC [88] DETAIL:  parameters: $1 = '44', $2 = '46', $3 = '47', $4 = '0'
+2023-08-10 14:52:18.013 UTC [88] LOG:  execute s5: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" IN ($1) OFFSET $2
+2023-08-10 14:52:18.013 UTC [88] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 14:52:18.021 UTC [88] LOG:  execute s6: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 14:52:18.021 UTC [88] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '14', $4 = '0'
+2023-08-10 14:56:09.553 UTC [88] LOG:  statement: SELECT 1
+2023-08-10 14:56:09.555 UTC [88] LOG:  execute s3: SELECT "public"."ProfessorCursoDisciplina"."id", "public"."ProfessorCursoDisciplina"."id_professor", "public"."ProfessorCursoDisciplina"."id_cursoDisciplina" FROM "public"."ProfessorCursoDisciplina" WHERE "public"."ProfessorCursoDisciplina"."id_professor" = $1 OFFSET $2
+2023-08-10 14:56:09.555 UTC [88] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 14:56:09.557 UTC [88] LOG:  execute s4: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 14:56:09.557 UTC [88] DETAIL:  parameters: $1 = '44', $2 = '46', $3 = '47', $4 = '0'
+2023-08-10 14:56:09.559 UTC [88] LOG:  execute s5: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" IN ($1) OFFSET $2
+2023-08-10 14:56:09.559 UTC [88] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 14:56:09.561 UTC [88] LOG:  execute s6: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 14:56:09.561 UTC [88] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '14', $4 = '0'
+2023-08-10 14:56:25.109 UTC [88] LOG:  statement: SELECT 1
+2023-08-10 14:56:25.113 UTC [88] LOG:  execute s7: SELECT "public"."ProfessorCursoDisciplina"."id", "public"."ProfessorCursoDisciplina"."id_cursoDisciplina" FROM "public"."ProfessorCursoDisciplina" WHERE "public"."ProfessorCursoDisciplina"."id_professor" = $1 OFFSET $2
+2023-08-10 14:56:25.113 UTC [88] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 14:56:25.121 UTC [88] LOG:  statement: BEGIN
+2023-08-10 14:56:25.125 UTC [88] LOG:  execute s8: SELECT "public"."ProfessorCursoDisciplina"."id" FROM "public"."ProfessorCursoDisciplina" WHERE ("public"."ProfessorCursoDisciplina"."id_professor" = $1 AND 1=0) OFFSET $2
+2023-08-10 14:56:25.125 UTC [88] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 14:56:25.129 UTC [88] LOG:  execute s9: SELECT "public"."ProfessorCursoDisciplina"."id" FROM "public"."ProfessorCursoDisciplina" WHERE ("public"."ProfessorCursoDisciplina"."id_professor" = $1 AND 1=0)
+2023-08-10 14:56:25.129 UTC [88] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956'
+2023-08-10 14:56:25.131 UTC [88] LOG:  statement: COMMIT
+2023-08-10 14:56:25.137 UTC [88] LOG:  execute s3: SELECT "public"."ProfessorCursoDisciplina"."id", "public"."ProfessorCursoDisciplina"."id_professor", "public"."ProfessorCursoDisciplina"."id_cursoDisciplina" FROM "public"."ProfessorCursoDisciplina" WHERE "public"."ProfessorCursoDisciplina"."id_professor" = $1 OFFSET $2
+2023-08-10 14:56:25.137 UTC [88] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 14:56:25.139 UTC [88] LOG:  execute s4: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 14:56:25.139 UTC [88] DETAIL:  parameters: $1 = '44', $2 = '46', $3 = '47', $4 = '0'
+2023-08-10 14:56:25.141 UTC [88] LOG:  execute s5: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" IN ($1) OFFSET $2
+2023-08-10 14:56:25.141 UTC [88] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 14:56:25.143 UTC [88] LOG:  execute s6: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 14:56:25.143 UTC [88] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '14', $4 = '0'
+2023-08-10 14:56:47.611 UTC [88] LOG:  statement: SELECT 1
+2023-08-10 14:56:47.613 UTC [88] LOG:  execute s3: SELECT "public"."ProfessorCursoDisciplina"."id", "public"."ProfessorCursoDisciplina"."id_professor", "public"."ProfessorCursoDisciplina"."id_cursoDisciplina" FROM "public"."ProfessorCursoDisciplina" WHERE "public"."ProfessorCursoDisciplina"."id_professor" = $1 OFFSET $2
+2023-08-10 14:56:47.613 UTC [88] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 14:56:47.616 UTC [88] LOG:  execute s4: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 14:56:47.616 UTC [88] DETAIL:  parameters: $1 = '44', $2 = '46', $3 = '47', $4 = '0'
+2023-08-10 14:56:47.618 UTC [88] LOG:  execute s5: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" IN ($1) OFFSET $2
+2023-08-10 14:56:47.618 UTC [88] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 14:56:47.620 UTC [88] LOG:  execute s6: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 14:56:47.620 UTC [88] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '14', $4 = '0'
+2023-08-10 14:56:50.678 UTC [88] LOG:  execute s3: SELECT "public"."ProfessorCursoDisciplina"."id", "public"."ProfessorCursoDisciplina"."id_professor", "public"."ProfessorCursoDisciplina"."id_cursoDisciplina" FROM "public"."ProfessorCursoDisciplina" WHERE "public"."ProfessorCursoDisciplina"."id_professor" = $1 OFFSET $2
+2023-08-10 14:56:50.678 UTC [88] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 14:56:50.680 UTC [88] LOG:  execute s4: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 14:56:50.680 UTC [88] DETAIL:  parameters: $1 = '44', $2 = '46', $3 = '47', $4 = '0'
+2023-08-10 14:56:50.683 UTC [88] LOG:  execute s5: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" IN ($1) OFFSET $2
+2023-08-10 14:56:50.683 UTC [88] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 14:56:50.685 UTC [88] LOG:  execute s6: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 14:56:50.685 UTC [88] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '14', $4 = '0'
+2023-08-10 21:51:01.623 UTC [109] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-10 21:51:01.623 UTC [109] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 21:51:01.631 UTC [109] LOG:  execute s1: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 21:51:01.631 UTC [109] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '14', $4 = '0'
+2023-08-10 22:03:54.602 UTC [123] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-10 22:03:54.602 UTC [123] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 22:03:54.611 UTC [123] LOG:  statement: BEGIN
+2023-08-10 22:03:54.619 UTC [123] LOG:  execute s1: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0) OFFSET $2
+2023-08-10 22:03:54.619 UTC [123] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 22:03:54.622 UTC [123] LOG:  execute s2: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0)
+2023-08-10 22:03:54.622 UTC [123] DETAIL:  parameters: $1 = '6'
+2023-08-10 22:03:54.624 UTC [123] LOG:  statement: COMMIT
+2023-08-10 22:03:54.632 UTC [123] LOG:  execute s3: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-10 22:03:54.632 UTC [123] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 22:03:54.696 UTC [123] LOG:  execute s4: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 22:03:54.696 UTC [123] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '14', $4 = '0'
+2023-08-10 22:04:34.702 UTC [125] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-10 22:04:34.702 UTC [125] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 22:04:34.709 UTC [125] LOG:  statement: BEGIN
+2023-08-10 22:04:34.714 UTC [125] LOG:  execute s1: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0) OFFSET $2
+2023-08-10 22:04:34.714 UTC [125] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 22:04:34.719 UTC [125] LOG:  execute s2: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0)
+2023-08-10 22:04:34.719 UTC [125] DETAIL:  parameters: $1 = '6'
+2023-08-10 22:04:34.720 UTC [125] LOG:  statement: COMMIT
+2023-08-10 22:04:34.728 UTC [125] LOG:  execute s3: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-10 22:04:34.728 UTC [125] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 22:06:20.142 UTC [127] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-10 22:06:20.142 UTC [127] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 22:06:20.150 UTC [127] LOG:  execute s1: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 22:06:20.150 UTC [127] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '14', $4 = '0'
+2023-08-10 22:06:51.470 UTC [127] LOG:  statement: SELECT 1
+2023-08-10 22:06:51.475 UTC [127] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-10 22:06:51.475 UTC [127] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 22:06:51.477 UTC [127] LOG:  execute s1: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 22:06:51.477 UTC [127] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '14', $4 = '0'
+2023-08-10 22:06:57.073 UTC [127] LOG:  execute s2: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-10 22:06:57.073 UTC [127] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 22:06:57.079 UTC [127] LOG:  statement: BEGIN
+2023-08-10 22:06:57.083 UTC [127] LOG:  execute s3: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0) OFFSET $2
+2023-08-10 22:06:57.083 UTC [127] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 22:06:57.089 UTC [127] LOG:  execute s4: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0)
+2023-08-10 22:06:57.089 UTC [127] DETAIL:  parameters: $1 = '6'
+2023-08-10 22:06:57.091 UTC [127] LOG:  statement: COMMIT
+2023-08-10 22:06:57.096 UTC [127] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-10 22:06:57.096 UTC [127] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 22:16:22.261 UTC [138] LOG:  execute s0: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-10 22:16:22.261 UTC [138] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 22:16:22.270 UTC [138] LOG:  statement: BEGIN
+2023-08-10 22:16:22.274 UTC [138] LOG:  execute s1: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0) OFFSET $2
+2023-08-10 22:16:22.274 UTC [138] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 22:16:22.278 UTC [138] LOG:  execute s2: SELECT "public"."CursoDisciplina"."id" FROM "public"."CursoDisciplina" WHERE ("public"."CursoDisciplina"."id_curso" = $1 AND 1=0)
+2023-08-10 22:16:22.278 UTC [138] DETAIL:  parameters: $1 = '6'
+2023-08-10 22:16:22.281 UTC [138] LOG:  statement: COMMIT
+2023-08-10 22:16:22.287 UTC [138] LOG:  execute s3: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-10 22:16:22.287 UTC [138] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 22:16:24.977 UTC [138] LOG:  execute s3: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-10 22:16:24.977 UTC [138] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 22:16:24.984 UTC [138] LOG:  execute s4: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 22:16:24.984 UTC [138] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '14', $4 = '0'
+2023-08-10 22:18:01.142 UTC [138] LOG:  statement: SELECT 1
+2023-08-10 22:18:01.146 UTC [138] LOG:  execute s5: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE 1=1 OFFSET $1
+2023-08-10 22:18:01.146 UTC [138] DETAIL:  parameters: $1 = '0'
+2023-08-10 22:21:16.254 UTC [138] LOG:  statement: SELECT 1
+2023-08-10 22:21:16.282 UTC [138] LOG:  execute s6: SELECT "public"."ProfessorCursoDisciplina"."id", "public"."ProfessorCursoDisciplina"."id_professor", "public"."ProfessorCursoDisciplina"."id_cursoDisciplina" FROM "public"."ProfessorCursoDisciplina" WHERE "public"."ProfessorCursoDisciplina"."id_professor" = $1 OFFSET $2
+2023-08-10 22:21:16.282 UTC [138] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 22:21:16.286 UTC [138] LOG:  execute s7: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 22:21:16.286 UTC [138] DETAIL:  parameters: $1 = '44', $2 = '46', $3 = '47', $4 = '0'
+2023-08-10 22:21:16.316 UTC [138] LOG:  execute s8: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" IN ($1) OFFSET $2
+2023-08-10 22:21:16.316 UTC [138] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 22:21:16.318 UTC [138] LOG:  execute s4: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 22:21:16.318 UTC [138] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '14', $4 = '0'
+2023-08-10 22:21:24.664 UTC [138] LOG:  execute s9: SELECT "public"."ProfessorCursoDisciplina"."id", "public"."ProfessorCursoDisciplina"."id_cursoDisciplina" FROM "public"."ProfessorCursoDisciplina" WHERE "public"."ProfessorCursoDisciplina"."id_professor" = $1 OFFSET $2
+2023-08-10 22:21:24.664 UTC [138] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 22:21:24.668 UTC [138] LOG:  statement: BEGIN
+2023-08-10 22:21:24.671 UTC [138] LOG:  execute s10: SELECT "public"."ProfessorCursoDisciplina"."id" FROM "public"."ProfessorCursoDisciplina" WHERE ("public"."ProfessorCursoDisciplina"."id_professor" = $1 AND 1=0) OFFSET $2
+2023-08-10 22:21:24.671 UTC [138] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 22:21:24.676 UTC [138] LOG:  execute s11: SELECT "public"."ProfessorCursoDisciplina"."id" FROM "public"."ProfessorCursoDisciplina" WHERE ("public"."ProfessorCursoDisciplina"."id_professor" = $1 AND 1=0)
+2023-08-10 22:21:24.676 UTC [138] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956'
+2023-08-10 22:21:24.677 UTC [138] LOG:  statement: COMMIT
+2023-08-10 22:21:24.680 UTC [138] LOG:  execute s6: SELECT "public"."ProfessorCursoDisciplina"."id", "public"."ProfessorCursoDisciplina"."id_professor", "public"."ProfessorCursoDisciplina"."id_cursoDisciplina" FROM "public"."ProfessorCursoDisciplina" WHERE "public"."ProfessorCursoDisciplina"."id_professor" = $1 OFFSET $2
+2023-08-10 22:21:24.680 UTC [138] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 22:21:24.682 UTC [138] LOG:  execute s7: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 22:21:24.682 UTC [138] DETAIL:  parameters: $1 = '44', $2 = '46', $3 = '47', $4 = '0'
+2023-08-10 22:21:24.684 UTC [138] LOG:  execute s8: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" IN ($1) OFFSET $2
+2023-08-10 22:21:24.684 UTC [138] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 22:21:24.686 UTC [138] LOG:  execute s4: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 22:21:24.686 UTC [138] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '14', $4 = '0'
+2023-08-10 22:29:31.169 UTC [152] LOG:  execute s0: SELECT "public"."ProfessorCursoDisciplina"."id", "public"."ProfessorCursoDisciplina"."id_cursoDisciplina" FROM "public"."ProfessorCursoDisciplina" WHERE "public"."ProfessorCursoDisciplina"."id_professor" = $1 OFFSET $2
+2023-08-10 22:29:31.169 UTC [152] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 22:29:31.177 UTC [152] LOG:  statement: BEGIN
+2023-08-10 22:29:31.180 UTC [152] LOG:  execute s1: SELECT "public"."ProfessorCursoDisciplina"."id" FROM "public"."ProfessorCursoDisciplina" WHERE ("public"."ProfessorCursoDisciplina"."id_professor" = $1 AND 1=0) OFFSET $2
+2023-08-10 22:29:31.180 UTC [152] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 22:29:31.183 UTC [152] LOG:  execute s2: SELECT "public"."ProfessorCursoDisciplina"."id" FROM "public"."ProfessorCursoDisciplina" WHERE ("public"."ProfessorCursoDisciplina"."id_professor" = $1 AND 1=0)
+2023-08-10 22:29:31.183 UTC [152] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956'
+2023-08-10 22:29:31.185 UTC [152] LOG:  statement: COMMIT
+2023-08-10 22:29:31.192 UTC [152] LOG:  execute s3: SELECT "public"."ProfessorCursoDisciplina"."id", "public"."ProfessorCursoDisciplina"."id_professor", "public"."ProfessorCursoDisciplina"."id_cursoDisciplina" FROM "public"."ProfessorCursoDisciplina" WHERE "public"."ProfessorCursoDisciplina"."id_professor" = $1 OFFSET $2
+2023-08-10 22:29:31.192 UTC [152] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 22:36:55.627 UTC [161] LOG:  execute s0: SELECT "public"."ProfessorCursoDisciplina"."id", "public"."ProfessorCursoDisciplina"."id_professor", "public"."ProfessorCursoDisciplina"."id_cursoDisciplina" FROM "public"."ProfessorCursoDisciplina" WHERE "public"."ProfessorCursoDisciplina"."id_professor" = $1 OFFSET $2
+2023-08-10 22:36:55.627 UTC [161] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-10 22:36:55.633 UTC [161] LOG:  execute s1: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 22:36:55.633 UTC [161] DETAIL:  parameters: $1 = '44', $2 = '46', $3 = '47', $4 = '0'
+2023-08-10 22:36:55.644 UTC [161] LOG:  execute s2: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" IN ($1) OFFSET $2
+2023-08-10 22:36:55.644 UTC [161] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 22:36:55.651 UTC [161] LOG:  execute s3: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 22:36:55.651 UTC [161] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '14', $4 = '0'
+2023-08-10 22:43:11.381 UTC [168] LOG:  execute s4: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id_curso" = $1 OFFSET $2
+2023-08-10 22:43:11.381 UTC [168] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-10 22:43:11.387 UTC [168] LOG:  execute s5: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2,$3) OFFSET $4
+2023-08-10 22:43:11.387 UTC [168] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '14', $4 = '0'

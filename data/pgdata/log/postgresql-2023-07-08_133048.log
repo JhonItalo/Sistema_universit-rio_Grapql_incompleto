@@ -1,0 +1,2555 @@
+2023-07-08 13:30:48.280 UTC [1] LOG:  starting PostgreSQL 15.3 (Debian 15.3-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+2023-07-08 13:30:48.281 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2023-07-08 13:30:48.281 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2023-07-08 13:30:48.318 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2023-07-08 13:30:48.438 UTC [30] LOG:  database system was interrupted; last known up at 2023-07-07 14:16:33 UTC
+2023-07-08 13:30:58.455 UTC [30] LOG:  syncing data directory (pre-fsync), elapsed time: 10.00 s, current path: ./base/4/3079_fsm
+2023-07-08 13:31:05.779 UTC [30] LOG:  database system was not properly shut down; automatic recovery in progress
+2023-07-08 13:31:05.866 UTC [30] LOG:  redo starts at 0/4A70E10
+2023-07-08 13:31:05.867 UTC [30] LOG:  invalid record length at 0/4A70EF8: wanted 24, got 0
+2023-07-08 13:31:05.867 UTC [30] LOG:  redo done at 0/4A70EC0 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2023-07-08 13:31:06.009 UTC [28] LOG:  checkpoint starting: end-of-recovery immediate wait
+2023-07-08 13:31:06.105 UTC [28] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.025 s, sync=0.014 s, total=0.101 s; sync files=3, longest=0.006 s, average=0.005 s; distance=0 kB, estimate=0 kB
+2023-07-08 13:31:06.134 UTC [1] LOG:  database system is ready to accept connections
+2023-07-08 14:01:53.306 UTC [34] LOG:  statement: SELECT CURRENT_SCHEMA() AS schema
+2023-07-08 14:01:53.330 UTC [34] LOG:  statement: select version()
+2023-07-08 14:01:53.336 UTC [34] LOG:  statement: 
+	      SELECT      n.nspname as schema, t.typname as typename, t.oid::int4 as typeid
+	      FROM        pg_type t
+	      LEFT JOIN   pg_catalog.pg_namespace n ON n.oid = t.typnamespace
+	      WHERE       (t.typrelid = 0 OR (SELECT c.relkind = 'c' FROM pg_catalog.pg_class c WHERE c.oid = t.typrelid))
+	      AND     NOT EXISTS(SELECT 1 FROM pg_catalog.pg_type el WHERE el.oid = t.typelem AND el.typarray = t.oid)
+	      AND     n.nspname NOT IN ('pg_catalog', 'information_schema');
+	    
+2023-07-08 14:01:53.395 UTC [34] LOG:  statement: select version()
+2023-07-08 14:01:53.610 UTC [34] LOG:  execute <unnamed>: 
+	    SELECT datname
+	    FROM pg_database
+	    WHERE datistemplate = $1
+	    
+	    ORDER BY datname
+	  
+2023-07-08 14:01:53.610 UTC [34] DETAIL:  parameters: $1 = 'f'
+2023-07-08 14:01:53.884 UTC [35] LOG:  statement: select version()
+2023-07-08 14:01:53.887 UTC [35] LOG:  statement: 
+	    SELECT
+	      t.table_schema as schema,
+	      t.table_name as name,
+	  
+	        pc.relkind as tabletype
+	      FROM information_schema.tables AS t
+	      JOIN pg_class AS pc
+	        ON t.table_name = pc.relname AND quote_ident(t.table_schema) = pc.relnamespace::regnamespace::text
+	      LEFT OUTER JOIN pg_inherits AS i
+	        ON pc.oid = i.inhrelid
+	      WHERE t.table_type NOT LIKE '%VIEW%'
+	      AND i.inhrelid::regclass IS NULL
+	    
+	    
+	    ORDER BY t.table_schema, t.table_name
+	  
+2023-07-08 14:01:53.954 UTC [35] LOG:  statement: 
+	    SELECT
+	      table_schema as schema,
+	      table_name as name
+	    FROM information_schema.views
+	    
+	    ORDER BY table_schema, table_name
+	  
+2023-07-08 14:01:53.963 UTC [35] LOG:  statement: select version()
+2023-07-08 14:01:53.966 UTC [35] LOG:  statement: 
+	    SELECT
+	      schemaname as schema,
+	      matviewname as name
+	    FROM pg_matviews
+	    
+	    order by schemaname, matviewname;
+	  
+2023-07-08 14:01:54.046 UTC [35] LOG:  statement: select version()
+2023-07-08 14:01:54.069 UTC [35] LOG:  statement: 
+	    SELECT
+	      r.specific_name as id,
+	      r.routine_schema as routine_schema,
+	      r.routine_name as name,
+	      r.routine_type as routine_type,
+	      r.data_type as data_type
+	    FROM INFORMATION_SCHEMA.ROUTINES r
+	    where r.routine_schema not in ('sys', 'information_schema',
+	                                'pg_catalog', 'performance_schema')
+	    
+	    ORDER BY routine_schema, routine_name
+	  
+2023-07-08 14:01:54.146 UTC [35] LOG:  statement: 
+	    select
+	        r.routine_schema as routine_schema,
+	        r.specific_name as specific_name,
+	        p.parameter_name as parameter_name,
+	        p.character_maximum_length as char_length,
+	        p.data_type as data_type
+	  from information_schema.routines r
+	  left join information_schema.parameters p
+	            on p.specific_schema = r.routine_schema
+	            and p.specific_name = r.specific_name
+	  where r.routine_schema not in ('sys', 'information_schema',
+	                                'pg_catalog', 'performance_schema')
+	    
+	
+	      AND p.parameter_mode = 'IN'
+	  order by r.routine_schema,
+	          r.specific_name,
+	          p.ordinal_position;
+	
+	  
+2023-07-08 14:01:56.191 UTC [35] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-07-08 14:01:56.191 UTC [35] DETAIL:  parameters: $1 = 'public', $2 = 'Professor'
+2023-07-08 14:01:56.243 UTC [35] LOG:  execute <unnamed>: 
+	    SELECT
+	        tc.table_schema as from_schema,
+	        tc.table_name as from_table,
+	        kcu.column_name as from_column,
+	        ccu.table_schema AS to_schema,
+	        ccu.table_name AS to_table,
+	        ccu.column_name AS to_column,
+	        tc.constraint_name,
+	        rc.update_rule as update_rule,
+	        rc.delete_rule as delete_rule
+	    FROM
+	        information_schema.table_constraints AS tc
+	        JOIN information_schema.key_column_usage AS kcu
+	          ON tc.constraint_name = kcu.constraint_name
+	          AND tc.table_schema = kcu.table_schema
+	        JOIN information_schema.constraint_column_usage AS ccu
+	          ON ccu.constraint_name = tc.constraint_name
+	          AND ccu.table_schema = tc.table_schema
+	         JOIN information_schema.referential_constraints rc
+	          on tc.constraint_name = rc.constraint_name
+	          and tc.table_schema = rc.constraint_schema
+	    WHERE tc.constraint_type = 'FOREIGN KEY'
+	    AND tc.table_name= $1 and tc.table_schema = $2;
+	
+	  
+2023-07-08 14:01:56.243 UTC [35] DETAIL:  parameters: $1 = 'Professor', $2 = 'public'
+2023-07-08 14:01:56.254 UTC [35] LOG:  statement: select version()
+2023-07-08 14:01:56.257 UTC [35] LOG:  statement: 
+	    SELECT
+	      a.attname as column_name,
+	      format_type(a.atttypid, a.atttypmod) AS data_type,
+	      a.attnum as position
+	    FROM   pg_index i
+	    JOIN   pg_attribute a ON a.attrelid = i.indrelid
+	                        AND a.attnum = ANY(i.indkey)
+	    WHERE  i.indrelid = '"public"."Professor"'::regclass
+	    AND    i.indisprimary
+	    ORDER BY a.attnum
+	  
+2023-07-08 14:01:56.356 UTC [35] LOG:  statement: select version()
+2023-07-08 14:01:56.360 UTC [35] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:14:57.589 UTC [49] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-07-08 14:14:57.589 UTC [49] DETAIL:  parameters: $1 = 'public', $2 = 'Departamento'
+2023-07-08 14:14:57.631 UTC [49] LOG:  execute <unnamed>: 
+	    SELECT
+	        tc.table_schema as from_schema,
+	        tc.table_name as from_table,
+	        kcu.column_name as from_column,
+	        ccu.table_schema AS to_schema,
+	        ccu.table_name AS to_table,
+	        ccu.column_name AS to_column,
+	        tc.constraint_name,
+	        rc.update_rule as update_rule,
+	        rc.delete_rule as delete_rule
+	    FROM
+	        information_schema.table_constraints AS tc
+	        JOIN information_schema.key_column_usage AS kcu
+	          ON tc.constraint_name = kcu.constraint_name
+	          AND tc.table_schema = kcu.table_schema
+	        JOIN information_schema.constraint_column_usage AS ccu
+	          ON ccu.constraint_name = tc.constraint_name
+	          AND ccu.table_schema = tc.table_schema
+	         JOIN information_schema.referential_constraints rc
+	          on tc.constraint_name = rc.constraint_name
+	          and tc.table_schema = rc.constraint_schema
+	    WHERE tc.constraint_type = 'FOREIGN KEY'
+	    AND tc.table_name= $1 and tc.table_schema = $2;
+	
+	  
+2023-07-08 14:14:57.631 UTC [49] DETAIL:  parameters: $1 = 'Departamento', $2 = 'public'
+2023-07-08 14:14:57.635 UTC [49] LOG:  statement: select version()
+2023-07-08 14:14:57.638 UTC [49] LOG:  statement: 
+	    SELECT
+	      a.attname as column_name,
+	      format_type(a.atttypid, a.atttypmod) AS data_type,
+	      a.attnum as position
+	    FROM   pg_index i
+	    JOIN   pg_attribute a ON a.attrelid = i.indrelid
+	                        AND a.attnum = ANY(i.indkey)
+	    WHERE  i.indrelid = '"public"."Departamento"'::regclass
+	    AND    i.indisprimary
+	    ORDER BY a.attnum
+	  
+2023-07-08 14:14:57.698 UTC [49] LOG:  statement: select version()
+2023-07-08 14:14:57.705 UTC [49] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:15:08.803 UTC [49] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-07-08 14:15:08.803 UTC [49] DETAIL:  parameters: $1 = 'public', $2 = 'Professor'
+2023-07-08 14:15:08.830 UTC [49] LOG:  execute <unnamed>: 
+	    SELECT
+	        tc.table_schema as from_schema,
+	        tc.table_name as from_table,
+	        kcu.column_name as from_column,
+	        ccu.table_schema AS to_schema,
+	        ccu.table_name AS to_table,
+	        ccu.column_name AS to_column,
+	        tc.constraint_name,
+	        rc.update_rule as update_rule,
+	        rc.delete_rule as delete_rule
+	    FROM
+	        information_schema.table_constraints AS tc
+	        JOIN information_schema.key_column_usage AS kcu
+	          ON tc.constraint_name = kcu.constraint_name
+	          AND tc.table_schema = kcu.table_schema
+	        JOIN information_schema.constraint_column_usage AS ccu
+	          ON ccu.constraint_name = tc.constraint_name
+	          AND ccu.table_schema = tc.table_schema
+	         JOIN information_schema.referential_constraints rc
+	          on tc.constraint_name = rc.constraint_name
+	          and tc.table_schema = rc.constraint_schema
+	    WHERE tc.constraint_type = 'FOREIGN KEY'
+	    AND tc.table_name= $1 and tc.table_schema = $2;
+	
+	  
+2023-07-08 14:15:08.830 UTC [49] DETAIL:  parameters: $1 = 'Professor', $2 = 'public'
+2023-07-08 14:15:08.838 UTC [49] LOG:  statement: select version()
+2023-07-08 14:15:08.842 UTC [49] LOG:  statement: 
+	    SELECT
+	      a.attname as column_name,
+	      format_type(a.atttypid, a.atttypmod) AS data_type,
+	      a.attnum as position
+	    FROM   pg_index i
+	    JOIN   pg_attribute a ON a.attrelid = i.indrelid
+	                        AND a.attnum = ANY(i.indkey)
+	    WHERE  i.indrelid = '"public"."Professor"'::regclass
+	    AND    i.indisprimary
+	    ORDER BY a.attnum
+	  
+2023-07-08 14:15:08.917 UTC [49] LOG:  statement: select version()
+2023-07-08 14:15:08.966 UTC [49] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:15:15.636 UTC [51] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-07-08 14:15:15.636 UTC [51] DETAIL:  parameters: $1 = '16537'
+2023-07-08 14:15:15.648 UTC [51] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-07-08 14:15:15.648 UTC [51] DETAIL:  parameters: $1 = '16537'
+2023-07-08 14:15:15.659 UTC [51] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-07-08 14:15:15.659 UTC [51] DETAIL:  parameters: $1 = 'reinaldo@gmail.com', $2 = '1', $3 = '0'
+2023-07-08 14:15:15.668 UTC [51] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-07-08 14:15:15.668 UTC [51] DETAIL:  parameters: $1 = '16419'
+2023-07-08 14:15:15.670 UTC [51] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-07-08 14:15:15.670 UTC [51] DETAIL:  parameters: $1 = '16419'
+2023-07-08 14:15:15.676 UTC [51] LOG:  execute s3: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."cpf" = $1 LIMIT $2 OFFSET $3
+2023-07-08 14:15:15.676 UTC [51] DETAIL:  parameters: $1 = '06806374352', $2 = '1', $3 = '0'
+2023-07-08 14:15:15.681 UTC [51] LOG:  execute s4: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."email" = $1 LIMIT $2 OFFSET $3
+2023-07-08 14:15:15.681 UTC [51] DETAIL:  parameters: $1 = 'reinaldo@gmail.com', $2 = '1', $3 = '0'
+2023-07-08 14:15:15.796 UTC [51] LOG:  statement: BEGIN
+2023-07-08 14:15:15.803 UTC [51] LOG:  execute s5: SELECT "public"."Departamento"."id" FROM "public"."Departamento" WHERE ("public"."Departamento"."id" = $1 AND 1=1) OFFSET $2
+2023-07-08 14:15:15.803 UTC [51] DETAIL:  parameters: $1 = '1', $2 = '0'
+2023-07-08 14:15:15.811 UTC [51] LOG:  execute s6: INSERT INTO "public"."Professor" ("id","nome","email","cpf","sexo","telefone","createt_at","id_departamento") VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING "public"."Professor"."id"
+2023-07-08 14:15:15.811 UTC [51] DETAIL:  parameters: $1 = '2b90347e-b4e3-4f12-9f8c-439f0f8b5fb6', $2 = 'reinaldo', $3 = 'reinaldo@gmail.com', $4 = '06806374352', $5 = 'M', $6 = '0000', $7 = '2023-07-08 14:15:15.794', $8 = '1'
+2023-07-08 14:15:15.820 UTC [51] LOG:  execute s7: INSERT INTO "public"."User" ("id","email","password","status","id_professor") VALUES ($1,$2,$3,$4,$5) RETURNING "public"."User"."id"
+2023-07-08 14:15:15.820 UTC [51] DETAIL:  parameters: $1 = '0c1c4236-2a94-4963-aa4b-dafc8fa92064', $2 = 'reinaldo@gmail.com', $3 = '$2b$10$cMzmimljsPtgMFHoik9rxOYakolZWdU1yhFZ1o676E5giTSelRt5W', $4 = 'professor', $5 = '2b90347e-b4e3-4f12-9f8c-439f0f8b5fb6'
+2023-07-08 14:15:15.828 UTC [51] LOG:  execute s8: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-07-08 14:15:15.828 UTC [51] DETAIL:  parameters: $1 = '2b90347e-b4e3-4f12-9f8c-439f0f8b5fb6', $2 = '1', $3 = '0'
+2023-07-08 14:15:15.831 UTC [51] LOG:  statement: COMMIT
+2023-07-08 14:15:23.992 UTC [49] LOG:  statement: select version()
+2023-07-08 14:15:24.001 UTC [49] LOG:  statement: 
+	    SELECT
+	      r.specific_name as id,
+	      r.routine_schema as routine_schema,
+	      r.routine_name as name,
+	      r.routine_type as routine_type,
+	      r.data_type as data_type
+	    FROM INFORMATION_SCHEMA.ROUTINES r
+	    where r.routine_schema not in ('sys', 'information_schema',
+	                                'pg_catalog', 'performance_schema')
+	    
+	    ORDER BY routine_schema, routine_name
+	  
+2023-07-08 14:15:24.027 UTC [49] LOG:  statement: 
+	    select
+	        r.routine_schema as routine_schema,
+	        r.specific_name as specific_name,
+	        p.parameter_name as parameter_name,
+	        p.character_maximum_length as char_length,
+	        p.data_type as data_type
+	  from information_schema.routines r
+	  left join information_schema.parameters p
+	            on p.specific_schema = r.routine_schema
+	            and p.specific_name = r.specific_name
+	  where r.routine_schema not in ('sys', 'information_schema',
+	                                'pg_catalog', 'performance_schema')
+	    
+	
+	      AND p.parameter_mode = 'IN'
+	  order by r.routine_schema,
+	          r.specific_name,
+	          p.ordinal_position;
+	
+	  
+2023-07-08 14:15:24.193 UTC [52] LOG:  statement: select version()
+2023-07-08 14:15:24.196 UTC [52] LOG:  statement: 
+	    SELECT
+	      t.table_schema as schema,
+	      t.table_name as name,
+	  
+	        pc.relkind as tabletype
+	      FROM information_schema.tables AS t
+	      JOIN pg_class AS pc
+	        ON t.table_name = pc.relname AND quote_ident(t.table_schema) = pc.relnamespace::regnamespace::text
+	      LEFT OUTER JOIN pg_inherits AS i
+	        ON pc.oid = i.inhrelid
+	      WHERE t.table_type NOT LIKE '%VIEW%'
+	      AND i.inhrelid::regclass IS NULL
+	    
+	    
+	    ORDER BY t.table_schema, t.table_name
+	  
+2023-07-08 14:15:24.222 UTC [52] LOG:  statement: 
+	    SELECT
+	      table_schema as schema,
+	      table_name as name
+	    FROM information_schema.views
+	    
+	    ORDER BY table_schema, table_name
+	  
+2023-07-08 14:15:24.229 UTC [52] LOG:  statement: select version()
+2023-07-08 14:15:24.232 UTC [52] LOG:  statement: 
+	    SELECT
+	      schemaname as schema,
+	      matviewname as name
+	    FROM pg_matviews
+	    
+	    order by schemaname, matviewname;
+	  
+2023-07-08 14:15:24.304 UTC [49] LOG:  statement: select version()
+2023-07-08 14:15:24.304 UTC [52] LOG:  statement: select version()
+2023-07-08 14:15:24.331 UTC [49] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:15:24.333 UTC [52] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:15:24.350 UTC [49] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-07-08 14:15:24.350 UTC [49] DETAIL:  parameters: $1 = 'public', $2 = 'Departamento'
+2023-07-08 14:15:24.380 UTC [49] LOG:  statement: select version()
+2023-07-08 14:15:24.387 UTC [49] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:15:24.396 UTC [49] LOG:  statement: select version()
+2023-07-08 14:15:24.399 UTC [49] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:15:24.444 UTC [52] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-07-08 14:15:24.444 UTC [52] DETAIL:  parameters: $1 = 'public', $2 = 'Professor'
+2023-07-08 14:15:24.551 UTC [49] LOG:  statement: select version()
+2023-07-08 14:15:24.551 UTC [52] LOG:  statement: select version()
+2023-07-08 14:15:24.607 UTC [52] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:15:24.608 UTC [49] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:15:24.610 UTC [53] LOG:  statement: select version()
+2023-07-08 14:15:24.617 UTC [52] LOG:  statement: select version()
+2023-07-08 14:15:24.687 UTC [49] LOG:  statement: select version()
+2023-07-08 14:15:24.689 UTC [53] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:15:24.698 UTC [52] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:15:24.702 UTC [49] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:15:24.710 UTC [53] LOG:  statement: select version()
+2023-07-08 14:15:24.776 UTC [53] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:15:24.777 UTC [54] LOG:  statement: select version()
+2023-07-08 14:15:24.841 UTC [54] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:15:24.887 UTC [55] LOG:  statement: select version()
+2023-07-08 14:15:24.891 UTC [55] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:15:33.202 UTC [55] LOG:  statement: select version()
+2023-07-08 14:15:33.207 UTC [54] LOG:  statement: select version()
+2023-07-08 14:15:33.209 UTC [55] LOG:  statement: 
+	    SELECT
+	      r.specific_name as id,
+	      r.routine_schema as routine_schema,
+	      r.routine_name as name,
+	      r.routine_type as routine_type,
+	      r.data_type as data_type
+	    FROM INFORMATION_SCHEMA.ROUTINES r
+	    where r.routine_schema not in ('sys', 'information_schema',
+	                                'pg_catalog', 'performance_schema')
+	    
+	    ORDER BY routine_schema, routine_name
+	  
+2023-07-08 14:15:33.210 UTC [54] LOG:  statement: 
+	    SELECT
+	      t.table_schema as schema,
+	      t.table_name as name,
+	  
+	        pc.relkind as tabletype
+	      FROM information_schema.tables AS t
+	      JOIN pg_class AS pc
+	        ON t.table_name = pc.relname AND quote_ident(t.table_schema) = pc.relnamespace::regnamespace::text
+	      LEFT OUTER JOIN pg_inherits AS i
+	        ON pc.oid = i.inhrelid
+	      WHERE t.table_type NOT LIKE '%VIEW%'
+	      AND i.inhrelid::regclass IS NULL
+	    
+	    
+	    ORDER BY t.table_schema, t.table_name
+	  
+2023-07-08 14:15:33.233 UTC [55] LOG:  statement: 
+	    select
+	        r.routine_schema as routine_schema,
+	        r.specific_name as specific_name,
+	        p.parameter_name as parameter_name,
+	        p.character_maximum_length as char_length,
+	        p.data_type as data_type
+	  from information_schema.routines r
+	  left join information_schema.parameters p
+	            on p.specific_schema = r.routine_schema
+	            and p.specific_name = r.specific_name
+	  where r.routine_schema not in ('sys', 'information_schema',
+	                                'pg_catalog', 'performance_schema')
+	    
+	
+	      AND p.parameter_mode = 'IN'
+	  order by r.routine_schema,
+	          r.specific_name,
+	          p.ordinal_position;
+	
+	  
+2023-07-08 14:15:33.238 UTC [54] LOG:  statement: 
+	    SELECT
+	      table_schema as schema,
+	      table_name as name
+	    FROM information_schema.views
+	    
+	    ORDER BY table_schema, table_name
+	  
+2023-07-08 14:15:33.243 UTC [54] LOG:  statement: select version()
+2023-07-08 14:15:33.246 UTC [54] LOG:  statement: 
+	    SELECT
+	      schemaname as schema,
+	      matviewname as name
+	    FROM pg_matviews
+	    
+	    order by schemaname, matviewname;
+	  
+2023-07-08 14:15:33.333 UTC [49] LOG:  statement: select version()
+2023-07-08 14:15:33.333 UTC [54] LOG:  statement: select version()
+2023-07-08 14:15:33.333 UTC [53] LOG:  statement: select version()
+2023-07-08 14:15:33.350 UTC [54] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:15:33.352 UTC [53] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:15:33.356 UTC [49] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:15:33.370 UTC [49] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-07-08 14:15:33.370 UTC [49] DETAIL:  parameters: $1 = 'public', $2 = 'Professor'
+2023-07-08 14:15:33.408 UTC [54] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-07-08 14:15:33.408 UTC [54] DETAIL:  parameters: $1 = 'public', $2 = 'Professor'
+2023-07-08 14:15:33.417 UTC [53] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-07-08 14:15:33.417 UTC [53] DETAIL:  parameters: $1 = 'public', $2 = 'Departamento'
+2023-07-08 14:15:33.431 UTC [52] LOG:  statement: select version()
+2023-07-08 14:15:33.431 UTC [49] LOG:  statement: select version()
+2023-07-08 14:15:33.437 UTC [55] LOG:  statement: select version()
+2023-07-08 14:15:33.453 UTC [54] LOG:  statement: select version()
+2023-07-08 14:15:33.476 UTC [53] LOG:  statement: select version()
+2023-07-08 14:15:33.481 UTC [55] LOG:  statement: select version()
+2023-07-08 14:15:33.483 UTC [52] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:15:33.485 UTC [49] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:15:33.488 UTC [54] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:15:33.491 UTC [53] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:15:33.492 UTC [55] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:15:33.494 UTC [52] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:15:33.504 UTC [49] LOG:  statement: select version()
+2023-07-08 14:15:33.508 UTC [54] LOG:  statement: select version()
+2023-07-08 14:15:33.530 UTC [55] LOG:  statement: select version()
+2023-07-08 14:15:33.531 UTC [49] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:15:33.537 UTC [54] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:15:33.541 UTC [55] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:15:35.444 UTC [55] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-07-08 14:15:35.444 UTC [55] DETAIL:  parameters: $1 = 'public', $2 = 'User'
+2023-07-08 14:15:35.473 UTC [55] LOG:  execute <unnamed>: 
+	    SELECT
+	        tc.table_schema as from_schema,
+	        tc.table_name as from_table,
+	        kcu.column_name as from_column,
+	        ccu.table_schema AS to_schema,
+	        ccu.table_name AS to_table,
+	        ccu.column_name AS to_column,
+	        tc.constraint_name,
+	        rc.update_rule as update_rule,
+	        rc.delete_rule as delete_rule
+	    FROM
+	        information_schema.table_constraints AS tc
+	        JOIN information_schema.key_column_usage AS kcu
+	          ON tc.constraint_name = kcu.constraint_name
+	          AND tc.table_schema = kcu.table_schema
+	        JOIN information_schema.constraint_column_usage AS ccu
+	          ON ccu.constraint_name = tc.constraint_name
+	          AND ccu.table_schema = tc.table_schema
+	         JOIN information_schema.referential_constraints rc
+	          on tc.constraint_name = rc.constraint_name
+	          and tc.table_schema = rc.constraint_schema
+	    WHERE tc.constraint_type = 'FOREIGN KEY'
+	    AND tc.table_name= $1 and tc.table_schema = $2;
+	
+	  
+2023-07-08 14:15:35.473 UTC [55] DETAIL:  parameters: $1 = 'User', $2 = 'public'
+2023-07-08 14:15:35.481 UTC [55] LOG:  statement: select version()
+2023-07-08 14:15:35.484 UTC [55] LOG:  statement: 
+	    SELECT
+	      a.attname as column_name,
+	      format_type(a.atttypid, a.atttypmod) AS data_type,
+	      a.attnum as position
+	    FROM   pg_index i
+	    JOIN   pg_attribute a ON a.attrelid = i.indrelid
+	                        AND a.attnum = ANY(i.indkey)
+	    WHERE  i.indrelid = '"public"."User"'::regclass
+	    AND    i.indisprimary
+	    ORDER BY a.attnum
+	  
+2023-07-08 14:15:35.539 UTC [55] LOG:  statement: select version()
+2023-07-08 14:15:35.579 UTC [55] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."User"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:16:05.858 UTC [28] LOG:  checkpoint starting: time
+2023-07-08 14:16:07.105 UTC [28] LOG:  checkpoint complete: wrote 12 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=1.137 s, sync=0.019 s, total=1.248 s; sync files=9, longest=0.005 s, average=0.003 s; distance=5 kB, estimate=5 kB
+2023-07-08 14:22:40.654 UTC [63] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-07-08 14:22:40.654 UTC [63] DETAIL:  parameters: $1 = '16419'
+2023-07-08 14:22:40.665 UTC [63] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-07-08 14:22:40.665 UTC [63] DETAIL:  parameters: $1 = '16419'
+2023-07-08 14:22:40.672 UTC [63] LOG:  execute s0: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."cpf" = $1 LIMIT $2 OFFSET $3
+2023-07-08 14:22:40.672 UTC [63] DETAIL:  parameters: $1 = '06806374352', $2 = '1', $3 = '0'
+2023-07-08 14:22:40.679 UTC [63] LOG:  execute s0: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."cpf" = $1 LIMIT $2 OFFSET $3
+2023-07-08 14:22:40.679 UTC [63] DETAIL:  parameters: $1 = '06806374352', $2 = '1', $3 = '0'
+2023-07-08 14:22:40.682 UTC [63] LOG:  statement: BEGIN
+2023-07-08 14:22:40.686 UTC [63] LOG:  execute s3: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE ("public"."Professor"."cpf" = $1 AND 1=1) LIMIT $2 OFFSET $3
+2023-07-08 14:22:40.686 UTC [63] DETAIL:  parameters: $1 = '06806374352', $2 = '1', $3 = '0'
+2023-07-08 14:22:40.690 UTC [63] LOG:  execute s4: SELECT "public"."Professor"."id" FROM "public"."Professor" WHERE ("public"."Professor"."cpf" = $1 AND 1=1)
+2023-07-08 14:22:40.690 UTC [63] DETAIL:  parameters: $1 = '06806374352'
+2023-07-08 14:22:40.696 UTC [63] LOG:  execute s5: DELETE FROM "public"."Professor" WHERE ("public"."Professor"."id" IN ($1) AND ("public"."Professor"."cpf" = $2 AND 1=1))
+2023-07-08 14:22:40.696 UTC [63] DETAIL:  parameters: $1 = '2b90347e-b4e3-4f12-9f8c-439f0f8b5fb6', $2 = '06806374352'
+2023-07-08 14:22:40.711 UTC [63] LOG:  statement: COMMIT
+2023-07-08 14:22:44.357 UTC [64] LOG:  statement: select version()
+2023-07-08 14:22:44.360 UTC [64] LOG:  statement: 
+	    SELECT
+	      r.specific_name as id,
+	      r.routine_schema as routine_schema,
+	      r.routine_name as name,
+	      r.routine_type as routine_type,
+	      r.data_type as data_type
+	    FROM INFORMATION_SCHEMA.ROUTINES r
+	    where r.routine_schema not in ('sys', 'information_schema',
+	                                'pg_catalog', 'performance_schema')
+	    
+	    ORDER BY routine_schema, routine_name
+	  
+2023-07-08 14:22:44.387 UTC [64] LOG:  statement: 
+	    select
+	        r.routine_schema as routine_schema,
+	        r.specific_name as specific_name,
+	        p.parameter_name as parameter_name,
+	        p.character_maximum_length as char_length,
+	        p.data_type as data_type
+	  from information_schema.routines r
+	  left join information_schema.parameters p
+	            on p.specific_schema = r.routine_schema
+	            and p.specific_name = r.specific_name
+	  where r.routine_schema not in ('sys', 'information_schema',
+	                                'pg_catalog', 'performance_schema')
+	    
+	
+	      AND p.parameter_mode = 'IN'
+	  order by r.routine_schema,
+	          r.specific_name,
+	          p.ordinal_position;
+	
+	  
+2023-07-08 14:22:44.420 UTC [65] LOG:  statement: select version()
+2023-07-08 14:22:44.424 UTC [65] LOG:  statement: 
+	    SELECT
+	      t.table_schema as schema,
+	      t.table_name as name,
+	  
+	        pc.relkind as tabletype
+	      FROM information_schema.tables AS t
+	      JOIN pg_class AS pc
+	        ON t.table_name = pc.relname AND quote_ident(t.table_schema) = pc.relnamespace::regnamespace::text
+	      LEFT OUTER JOIN pg_inherits AS i
+	        ON pc.oid = i.inhrelid
+	      WHERE t.table_type NOT LIKE '%VIEW%'
+	      AND i.inhrelid::regclass IS NULL
+	    
+	    
+	    ORDER BY t.table_schema, t.table_name
+	  
+2023-07-08 14:22:44.455 UTC [65] LOG:  statement: 
+	    SELECT
+	      table_schema as schema,
+	      table_name as name
+	    FROM information_schema.views
+	    
+	    ORDER BY table_schema, table_name
+	  
+2023-07-08 14:22:44.464 UTC [65] LOG:  statement: select version()
+2023-07-08 14:22:44.468 UTC [65] LOG:  statement: 
+	    SELECT
+	      schemaname as schema,
+	      matviewname as name
+	    FROM pg_matviews
+	    
+	    order by schemaname, matviewname;
+	  
+2023-07-08 14:22:44.597 UTC [65] LOG:  statement: select version()
+2023-07-08 14:22:44.635 UTC [65] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:44.692 UTC [65] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-07-08 14:22:44.692 UTC [65] DETAIL:  parameters: $1 = 'public', $2 = 'Professor'
+2023-07-08 14:22:44.900 UTC [65] LOG:  statement: select version()
+2023-07-08 14:22:44.900 UTC [64] LOG:  statement: select version()
+2023-07-08 14:22:44.903 UTC [68] LOG:  statement: select version()
+2023-07-08 14:22:44.904 UTC [67] LOG:  statement: select version()
+2023-07-08 14:22:44.905 UTC [65] LOG:  statement: select version()
+2023-07-08 14:22:44.908 UTC [64] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:44.909 UTC [68] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:44.910 UTC [67] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."User"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:44.910 UTC [65] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:44.919 UTC [64] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:44.924 UTC [68] LOG:  statement: select version()
+2023-07-08 14:22:44.933 UTC [67] LOG:  statement: select version()
+2023-07-08 14:22:44.942 UTC [68] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:44.943 UTC [67] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:44.959 UTC [65] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-07-08 14:22:44.959 UTC [65] DETAIL:  parameters: $1 = 'public', $2 = 'Departamento'
+2023-07-08 14:22:44.979 UTC [64] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-07-08 14:22:44.979 UTC [64] DETAIL:  parameters: $1 = 'public', $2 = 'User'
+2023-07-08 14:22:44.985 UTC [67] LOG:  statement: select version()
+2023-07-08 14:22:44.985 UTC [65] LOG:  statement: select version()
+2023-07-08 14:22:45.035 UTC [68] LOG:  statement: select version()
+2023-07-08 14:22:45.035 UTC [64] LOG:  statement: select version()
+2023-07-08 14:22:45.043 UTC [67] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:45.045 UTC [65] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:45.048 UTC [66] LOG:  statement: select version()
+2023-07-08 14:22:45.051 UTC [68] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."User"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:45.054 UTC [64] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."User"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:45.059 UTC [65] LOG:  statement: select version()
+2023-07-08 14:22:45.061 UTC [66] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:45.099 UTC [65] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:45.103 UTC [64] LOG:  statement: select version()
+2023-07-08 14:22:45.113 UTC [66] LOG:  statement: select version()
+2023-07-08 14:22:45.118 UTC [64] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."User"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:45.118 UTC [66] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:48.205 UTC [66] LOG:  statement: select version()
+2023-07-08 14:22:48.205 UTC [64] LOG:  statement: select version()
+2023-07-08 14:22:48.211 UTC [66] LOG:  statement: 
+	    SELECT
+	      t.table_schema as schema,
+	      t.table_name as name,
+	  
+	        pc.relkind as tabletype
+	      FROM information_schema.tables AS t
+	      JOIN pg_class AS pc
+	        ON t.table_name = pc.relname AND quote_ident(t.table_schema) = pc.relnamespace::regnamespace::text
+	      LEFT OUTER JOIN pg_inherits AS i
+	        ON pc.oid = i.inhrelid
+	      WHERE t.table_type NOT LIKE '%VIEW%'
+	      AND i.inhrelid::regclass IS NULL
+	    
+	    
+	    ORDER BY t.table_schema, t.table_name
+	  
+2023-07-08 14:22:48.212 UTC [64] LOG:  statement: 
+	    SELECT
+	      r.specific_name as id,
+	      r.routine_schema as routine_schema,
+	      r.routine_name as name,
+	      r.routine_type as routine_type,
+	      r.data_type as data_type
+	    FROM INFORMATION_SCHEMA.ROUTINES r
+	    where r.routine_schema not in ('sys', 'information_schema',
+	                                'pg_catalog', 'performance_schema')
+	    
+	    ORDER BY routine_schema, routine_name
+	  
+2023-07-08 14:22:48.219 UTC [64] LOG:  statement: 
+	    select
+	        r.routine_schema as routine_schema,
+	        r.specific_name as specific_name,
+	        p.parameter_name as parameter_name,
+	        p.character_maximum_length as char_length,
+	        p.data_type as data_type
+	  from information_schema.routines r
+	  left join information_schema.parameters p
+	            on p.specific_schema = r.routine_schema
+	            and p.specific_name = r.specific_name
+	  where r.routine_schema not in ('sys', 'information_schema',
+	                                'pg_catalog', 'performance_schema')
+	    
+	
+	      AND p.parameter_mode = 'IN'
+	  order by r.routine_schema,
+	          r.specific_name,
+	          p.ordinal_position;
+	
+	  
+2023-07-08 14:22:48.238 UTC [66] LOG:  statement: 
+	    SELECT
+	      table_schema as schema,
+	      table_name as name
+	    FROM information_schema.views
+	    
+	    ORDER BY table_schema, table_name
+	  
+2023-07-08 14:22:48.245 UTC [66] LOG:  statement: select version()
+2023-07-08 14:22:48.247 UTC [66] LOG:  statement: 
+	    SELECT
+	      schemaname as schema,
+	      matviewname as name
+	    FROM pg_matviews
+	    
+	    order by schemaname, matviewname;
+	  
+2023-07-08 14:22:48.329 UTC [68] LOG:  statement: select version()
+2023-07-08 14:22:48.329 UTC [66] LOG:  statement: select version()
+2023-07-08 14:22:48.329 UTC [67] LOG:  statement: select version()
+2023-07-08 14:22:48.329 UTC [65] LOG:  statement: select version()
+2023-07-08 14:22:48.355 UTC [65] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:48.355 UTC [66] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:48.359 UTC [67] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."User"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:48.359 UTC [68] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:48.368 UTC [65] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-07-08 14:22:48.368 UTC [65] DETAIL:  parameters: $1 = 'public', $2 = 'Departamento'
+2023-07-08 14:22:48.398 UTC [64] LOG:  statement: select version()
+2023-07-08 14:22:48.398 UTC [65] LOG:  statement: select version()
+2023-07-08 14:22:48.402 UTC [66] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-07-08 14:22:48.402 UTC [66] DETAIL:  parameters: $1 = 'public', $2 = 'Professor'
+2023-07-08 14:22:48.404 UTC [64] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:48.404 UTC [65] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:48.429 UTC [68] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-07-08 14:22:48.429 UTC [68] DETAIL:  parameters: $1 = 'public', $2 = 'Professor'
+2023-07-08 14:22:48.437 UTC [67] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-07-08 14:22:48.437 UTC [67] DETAIL:  parameters: $1 = 'public', $2 = 'User'
+2023-07-08 14:22:48.472 UTC [66] LOG:  statement: select version()
+2023-07-08 14:22:48.472 UTC [65] LOG:  statement: select version()
+2023-07-08 14:22:48.483 UTC [65] LOG:  statement: select version()
+2023-07-08 14:22:48.485 UTC [64] LOG:  statement: select version()
+2023-07-08 14:22:48.491 UTC [68] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:48.496 UTC [67] LOG:  statement: select version()
+2023-07-08 14:22:48.511 UTC [66] LOG:  statement: select version()
+2023-07-08 14:22:48.516 UTC [64] LOG:  statement: select version()
+2023-07-08 14:22:48.519 UTC [68] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:48.522 UTC [67] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:48.525 UTC [65] LOG:  statement: select version()
+2023-07-08 14:22:48.529 UTC [68] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:48.535 UTC [66] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:48.535 UTC [64] LOG:  statement: select version()
+2023-07-08 14:22:48.536 UTC [67] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."User"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:48.545 UTC [68] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."User"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:48.550 UTC [67] LOG:  statement: select version()
+2023-07-08 14:22:48.551 UTC [65] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:48.552 UTC [64] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:48.559 UTC [67] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."User"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:50.701 UTC [64] LOG:  statement: select version()
+2023-07-08 14:22:50.702 UTC [67] LOG:  statement: select version()
+2023-07-08 14:22:50.705 UTC [64] LOG:  statement: 
+	    SELECT
+	      t.table_schema as schema,
+	      t.table_name as name,
+	  
+	        pc.relkind as tabletype
+	      FROM information_schema.tables AS t
+	      JOIN pg_class AS pc
+	        ON t.table_name = pc.relname AND quote_ident(t.table_schema) = pc.relnamespace::regnamespace::text
+	      LEFT OUTER JOIN pg_inherits AS i
+	        ON pc.oid = i.inhrelid
+	      WHERE t.table_type NOT LIKE '%VIEW%'
+	      AND i.inhrelid::regclass IS NULL
+	    
+	    
+	    ORDER BY t.table_schema, t.table_name
+	  
+2023-07-08 14:22:50.708 UTC [67] LOG:  statement: 
+	    SELECT
+	      r.specific_name as id,
+	      r.routine_schema as routine_schema,
+	      r.routine_name as name,
+	      r.routine_type as routine_type,
+	      r.data_type as data_type
+	    FROM INFORMATION_SCHEMA.ROUTINES r
+	    where r.routine_schema not in ('sys', 'information_schema',
+	                                'pg_catalog', 'performance_schema')
+	    
+	    ORDER BY routine_schema, routine_name
+	  
+2023-07-08 14:22:50.725 UTC [64] LOG:  statement: 
+	    SELECT
+	      table_schema as schema,
+	      table_name as name
+	    FROM information_schema.views
+	    
+	    ORDER BY table_schema, table_name
+	  
+2023-07-08 14:22:50.727 UTC [67] LOG:  statement: 
+	    select
+	        r.routine_schema as routine_schema,
+	        r.specific_name as specific_name,
+	        p.parameter_name as parameter_name,
+	        p.character_maximum_length as char_length,
+	        p.data_type as data_type
+	  from information_schema.routines r
+	  left join information_schema.parameters p
+	            on p.specific_schema = r.routine_schema
+	            and p.specific_name = r.specific_name
+	  where r.routine_schema not in ('sys', 'information_schema',
+	                                'pg_catalog', 'performance_schema')
+	    
+	
+	      AND p.parameter_mode = 'IN'
+	  order by r.routine_schema,
+	          r.specific_name,
+	          p.ordinal_position;
+	
+	  
+2023-07-08 14:22:50.731 UTC [64] LOG:  statement: select version()
+2023-07-08 14:22:50.735 UTC [64] LOG:  statement: 
+	    SELECT
+	      schemaname as schema,
+	      matviewname as name
+	    FROM pg_matviews
+	    
+	    order by schemaname, matviewname;
+	  
+2023-07-08 14:22:50.812 UTC [65] LOG:  statement: select version()
+2023-07-08 14:22:50.812 UTC [64] LOG:  statement: select version()
+2023-07-08 14:22:50.814 UTC [68] LOG:  statement: select version()
+2023-07-08 14:22:50.816 UTC [66] LOG:  statement: select version()
+2023-07-08 14:22:50.837 UTC [65] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:50.841 UTC [64] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:50.841 UTC [68] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:50.844 UTC [66] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."User"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:50.854 UTC [65] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-07-08 14:22:50.854 UTC [65] DETAIL:  parameters: $1 = 'public', $2 = 'Departamento'
+2023-07-08 14:22:50.859 UTC [68] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-07-08 14:22:50.859 UTC [68] DETAIL:  parameters: $1 = 'public', $2 = 'Professor'
+2023-07-08 14:22:50.868 UTC [64] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-07-08 14:22:50.868 UTC [64] DETAIL:  parameters: $1 = 'public', $2 = 'Professor'
+2023-07-08 14:22:50.880 UTC [65] LOG:  statement: select version()
+2023-07-08 14:22:50.886 UTC [68] LOG:  statement: select version()
+2023-07-08 14:22:50.916 UTC [66] LOG:  statement: select version()
+2023-07-08 14:22:50.917 UTC [64] LOG:  statement: select version()
+2023-07-08 14:22:50.922 UTC [68] LOG:  statement: select version()
+2023-07-08 14:22:50.927 UTC [65] LOG:  statement: select version()
+2023-07-08 14:22:50.929 UTC [67] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:50.933 UTC [64] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-07-08 14:22:50.933 UTC [64] DETAIL:  parameters: $1 = 'public', $2 = 'User'
+2023-07-08 14:22:50.942 UTC [66] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:50.943 UTC [67] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:50.949 UTC [68] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:50.950 UTC [65] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:50.952 UTC [64] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:50.990 UTC [67] LOG:  statement: select version()
+2023-07-08 14:22:50.998 UTC [64] LOG:  statement: select version()
+2023-07-08 14:22:51.003 UTC [66] LOG:  statement: select version()
+2023-07-08 14:22:51.008 UTC [68] LOG:  statement: select version()
+2023-07-08 14:22:51.010 UTC [65] LOG:  statement: select version()
+2023-07-08 14:22:51.014 UTC [67] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."User"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:51.015 UTC [64] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."User"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:51.016 UTC [66] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:51.017 UTC [68] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:51.019 UTC [65] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:22:51.024 UTC [67] LOG:  statement: select version()
+2023-07-08 14:22:51.046 UTC [67] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."User"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:26:00.596 UTC [72] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-07-08 14:26:00.596 UTC [72] DETAIL:  parameters: $1 = '16537'
+2023-07-08 14:26:00.603 UTC [72] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-07-08 14:26:00.603 UTC [72] DETAIL:  parameters: $1 = '16537'
+2023-07-08 14:26:00.608 UTC [72] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-07-08 14:26:00.608 UTC [72] DETAIL:  parameters: $1 = 'reinaldo@gmail.com', $2 = '1', $3 = '0'
+2023-07-08 14:26:00.616 UTC [72] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-07-08 14:26:00.616 UTC [72] DETAIL:  parameters: $1 = '16419'
+2023-07-08 14:26:00.618 UTC [72] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-07-08 14:26:00.618 UTC [72] DETAIL:  parameters: $1 = '16419'
+2023-07-08 14:26:00.624 UTC [72] LOG:  execute s3: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."cpf" = $1 LIMIT $2 OFFSET $3
+2023-07-08 14:26:00.624 UTC [72] DETAIL:  parameters: $1 = '06806374352', $2 = '1', $3 = '0'
+2023-07-08 14:26:00.630 UTC [72] LOG:  execute s4: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."email" = $1 LIMIT $2 OFFSET $3
+2023-07-08 14:26:00.630 UTC [72] DETAIL:  parameters: $1 = 'reinaldo@gmail.com', $2 = '1', $3 = '0'
+2023-07-08 14:26:00.737 UTC [72] LOG:  statement: BEGIN
+2023-07-08 14:26:00.747 UTC [72] LOG:  execute s5: SELECT "public"."Departamento"."id" FROM "public"."Departamento" WHERE ("public"."Departamento"."id" = $1 AND 1=1) OFFSET $2
+2023-07-08 14:26:00.747 UTC [72] DETAIL:  parameters: $1 = '1', $2 = '0'
+2023-07-08 14:26:00.751 UTC [72] LOG:  execute s6: INSERT INTO "public"."Professor" ("id","nome","email","cpf","sexo","telefone","createt_at","id_departamento") VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING "public"."Professor"."id"
+2023-07-08 14:26:00.751 UTC [72] DETAIL:  parameters: $1 = 'b2137a30-4d30-4061-a341-e3f4e3654d4f', $2 = 'reinaldo', $3 = 'reinaldo@gmail.com', $4 = '06806374352', $5 = 'M', $6 = '0000', $7 = '2023-07-08 14:26:00.736', $8 = '1'
+2023-07-08 14:26:00.756 UTC [72] LOG:  execute s7: INSERT INTO "public"."User" ("id","email","password","status","id_professor") VALUES ($1,$2,$3,$4,$5) RETURNING "public"."User"."id"
+2023-07-08 14:26:00.756 UTC [72] DETAIL:  parameters: $1 = 'e5be9b88-ef31-4b76-8a5f-dcd18e239d5b', $2 = 'reinaldo@gmail.com', $3 = '$2b$10$KdgKWjaGdZPaJ4RgQKyWQO1KvxyonQYnp01Gud8fNIf.EaT36FVS2', $4 = 'professor', $5 = 'b2137a30-4d30-4061-a341-e3f4e3654d4f'
+2023-07-08 14:26:00.761 UTC [72] LOG:  execute s8: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-07-08 14:26:00.761 UTC [72] DETAIL:  parameters: $1 = 'b2137a30-4d30-4061-a341-e3f4e3654d4f', $2 = '1', $3 = '0'
+2023-07-08 14:26:00.763 UTC [72] LOG:  statement: COMMIT
+2023-07-08 14:26:05.312 UTC [28] LOG:  checkpoint starting: time
+2023-07-08 14:26:06.317 UTC [28] LOG:  checkpoint complete: wrote 9 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.829 s, sync=0.109 s, total=1.006 s; sync files=9, longest=0.076 s, average=0.013 s; distance=6 kB, estimate=6 kB
+2023-07-08 14:26:27.570 UTC [72] LOG:  statement: SELECT 1
+2023-07-08 14:26:27.575 UTC [72] LOG:  execute s9: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE 1=1 OFFSET $1
+2023-07-08 14:26:27.575 UTC [72] DETAIL:  parameters: $1 = '0'
+2023-07-08 14:51:02.460 UTC [98] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-07-08 14:51:02.460 UTC [98] DETAIL:  parameters: $1 = '16537'
+2023-07-08 14:51:02.470 UTC [98] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-07-08 14:51:02.470 UTC [98] DETAIL:  parameters: $1 = '16537'
+2023-07-08 14:51:02.476 UTC [98] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-07-08 14:51:02.476 UTC [98] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1', $3 = '0'
+2023-07-08 14:51:02.486 UTC [98] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-07-08 14:51:02.486 UTC [98] DETAIL:  parameters: $1 = '16419'
+2023-07-08 14:51:02.488 UTC [98] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-07-08 14:51:02.488 UTC [98] DETAIL:  parameters: $1 = '16419'
+2023-07-08 14:51:02.494 UTC [98] LOG:  execute s3: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."cpf" = $1 LIMIT $2 OFFSET $3
+2023-07-08 14:51:02.494 UTC [98] DETAIL:  parameters: $1 = '06806374352', $2 = '1', $3 = '0'
+2023-07-08 14:51:02.502 UTC [98] LOG:  execute s4: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."email" = $1 LIMIT $2 OFFSET $3
+2023-07-08 14:51:02.502 UTC [98] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1', $3 = '0'
+2023-07-08 14:51:02.610 UTC [98] LOG:  statement: BEGIN
+2023-07-08 14:51:02.618 UTC [98] LOG:  execute s5: SELECT "public"."Professor"."id" FROM "public"."Professor" WHERE ("public"."Professor"."id" = $1 AND 1=1)
+2023-07-08 14:51:02.618 UTC [98] DETAIL:  parameters: $1 = 'b2137a30-4d30-4061-a341-e3f4e3654d4f'
+2023-07-08 14:51:02.623 UTC [98] LOG:  execute s6: UPDATE "public"."Professor" SET "nome" = $1, "email" = $2, "sexo" = $3, "telefone" = $4 WHERE ("public"."Professor"."id" IN ($5) AND ("public"."Professor"."id" = $6 AND 1=1))
+2023-07-08 14:51:02.623 UTC [98] DETAIL:  parameters: $1 = 'reinaldo braga', $2 = 'reinaldoBraga@gmail.com', $3 = 'F', $4 = '11111', $5 = 'b2137a30-4d30-4061-a341-e3f4e3654d4f', $6 = 'b2137a30-4d30-4061-a341-e3f4e3654d4f'
+2023-07-08 14:51:02.633 UTC [98] LOG:  execute s7: SELECT "public"."User"."id", "public"."User"."id_professor" FROM "public"."User" WHERE (("public"."User"."email" = $1 AND 1=1) AND "public"."User"."id_professor" IN ($2)) OFFSET $3
+2023-07-08 14:51:02.633 UTC [98] DETAIL:  parameters: $1 = 'reinaldo@gmail.com', $2 = 'b2137a30-4d30-4061-a341-e3f4e3654d4f', $3 = '0'
+2023-07-08 14:51:02.637 UTC [98] LOG:  execute s8: UPDATE "public"."User" SET "email" = $1, "password" = $2 WHERE ("public"."User"."id" IN ($3) AND ("public"."User"."email" = $4 AND 1=1))
+2023-07-08 14:51:02.637 UTC [98] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '$2b$10$cylwRrhEh3flb4aX4N.GbOhV5I1kmoWhnYxTBPs5lkpR8f4s2fWLK', $3 = 'e5be9b88-ef31-4b76-8a5f-dcd18e239d5b', $4 = 'reinaldo@gmail.com'
+2023-07-08 14:51:02.641 UTC [98] LOG:  execute s9: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-07-08 14:51:02.641 UTC [98] DETAIL:  parameters: $1 = 'b2137a30-4d30-4061-a341-e3f4e3654d4f', $2 = '1', $3 = '0'
+2023-07-08 14:51:02.643 UTC [98] LOG:  statement: COMMIT
+2023-07-08 14:51:02.652 UTC [98] LOG:  execute s3: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."cpf" = $1 LIMIT $2 OFFSET $3
+2023-07-08 14:51:02.652 UTC [98] DETAIL:  parameters: $1 = '06806374352', $2 = '1', $3 = '0'
+2023-07-08 14:51:05.566 UTC [28] LOG:  checkpoint starting: time
+2023-07-08 14:51:06.361 UTC [28] LOG:  checkpoint complete: wrote 8 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.728 s, sync=0.012 s, total=0.795 s; sync files=8, longest=0.003 s, average=0.002 s; distance=6 kB, estimate=6 kB
+2023-07-08 14:51:07.045 UTC [98] LOG:  execute s10: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE 1=1 OFFSET $1
+2023-07-08 14:51:07.045 UTC [98] DETAIL:  parameters: $1 = '0'
+2023-07-08 14:51:12.026 UTC [101] LOG:  statement: select version()
+2023-07-08 14:51:12.031 UTC [101] LOG:  statement: 
+	    SELECT
+	      t.table_schema as schema,
+	      t.table_name as name,
+	  
+	        pc.relkind as tabletype
+	      FROM information_schema.tables AS t
+	      JOIN pg_class AS pc
+	        ON t.table_name = pc.relname AND quote_ident(t.table_schema) = pc.relnamespace::regnamespace::text
+	      LEFT OUTER JOIN pg_inherits AS i
+	        ON pc.oid = i.inhrelid
+	      WHERE t.table_type NOT LIKE '%VIEW%'
+	      AND i.inhrelid::regclass IS NULL
+	    
+	    
+	    ORDER BY t.table_schema, t.table_name
+	  
+2023-07-08 14:51:12.068 UTC [101] LOG:  statement: 
+	    SELECT
+	      table_schema as schema,
+	      table_name as name
+	    FROM information_schema.views
+	    
+	    ORDER BY table_schema, table_name
+	  
+2023-07-08 14:51:12.074 UTC [101] LOG:  statement: select version()
+2023-07-08 14:51:12.077 UTC [101] LOG:  statement: 
+	    SELECT
+	      schemaname as schema,
+	      matviewname as name
+	    FROM pg_matviews
+	    
+	    order by schemaname, matviewname;
+	  
+2023-07-08 14:51:12.153 UTC [101] LOG:  statement: select version()
+2023-07-08 14:51:12.170 UTC [100] LOG:  statement: select version()
+2023-07-08 14:51:12.183 UTC [101] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:12.190 UTC [100] LOG:  statement: 
+	    SELECT
+	      r.specific_name as id,
+	      r.routine_schema as routine_schema,
+	      r.routine_name as name,
+	      r.routine_type as routine_type,
+	      r.data_type as data_type
+	    FROM INFORMATION_SCHEMA.ROUTINES r
+	    where r.routine_schema not in ('sys', 'information_schema',
+	                                'pg_catalog', 'performance_schema')
+	    
+	    ORDER BY routine_schema, routine_name
+	  
+2023-07-08 14:51:12.273 UTC [101] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-07-08 14:51:12.273 UTC [101] DETAIL:  parameters: $1 = 'public', $2 = 'Professor'
+2023-07-08 14:51:12.429 UTC [100] LOG:  statement: 
+	    select
+	        r.routine_schema as routine_schema,
+	        r.specific_name as specific_name,
+	        p.parameter_name as parameter_name,
+	        p.character_maximum_length as char_length,
+	        p.data_type as data_type
+	  from information_schema.routines r
+	  left join information_schema.parameters p
+	            on p.specific_schema = r.routine_schema
+	            and p.specific_name = r.specific_name
+	  where r.routine_schema not in ('sys', 'information_schema',
+	                                'pg_catalog', 'performance_schema')
+	    
+	
+	      AND p.parameter_mode = 'IN'
+	  order by r.routine_schema,
+	          r.specific_name,
+	          p.ordinal_position;
+	
+	  
+2023-07-08 14:51:12.504 UTC [101] LOG:  statement: select version()
+2023-07-08 14:51:12.509 UTC [103] LOG:  statement: select version()
+2023-07-08 14:51:12.511 UTC [102] LOG:  statement: select version()
+2023-07-08 14:51:12.512 UTC [101] LOG:  statement: select version()
+2023-07-08 14:51:12.515 UTC [103] LOG:  statement: select version()
+2023-07-08 14:51:12.517 UTC [102] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:12.517 UTC [101] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."User"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:12.519 UTC [103] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:12.525 UTC [101] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:12.532 UTC [101] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:12.562 UTC [101] LOG:  statement: select version()
+2023-07-08 14:51:12.568 UTC [103] LOG:  statement: select version()
+2023-07-08 14:51:12.570 UTC [103] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:12.578 UTC [103] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:12.584 UTC [101] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-07-08 14:51:12.584 UTC [101] DETAIL:  parameters: $1 = 'public', $2 = 'Departamento'
+2023-07-08 14:51:12.616 UTC [102] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-07-08 14:51:12.616 UTC [102] DETAIL:  parameters: $1 = 'public', $2 = 'User'
+2023-07-08 14:51:12.631 UTC [103] LOG:  statement: select version()
+2023-07-08 14:51:12.631 UTC [101] LOG:  statement: select version()
+2023-07-08 14:51:12.687 UTC [102] LOG:  statement: select version()
+2023-07-08 14:51:12.687 UTC [104] LOG:  statement: select version()
+2023-07-08 14:51:12.728 UTC [100] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:12.728 UTC [101] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:12.734 UTC [103] LOG:  statement: select version()
+2023-07-08 14:51:12.769 UTC [104] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:12.771 UTC [102] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."User"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:12.804 UTC [100] LOG:  statement: select version()
+2023-07-08 14:51:12.804 UTC [102] LOG:  statement: select version()
+2023-07-08 14:51:12.807 UTC [104] LOG:  statement: select version()
+2023-07-08 14:51:12.808 UTC [103] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."User"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:12.816 UTC [102] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."User"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:12.818 UTC [100] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:12.819 UTC [104] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:20.789 UTC [102] LOG:  statement: select version()
+2023-07-08 14:51:20.791 UTC [103] LOG:  statement: select version()
+2023-07-08 14:51:20.794 UTC [102] LOG:  statement: 
+	    SELECT
+	      r.specific_name as id,
+	      r.routine_schema as routine_schema,
+	      r.routine_name as name,
+	      r.routine_type as routine_type,
+	      r.data_type as data_type
+	    FROM INFORMATION_SCHEMA.ROUTINES r
+	    where r.routine_schema not in ('sys', 'information_schema',
+	                                'pg_catalog', 'performance_schema')
+	    
+	    ORDER BY routine_schema, routine_name
+	  
+2023-07-08 14:51:20.795 UTC [103] LOG:  statement: 
+	    SELECT
+	      t.table_schema as schema,
+	      t.table_name as name,
+	  
+	        pc.relkind as tabletype
+	      FROM information_schema.tables AS t
+	      JOIN pg_class AS pc
+	        ON t.table_name = pc.relname AND quote_ident(t.table_schema) = pc.relnamespace::regnamespace::text
+	      LEFT OUTER JOIN pg_inherits AS i
+	        ON pc.oid = i.inhrelid
+	      WHERE t.table_type NOT LIKE '%VIEW%'
+	      AND i.inhrelid::regclass IS NULL
+	    
+	    
+	    ORDER BY t.table_schema, t.table_name
+	  
+2023-07-08 14:51:20.809 UTC [102] LOG:  statement: 
+	    select
+	        r.routine_schema as routine_schema,
+	        r.specific_name as specific_name,
+	        p.parameter_name as parameter_name,
+	        p.character_maximum_length as char_length,
+	        p.data_type as data_type
+	  from information_schema.routines r
+	  left join information_schema.parameters p
+	            on p.specific_schema = r.routine_schema
+	            and p.specific_name = r.specific_name
+	  where r.routine_schema not in ('sys', 'information_schema',
+	                                'pg_catalog', 'performance_schema')
+	    
+	
+	      AND p.parameter_mode = 'IN'
+	  order by r.routine_schema,
+	          r.specific_name,
+	          p.ordinal_position;
+	
+	  
+2023-07-08 14:51:20.822 UTC [103] LOG:  statement: 
+	    SELECT
+	      table_schema as schema,
+	      table_name as name
+	    FROM information_schema.views
+	    
+	    ORDER BY table_schema, table_name
+	  
+2023-07-08 14:51:20.828 UTC [103] LOG:  statement: select version()
+2023-07-08 14:51:20.831 UTC [103] LOG:  statement: 
+	    SELECT
+	      schemaname as schema,
+	      matviewname as name
+	    FROM pg_matviews
+	    
+	    order by schemaname, matviewname;
+	  
+2023-07-08 14:51:20.915 UTC [103] LOG:  statement: select version()
+2023-07-08 14:51:20.919 UTC [101] LOG:  statement: select version()
+2023-07-08 14:51:20.919 UTC [100] LOG:  statement: select version()
+2023-07-08 14:51:20.922 UTC [104] LOG:  statement: select version()
+2023-07-08 14:51:20.959 UTC [100] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:20.959 UTC [103] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:20.961 UTC [104] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:20.963 UTC [101] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."User"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:20.994 UTC [101] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-07-08 14:51:20.994 UTC [101] DETAIL:  parameters: $1 = 'public', $2 = 'User'
+2023-07-08 14:51:21.009 UTC [103] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-07-08 14:51:21.009 UTC [103] DETAIL:  parameters: $1 = 'public', $2 = 'Professor'
+2023-07-08 14:51:21.044 UTC [100] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-07-08 14:51:21.044 UTC [100] DETAIL:  parameters: $1 = 'public', $2 = 'Professor'
+2023-07-08 14:51:21.049 UTC [101] LOG:  statement: select version()
+2023-07-08 14:51:21.049 UTC [102] LOG:  statement: select version()
+2023-07-08 14:51:21.057 UTC [104] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-07-08 14:51:21.057 UTC [104] DETAIL:  parameters: $1 = 'public', $2 = 'Departamento'
+2023-07-08 14:51:21.116 UTC [103] LOG:  statement: select version()
+2023-07-08 14:51:21.123 UTC [102] LOG:  statement: select version()
+2023-07-08 14:51:21.125 UTC [101] LOG:  statement: select version()
+2023-07-08 14:51:21.131 UTC [100] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."User"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:21.136 UTC [104] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."User"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:21.156 UTC [104] LOG:  statement: select version()
+2023-07-08 14:51:21.161 UTC [102] LOG:  statement: select version()
+2023-07-08 14:51:21.161 UTC [103] LOG:  statement: select version()
+2023-07-08 14:51:21.162 UTC [101] LOG:  statement: select version()
+2023-07-08 14:51:21.166 UTC [100] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:21.182 UTC [104] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:21.182 UTC [100] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:21.189 UTC [102] LOG:  statement: select version()
+2023-07-08 14:51:21.189 UTC [101] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:21.189 UTC [103] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:21.191 UTC [100] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:21.195 UTC [104] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."User"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:21.201 UTC [100] LOG:  statement: select version()
+2023-07-08 14:51:21.215 UTC [102] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:21.221 UTC [101] LOG:  statement: select version()
+2023-07-08 14:51:21.225 UTC [100] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Professor"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:21.237 UTC [101] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Departamento"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-07-08 14:51:27.881 UTC [98] LOG:  statement: SELECT 1
+2023-07-08 14:51:27.885 UTC [98] LOG:  execute s3: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."cpf" = $1 LIMIT $2 OFFSET $3
+2023-07-08 14:51:27.885 UTC [98] DETAIL:  parameters: $1 = '06806374352', $2 = '1', $3 = '0'
+2023-07-08 14:51:27.889 UTC [98] LOG:  execute s3: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."cpf" = $1 LIMIT $2 OFFSET $3
+2023-07-08 14:51:27.889 UTC [98] DETAIL:  parameters: $1 = '06806374352', $2 = '1', $3 = '0'
+2023-07-08 14:51:27.892 UTC [98] LOG:  statement: BEGIN
+2023-07-08 14:51:27.898 UTC [98] LOG:  execute s11: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE ("public"."Professor"."cpf" = $1 AND 1=1) LIMIT $2 OFFSET $3
+2023-07-08 14:51:27.898 UTC [98] DETAIL:  parameters: $1 = '06806374352', $2 = '1', $3 = '0'
+2023-07-08 14:51:27.902 UTC [98] LOG:  execute s12: SELECT "public"."Professor"."id" FROM "public"."Professor" WHERE ("public"."Professor"."cpf" = $1 AND 1=1)
+2023-07-08 14:51:27.902 UTC [98] DETAIL:  parameters: $1 = '06806374352'
+2023-07-08 14:51:27.905 UTC [98] LOG:  execute s13: DELETE FROM "public"."Professor" WHERE ("public"."Professor"."id" IN ($1) AND ("public"."Professor"."cpf" = $2 AND 1=1))
+2023-07-08 14:51:27.905 UTC [98] DETAIL:  parameters: $1 = 'b2137a30-4d30-4061-a341-e3f4e3654d4f', $2 = '06806374352'
+2023-07-08 14:51:27.910 UTC [98] LOG:  statement: COMMIT
+2023-07-08 14:51:30.921 UTC [98] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-07-08 14:51:30.921 UTC [98] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1', $3 = '0'
+2023-07-08 14:51:30.924 UTC [98] LOG:  execute s3: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."cpf" = $1 LIMIT $2 OFFSET $3
+2023-07-08 14:51:30.924 UTC [98] DETAIL:  parameters: $1 = '06806374352', $2 = '1', $3 = '0'

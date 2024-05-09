@@ -1,0 +1,732 @@
+2023-08-19 13:39:08.533 UTC [1] LOG:  starting PostgreSQL 15.3 (Debian 15.3-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+2023-08-19 13:39:08.669 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2023-08-19 13:39:08.669 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2023-08-19 13:39:08.820 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2023-08-19 13:39:09.080 UTC [30] LOG:  database system was interrupted; last known up at 2023-08-18 21:57:36 UTC
+2023-08-19 13:39:19.112 UTC [30] LOG:  syncing data directory (pre-fsync), elapsed time: 10.01 s, current path: ./base/16384/16395
+2023-08-19 13:39:29.193 UTC [30] LOG:  syncing data directory (pre-fsync), elapsed time: 20.09 s, current path: ./base/4/3081
+2023-08-19 13:39:37.729 UTC [30] LOG:  database system was not properly shut down; automatic recovery in progress
+2023-08-19 13:39:37.803 UTC [30] LOG:  redo starts at 0/AD25960
+2023-08-19 13:39:37.803 UTC [30] LOG:  invalid record length at 0/AD25A48: wanted 24, got 0
+2023-08-19 13:39:37.804 UTC [30] LOG:  redo done at 0/AD25A10 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2023-08-19 13:39:37.891 UTC [28] LOG:  checkpoint starting: end-of-recovery immediate wait
+2023-08-19 13:39:37.971 UTC [28] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.018 s, sync=0.011 s, total=0.086 s; sync files=3, longest=0.004 s, average=0.004 s; distance=0 kB, estimate=0 kB
+2023-08-19 13:39:38.001 UTC [1] LOG:  database system is ready to accept connections
+2023-08-19 21:37:39.096 UTC [38] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-19 21:37:39.096 UTC [38] DETAIL:  parameters: $1 = '16419'
+2023-08-19 21:37:39.159 UTC [38] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-19 21:37:39.159 UTC [38] DETAIL:  parameters: $1 = '16419'
+2023-08-19 21:37:39.180 UTC [38] LOG:  execute s0: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE 1=1 OFFSET $1
+2023-08-19 21:37:39.180 UTC [38] DETAIL:  parameters: $1 = '0'
+2023-08-19 21:53:22.552 UTC [66] LOG:  execute s0: SELECT "public"."AlunoProfessorCursoDisciplina"."id", "public"."AlunoProfessorCursoDisciplina"."id_aluno", "public"."AlunoProfessorCursoDisciplina"."id_professorCursoDisciplina" FROM "public"."AlunoProfessorCursoDisciplina" WHERE 1=1 OFFSET $1
+2023-08-19 21:53:22.552 UTC [66] DETAIL:  parameters: $1 = '0'
+2023-08-19 21:55:14.335 UTC [69] LOG:  execute s0: SELECT "public"."AlunoProfessorCursoDisciplina"."id", "public"."AlunoProfessorCursoDisciplina"."id_aluno", "public"."AlunoProfessorCursoDisciplina"."id_professorCursoDisciplina" FROM "public"."AlunoProfessorCursoDisciplina" WHERE ("public"."AlunoProfessorCursoDisciplina"."id") IN (SELECT "t0"."id" FROM "public"."AlunoProfessorCursoDisciplina" AS "t0" INNER JOIN "public"."Aluno" AS "j0" ON ("j0"."id") = ("t0"."id_aluno") WHERE ("j0"."nome" = $1 AND "t0"."id" IS NOT NULL)) OFFSET $2
+2023-08-19 21:55:14.335 UTC [69] DETAIL:  parameters: $1 = 'jhon', $2 = '0'
+2023-08-19 21:57:45.847 UTC [75] LOG:  execute s0: SELECT "public"."AlunoProfessorCursoDisciplina"."id", "public"."AlunoProfessorCursoDisciplina"."id_aluno", "public"."AlunoProfessorCursoDisciplina"."id_professorCursoDisciplina" FROM "public"."AlunoProfessorCursoDisciplina" WHERE ("public"."AlunoProfessorCursoDisciplina"."id") IN (SELECT "t0"."id" FROM "public"."AlunoProfessorCursoDisciplina" AS "t0" INNER JOIN "public"."Aluno" AS "j0" ON ("j0"."id") = ("t0"."id_aluno") WHERE ("j0"."nome" = $1 AND "t0"."id" IS NOT NULL)) OFFSET $2
+2023-08-19 21:57:45.847 UTC [75] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 21:58:13.563 UTC [77] LOG:  execute s0: SELECT "public"."AlunoProfessorCursoDisciplina"."id", "public"."AlunoProfessorCursoDisciplina"."id_aluno", "public"."AlunoProfessorCursoDisciplina"."id_professorCursoDisciplina" FROM "public"."AlunoProfessorCursoDisciplina" WHERE "public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 OFFSET $2
+2023-08-19 21:58:13.563 UTC [77] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 21:59:46.171 UTC [79] LOG:  execute s0: SELECT "public"."AlunoProfessorCursoDisciplina"."id", "public"."AlunoProfessorCursoDisciplina"."id_aluno", "public"."AlunoProfessorCursoDisciplina"."id_professorCursoDisciplina" FROM "public"."AlunoProfessorCursoDisciplina" WHERE "public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 OFFSET $2
+2023-08-19 21:59:46.171 UTC [79] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 22:00:24.088 UTC [81] LOG:  execute s0: SELECT "public"."AlunoProfessorCursoDisciplina"."id", "public"."AlunoProfessorCursoDisciplina"."id_aluno", "public"."AlunoProfessorCursoDisciplina"."id_professorCursoDisciplina" FROM "public"."AlunoProfessorCursoDisciplina" WHERE "public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 OFFSET $2
+2023-08-19 22:00:24.088 UTC [81] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 22:01:44.336 UTC [83] LOG:  execute s0: SELECT "public"."AlunoProfessorCursoDisciplina"."id", "public"."AlunoProfessorCursoDisciplina"."id_aluno", "public"."AlunoProfessorCursoDisciplina"."id_professorCursoDisciplina" FROM "public"."AlunoProfessorCursoDisciplina" WHERE "public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 OFFSET $2
+2023-08-19 22:01:44.336 UTC [83] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 22:02:19.834 UTC [85] LOG:  execute s0: SELECT "public"."AlunoProfessorCursoDisciplina"."id", "public"."AlunoProfessorCursoDisciplina"."id_aluno", "public"."AlunoProfessorCursoDisciplina"."id_professorCursoDisciplina" FROM "public"."AlunoProfessorCursoDisciplina" WHERE "public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 OFFSET $2
+2023-08-19 22:02:19.834 UTC [85] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 22:06:29.587 UTC [90] LOG:  execute s0: SELECT "public"."AlunoProfessorCursoDisciplina"."id", "public"."AlunoProfessorCursoDisciplina"."id_aluno", "public"."AlunoProfessorCursoDisciplina"."id_professorCursoDisciplina" FROM "public"."AlunoProfessorCursoDisciplina" WHERE "public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 OFFSET $2
+2023-08-19 22:06:29.587 UTC [90] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 22:06:29.609 UTC [90] LOG:  statement: BEGIN
+2023-08-19 22:06:29.622 UTC [90] LOG:  execute s1: SELECT "public"."AlunoProfessorCursoDisciplina"."id" FROM "public"."AlunoProfessorCursoDisciplina" WHERE ("public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 AND 1=0) OFFSET $2
+2023-08-19 22:06:29.622 UTC [90] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 22:06:29.629 UTC [90] LOG:  execute s2: SELECT "public"."AlunoProfessorCursoDisciplina"."id" FROM "public"."AlunoProfessorCursoDisciplina" WHERE ("public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 AND 1=0)
+2023-08-19 22:06:29.629 UTC [90] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-19 22:06:29.647 UTC [90] LOG:  execute s3: INSERT INTO "public"."AlunoProfessorCursoDisciplina" ("id_aluno","id_professorCursoDisciplina") VALUES ($1,$2)
+2023-08-19 22:06:29.647 UTC [90] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1'
+2023-08-19 22:06:29.780 UTC [90] ERROR:  insert or update on table "AlunoProfessorCursoDisciplina" violates foreign key constraint "AlunoProfessorCursoDisciplina_id_professorCursoDisciplina_fkey"
+2023-08-19 22:06:29.780 UTC [90] DETAIL:  Key (id_professorCursoDisciplina)=(1) is not present in table "ProfessorCursoDisciplina".
+2023-08-19 22:06:29.780 UTC [90] STATEMENT:  INSERT INTO "public"."AlunoProfessorCursoDisciplina" ("id_aluno","id_professorCursoDisciplina") VALUES ($1,$2)
+2023-08-19 22:06:29.782 UTC [90] LOG:  statement: ROLLBACK
+2023-08-19 22:06:50.456 UTC [90] LOG:  statement: SELECT 1
+2023-08-19 22:06:50.459 UTC [90] LOG:  execute s0: SELECT "public"."AlunoProfessorCursoDisciplina"."id", "public"."AlunoProfessorCursoDisciplina"."id_aluno", "public"."AlunoProfessorCursoDisciplina"."id_professorCursoDisciplina" FROM "public"."AlunoProfessorCursoDisciplina" WHERE "public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 OFFSET $2
+2023-08-19 22:06:50.459 UTC [90] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 22:06:50.473 UTC [90] LOG:  statement: BEGIN
+2023-08-19 22:06:50.478 UTC [90] LOG:  execute s1: SELECT "public"."AlunoProfessorCursoDisciplina"."id" FROM "public"."AlunoProfessorCursoDisciplina" WHERE ("public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 AND 1=0) OFFSET $2
+2023-08-19 22:06:50.478 UTC [90] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 22:06:50.480 UTC [90] LOG:  execute s2: SELECT "public"."AlunoProfessorCursoDisciplina"."id" FROM "public"."AlunoProfessorCursoDisciplina" WHERE ("public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 AND 1=0)
+2023-08-19 22:06:50.480 UTC [90] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-19 22:06:50.491 UTC [90] LOG:  execute s4: INSERT INTO "public"."AlunoProfessorCursoDisciplina" ("id_professorCursoDisciplina","id_aluno") VALUES ($1,$2)
+2023-08-19 22:06:50.491 UTC [90] DETAIL:  parameters: $1 = '1', $2 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-19 22:06:50.492 UTC [90] ERROR:  insert or update on table "AlunoProfessorCursoDisciplina" violates foreign key constraint "AlunoProfessorCursoDisciplina_id_professorCursoDisciplina_fkey"
+2023-08-19 22:06:50.492 UTC [90] DETAIL:  Key (id_professorCursoDisciplina)=(1) is not present in table "ProfessorCursoDisciplina".
+2023-08-19 22:06:50.492 UTC [90] STATEMENT:  INSERT INTO "public"."AlunoProfessorCursoDisciplina" ("id_professorCursoDisciplina","id_aluno") VALUES ($1,$2)
+2023-08-19 22:06:50.495 UTC [90] LOG:  statement: ROLLBACK
+2023-08-19 22:07:00.057 UTC [28] LOG:  checkpoint starting: time
+2023-08-19 22:07:01.601 UTC [28] LOG:  checkpoint complete: wrote 14 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=1.411 s, sync=0.020 s, total=1.544 s; sync files=13, longest=0.004 s, average=0.002 s; distance=7 kB, estimate=7 kB
+2023-08-19 22:07:42.547 UTC [92] LOG:  execute s0: SELECT "public"."AlunoProfessorCursoDisciplina"."id", "public"."AlunoProfessorCursoDisciplina"."id_aluno", "public"."AlunoProfessorCursoDisciplina"."id_professorCursoDisciplina" FROM "public"."AlunoProfessorCursoDisciplina" WHERE "public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 OFFSET $2
+2023-08-19 22:07:42.547 UTC [92] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 22:07:42.582 UTC [92] LOG:  statement: BEGIN
+2023-08-19 22:07:42.590 UTC [92] LOG:  execute s1: SELECT "public"."AlunoProfessorCursoDisciplina"."id" FROM "public"."AlunoProfessorCursoDisciplina" WHERE ("public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 AND 1=0) OFFSET $2
+2023-08-19 22:07:42.590 UTC [92] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 22:07:42.594 UTC [92] LOG:  execute s2: SELECT "public"."AlunoProfessorCursoDisciplina"."id" FROM "public"."AlunoProfessorCursoDisciplina" WHERE ("public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 AND 1=0)
+2023-08-19 22:07:42.594 UTC [92] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-19 22:07:42.601 UTC [92] LOG:  execute s3: INSERT INTO "public"."AlunoProfessorCursoDisciplina" ("id_professorCursoDisciplina","id_aluno") VALUES ($1,$2)
+2023-08-19 22:07:42.601 UTC [92] DETAIL:  parameters: $1 = '1', $2 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-19 22:07:42.615 UTC [92] ERROR:  insert or update on table "AlunoProfessorCursoDisciplina" violates foreign key constraint "AlunoProfessorCursoDisciplina_id_professorCursoDisciplina_fkey"
+2023-08-19 22:07:42.615 UTC [92] DETAIL:  Key (id_professorCursoDisciplina)=(1) is not present in table "ProfessorCursoDisciplina".
+2023-08-19 22:07:42.615 UTC [92] STATEMENT:  INSERT INTO "public"."AlunoProfessorCursoDisciplina" ("id_professorCursoDisciplina","id_aluno") VALUES ($1,$2)
+2023-08-19 22:07:42.618 UTC [92] LOG:  statement: ROLLBACK
+2023-08-19 22:12:00.708 UTC [28] LOG:  checkpoint starting: time
+2023-08-19 22:12:01.198 UTC [28] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.424 s, sync=0.009 s, total=0.491 s; sync files=5, longest=0.005 s, average=0.002 s; distance=7 kB, estimate=7 kB
+2023-08-19 22:15:14.718 UTC [101] LOG:  execute s0: SELECT "public"."AlunoProfessorCursoDisciplina"."id", "public"."AlunoProfessorCursoDisciplina"."id_aluno", "public"."AlunoProfessorCursoDisciplina"."id_professorCursoDisciplina" FROM "public"."AlunoProfessorCursoDisciplina" WHERE "public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 OFFSET $2
+2023-08-19 22:15:14.718 UTC [101] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 22:15:14.771 UTC [101] LOG:  statement: BEGIN
+2023-08-19 22:15:14.786 UTC [101] LOG:  execute s1: SELECT "public"."AlunoProfessorCursoDisciplina"."id" FROM "public"."AlunoProfessorCursoDisciplina" WHERE ("public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 AND 1=0) OFFSET $2
+2023-08-19 22:15:14.786 UTC [101] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 22:15:14.800 UTC [101] LOG:  execute s2: SELECT "public"."AlunoProfessorCursoDisciplina"."id" FROM "public"."AlunoProfessorCursoDisciplina" WHERE ("public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 AND 1=0)
+2023-08-19 22:15:14.800 UTC [101] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-19 22:15:14.817 UTC [101] LOG:  execute s3: INSERT INTO "public"."AlunoProfessorCursoDisciplina" ("id_aluno","id_professorCursoDisciplina") VALUES ($1,$2)
+2023-08-19 22:15:14.817 UTC [101] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1'
+2023-08-19 22:15:14.846 UTC [101] ERROR:  insert or update on table "AlunoProfessorCursoDisciplina" violates foreign key constraint "AlunoProfessorCursoDisciplina_id_professorCursoDisciplina_fkey"
+2023-08-19 22:15:14.846 UTC [101] DETAIL:  Key (id_professorCursoDisciplina)=(1) is not present in table "ProfessorCursoDisciplina".
+2023-08-19 22:15:14.846 UTC [101] STATEMENT:  INSERT INTO "public"."AlunoProfessorCursoDisciplina" ("id_aluno","id_professorCursoDisciplina") VALUES ($1,$2)
+2023-08-19 22:15:14.848 UTC [101] LOG:  statement: ROLLBACK
+2023-08-19 22:15:48.129 UTC [102] LOG:  execute s0: SELECT "public"."AlunoProfessorCursoDisciplina"."id", "public"."AlunoProfessorCursoDisciplina"."id_aluno", "public"."AlunoProfessorCursoDisciplina"."id_professorCursoDisciplina" FROM "public"."AlunoProfessorCursoDisciplina" WHERE "public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 OFFSET $2
+2023-08-19 22:15:48.129 UTC [102] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 22:15:48.172 UTC [102] LOG:  statement: BEGIN
+2023-08-19 22:15:48.176 UTC [102] LOG:  execute s1: SELECT "public"."AlunoProfessorCursoDisciplina"."id" FROM "public"."AlunoProfessorCursoDisciplina" WHERE ("public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 AND 1=0) OFFSET $2
+2023-08-19 22:15:48.176 UTC [102] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 22:15:48.183 UTC [102] LOG:  execute s2: SELECT "public"."AlunoProfessorCursoDisciplina"."id" FROM "public"."AlunoProfessorCursoDisciplina" WHERE ("public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 AND 1=0)
+2023-08-19 22:15:48.183 UTC [102] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-19 22:15:48.193 UTC [102] LOG:  execute s3: INSERT INTO "public"."AlunoProfessorCursoDisciplina" ("id_professorCursoDisciplina","id_aluno") VALUES ($1,$2)
+2023-08-19 22:15:48.193 UTC [102] DETAIL:  parameters: $1 = '1', $2 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-19 22:15:48.207 UTC [102] ERROR:  insert or update on table "AlunoProfessorCursoDisciplina" violates foreign key constraint "AlunoProfessorCursoDisciplina_id_professorCursoDisciplina_fkey"
+2023-08-19 22:15:48.207 UTC [102] DETAIL:  Key (id_professorCursoDisciplina)=(1) is not present in table "ProfessorCursoDisciplina".
+2023-08-19 22:15:48.207 UTC [102] STATEMENT:  INSERT INTO "public"."AlunoProfessorCursoDisciplina" ("id_professorCursoDisciplina","id_aluno") VALUES ($1,$2)
+2023-08-19 22:15:48.210 UTC [102] LOG:  statement: ROLLBACK
+2023-08-19 22:16:11.160 UTC [104] LOG:  execute s0: SELECT "public"."AlunoProfessorCursoDisciplina"."id", "public"."AlunoProfessorCursoDisciplina"."id_aluno", "public"."AlunoProfessorCursoDisciplina"."id_professorCursoDisciplina" FROM "public"."AlunoProfessorCursoDisciplina" WHERE "public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 OFFSET $2
+2023-08-19 22:16:11.160 UTC [104] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 22:16:11.185 UTC [104] LOG:  statement: BEGIN
+2023-08-19 22:16:11.189 UTC [104] LOG:  execute s1: SELECT "public"."AlunoProfessorCursoDisciplina"."id" FROM "public"."AlunoProfessorCursoDisciplina" WHERE ("public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 AND 1=0) OFFSET $2
+2023-08-19 22:16:11.189 UTC [104] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 22:16:11.193 UTC [104] LOG:  execute s2: SELECT "public"."AlunoProfessorCursoDisciplina"."id" FROM "public"."AlunoProfessorCursoDisciplina" WHERE ("public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 AND 1=0)
+2023-08-19 22:16:11.193 UTC [104] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-19 22:16:11.198 UTC [104] LOG:  execute s3: INSERT INTO "public"."AlunoProfessorCursoDisciplina" ("id_professorCursoDisciplina","id_aluno") VALUES ($1,$2)
+2023-08-19 22:16:11.198 UTC [104] DETAIL:  parameters: $1 = '1', $2 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-19 22:16:11.211 UTC [104] ERROR:  insert or update on table "AlunoProfessorCursoDisciplina" violates foreign key constraint "AlunoProfessorCursoDisciplina_id_professorCursoDisciplina_fkey"
+2023-08-19 22:16:11.211 UTC [104] DETAIL:  Key (id_professorCursoDisciplina)=(1) is not present in table "ProfessorCursoDisciplina".
+2023-08-19 22:16:11.211 UTC [104] STATEMENT:  INSERT INTO "public"."AlunoProfessorCursoDisciplina" ("id_professorCursoDisciplina","id_aluno") VALUES ($1,$2)
+2023-08-19 22:16:11.214 UTC [104] LOG:  statement: ROLLBACK
+2023-08-19 22:17:01.008 UTC [28] LOG:  checkpoint starting: time
+2023-08-19 22:17:01.505 UTC [28] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.426 s, sync=0.010 s, total=0.497 s; sync files=5, longest=0.005 s, average=0.002 s; distance=8 kB, estimate=8 kB
+2023-08-19 22:17:12.663 UTC [104] LOG:  statement: SELECT 1
+2023-08-19 22:17:12.665 UTC [104] LOG:  execute s0: SELECT "public"."AlunoProfessorCursoDisciplina"."id", "public"."AlunoProfessorCursoDisciplina"."id_aluno", "public"."AlunoProfessorCursoDisciplina"."id_professorCursoDisciplina" FROM "public"."AlunoProfessorCursoDisciplina" WHERE "public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 OFFSET $2
+2023-08-19 22:17:12.665 UTC [104] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 22:17:12.683 UTC [104] LOG:  statement: BEGIN
+2023-08-19 22:17:12.693 UTC [104] LOG:  execute s1: SELECT "public"."AlunoProfessorCursoDisciplina"."id" FROM "public"."AlunoProfessorCursoDisciplina" WHERE ("public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 AND 1=0) OFFSET $2
+2023-08-19 22:17:12.693 UTC [104] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 22:17:12.697 UTC [104] LOG:  execute s2: SELECT "public"."AlunoProfessorCursoDisciplina"."id" FROM "public"."AlunoProfessorCursoDisciplina" WHERE ("public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 AND 1=0)
+2023-08-19 22:17:12.697 UTC [104] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-19 22:17:12.701 UTC [104] LOG:  execute s3: INSERT INTO "public"."AlunoProfessorCursoDisciplina" ("id_professorCursoDisciplina","id_aluno") VALUES ($1,$2)
+2023-08-19 22:17:12.701 UTC [104] DETAIL:  parameters: $1 = '1', $2 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-19 22:17:12.706 UTC [104] ERROR:  insert or update on table "AlunoProfessorCursoDisciplina" violates foreign key constraint "AlunoProfessorCursoDisciplina_id_professorCursoDisciplina_fkey"
+2023-08-19 22:17:12.706 UTC [104] DETAIL:  Key (id_professorCursoDisciplina)=(1) is not present in table "ProfessorCursoDisciplina".
+2023-08-19 22:17:12.706 UTC [104] STATEMENT:  INSERT INTO "public"."AlunoProfessorCursoDisciplina" ("id_professorCursoDisciplina","id_aluno") VALUES ($1,$2)
+2023-08-19 22:17:12.709 UTC [104] LOG:  statement: ROLLBACK
+2023-08-19 22:22:01.528 UTC [28] LOG:  checkpoint starting: time
+2023-08-19 22:22:02.018 UTC [28] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.424 s, sync=0.010 s, total=0.491 s; sync files=5, longest=0.006 s, average=0.002 s; distance=8 kB, estimate=8 kB
+2023-08-19 22:23:45.505 UTC [113] LOG:  statement: SELECT CURRENT_SCHEMA() AS schema
+2023-08-19 22:23:45.529 UTC [113] LOG:  statement: select version()
+2023-08-19 22:23:45.535 UTC [113] LOG:  statement: 
+	      SELECT      n.nspname as schema, t.typname as typename, t.oid::int4 as typeid
+	      FROM        pg_type t
+	      LEFT JOIN   pg_catalog.pg_namespace n ON n.oid = t.typnamespace
+	      WHERE       (t.typrelid = 0 OR (SELECT c.relkind = 'c' FROM pg_catalog.pg_class c WHERE c.oid = t.typrelid))
+	      AND     NOT EXISTS(SELECT 1 FROM pg_catalog.pg_type el WHERE el.oid = t.typelem AND el.typarray = t.oid)
+	      AND     n.nspname NOT IN ('pg_catalog', 'information_schema');
+	    
+2023-08-19 22:23:45.590 UTC [113] LOG:  statement: select version()
+2023-08-19 22:23:45.874 UTC [113] LOG:  execute <unnamed>: 
+	    SELECT datname
+	    FROM pg_database
+	    WHERE datistemplate = $1
+	    
+	    ORDER BY datname
+	  
+2023-08-19 22:23:45.874 UTC [113] DETAIL:  parameters: $1 = 'f'
+2023-08-19 22:23:46.256 UTC [114] LOG:  statement: select version()
+2023-08-19 22:23:46.261 UTC [114] LOG:  statement: 
+	    SELECT
+	      t.table_schema as schema,
+	      t.table_name as name,
+	  
+	        pc.relkind as tabletype
+	      FROM information_schema.tables AS t
+	      JOIN pg_class AS pc
+	        ON t.table_name = pc.relname AND quote_ident(t.table_schema) = pc.relnamespace::regnamespace::text
+	      LEFT OUTER JOIN pg_inherits AS i
+	        ON pc.oid = i.inhrelid
+	      WHERE t.table_type NOT LIKE '%VIEW%'
+	      AND i.inhrelid::regclass IS NULL
+	    
+	    
+	    ORDER BY t.table_schema, t.table_name
+	  
+2023-08-19 22:23:46.437 UTC [114] LOG:  statement: 
+	    SELECT
+	      table_schema as schema,
+	      table_name as name
+	    FROM information_schema.views
+	    
+	    ORDER BY table_schema, table_name
+	  
+2023-08-19 22:23:46.447 UTC [114] LOG:  statement: select version()
+2023-08-19 22:23:46.452 UTC [114] LOG:  statement: 
+	    SELECT
+	      schemaname as schema,
+	      matviewname as name
+	    FROM pg_matviews
+	    
+	    order by schemaname, matviewname;
+	  
+2023-08-19 22:23:46.537 UTC [114] LOG:  statement: select version()
+2023-08-19 22:23:46.562 UTC [114] LOG:  statement: 
+	    SELECT
+	      r.specific_name as id,
+	      r.routine_schema as routine_schema,
+	      r.routine_name as name,
+	      r.routine_type as routine_type,
+	      r.data_type as data_type
+	    FROM INFORMATION_SCHEMA.ROUTINES r
+	    where r.routine_schema not in ('sys', 'information_schema',
+	                                'pg_catalog', 'performance_schema')
+	    
+	    ORDER BY routine_schema, routine_name
+	  
+2023-08-19 22:23:46.707 UTC [114] LOG:  statement: 
+	    select
+	        r.routine_schema as routine_schema,
+	        r.specific_name as specific_name,
+	        p.parameter_name as parameter_name,
+	        p.character_maximum_length as char_length,
+	        p.data_type as data_type
+	  from information_schema.routines r
+	  left join information_schema.parameters p
+	            on p.specific_schema = r.routine_schema
+	            and p.specific_name = r.specific_name
+	  where r.routine_schema not in ('sys', 'information_schema',
+	                                'pg_catalog', 'performance_schema')
+	    
+	
+	      AND p.parameter_mode = 'IN'
+	  order by r.routine_schema,
+	          r.specific_name,
+	          p.ordinal_position;
+	
+	  
+2023-08-19 22:23:49.842 UTC [114] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-08-19 22:23:49.842 UTC [114] DETAIL:  parameters: $1 = 'public', $2 = 'AlunoProfessorCursoDisciplina'
+2023-08-19 22:23:49.924 UTC [114] LOG:  execute <unnamed>: 
+	    SELECT
+	        tc.table_schema as from_schema,
+	        tc.table_name as from_table,
+	        kcu.column_name as from_column,
+	        ccu.table_schema AS to_schema,
+	        ccu.table_name AS to_table,
+	        ccu.column_name AS to_column,
+	        tc.constraint_name,
+	        rc.update_rule as update_rule,
+	        rc.delete_rule as delete_rule
+	    FROM
+	        information_schema.table_constraints AS tc
+	        JOIN information_schema.key_column_usage AS kcu
+	          ON tc.constraint_name = kcu.constraint_name
+	          AND tc.table_schema = kcu.table_schema
+	        JOIN information_schema.constraint_column_usage AS ccu
+	          ON ccu.constraint_name = tc.constraint_name
+	          AND ccu.table_schema = tc.table_schema
+	         JOIN information_schema.referential_constraints rc
+	          on tc.constraint_name = rc.constraint_name
+	          and tc.table_schema = rc.constraint_schema
+	    WHERE tc.constraint_type = 'FOREIGN KEY'
+	    AND tc.table_name= $1 and tc.table_schema = $2;
+	
+	  
+2023-08-19 22:23:49.924 UTC [114] DETAIL:  parameters: $1 = 'AlunoProfessorCursoDisciplina', $2 = 'public'
+2023-08-19 22:23:49.942 UTC [114] LOG:  statement: select version()
+2023-08-19 22:23:49.945 UTC [114] LOG:  statement: 
+	    SELECT
+	      a.attname as column_name,
+	      format_type(a.atttypid, a.atttypmod) AS data_type,
+	      a.attnum as position
+	    FROM   pg_index i
+	    JOIN   pg_attribute a ON a.attrelid = i.indrelid
+	                        AND a.attnum = ANY(i.indkey)
+	    WHERE  i.indrelid = '"public"."AlunoProfessorCursoDisciplina"'::regclass
+	    AND    i.indisprimary
+	    ORDER BY a.attnum
+	  
+2023-08-19 22:23:50.035 UTC [114] LOG:  statement: select version()
+2023-08-19 22:23:50.040 UTC [114] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."AlunoProfessorCursoDisciplina"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-08-19 22:26:05.546 UTC [117] LOG:  statement: select version()
+2023-08-19 22:26:05.551 UTC [117] LOG:  statement: 
+	    SELECT
+	      t.table_schema as schema,
+	      t.table_name as name,
+	  
+	        pc.relkind as tabletype
+	      FROM information_schema.tables AS t
+	      JOIN pg_class AS pc
+	        ON t.table_name = pc.relname AND quote_ident(t.table_schema) = pc.relnamespace::regnamespace::text
+	      LEFT OUTER JOIN pg_inherits AS i
+	        ON pc.oid = i.inhrelid
+	      WHERE t.table_type NOT LIKE '%VIEW%'
+	      AND i.inhrelid::regclass IS NULL
+	    
+	    
+	    ORDER BY t.table_schema, t.table_name
+	  
+2023-08-19 22:26:05.613 UTC [117] LOG:  statement: 
+	    SELECT
+	      table_schema as schema,
+	      table_name as name
+	    FROM information_schema.views
+	    
+	    ORDER BY table_schema, table_name
+	  
+2023-08-19 22:26:05.621 UTC [117] LOG:  statement: select version()
+2023-08-19 22:26:05.627 UTC [117] LOG:  statement: 
+	    SELECT
+	      schemaname as schema,
+	      matviewname as name
+	    FROM pg_matviews
+	    
+	    order by schemaname, matviewname;
+	  
+2023-08-19 22:26:05.760 UTC [117] LOG:  statement: select version()
+2023-08-19 22:26:05.773 UTC [118] LOG:  statement: select version()
+2023-08-19 22:26:05.784 UTC [117] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."AlunoProfessorCursoDisciplina"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-08-19 22:26:05.796 UTC [118] LOG:  statement: 
+	    SELECT
+	      r.specific_name as id,
+	      r.routine_schema as routine_schema,
+	      r.routine_name as name,
+	      r.routine_type as routine_type,
+	      r.data_type as data_type
+	    FROM INFORMATION_SCHEMA.ROUTINES r
+	    where r.routine_schema not in ('sys', 'information_schema',
+	                                'pg_catalog', 'performance_schema')
+	    
+	    ORDER BY routine_schema, routine_name
+	  
+2023-08-19 22:26:05.845 UTC [118] LOG:  statement: 
+	    select
+	        r.routine_schema as routine_schema,
+	        r.specific_name as specific_name,
+	        p.parameter_name as parameter_name,
+	        p.character_maximum_length as char_length,
+	        p.data_type as data_type
+	  from information_schema.routines r
+	  left join information_schema.parameters p
+	            on p.specific_schema = r.routine_schema
+	            and p.specific_name = r.specific_name
+	  where r.routine_schema not in ('sys', 'information_schema',
+	                                'pg_catalog', 'performance_schema')
+	    
+	
+	      AND p.parameter_mode = 'IN'
+	  order by r.routine_schema,
+	          r.specific_name,
+	          p.ordinal_position;
+	
+	  
+2023-08-19 22:26:05.871 UTC [117] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-08-19 22:26:05.871 UTC [117] DETAIL:  parameters: $1 = 'public', $2 = 'AlunoProfessorCursoDisciplina'
+2023-08-19 22:26:05.942 UTC [117] LOG:  statement: select version()
+2023-08-19 22:26:05.960 UTC [117] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."AlunoProfessorCursoDisciplina"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-08-19 22:26:05.984 UTC [117] LOG:  statement: select version()
+2023-08-19 22:26:05.996 UTC [117] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."AlunoProfessorCursoDisciplina"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-08-19 22:26:06.487 UTC [120] LOG:  statement: select version()
+2023-08-19 22:26:06.496 UTC [120] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."AlunoProfessorCursoDisciplina"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-08-19 22:26:48.317 UTC [121] LOG:  execute s0: SELECT "public"."AlunoProfessorCursoDisciplina"."id", "public"."AlunoProfessorCursoDisciplina"."id_aluno", "public"."AlunoProfessorCursoDisciplina"."id_professorCursoDisciplina" FROM "public"."AlunoProfessorCursoDisciplina" WHERE "public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 OFFSET $2
+2023-08-19 22:26:48.317 UTC [121] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 22:26:48.333 UTC [121] LOG:  execute s0: SELECT "public"."AlunoProfessorCursoDisciplina"."id", "public"."AlunoProfessorCursoDisciplina"."id_aluno", "public"."AlunoProfessorCursoDisciplina"."id_professorCursoDisciplina" FROM "public"."AlunoProfessorCursoDisciplina" WHERE "public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 OFFSET $2
+2023-08-19 22:26:48.333 UTC [121] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 22:27:31.945 UTC [123] LOG:  execute s0: SELECT "public"."AlunoProfessorCursoDisciplina"."id", "public"."AlunoProfessorCursoDisciplina"."id_aluno", "public"."AlunoProfessorCursoDisciplina"."id_professorCursoDisciplina" FROM "public"."AlunoProfessorCursoDisciplina" WHERE "public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 OFFSET $2
+2023-08-19 22:27:31.945 UTC [123] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 22:27:31.966 UTC [123] LOG:  execute s0: SELECT "public"."AlunoProfessorCursoDisciplina"."id", "public"."AlunoProfessorCursoDisciplina"."id_aluno", "public"."AlunoProfessorCursoDisciplina"."id_professorCursoDisciplina" FROM "public"."AlunoProfessorCursoDisciplina" WHERE "public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 OFFSET $2
+2023-08-19 22:27:31.966 UTC [123] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 22:27:35.650 UTC [124] LOG:  execute <unnamed>: 
+	    SELECT datname
+	    FROM pg_database
+	    WHERE datistemplate = $1
+	    
+	    ORDER BY datname
+	  
+2023-08-19 22:27:35.650 UTC [124] DETAIL:  parameters: $1 = 'f'
+2023-08-19 22:27:37.437 UTC [124] LOG:  execute <unnamed>: 
+	    SELECT datname
+	    FROM pg_database
+	    WHERE datistemplate = $1
+	    
+	    ORDER BY datname
+	  
+2023-08-19 22:27:37.437 UTC [124] DETAIL:  parameters: $1 = 'f'
+2023-08-19 22:27:38.181 UTC [124] LOG:  execute <unnamed>: 
+	    SELECT datname
+	    FROM pg_database
+	    WHERE datistemplate = $1
+	    
+	    ORDER BY datname
+	  
+2023-08-19 22:27:38.181 UTC [124] DETAIL:  parameters: $1 = 'f'
+2023-08-19 22:27:38.325 UTC [124] LOG:  execute <unnamed>: 
+	    SELECT datname
+	    FROM pg_database
+	    WHERE datistemplate = $1
+	    
+	    ORDER BY datname
+	  
+2023-08-19 22:27:38.325 UTC [124] DETAIL:  parameters: $1 = 'f'
+2023-08-19 22:27:38.453 UTC [124] LOG:  execute <unnamed>: 
+	    SELECT datname
+	    FROM pg_database
+	    WHERE datistemplate = $1
+	    
+	    ORDER BY datname
+	  
+2023-08-19 22:27:38.453 UTC [124] DETAIL:  parameters: $1 = 'f'
+2023-08-19 22:27:38.590 UTC [124] LOG:  execute <unnamed>: 
+	    SELECT datname
+	    FROM pg_database
+	    WHERE datistemplate = $1
+	    
+	    ORDER BY datname
+	  
+2023-08-19 22:27:38.590 UTC [124] DETAIL:  parameters: $1 = 'f'
+2023-08-19 22:27:40.933 UTC [124] LOG:  execute <unnamed>: 
+	    SELECT datname
+	    FROM pg_database
+	    WHERE datistemplate = $1
+	    
+	    ORDER BY datname
+	  
+2023-08-19 22:27:40.933 UTC [124] DETAIL:  parameters: $1 = 'f'
+2023-08-19 22:27:41.101 UTC [124] LOG:  execute <unnamed>: 
+	    SELECT datname
+	    FROM pg_database
+	    WHERE datistemplate = $1
+	    
+	    ORDER BY datname
+	  
+2023-08-19 22:27:41.101 UTC [124] DETAIL:  parameters: $1 = 'f'
+2023-08-19 22:27:41.229 UTC [124] LOG:  execute <unnamed>: 
+	    SELECT datname
+	    FROM pg_database
+	    WHERE datistemplate = $1
+	    
+	    ORDER BY datname
+	  
+2023-08-19 22:27:41.229 UTC [124] DETAIL:  parameters: $1 = 'f'
+2023-08-19 22:27:41.373 UTC [124] LOG:  execute <unnamed>: 
+	    SELECT datname
+	    FROM pg_database
+	    WHERE datistemplate = $1
+	    
+	    ORDER BY datname
+	  
+2023-08-19 22:27:41.373 UTC [124] DETAIL:  parameters: $1 = 'f'
+2023-08-19 22:27:41.533 UTC [124] LOG:  execute <unnamed>: 
+	    SELECT datname
+	    FROM pg_database
+	    WHERE datistemplate = $1
+	    
+	    ORDER BY datname
+	  
+2023-08-19 22:27:41.533 UTC [124] DETAIL:  parameters: $1 = 'f'
+2023-08-19 22:28:32.368 UTC [126] LOG:  execute s0: SELECT "public"."AlunoProfessorCursoDisciplina"."id", "public"."AlunoProfessorCursoDisciplina"."id_aluno", "public"."AlunoProfessorCursoDisciplina"."id_professorCursoDisciplina" FROM "public"."AlunoProfessorCursoDisciplina" WHERE "public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 OFFSET $2
+2023-08-19 22:28:32.368 UTC [126] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 22:28:32.387 UTC [126] LOG:  statement: BEGIN
+2023-08-19 22:28:32.391 UTC [126] LOG:  execute s1: INSERT INTO "public"."AlunoProfessorCursoDisciplina" ("id_aluno","id_professorCursoDisciplina") VALUES ($1,$2)
+2023-08-19 22:28:32.391 UTC [126] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1'
+2023-08-19 22:28:32.403 UTC [126] ERROR:  insert or update on table "AlunoProfessorCursoDisciplina" violates foreign key constraint "AlunoProfessorCursoDisciplina_id_professorCursoDisciplina_fkey"
+2023-08-19 22:28:32.403 UTC [126] DETAIL:  Key (id_professorCursoDisciplina)=(1) is not present in table "ProfessorCursoDisciplina".
+2023-08-19 22:28:32.403 UTC [126] STATEMENT:  INSERT INTO "public"."AlunoProfessorCursoDisciplina" ("id_aluno","id_professorCursoDisciplina") VALUES ($1,$2)
+2023-08-19 22:28:32.405 UTC [126] LOG:  statement: ROLLBACK
+2023-08-19 22:29:46.069 UTC [128] LOG:  execute s0: SELECT "public"."AlunoProfessorCursoDisciplina"."id", "public"."AlunoProfessorCursoDisciplina"."id_aluno", "public"."AlunoProfessorCursoDisciplina"."id_professorCursoDisciplina" FROM "public"."AlunoProfessorCursoDisciplina" WHERE "public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 OFFSET $2
+2023-08-19 22:29:46.069 UTC [128] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 22:29:46.085 UTC [128] LOG:  statement: BEGIN
+2023-08-19 22:29:46.094 UTC [128] LOG:  execute s1: INSERT INTO "public"."AlunoProfessorCursoDisciplina" ("id_professorCursoDisciplina","id_aluno") VALUES ($1,$2)
+2023-08-19 22:29:46.094 UTC [128] DETAIL:  parameters: $1 = '1', $2 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-19 22:29:46.103 UTC [128] ERROR:  insert or update on table "AlunoProfessorCursoDisciplina" violates foreign key constraint "AlunoProfessorCursoDisciplina_id_professorCursoDisciplina_fkey"
+2023-08-19 22:29:46.103 UTC [128] DETAIL:  Key (id_professorCursoDisciplina)=(1) is not present in table "ProfessorCursoDisciplina".
+2023-08-19 22:29:46.103 UTC [128] STATEMENT:  INSERT INTO "public"."AlunoProfessorCursoDisciplina" ("id_professorCursoDisciplina","id_aluno") VALUES ($1,$2)
+2023-08-19 22:29:46.105 UTC [128] LOG:  statement: ROLLBACK
+2023-08-19 22:31:13.995 UTC [131] LOG:  execute s0: SELECT "public"."AlunoProfessorCursoDisciplina"."id", "public"."AlunoProfessorCursoDisciplina"."id_aluno", "public"."AlunoProfessorCursoDisciplina"."id_professorCursoDisciplina" FROM "public"."AlunoProfessorCursoDisciplina" WHERE "public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 OFFSET $2
+2023-08-19 22:31:13.995 UTC [131] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 22:31:14.005 UTC [131] LOG:  statement: BEGIN
+2023-08-19 22:31:14.009 UTC [131] LOG:  execute s1: INSERT INTO "public"."AlunoProfessorCursoDisciplina" ("id_professorCursoDisciplina","id_aluno") VALUES ($1,$2)
+2023-08-19 22:31:14.009 UTC [131] DETAIL:  parameters: $1 = '1', $2 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-19 22:31:14.022 UTC [131] ERROR:  insert or update on table "AlunoProfessorCursoDisciplina" violates foreign key constraint "AlunoProfessorCursoDisciplina_id_professorCursoDisciplina_fkey"
+2023-08-19 22:31:14.022 UTC [131] DETAIL:  Key (id_professorCursoDisciplina)=(1) is not present in table "ProfessorCursoDisciplina".
+2023-08-19 22:31:14.022 UTC [131] STATEMENT:  INSERT INTO "public"."AlunoProfessorCursoDisciplina" ("id_professorCursoDisciplina","id_aluno") VALUES ($1,$2)
+2023-08-19 22:31:14.025 UTC [131] LOG:  statement: ROLLBACK
+2023-08-19 22:32:01.225 UTC [28] LOG:  checkpoint starting: time
+2023-08-19 22:32:02.230 UTC [28] LOG:  checkpoint complete: wrote 10 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.935 s, sync=0.013 s, total=1.005 s; sync files=9, longest=0.004 s, average=0.002 s; distance=8 kB, estimate=8 kB
+2023-08-19 22:43:39.426 UTC [144] LOG:  statement: select version()
+2023-08-19 22:43:39.430 UTC [144] LOG:  statement: 
+	    SELECT
+	      r.specific_name as id,
+	      r.routine_schema as routine_schema,
+	      r.routine_name as name,
+	      r.routine_type as routine_type,
+	      r.data_type as data_type
+	    FROM INFORMATION_SCHEMA.ROUTINES r
+	    where r.routine_schema not in ('sys', 'information_schema',
+	                                'pg_catalog', 'performance_schema')
+	    
+	    ORDER BY routine_schema, routine_name
+	  
+2023-08-19 22:43:39.469 UTC [144] LOG:  statement: 
+	    select
+	        r.routine_schema as routine_schema,
+	        r.specific_name as specific_name,
+	        p.parameter_name as parameter_name,
+	        p.character_maximum_length as char_length,
+	        p.data_type as data_type
+	  from information_schema.routines r
+	  left join information_schema.parameters p
+	            on p.specific_schema = r.routine_schema
+	            and p.specific_name = r.specific_name
+	  where r.routine_schema not in ('sys', 'information_schema',
+	                                'pg_catalog', 'performance_schema')
+	    
+	
+	      AND p.parameter_mode = 'IN'
+	  order by r.routine_schema,
+	          r.specific_name,
+	          p.ordinal_position;
+	
+	  
+2023-08-19 22:43:39.514 UTC [145] LOG:  statement: select version()
+2023-08-19 22:43:39.518 UTC [145] LOG:  statement: 
+	    SELECT
+	      t.table_schema as schema,
+	      t.table_name as name,
+	  
+	        pc.relkind as tabletype
+	      FROM information_schema.tables AS t
+	      JOIN pg_class AS pc
+	        ON t.table_name = pc.relname AND quote_ident(t.table_schema) = pc.relnamespace::regnamespace::text
+	      LEFT OUTER JOIN pg_inherits AS i
+	        ON pc.oid = i.inhrelid
+	      WHERE t.table_type NOT LIKE '%VIEW%'
+	      AND i.inhrelid::regclass IS NULL
+	    
+	    
+	    ORDER BY t.table_schema, t.table_name
+	  
+2023-08-19 22:43:39.555 UTC [145] LOG:  statement: 
+	    SELECT
+	      table_schema as schema,
+	      table_name as name
+	    FROM information_schema.views
+	    
+	    ORDER BY table_schema, table_name
+	  
+2023-08-19 22:43:39.563 UTC [145] LOG:  statement: select version()
+2023-08-19 22:43:39.566 UTC [145] LOG:  statement: 
+	    SELECT
+	      schemaname as schema,
+	      matviewname as name
+	    FROM pg_matviews
+	    
+	    order by schemaname, matviewname;
+	  
+2023-08-19 22:43:39.677 UTC [145] LOG:  statement: select version()
+2023-08-19 22:43:39.714 UTC [145] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."AlunoProfessorCursoDisciplina"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-08-19 22:43:39.756 UTC [145] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-08-19 22:43:39.756 UTC [145] DETAIL:  parameters: $1 = 'public', $2 = 'AlunoProfessorCursoDisciplina'
+2023-08-19 22:43:39.793 UTC [145] LOG:  statement: select version()
+2023-08-19 22:43:39.794 UTC [144] LOG:  statement: select version()
+2023-08-19 22:43:39.807 UTC [145] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."AlunoProfessorCursoDisciplina"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-08-19 22:43:39.810 UTC [144] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."AlunoProfessorCursoDisciplina"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-08-19 22:43:39.820 UTC [145] LOG:  statement: select version()
+2023-08-19 22:43:39.832 UTC [145] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."AlunoProfessorCursoDisciplina"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-08-19 22:48:14.219 UTC [151] LOG:  execute s0: SELECT "public"."AlunoProfessorCursoDisciplina"."id", "public"."AlunoProfessorCursoDisciplina"."id_aluno", "public"."AlunoProfessorCursoDisciplina"."id_professorCursoDisciplina" FROM "public"."AlunoProfessorCursoDisciplina" WHERE "public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 OFFSET $2
+2023-08-19 22:48:14.219 UTC [151] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 22:48:14.228 UTC [151] LOG:  statement: BEGIN
+2023-08-19 22:48:14.232 UTC [151] LOG:  execute s1: INSERT INTO "public"."AlunoProfessorCursoDisciplina" ("id_aluno","id_professorCursoDisciplina") VALUES ($1,$2)
+2023-08-19 22:48:14.232 UTC [151] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1'
+2023-08-19 22:48:14.240 UTC [151] ERROR:  insert or update on table "AlunoProfessorCursoDisciplina" violates foreign key constraint "AlunoProfessorCursoDisciplina_id_professorCursoDisciplina_fkey"
+2023-08-19 22:48:14.240 UTC [151] DETAIL:  Key (id_professorCursoDisciplina)=(1) is not present in table "ProfessorCursoDisciplina".
+2023-08-19 22:48:14.240 UTC [151] STATEMENT:  INSERT INTO "public"."AlunoProfessorCursoDisciplina" ("id_aluno","id_professorCursoDisciplina") VALUES ($1,$2)
+2023-08-19 22:48:14.243 UTC [151] LOG:  statement: ROLLBACK
+2023-08-19 22:50:39.177 UTC [151] LOG:  statement: SELECT 1
+2023-08-19 22:50:39.184 UTC [151] LOG:  execute s2: SELECT "public"."ProfessorCursoDisciplina"."id", "public"."ProfessorCursoDisciplina"."id_professor", "public"."ProfessorCursoDisciplina"."id_cursoDisciplina" FROM "public"."ProfessorCursoDisciplina" WHERE "public"."ProfessorCursoDisciplina"."id_professor" = $1 OFFSET $2
+2023-08-19 22:50:39.184 UTC [151] DETAIL:  parameters: $1 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $2 = '0'
+2023-08-19 22:50:39.217 UTC [151] LOG:  execute s3: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id" IN ($1,$2) OFFSET $3
+2023-08-19 22:50:39.217 UTC [151] DETAIL:  parameters: $1 = '44', $2 = '46', $3 = '0'
+2023-08-19 22:50:39.263 UTC [151] LOG:  execute s4: SELECT "public"."Curso"."id", "public"."Curso"."nome", "public"."Curso"."id_departamento" FROM "public"."Curso" WHERE "public"."Curso"."id" IN ($1) OFFSET $2
+2023-08-19 22:50:39.263 UTC [151] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-19 22:50:39.341 UTC [151] LOG:  execute s5: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2) OFFSET $3
+2023-08-19 22:50:39.341 UTC [151] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '0'
+2023-08-19 22:52:01.528 UTC [28] LOG:  checkpoint starting: time
+2023-08-19 22:52:02.019 UTC [28] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.424 s, sync=0.011 s, total=0.492 s; sync files=5, longest=0.006 s, average=0.003 s; distance=8 kB, estimate=8 kB
+2023-08-19 22:52:22.630 UTC [151] LOG:  statement: SELECT 1
+2023-08-19 22:52:22.635 UTC [151] LOG:  execute s6: SELECT "public"."ProfessorCursoDisciplina"."id", "public"."ProfessorCursoDisciplina"."id_professor", "public"."ProfessorCursoDisciplina"."id_cursoDisciplina" FROM "public"."ProfessorCursoDisciplina" WHERE ("public"."ProfessorCursoDisciplina"."id") IN (SELECT "t0"."id" FROM "public"."ProfessorCursoDisciplina" AS "t0" INNER JOIN "public"."CursoDisciplina" AS "j0" ON ("j0"."id") = ("t0"."id_cursoDisciplina") WHERE ("j0"."id_curso" = $1 AND "t0"."id" IS NOT NULL)) OFFSET $2
+2023-08-19 22:52:22.635 UTC [151] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-19 22:52:22.637 UTC [151] LOG:  execute s3: SELECT "public"."CursoDisciplina"."id", "public"."CursoDisciplina"."id_curso", "public"."CursoDisciplina"."id_disciplina" FROM "public"."CursoDisciplina" WHERE "public"."CursoDisciplina"."id" IN ($1,$2) OFFSET $3
+2023-08-19 22:52:22.637 UTC [151] DETAIL:  parameters: $1 = '46', $2 = '44', $3 = '0'
+2023-08-19 22:52:22.642 UTC [151] LOG:  execute s7: SELECT "public"."Curso"."id", "public"."Curso"."nome" FROM "public"."Curso" WHERE "public"."Curso"."id" IN ($1) OFFSET $2
+2023-08-19 22:52:22.642 UTC [151] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-08-19 22:52:22.646 UTC [151] LOG:  execute s5: SELECT "public"."Disciplina"."id", "public"."Disciplina"."nome", "public"."Disciplina"."carga_horaria" FROM "public"."Disciplina" WHERE "public"."Disciplina"."id" IN ($1,$2) OFFSET $3
+2023-08-19 22:52:22.646 UTC [151] DETAIL:  parameters: $1 = '12', $2 = '11', $3 = '0'
+2023-08-19 22:52:22.701 UTC [151] LOG:  execute s8: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" IN ($1,$2) OFFSET $3
+2023-08-19 22:52:22.701 UTC [151] DETAIL:  parameters: $1 = '0e99dc48-102c-4686-b5fb-b85ecb232d3a', $2 = 'b47e4fad-ecd1-490e-afa6-77b71db3a956', $3 = '0'
+2023-08-19 22:52:22.747 UTC [151] LOG:  execute s9: SELECT "public"."Departamento"."id", "public"."Departamento"."nome" FROM "public"."Departamento" WHERE "public"."Departamento"."id" IN ($1) OFFSET $2
+2023-08-19 22:52:22.747 UTC [151] DETAIL:  parameters: $1 = '1', $2 = '0'
+2023-08-19 22:52:56.817 UTC [151] LOG:  statement: SELECT 1
+2023-08-19 22:52:56.819 UTC [151] LOG:  execute s0: SELECT "public"."AlunoProfessorCursoDisciplina"."id", "public"."AlunoProfessorCursoDisciplina"."id_aluno", "public"."AlunoProfessorCursoDisciplina"."id_professorCursoDisciplina" FROM "public"."AlunoProfessorCursoDisciplina" WHERE "public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 OFFSET $2
+2023-08-19 22:52:56.819 UTC [151] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'
+2023-08-19 22:52:56.824 UTC [151] LOG:  statement: BEGIN
+2023-08-19 22:52:56.827 UTC [151] LOG:  execute s10: INSERT INTO "public"."AlunoProfessorCursoDisciplina" ("id_professorCursoDisciplina","id_aluno") VALUES ($1,$2)
+2023-08-19 22:52:56.827 UTC [151] DETAIL:  parameters: $1 = '12', $2 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-19 22:52:56.831 UTC [151] LOG:  statement: COMMIT
+2023-08-19 22:52:56.859 UTC [151] LOG:  execute s0: SELECT "public"."AlunoProfessorCursoDisciplina"."id", "public"."AlunoProfessorCursoDisciplina"."id_aluno", "public"."AlunoProfessorCursoDisciplina"."id_professorCursoDisciplina" FROM "public"."AlunoProfessorCursoDisciplina" WHERE "public"."AlunoProfessorCursoDisciplina"."id_aluno" = $1 OFFSET $2
+2023-08-19 22:52:56.859 UTC [151] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '0'

@@ -1,0 +1,19 @@
+2023-08-31 13:29:14.626 UTC [1] LOG:  starting PostgreSQL 15.3 (Debian 15.3-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+2023-08-31 13:29:14.629 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2023-08-31 13:29:14.629 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2023-08-31 13:29:14.715 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2023-08-31 13:29:14.826 UTC [31] LOG:  database system was interrupted; last known up at 2023-08-30 23:45:38 UTC
+2023-08-31 13:29:24.844 UTC [31] LOG:  syncing data directory (pre-fsync), elapsed time: 10.01 s, current path: ./base/16384/36240
+2023-08-31 13:29:34.838 UTC [31] LOG:  syncing data directory (pre-fsync), elapsed time: 20.00 s, current path: ./base/16906/4173
+2023-08-31 13:29:44.847 UTC [31] LOG:  syncing data directory (pre-fsync), elapsed time: 30.01 s, current path: ./base/4/2696
+2023-08-31 13:29:54.853 UTC [31] LOG:  syncing data directory (pre-fsync), elapsed time: 40.01 s, current path: ./base/5/2601_fsm
+2023-08-31 13:30:04.958 UTC [31] LOG:  syncing data directory (pre-fsync), elapsed time: 50.12 s, current path: ./global/2964
+2023-08-31 13:30:14.865 UTC [31] LOG:  syncing data directory (pre-fsync), elapsed time: 60.03 s, current path: ./log/postgresql-2023-08-05_132740.log
+2023-08-31 13:30:27.852 UTC [31] LOG:  syncing data directory (fsync), elapsed time: 10.00 s, current path: ./base/5/2704
+2023-08-31 13:30:29.269 UTC [31] LOG:  database system was not properly shut down; automatic recovery in progress
+2023-08-31 13:30:29.387 UTC [31] LOG:  redo starts at 0/AD77BB8
+2023-08-31 13:30:29.388 UTC [31] LOG:  invalid record length at 0/AD77CA0: wanted 24, got 0
+2023-08-31 13:30:29.388 UTC [31] LOG:  redo done at 0/AD77C68 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2023-08-31 13:30:29.536 UTC [29] LOG:  checkpoint starting: end-of-recovery immediate wait
+2023-08-31 13:30:29.690 UTC [29] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.057 s, sync=0.022 s, total=0.164 s; sync files=3, longest=0.009 s, average=0.008 s; distance=0 kB, estimate=0 kB
+2023-08-31 13:30:29.742 UTC [1] LOG:  database system is ready to accept connections

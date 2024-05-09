@@ -1,0 +1,49 @@
+2023-07-12 13:38:08.411 UTC [1] LOG:  starting PostgreSQL 15.3 (Debian 15.3-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+2023-07-12 13:38:08.412 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2023-07-12 13:38:08.412 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2023-07-12 13:38:08.425 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2023-07-12 13:38:08.494 UTC [30] LOG:  database system was interrupted; last known up at 2023-07-11 19:26:04 UTC
+2023-07-12 13:38:18.501 UTC [30] LOG:  syncing data directory (pre-fsync), elapsed time: 10.00 s, current path: ./base/5/13393
+2023-07-12 13:38:24.254 UTC [30] LOG:  database system was not properly shut down; automatic recovery in progress
+2023-07-12 13:38:24.305 UTC [30] LOG:  redo starts at 0/76CB090
+2023-07-12 13:38:24.306 UTC [30] LOG:  invalid record length at 0/76CB178: wanted 24, got 0
+2023-07-12 13:38:24.306 UTC [30] LOG:  redo done at 0/76CB140 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2023-07-12 13:38:24.379 UTC [28] LOG:  checkpoint starting: end-of-recovery immediate wait
+2023-07-12 13:38:24.454 UTC [28] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.018 s, sync=0.014 s, total=0.080 s; sync files=3, longest=0.007 s, average=0.005 s; distance=0 kB, estimate=0 kB
+2023-07-12 13:38:24.481 UTC [1] LOG:  database system is ready to accept connections
+2023-07-12 14:12:30.098 UTC [34] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-07-12 14:12:30.098 UTC [34] DETAIL:  parameters: $1 = '16419'
+2023-07-12 14:12:30.115 UTC [34] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-07-12 14:12:30.115 UTC [34] DETAIL:  parameters: $1 = '16419'
+2023-07-12 14:12:30.121 UTC [34] LOG:  execute s0: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE 1=1 OFFSET $1
+2023-07-12 14:12:30.121 UTC [34] DETAIL:  parameters: $1 = '0'
+2023-07-12 14:12:38.163 UTC [34] LOG:  execute s3: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE 1=1 OFFSET $1
+2023-07-12 14:12:38.163 UTC [34] DETAIL:  parameters: $1 = '0'
+2023-07-12 14:12:43.419 UTC [34] LOG:  execute s4: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE ("public"."Turma"."nome" = $1 AND "public"."Turma"."id_curso" = $2) LIMIT $3 OFFSET $4
+2023-07-12 14:12:43.419 UTC [34] DETAIL:  parameters: $1 = '2025.1', $2 = '6', $3 = '1', $4 = '0'
+2023-07-12 14:12:43.425 UTC [34] LOG:  statement: BEGIN
+2023-07-12 14:12:43.437 UTC [34] LOG:  execute s5: SELECT "public"."Curso"."id" FROM "public"."Curso" WHERE ("public"."Curso"."id" = $1 AND 1=1) OFFSET $2
+2023-07-12 14:12:43.437 UTC [34] DETAIL:  parameters: $1 = '6', $2 = '0'
+2023-07-12 14:12:43.447 UTC [34] LOG:  execute s6: INSERT INTO "public"."Turma" ("nome","id_curso") VALUES ($1,$2) RETURNING "public"."Turma"."id"
+2023-07-12 14:12:43.447 UTC [34] DETAIL:  parameters: $1 = '2025.1', $2 = '6'
+2023-07-12 14:12:43.463 UTC [34] LOG:  execute s7: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE "public"."Turma"."id" = $1 LIMIT $2 OFFSET $3
+2023-07-12 14:12:43.463 UTC [34] DETAIL:  parameters: $1 = '9', $2 = '1', $3 = '0'
+2023-07-12 14:12:43.465 UTC [34] LOG:  statement: COMMIT
+2023-07-12 14:12:47.379 UTC [34] LOG:  statement: SELECT 1
+2023-07-12 14:12:47.381 UTC [34] LOG:  execute s3: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE 1=1 OFFSET $1
+2023-07-12 14:12:47.381 UTC [34] DETAIL:  parameters: $1 = '0'
+2023-07-12 14:12:51.952 UTC [34] LOG:  execute s4: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE ("public"."Turma"."nome" = $1 AND "public"."Turma"."id_curso" = $2) LIMIT $3 OFFSET $4
+2023-07-12 14:12:51.952 UTC [34] DETAIL:  parameters: $1 = '2023.1', $2 = '5', $3 = '1', $4 = '0'
+2023-07-12 14:12:51.961 UTC [34] LOG:  execute s4: SELECT "public"."Turma"."id", "public"."Turma"."nome", "public"."Turma"."id_curso" FROM "public"."Turma" WHERE ("public"."Turma"."nome" = $1 AND "public"."Turma"."id_curso" = $2) LIMIT $3 OFFSET $4
+2023-07-12 14:12:51.961 UTC [34] DETAIL:  parameters: $1 = '2020.2', $2 = '5', $3 = '1', $4 = '0'
+2023-07-12 14:13:24.901 UTC [28] LOG:  checkpoint starting: time
+2023-07-12 14:13:25.539 UTC [28] LOG:  checkpoint complete: wrote 6 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.531 s, sync=0.014 s, total=0.639 s; sync files=6, longest=0.006 s, average=0.003 s; distance=1 kB, estimate=1 kB

@@ -1,0 +1,384 @@
+2023-09-05 21:39:24.559 UTC [1] LOG:  starting PostgreSQL 15.3 (Debian 15.3-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+2023-09-05 21:39:24.564 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2023-09-05 21:39:24.565 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2023-09-05 21:39:24.709 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2023-09-05 21:39:24.988 UTC [30] LOG:  database system was interrupted; last known up at 2023-09-05 13:15:27 UTC
+2023-09-05 21:39:35.039 UTC [30] LOG:  syncing data directory (pre-fsync), elapsed time: 10.00 s, current path: ./base/16384/2619_vm
+2023-09-05 21:39:45.087 UTC [30] LOG:  syncing data directory (pre-fsync), elapsed time: 20.05 s, current path: ./base/4/2605
+2023-09-05 21:39:55.042 UTC [30] LOG:  syncing data directory (pre-fsync), elapsed time: 30.00 s, current path: ./global/4175
+2023-09-05 21:40:08.479 UTC [30] LOG:  database system was not properly shut down; automatic recovery in progress
+2023-09-05 21:40:08.582 UTC [30] LOG:  redo starts at 0/AD7D028
+2023-09-05 21:40:08.582 UTC [30] LOG:  invalid record length at 0/AD7D060: wanted 24, got 0
+2023-09-05 21:40:08.583 UTC [30] LOG:  redo done at 0/AD7D028 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2023-09-05 21:40:08.711 UTC [28] LOG:  checkpoint starting: end-of-recovery immediate wait
+2023-09-05 21:40:08.825 UTC [28] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.028 s, sync=0.018 s, total=0.120 s; sync files=3, longest=0.006 s, average=0.006 s; distance=0 kB, estimate=0 kB
+2023-09-05 21:40:08.894 UTC [1] LOG:  database system is ready to accept connections
+2023-09-05 22:59:21.882 UTC [34] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-09-05 22:59:21.882 UTC [34] DETAIL:  parameters: $1 = '16537'
+2023-09-05 22:59:21.897 UTC [34] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-09-05 22:59:21.897 UTC [34] DETAIL:  parameters: $1 = '16537'
+2023-09-05 22:59:21.909 UTC [34] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."id" = $1 LIMIT $2 OFFSET $3
+2023-09-05 22:59:21.909 UTC [34] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '0'
+2023-09-05 22:59:21.936 UTC [34] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-09-05 22:59:21.936 UTC [34] DETAIL:  parameters: $1 = '16419'
+2023-09-05 22:59:21.938 UTC [34] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-09-05 22:59:21.938 UTC [34] DETAIL:  parameters: $1 = '16419'
+2023-09-05 22:59:21.947 UTC [34] LOG:  execute s3: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE 1=1 OFFSET $1
+2023-09-05 22:59:21.947 UTC [34] DETAIL:  parameters: $1 = '0'
+2023-09-05 23:00:46.149 UTC [34] LOG:  statement: SELECT 1
+2023-09-05 23:00:46.165 UTC [34] LOG:  execute s4: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-09-05 23:00:46.165 UTC [34] DETAIL:  parameters: $1 = 'ifce@gmail.com', $2 = '1', $3 = '0'
+2023-09-05 23:00:57.536 UTC [34] LOG:  execute s4: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-09-05 23:00:57.536 UTC [34] DETAIL:  parameters: $1 = 'jhon_italo@gmail.com', $2 = '1', $3 = '0'
+2023-09-05 23:01:12.867 UTC [34] LOG:  statement: SELECT 1
+2023-09-05 23:01:12.870 UTC [34] LOG:  execute s4: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-09-05 23:01:12.870 UTC [34] DETAIL:  parameters: $1 = 'ifce@gmail.com', $2 = '1', $3 = '0'
+2023-09-05 23:01:47.707 UTC [37] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-09-05 23:01:47.707 UTC [37] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:01:47.717 UTC [37] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-09-05 23:01:47.717 UTC [37] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:01:47.723 UTC [37] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-09-05 23:01:47.723 UTC [37] DETAIL:  parameters: $1 = 'ifce@gmail.com', $2 = '1', $3 = '0'
+2023-09-05 23:02:35.669 UTC [37] LOG:  statement: SELECT 1
+2023-09-05 23:02:35.671 UTC [37] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-09-05 23:02:35.671 UTC [37] DETAIL:  parameters: $1 = 'ifce@gmail.com', $2 = '1', $3 = '0'
+2023-09-05 23:02:50.091 UTC [37] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-09-05 23:02:50.091 UTC [37] DETAIL:  parameters: $1 = 'ifce@gmail.com', $2 = '1', $3 = '0'
+2023-09-05 23:03:02.875 UTC [37] LOG:  statement: SELECT 1
+2023-09-05 23:03:02.878 UTC [37] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-09-05 23:03:02.878 UTC [37] DETAIL:  parameters: $1 = 'jhon_italo@gmail.com', $2 = '1', $3 = '0'
+2023-09-05 23:03:16.059 UTC [37] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-09-05 23:03:16.059 UTC [37] DETAIL:  parameters: $1 = 'ifce@gmail.com', $2 = '1', $3 = '0'
+2023-09-05 23:04:07.195 UTC [37] LOG:  statement: SELECT 1
+2023-09-05 23:04:07.197 UTC [37] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-09-05 23:04:07.197 UTC [37] DETAIL:  parameters: $1 = 'ifce@gmail.com', $2 = '1', $3 = '0'
+2023-09-05 23:04:40.156 UTC [41] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-09-05 23:04:40.156 UTC [41] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:04:40.167 UTC [41] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-09-05 23:04:40.167 UTC [41] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:04:40.180 UTC [41] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-09-05 23:04:40.180 UTC [41] DETAIL:  parameters: $1 = 'ifce@gmail.com', $2 = '1', $3 = '0'
+2023-09-05 23:05:31.349 UTC [43] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-09-05 23:05:31.349 UTC [43] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:05:31.360 UTC [43] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-09-05 23:05:31.360 UTC [43] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:05:31.367 UTC [43] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-09-05 23:05:31.367 UTC [43] DETAIL:  parameters: $1 = 'ifce@gmail.com', $2 = '1', $3 = '0'
+2023-09-05 23:05:46.440 UTC [44] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-09-05 23:05:46.440 UTC [44] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:05:46.448 UTC [44] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-09-05 23:05:46.448 UTC [44] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:05:46.456 UTC [44] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-09-05 23:05:46.456 UTC [44] DETAIL:  parameters: $1 = 'ifce@gmail.com', $2 = '1', $3 = '0'
+2023-09-05 23:10:23.472 UTC [50] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-09-05 23:10:23.472 UTC [50] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:10:23.484 UTC [50] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-09-05 23:10:23.484 UTC [50] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:10:23.490 UTC [50] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-09-05 23:10:23.490 UTC [50] DETAIL:  parameters: $1 = 'ifce@gmail.com', $2 = '1', $3 = '0'
+2023-09-05 23:11:50.882 UTC [52] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-09-05 23:11:50.882 UTC [52] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:11:50.893 UTC [52] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-09-05 23:11:50.893 UTC [52] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:11:50.898 UTC [52] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-09-05 23:11:50.898 UTC [52] DETAIL:  parameters: $1 = 'ifce@gmail.com', $2 = '1', $3 = '0'
+2023-09-05 23:13:01.210 UTC [54] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-09-05 23:13:01.210 UTC [54] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:13:01.221 UTC [54] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-09-05 23:13:01.221 UTC [54] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:13:01.226 UTC [54] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-09-05 23:13:01.226 UTC [54] DETAIL:  parameters: $1 = 'ifce@gmail.com', $2 = '1', $3 = '0'
+2023-09-05 23:15:17.483 UTC [58] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-09-05 23:15:17.483 UTC [58] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:15:17.495 UTC [58] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-09-05 23:15:17.495 UTC [58] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:15:17.500 UTC [58] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."id" = $1 LIMIT $2 OFFSET $3
+2023-09-05 23:15:17.500 UTC [58] DETAIL:  parameters: $1 = 'id', $2 = '1', $3 = '0'
+2023-09-05 23:15:26.025 UTC [58] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."id" = $1 LIMIT $2 OFFSET $3
+2023-09-05 23:15:26.025 UTC [58] DETAIL:  parameters: $1 = 'id', $2 = '1', $3 = '0'
+2023-09-05 23:19:24.218 UTC [63] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-09-05 23:19:24.218 UTC [63] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:19:24.230 UTC [63] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-09-05 23:19:24.230 UTC [63] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:19:24.235 UTC [63] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-09-05 23:19:24.235 UTC [63] DETAIL:  parameters: $1 = 'ifce@gmail.com', $2 = '1', $3 = '0'
+2023-09-05 23:20:49.126 UTC [65] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-09-05 23:20:49.126 UTC [65] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:20:49.137 UTC [65] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-09-05 23:20:49.137 UTC [65] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:20:49.143 UTC [65] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-09-05 23:20:49.143 UTC [65] DETAIL:  parameters: $1 = 'ifce@gmail.com', $2 = '1', $3 = '0'
+2023-09-05 23:31:16.830 UTC [77] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-09-05 23:31:16.830 UTC [77] DETAIL:  parameters: $1 = '16419'
+2023-09-05 23:31:16.842 UTC [77] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-09-05 23:31:16.842 UTC [77] DETAIL:  parameters: $1 = '16419'
+2023-09-05 23:31:16.847 UTC [77] LOG:  execute s0: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE 1=1 OFFSET $1
+2023-09-05 23:31:16.847 UTC [77] DETAIL:  parameters: $1 = '0'
+2023-09-05 23:44:23.472 UTC [91] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-09-05 23:44:23.472 UTC [91] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:44:23.523 UTC [91] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-09-05 23:44:23.523 UTC [91] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:44:23.558 UTC [91] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-09-05 23:44:23.558 UTC [91] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-09-05 23:44:23.569 UTC [91] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-09-05 23:44:23.569 UTC [91] DETAIL:  parameters: $1 = '16419'
+2023-09-05 23:44:23.570 UTC [91] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-09-05 23:44:23.570 UTC [91] DETAIL:  parameters: $1 = '16419'
+2023-09-05 23:44:23.599 UTC [91] LOG:  execute s3: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE 1=1 OFFSET $1
+2023-09-05 23:44:23.599 UTC [91] DETAIL:  parameters: $1 = '0'
+2023-09-05 23:45:05.139 UTC [92] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-09-05 23:45:05.139 UTC [92] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:45:05.150 UTC [92] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-09-05 23:45:05.150 UTC [92] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:45:05.155 UTC [92] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-09-05 23:45:05.155 UTC [92] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-09-05 23:45:05.171 UTC [92] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-09-05 23:45:05.171 UTC [92] DETAIL:  parameters: $1 = '16419'
+2023-09-05 23:45:05.172 UTC [92] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-09-05 23:45:05.172 UTC [92] DETAIL:  parameters: $1 = '16419'
+2023-09-05 23:45:05.179 UTC [92] LOG:  execute s3: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE 1=1 OFFSET $1
+2023-09-05 23:45:05.179 UTC [92] DETAIL:  parameters: $1 = '0'
+2023-09-05 23:45:28.610 UTC [94] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-09-05 23:45:28.610 UTC [94] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:45:28.618 UTC [94] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-09-05 23:45:28.618 UTC [94] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:45:28.623 UTC [94] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-09-05 23:45:28.623 UTC [94] DETAIL:  parameters: $1 = '1', $2 = '1', $3 = '1', $4 = '1', $5 = '0'
+2023-09-05 23:45:28.635 UTC [94] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-09-05 23:45:28.635 UTC [94] DETAIL:  parameters: $1 = '16419'
+2023-09-05 23:45:28.636 UTC [94] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-09-05 23:45:28.636 UTC [94] DETAIL:  parameters: $1 = '16419'
+2023-09-05 23:45:28.642 UTC [94] LOG:  execute s3: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE 1=1 OFFSET $1
+2023-09-05 23:45:28.642 UTC [94] DETAIL:  parameters: $1 = '0'
+2023-09-05 23:45:43.766 UTC [94] LOG:  statement: SELECT 1
+2023-09-05 23:45:43.770 UTC [94] LOG:  execute s4: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-09-05 23:45:43.770 UTC [94] DETAIL:  parameters: $1 = 'jhon_italo@gmail.com', $2 = '1', $3 = '0'
+2023-09-05 23:57:02.904 UTC [110] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-09-05 23:57:02.904 UTC [110] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:57:02.913 UTC [110] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-09-05 23:57:02.913 UTC [110] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:57:02.919 UTC [110] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-09-05 23:57:02.919 UTC [110] DETAIL:  parameters: $1 = '3c39faa8-1c9d-4e0c-9118-21225f728090', $2 = '3c39faa8-1c9d-4e0c-9118-21225f728090', $3 = '9999', $4 = '1', $5 = '0'
+2023-09-05 23:58:41.774 UTC [113] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-09-05 23:58:41.774 UTC [113] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:58:41.784 UTC [113] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-09-05 23:58:41.784 UTC [113] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:58:41.789 UTC [113] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-09-05 23:58:41.789 UTC [113] DETAIL:  parameters: $1 = '3c39faa8-1c9d-4e0c-9118-21225f728090', $2 = '3c39faa8-1c9d-4e0c-9118-21225f728090', $3 = '9999', $4 = '1', $5 = '0'
+2023-09-05 23:59:37.328 UTC [115] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-09-05 23:59:37.328 UTC [115] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:59:37.385 UTC [115] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-09-05 23:59:37.385 UTC [115] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:59:58.471 UTC [116] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-09-05 23:59:58.471 UTC [116] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:59:58.480 UTC [116] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-09-05 23:59:58.480 UTC [116] DETAIL:  parameters: $1 = '16537'
+2023-09-05 23:59:58.486 UTC [116] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE ("public"."User"."id_aluno" = $1 OR "public"."User"."id_professor" = $2 OR "public"."User"."id_departamento" = $3) LIMIT $4 OFFSET $5
+2023-09-05 23:59:58.486 UTC [116] DETAIL:  parameters: $1 = '3c39faa8-1c9d-4e0c-9118-21225f728090', $2 = '3c39faa8-1c9d-4e0c-9118-21225f728090', $3 = '999999999', $4 = '1', $5 = '0'

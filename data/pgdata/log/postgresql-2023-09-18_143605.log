@@ -1,0 +1,19 @@
+2023-09-18 14:36:05.841 UTC [1] LOG:  starting PostgreSQL 15.3 (Debian 15.3-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+2023-09-18 14:36:05.842 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2023-09-18 14:36:05.842 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2023-09-18 14:36:05.881 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2023-09-18 14:36:05.986 UTC [30] LOG:  database system was interrupted; last known up at 2023-09-13 14:20:56 UTC
+2023-09-18 14:36:16.007 UTC [30] LOG:  syncing data directory (pre-fsync), elapsed time: 10.01 s, current path: ./base/16906/3602
+2023-09-18 14:36:29.337 UTC [30] LOG:  database system was not properly shut down; automatic recovery in progress
+2023-09-18 14:36:29.404 UTC [30] LOG:  redo starts at 0/AD98B68
+2023-09-18 14:36:29.405 UTC [30] LOG:  invalid record length at 0/AD98C50: wanted 24, got 0
+2023-09-18 14:36:29.405 UTC [30] LOG:  redo done at 0/AD98C18 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2023-09-18 14:36:29.490 UTC [28] LOG:  checkpoint starting: end-of-recovery immediate wait
+2023-09-18 14:36:29.589 UTC [28] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.021 s, sync=0.014 s, total=0.103 s; sync files=3, longest=0.006 s, average=0.005 s; distance=0 kB, estimate=0 kB
+2023-09-18 14:36:29.626 UTC [1] LOG:  database system is ready to accept connections
+2023-09-18 14:38:47.422 UTC [1] LOG:  received fast shutdown request
+2023-09-18 14:38:47.428 UTC [1] LOG:  aborting any active transactions
+2023-09-18 14:38:47.433 UTC [1] LOG:  background worker "logical replication launcher" (PID 33) exited with exit code 1
+2023-09-18 14:38:47.433 UTC [28] LOG:  shutting down
+2023-09-18 14:38:47.441 UTC [28] LOG:  checkpoint starting: shutdown immediate
+2023-09-18 14:38:47.550 UTC [28] LOG:  checkpoint complete: wrote 0 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.021 s, sync=0.001 s, total=0.117 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=0 kB

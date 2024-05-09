@@ -1,0 +1,13 @@
+2023-07-10 19:11:14.723 UTC [1] LOG:  starting PostgreSQL 15.3 (Debian 15.3-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+2023-07-10 19:11:14.727 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2023-07-10 19:11:14.727 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2023-07-10 19:11:14.756 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2023-07-10 19:11:14.838 UTC [31] LOG:  database system was interrupted; last known up at 2023-07-10 14:49:25 UTC
+2023-07-10 19:11:24.852 UTC [31] LOG:  syncing data directory (pre-fsync), elapsed time: 10.00 s, current path: ./base/4/13393_fsm
+2023-07-10 19:11:38.171 UTC [31] LOG:  database system was not properly shut down; automatic recovery in progress
+2023-07-10 19:11:38.259 UTC [31] LOG:  redo starts at 0/4A7FAF0
+2023-07-10 19:11:38.301 UTC [31] LOG:  invalid record length at 0/4A82E38: wanted 24, got 0
+2023-07-10 19:11:38.301 UTC [31] LOG:  redo done at 0/4A82E00 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.04 s
+2023-07-10 19:11:38.436 UTC [29] LOG:  checkpoint starting: end-of-recovery immediate wait
+2023-07-10 19:11:38.609 UTC [29] LOG:  checkpoint complete: wrote 11 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.045 s, sync=0.028 s, total=0.179 s; sync files=12, longest=0.008 s, average=0.003 s; distance=12 kB, estimate=12 kB
+2023-07-10 19:11:38.756 UTC [1] LOG:  database system is ready to accept connections

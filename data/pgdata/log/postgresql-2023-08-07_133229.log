@@ -1,0 +1,1244 @@
+2023-08-07 13:32:29.733 UTC [1] LOG:  starting PostgreSQL 15.3 (Debian 15.3-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+2023-08-07 13:32:29.739 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2023-08-07 13:32:29.739 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2023-08-07 13:32:29.765 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2023-08-07 13:32:29.867 UTC [31] LOG:  database system was interrupted; last known up at 2023-08-05 14:53:01 UTC
+2023-08-07 13:32:39.898 UTC [31] LOG:  syncing data directory (pre-fsync), elapsed time: 10.02 s, current path: ./base/1/2675
+2023-08-07 13:32:50.028 UTC [31] LOG:  syncing data directory (pre-fsync), elapsed time: 20.15 s, current path: ./base/1/3258
+2023-08-07 13:32:59.889 UTC [31] LOG:  syncing data directory (pre-fsync), elapsed time: 30.01 s, current path: ./base/16384/2612_fsm
+2023-08-07 13:33:09.891 UTC [31] LOG:  syncing data directory (pre-fsync), elapsed time: 40.01 s, current path: ./base/16906/3456_fsm
+2023-08-07 13:33:19.969 UTC [31] LOG:  syncing data directory (pre-fsync), elapsed time: 50.09 s, current path: ./log/postgresql-2023-07-05_132406.log
+2023-08-07 13:33:30.740 UTC [31] LOG:  database system was not properly shut down; automatic recovery in progress
+2023-08-07 13:33:30.961 UTC [31] LOG:  redo starts at 0/76FF010
+2023-08-07 13:33:31.131 UTC [31] LOG:  invalid record length at 0/76FF8E8: wanted 24, got 0
+2023-08-07 13:33:31.131 UTC [31] LOG:  redo done at 0/76FF8B0 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.18 s
+2023-08-07 13:33:31.380 UTC [29] LOG:  checkpoint starting: end-of-recovery immediate wait
+2023-08-07 13:33:31.902 UTC [29] LOG:  checkpoint complete: wrote 6 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.183 s, sync=0.184 s, total=0.536 s; sync files=7, longest=0.032 s, average=0.027 s; distance=2 kB, estimate=2 kB
+2023-08-07 13:33:31.981 UTC [1] LOG:  database system is ready to accept connections
+2023-08-07 13:34:11.459 UTC [35] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 13:34:11.459 UTC [35] DETAIL:  parameters: $1 = '16419'
+2023-08-07 13:34:11.525 UTC [35] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 13:34:11.525 UTC [35] DETAIL:  parameters: $1 = '16419'
+2023-08-07 13:34:11.581 UTC [35] LOG:  execute s0: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE 1=1 OFFSET $1
+2023-08-07 13:34:11.581 UTC [35] DETAIL:  parameters: $1 = '0'
+2023-08-07 13:34:34.681 UTC [35] LOG:  statement: SELECT 1
+2023-08-07 13:34:34.710 UTC [35] LOG:  execute s3: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:34:34.710 UTC [35] DETAIL:  parameters: $1 = '5e30c245-a0a1-4562-ba6a-679507c6fb0d', $2 = '1', $3 = '0'
+2023-08-07 13:34:34.718 UTC [35] LOG:  statement: BEGIN
+2023-08-07 13:34:34.723 UTC [35] LOG:  execute s4: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE ("public"."Professor"."id" = $1 AND 1=1) LIMIT $2 OFFSET $3
+2023-08-07 13:34:34.723 UTC [35] DETAIL:  parameters: $1 = '5e30c245-a0a1-4562-ba6a-679507c6fb0d', $2 = '1', $3 = '0'
+2023-08-07 13:34:34.729 UTC [35] LOG:  execute s5: SELECT "public"."Professor"."id" FROM "public"."Professor" WHERE ("public"."Professor"."id" = $1 AND 1=1)
+2023-08-07 13:34:34.729 UTC [35] DETAIL:  parameters: $1 = '5e30c245-a0a1-4562-ba6a-679507c6fb0d'
+2023-08-07 13:34:34.736 UTC [35] LOG:  execute s6: DELETE FROM "public"."Professor" WHERE ("public"."Professor"."id" IN ($1) AND ("public"."Professor"."id" = $2 AND 1=1))
+2023-08-07 13:34:34.736 UTC [35] DETAIL:  parameters: $1 = '5e30c245-a0a1-4562-ba6a-679507c6fb0d', $2 = '5e30c245-a0a1-4562-ba6a-679507c6fb0d'
+2023-08-07 13:34:34.778 UTC [35] LOG:  statement: COMMIT
+2023-08-07 13:34:40.042 UTC [35] LOG:  execute s0: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE 1=1 OFFSET $1
+2023-08-07 13:34:40.042 UTC [35] DETAIL:  parameters: $1 = '0'
+2023-08-07 13:34:52.655 UTC [35] LOG:  statement: SELECT 1
+2023-08-07 13:34:52.660 UTC [35] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 13:34:52.660 UTC [35] DETAIL:  parameters: $1 = '16537'
+2023-08-07 13:34:52.662 UTC [35] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 13:34:52.662 UTC [35] DETAIL:  parameters: $1 = '16537'
+2023-08-07 13:34:52.665 UTC [35] LOG:  execute s7: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:34:52.665 UTC [35] DETAIL:  parameters: $1 = 'reinaldo@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 13:34:52.674 UTC [35] LOG:  execute s8: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."cpf" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:34:52.674 UTC [35] DETAIL:  parameters: $1 = '06806374352', $2 = '1', $3 = '0'
+2023-08-07 13:34:52.679 UTC [35] LOG:  execute s9: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:34:52.679 UTC [35] DETAIL:  parameters: $1 = 'reinaldo@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 13:34:52.805 UTC [35] LOG:  statement: BEGIN
+2023-08-07 13:34:52.818 UTC [35] LOG:  execute s10: SELECT "public"."Departamento"."id" FROM "public"."Departamento" WHERE ("public"."Departamento"."id" = $1 AND 1=1) OFFSET $2
+2023-08-07 13:34:52.818 UTC [35] DETAIL:  parameters: $1 = '1', $2 = '0'
+2023-08-07 13:34:52.832 UTC [35] LOG:  execute s11: INSERT INTO "public"."Professor" ("id","nome","email","cpf","sexo","telefone","createt_at","id_departamento") VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING "public"."Professor"."id"
+2023-08-07 13:34:52.832 UTC [35] DETAIL:  parameters: $1 = 'fa9035f4-a3e1-496a-9f5f-60c0ae06c880', $2 = 'reinaldo', $3 = 'reinaldo@gmail.com', $4 = '06806374352', $5 = 'M', $6 = '0000', $7 = '2023-08-07 13:34:52.803', $8 = '1'
+2023-08-07 13:34:52.837 UTC [35] LOG:  execute s12: INSERT INTO "public"."User" ("id","email","password","status","id_professor") VALUES ($1,$2,$3,$4,$5) RETURNING "public"."User"."id"
+2023-08-07 13:34:52.837 UTC [35] DETAIL:  parameters: $1 = '3756c9ad-a131-4a48-a80f-7e1145594e3f', $2 = 'reinaldo@gmail.com', $3 = '$2b$10$E4pF66FGEnH26RY0RaQ6MeFfBeDsDVP4QkNk0lgXJdQpHo8UP77/S', $4 = 'professor', $5 = 'fa9035f4-a3e1-496a-9f5f-60c0ae06c880'
+2023-08-07 13:34:52.842 UTC [35] LOG:  execute s3: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:34:52.842 UTC [35] DETAIL:  parameters: $1 = 'fa9035f4-a3e1-496a-9f5f-60c0ae06c880', $2 = '1', $3 = '0'
+2023-08-07 13:34:52.844 UTC [35] LOG:  statement: COMMIT
+2023-08-07 13:37:11.881 UTC [35] LOG:  statement: SELECT 1
+2023-08-07 13:37:11.884 UTC [35] LOG:  execute s0: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE 1=1 OFFSET $1
+2023-08-07 13:37:11.884 UTC [35] DETAIL:  parameters: $1 = '0'
+2023-08-07 13:37:19.265 UTC [35] LOG:  execute s7: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:37:19.265 UTC [35] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 13:37:19.269 UTC [35] LOG:  execute s3: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:37:19.269 UTC [35] DETAIL:  parameters: $1 = '5e30c245-a0a1-4562-ba6a-679507c6fb0d', $2 = '1', $3 = '0'
+2023-08-07 13:37:32.933 UTC [35] LOG:  statement: SELECT 1
+2023-08-07 13:37:32.938 UTC [35] LOG:  execute s7: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:37:32.938 UTC [35] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 13:37:32.941 UTC [35] LOG:  execute s3: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:37:32.941 UTC [35] DETAIL:  parameters: $1 = 'fa9035f4-a3e1-496a-9f5f-60c0ae06c880', $2 = '1', $3 = '0'
+2023-08-07 13:37:32.945 UTC [35] LOG:  execute s9: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:37:32.945 UTC [35] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 13:37:32.950 UTC [35] LOG:  statement: BEGIN
+2023-08-07 13:37:32.954 UTC [35] LOG:  execute s5: SELECT "public"."Professor"."id" FROM "public"."Professor" WHERE ("public"."Professor"."id" = $1 AND 1=1)
+2023-08-07 13:37:32.954 UTC [35] DETAIL:  parameters: $1 = 'fa9035f4-a3e1-496a-9f5f-60c0ae06c880'
+2023-08-07 13:37:32.958 UTC [35] LOG:  execute s13: UPDATE "public"."Professor" SET "nome" = $1, "email" = $2, "sexo" = $3, "telefone" = $4 WHERE ("public"."Professor"."id" IN ($5) AND ("public"."Professor"."id" = $6 AND 1=1))
+2023-08-07 13:37:32.958 UTC [35] DETAIL:  parameters: $1 = 'reinaldo braga', $2 = 'reinaldoBraga@gmail.com', $3 = 'F', $4 = '11111', $5 = 'fa9035f4-a3e1-496a-9f5f-60c0ae06c880', $6 = 'fa9035f4-a3e1-496a-9f5f-60c0ae06c880'
+2023-08-07 13:37:32.962 UTC [35] LOG:  execute s14: SELECT "public"."User"."id", "public"."User"."id_professor" FROM "public"."User" WHERE (("public"."User"."email" = $1 AND 1=1) AND "public"."User"."id_professor" IN ($2)) OFFSET $3
+2023-08-07 13:37:32.962 UTC [35] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = 'fa9035f4-a3e1-496a-9f5f-60c0ae06c880', $3 = '0'
+2023-08-07 13:37:32.964 UTC [35] LOG:  statement: ROLLBACK
+2023-08-07 13:38:31.996 UTC [29] LOG:  checkpoint starting: time
+2023-08-07 13:38:33.080 UTC [29] LOG:  checkpoint complete: wrote 9 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.953 s, sync=0.033 s, total=1.085 s; sync files=9, longest=0.015 s, average=0.004 s; distance=7 kB, estimate=7 kB
+2023-08-07 13:42:02.821 UTC [44] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 13:42:02.821 UTC [44] DETAIL:  parameters: $1 = '16537'
+2023-08-07 13:42:02.858 UTC [44] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 13:42:02.858 UTC [44] DETAIL:  parameters: $1 = '16537'
+2023-08-07 13:42:02.865 UTC [44] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:42:02.865 UTC [44] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 13:42:02.875 UTC [44] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 13:42:02.875 UTC [44] DETAIL:  parameters: $1 = '16419'
+2023-08-07 13:42:02.877 UTC [44] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 13:42:02.877 UTC [44] DETAIL:  parameters: $1 = '16419'
+2023-08-07 13:42:02.888 UTC [44] LOG:  execute s3: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:42:02.888 UTC [44] DETAIL:  parameters: $1 = 'fa9035f4-a3e1-496a-9f5f-60c0ae06c880', $2 = '1', $3 = '0'
+2023-08-07 13:42:02.895 UTC [44] LOG:  execute s4: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:42:02.895 UTC [44] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 13:42:02.910 UTC [44] LOG:  statement: BEGIN
+2023-08-07 13:42:02.913 UTC [44] LOG:  execute s5: SELECT "public"."Professor"."id" FROM "public"."Professor" WHERE ("public"."Professor"."id" = $1 AND 1=1)
+2023-08-07 13:42:02.913 UTC [44] DETAIL:  parameters: $1 = 'fa9035f4-a3e1-496a-9f5f-60c0ae06c880'
+2023-08-07 13:42:02.919 UTC [44] LOG:  execute s6: UPDATE "public"."Professor" SET "nome" = $1, "email" = $2, "sexo" = $3, "telefone" = $4 WHERE ("public"."Professor"."id" IN ($5) AND ("public"."Professor"."id" = $6 AND 1=1))
+2023-08-07 13:42:02.919 UTC [44] DETAIL:  parameters: $1 = 'reinaldo braga', $2 = 'reinaldoBraga@gmail.com', $3 = 'F', $4 = '11111', $5 = 'fa9035f4-a3e1-496a-9f5f-60c0ae06c880', $6 = 'fa9035f4-a3e1-496a-9f5f-60c0ae06c880'
+2023-08-07 13:42:02.926 UTC [44] LOG:  execute s7: SELECT "public"."User"."id", "public"."User"."id_professor" FROM "public"."User" WHERE (("public"."User"."email" = $1 AND 1=1) AND "public"."User"."id_professor" IN ($2)) OFFSET $3
+2023-08-07 13:42:02.926 UTC [44] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = 'fa9035f4-a3e1-496a-9f5f-60c0ae06c880', $3 = '0'
+2023-08-07 13:42:02.928 UTC [44] LOG:  statement: ROLLBACK
+2023-08-07 13:43:31.168 UTC [29] LOG:  checkpoint starting: time
+2023-08-07 13:43:32.050 UTC [29] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.517 s, sync=0.015 s, total=0.883 s; sync files=5, longest=0.007 s, average=0.003 s; distance=3 kB, estimate=7 kB
+2023-08-07 13:43:45.927 UTC [47] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 13:43:45.927 UTC [47] DETAIL:  parameters: $1 = '16537'
+2023-08-07 13:43:45.937 UTC [47] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 13:43:45.937 UTC [47] DETAIL:  parameters: $1 = '16537'
+2023-08-07 13:43:45.946 UTC [47] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:43:45.946 UTC [47] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 13:43:45.954 UTC [47] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 13:43:45.954 UTC [47] DETAIL:  parameters: $1 = '16419'
+2023-08-07 13:43:45.956 UTC [47] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 13:43:45.956 UTC [47] DETAIL:  parameters: $1 = '16419'
+2023-08-07 13:43:45.965 UTC [47] LOG:  execute s3: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:43:45.965 UTC [47] DETAIL:  parameters: $1 = 'fa9035f4-a3e1-496a-9f5f-60c0ae06c880', $2 = '1', $3 = '0'
+2023-08-07 13:43:45.973 UTC [47] LOG:  execute s4: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:43:45.973 UTC [47] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 13:43:45.988 UTC [47] LOG:  statement: BEGIN
+2023-08-07 13:43:45.994 UTC [47] LOG:  execute s5: SELECT "public"."Professor"."id" FROM "public"."Professor" WHERE ("public"."Professor"."id" = $1 AND 1=1)
+2023-08-07 13:43:45.994 UTC [47] DETAIL:  parameters: $1 = 'fa9035f4-a3e1-496a-9f5f-60c0ae06c880'
+2023-08-07 13:43:46.000 UTC [47] LOG:  execute s6: UPDATE "public"."Professor" SET "nome" = $1, "email" = $2, "sexo" = $3, "telefone" = $4 WHERE ("public"."Professor"."id" IN ($5) AND ("public"."Professor"."id" = $6 AND 1=1))
+2023-08-07 13:43:46.000 UTC [47] DETAIL:  parameters: $1 = 'reinaldo braga', $2 = 'reinaldoBraga@gmail.com', $3 = 'F', $4 = '11111', $5 = 'fa9035f4-a3e1-496a-9f5f-60c0ae06c880', $6 = 'fa9035f4-a3e1-496a-9f5f-60c0ae06c880'
+2023-08-07 13:43:46.006 UTC [47] LOG:  execute s7: SELECT "public"."User"."id", "public"."User"."id_professor" FROM "public"."User" WHERE (("public"."User"."email" = $1 AND 1=1) AND "public"."User"."id_professor" IN ($2)) OFFSET $3
+2023-08-07 13:43:46.006 UTC [47] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = 'fa9035f4-a3e1-496a-9f5f-60c0ae06c880', $3 = '0'
+2023-08-07 13:43:46.008 UTC [47] LOG:  statement: ROLLBACK
+2023-08-07 13:48:31.110 UTC [29] LOG:  checkpoint starting: time
+2023-08-07 13:48:31.600 UTC [29] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.424 s, sync=0.009 s, total=0.491 s; sync files=5, longest=0.004 s, average=0.002 s; distance=3 kB, estimate=6 kB
+2023-08-07 13:48:49.775 UTC [53] LOG:  execute s9: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 13:48:49.775 UTC [53] DETAIL:  parameters: $1 = '16419'
+2023-08-07 13:48:49.786 UTC [53] LOG:  execute s10: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 13:48:49.786 UTC [53] DETAIL:  parameters: $1 = '16419'
+2023-08-07 13:48:49.795 UTC [53] LOG:  execute s8: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE 1=1 OFFSET $1
+2023-08-07 13:48:49.795 UTC [53] DETAIL:  parameters: $1 = '0'
+2023-08-07 13:51:24.347 UTC [56] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 13:51:24.347 UTC [56] DETAIL:  parameters: $1 = '16537'
+2023-08-07 13:51:24.355 UTC [56] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 13:51:24.355 UTC [56] DETAIL:  parameters: $1 = '16537'
+2023-08-07 13:51:24.362 UTC [56] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:51:24.362 UTC [56] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 13:51:24.370 UTC [56] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 13:51:24.370 UTC [56] DETAIL:  parameters: $1 = '16419'
+2023-08-07 13:51:24.372 UTC [56] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 13:51:24.372 UTC [56] DETAIL:  parameters: $1 = '16419'
+2023-08-07 13:51:24.380 UTC [56] LOG:  execute s3: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:51:24.380 UTC [56] DETAIL:  parameters: $1 = 'fa9035f4-a3e1-496a-9f5f-60c0ae06c880', $2 = '1', $3 = '0'
+2023-08-07 13:51:24.387 UTC [56] LOG:  execute s4: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:51:24.387 UTC [56] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 13:51:24.406 UTC [56] LOG:  statement: BEGIN
+2023-08-07 13:51:24.412 UTC [56] LOG:  execute s5: SELECT "public"."Professor"."id" FROM "public"."Professor" WHERE ("public"."Professor"."id" = $1 AND 1=1)
+2023-08-07 13:51:24.412 UTC [56] DETAIL:  parameters: $1 = 'fa9035f4-a3e1-496a-9f5f-60c0ae06c880'
+2023-08-07 13:51:24.418 UTC [56] LOG:  execute s6: UPDATE "public"."Professor" SET "nome" = $1, "email" = $2, "sexo" = $3, "telefone" = $4 WHERE ("public"."Professor"."id" IN ($5) AND ("public"."Professor"."id" = $6 AND 1=1))
+2023-08-07 13:51:24.418 UTC [56] DETAIL:  parameters: $1 = 'reinaldo braga', $2 = 'reinaldoBraga@gmail.com', $3 = 'F', $4 = '11111', $5 = 'fa9035f4-a3e1-496a-9f5f-60c0ae06c880', $6 = 'fa9035f4-a3e1-496a-9f5f-60c0ae06c880'
+2023-08-07 13:51:24.424 UTC [56] LOG:  execute s7: SELECT "public"."User"."id", "public"."User"."id_professor" FROM "public"."User" WHERE (("public"."User"."email" = $1 AND 1=1) AND "public"."User"."id_professor" IN ($2)) OFFSET $3
+2023-08-07 13:51:24.424 UTC [56] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = 'fa9035f4-a3e1-496a-9f5f-60c0ae06c880', $3 = '0'
+2023-08-07 13:51:24.428 UTC [56] LOG:  statement: ROLLBACK
+2023-08-07 13:53:31.631 UTC [29] LOG:  checkpoint starting: time
+2023-08-07 13:53:32.116 UTC [29] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.423 s, sync=0.009 s, total=0.485 s; sync files=5, longest=0.005 s, average=0.002 s; distance=3 kB, estimate=6 kB
+2023-08-07 13:55:30.004 UTC [61] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 13:55:30.004 UTC [61] DETAIL:  parameters: $1 = '16419'
+2023-08-07 13:55:30.014 UTC [61] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 13:55:30.014 UTC [61] DETAIL:  parameters: $1 = '16419'
+2023-08-07 13:55:30.020 UTC [61] LOG:  execute s0: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE 1=1 OFFSET $1
+2023-08-07 13:55:30.020 UTC [61] DETAIL:  parameters: $1 = '0'
+2023-08-07 13:55:35.722 UTC [61] LOG:  execute s0: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE 1=1 OFFSET $1
+2023-08-07 13:55:35.722 UTC [61] DETAIL:  parameters: $1 = '0'
+2023-08-07 13:56:04.799 UTC [61] LOG:  statement: SELECT 1
+2023-08-07 13:56:04.804 UTC [61] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 13:56:04.804 UTC [61] DETAIL:  parameters: $1 = '16537'
+2023-08-07 13:56:04.807 UTC [61] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 13:56:04.807 UTC [61] DETAIL:  parameters: $1 = '16537'
+2023-08-07 13:56:04.813 UTC [61] LOG:  execute s3: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:56:04.813 UTC [61] DETAIL:  parameters: $1 = 'jhon_italo@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 13:56:04.841 UTC [61] LOG:  execute s4: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:56:04.841 UTC [61] DETAIL:  parameters: $1 = 'a8e05205-a3ec-4a82-974c-bc536dadfe13', $2 = '1', $3 = '0'
+2023-08-07 13:56:09.214 UTC [61] LOG:  execute s5: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE 1=1 OFFSET $1
+2023-08-07 13:56:09.214 UTC [61] DETAIL:  parameters: $1 = '0'
+2023-08-07 13:56:46.714 UTC [61] LOG:  statement: SELECT 1
+2023-08-07 13:56:46.716 UTC [61] LOG:  execute s3: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:56:46.716 UTC [61] DETAIL:  parameters: $1 = 'jhon_italo2@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 13:56:46.721 UTC [61] LOG:  execute s4: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:56:46.721 UTC [61] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1', $3 = '0'
+2023-08-07 13:56:46.726 UTC [61] LOG:  execute s6: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:56:46.726 UTC [61] DETAIL:  parameters: $1 = 'jhon_italo2@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 13:56:46.730 UTC [61] LOG:  statement: BEGIN
+2023-08-07 13:56:46.734 UTC [61] LOG:  execute s7: SELECT "public"."Aluno"."id" FROM "public"."Aluno" WHERE ("public"."Aluno"."id" = $1 AND 1=1)
+2023-08-07 13:56:46.734 UTC [61] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-07 13:56:46.739 UTC [61] LOG:  execute s8: UPDATE "public"."Aluno" SET "email" = $1, "sexo" = $2, "telefone" = $3 WHERE ("public"."Aluno"."id" IN ($4) AND ("public"."Aluno"."id" = $5 AND 1=1))
+2023-08-07 13:56:46.739 UTC [61] DETAIL:  parameters: $1 = 'jhon_italo2@gmail.com', $2 = 'F', $3 = '4321', $4 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $5 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-07 13:56:46.744 UTC [61] LOG:  execute s9: SELECT "public"."User"."id", "public"."User"."id_aluno" FROM "public"."User" WHERE (("public"."User"."email" = $1 AND 1=1) AND "public"."User"."id_aluno" IN ($2)) OFFSET $3
+2023-08-07 13:56:46.744 UTC [61] DETAIL:  parameters: $1 = 'jhon@gmail.com', $2 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $3 = '0'
+2023-08-07 13:56:46.747 UTC [61] LOG:  execute s10: UPDATE "public"."User" SET "email" = $1 WHERE ("public"."User"."id" IN ($2) AND ("public"."User"."email" = $3 AND 1=1))
+2023-08-07 13:56:46.747 UTC [61] DETAIL:  parameters: $1 = 'jhon_italo2@gmail.com', $2 = '28087502-247f-4580-80c7-79d7722dda34', $3 = 'jhon@gmail.com'
+2023-08-07 13:56:46.749 UTC [61] LOG:  execute s4: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:56:46.749 UTC [61] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1', $3 = '0'
+2023-08-07 13:56:46.751 UTC [61] LOG:  statement: COMMIT
+2023-08-07 13:56:46.768 UTC [61] LOG:  execute s4: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:56:46.768 UTC [61] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1', $3 = '0'
+2023-08-07 13:57:06.084 UTC [61] LOG:  statement: SELECT 1
+2023-08-07 13:57:06.087 UTC [61] LOG:  execute s4: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:57:06.087 UTC [61] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1', $3 = '0'
+2023-08-07 13:57:06.092 UTC [61] LOG:  statement: BEGIN
+2023-08-07 13:57:06.093 UTC [61] LOG:  execute s7: SELECT "public"."Aluno"."id" FROM "public"."Aluno" WHERE ("public"."Aluno"."id" = $1 AND 1=1)
+2023-08-07 13:57:06.093 UTC [61] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-07 13:57:06.097 UTC [61] LOG:  execute s11: UPDATE "public"."Aluno" SET "nome" = $1 WHERE ("public"."Aluno"."id" IN ($2) AND ("public"."Aluno"."id" = $3 AND 1=1))
+2023-08-07 13:57:06.097 UTC [61] DETAIL:  parameters: $1 = 'john italo', $2 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $3 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-07 13:57:06.098 UTC [61] LOG:  execute s9: SELECT "public"."User"."id", "public"."User"."id_aluno" FROM "public"."User" WHERE (("public"."User"."email" = $1 AND 1=1) AND "public"."User"."id_aluno" IN ($2)) OFFSET $3
+2023-08-07 13:57:06.098 UTC [61] DETAIL:  parameters: $1 = 'jhon_italo2@gmail.com', $2 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $3 = '0'
+2023-08-07 13:57:06.102 UTC [61] LOG:  execute s4: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:57:06.102 UTC [61] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1', $3 = '0'
+2023-08-07 13:57:06.104 UTC [61] LOG:  statement: COMMIT
+2023-08-07 13:57:06.110 UTC [61] LOG:  execute s4: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:57:06.110 UTC [61] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1', $3 = '0'
+2023-08-07 13:58:28.050 UTC [61] LOG:  statement: SELECT 1
+2023-08-07 13:58:28.052 UTC [61] LOG:  execute s0: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE 1=1 OFFSET $1
+2023-08-07 13:58:28.052 UTC [61] DETAIL:  parameters: $1 = '0'
+2023-08-07 13:58:31.195 UTC [29] LOG:  checkpoint starting: time
+2023-08-07 13:58:31.782 UTC [29] LOG:  checkpoint complete: wrote 6 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.524 s, sync=0.011 s, total=0.587 s; sync files=6, longest=0.005 s, average=0.002 s; distance=11 kB, estimate=11 kB
+2023-08-07 13:58:45.871 UTC [61] LOG:  statement: SELECT 1
+2023-08-07 13:58:45.875 UTC [61] LOG:  execute s12: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:58:45.875 UTC [61] DETAIL:  parameters: $1 = 'fa9035f4-a3e1-496a-9f5f-60c0ae06c880', $2 = '1', $3 = '0'
+2023-08-07 13:58:45.880 UTC [61] LOG:  statement: BEGIN
+2023-08-07 13:58:45.884 UTC [61] LOG:  execute s13: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE ("public"."Professor"."id" = $1 AND 1=1) LIMIT $2 OFFSET $3
+2023-08-07 13:58:45.884 UTC [61] DETAIL:  parameters: $1 = 'fa9035f4-a3e1-496a-9f5f-60c0ae06c880', $2 = '1', $3 = '0'
+2023-08-07 13:58:45.887 UTC [61] LOG:  execute s14: SELECT "public"."Professor"."id" FROM "public"."Professor" WHERE ("public"."Professor"."id" = $1 AND 1=1)
+2023-08-07 13:58:45.887 UTC [61] DETAIL:  parameters: $1 = 'fa9035f4-a3e1-496a-9f5f-60c0ae06c880'
+2023-08-07 13:58:45.891 UTC [61] LOG:  execute s15: DELETE FROM "public"."Professor" WHERE ("public"."Professor"."id" IN ($1) AND ("public"."Professor"."id" = $2 AND 1=1))
+2023-08-07 13:58:45.891 UTC [61] DETAIL:  parameters: $1 = 'fa9035f4-a3e1-496a-9f5f-60c0ae06c880', $2 = 'fa9035f4-a3e1-496a-9f5f-60c0ae06c880'
+2023-08-07 13:58:45.906 UTC [61] LOG:  statement: COMMIT
+2023-08-07 13:58:48.984 UTC [61] LOG:  execute s0: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE 1=1 OFFSET $1
+2023-08-07 13:58:48.984 UTC [61] DETAIL:  parameters: $1 = '0'
+2023-08-07 13:58:51.591 UTC [61] LOG:  execute s3: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:58:51.591 UTC [61] DETAIL:  parameters: $1 = 'reinaldo@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 13:58:51.598 UTC [61] LOG:  execute s16: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."cpf" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:58:51.598 UTC [61] DETAIL:  parameters: $1 = '06806374352', $2 = '1', $3 = '0'
+2023-08-07 13:58:51.605 UTC [61] LOG:  execute s17: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:58:51.605 UTC [61] DETAIL:  parameters: $1 = 'reinaldo@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 13:58:51.728 UTC [61] LOG:  statement: BEGIN
+2023-08-07 13:58:51.762 UTC [61] LOG:  execute s18: SELECT "public"."Departamento"."id" FROM "public"."Departamento" WHERE ("public"."Departamento"."id" = $1 AND 1=1) OFFSET $2
+2023-08-07 13:58:51.762 UTC [61] DETAIL:  parameters: $1 = '1', $2 = '0'
+2023-08-07 13:58:51.767 UTC [61] LOG:  execute s19: INSERT INTO "public"."Professor" ("id","nome","email","cpf","sexo","telefone","createt_at","id_departamento") VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING "public"."Professor"."id"
+2023-08-07 13:58:51.767 UTC [61] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34', $2 = 'reinaldo', $3 = 'reinaldo@gmail.com', $4 = '06806374352', $5 = 'M', $6 = '0000', $7 = '2023-08-07 13:58:51.726', $8 = '1'
+2023-08-07 13:58:51.772 UTC [61] LOG:  execute s20: INSERT INTO "public"."User" ("id","email","password","status","id_professor") VALUES ($1,$2,$3,$4,$5) RETURNING "public"."User"."id"
+2023-08-07 13:58:51.772 UTC [61] DETAIL:  parameters: $1 = '37369c88-19b0-4ce5-af72-9bd6ff957da5', $2 = 'reinaldo@gmail.com', $3 = '$2b$10$JAQYo6FngKfjp7vpQ5eOo.MRIzzCmFEIO.dhymXlSqcUh7EiFiO6i', $4 = 'professor', $5 = '1e9653fe-020b-496d-96b4-552fcb950e34'
+2023-08-07 13:58:51.777 UTC [61] LOG:  execute s12: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:58:51.777 UTC [61] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34', $2 = '1', $3 = '0'
+2023-08-07 13:58:51.779 UTC [61] LOG:  statement: COMMIT
+2023-08-07 13:59:09.255 UTC [61] LOG:  statement: SELECT 1
+2023-08-07 13:59:09.257 UTC [61] LOG:  execute s3: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:59:09.257 UTC [61] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 13:59:09.263 UTC [61] LOG:  execute s12: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:59:09.263 UTC [61] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34', $2 = '1', $3 = '0'
+2023-08-07 13:59:09.267 UTC [61] LOG:  execute s17: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 13:59:09.267 UTC [61] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 13:59:09.274 UTC [61] LOG:  statement: BEGIN
+2023-08-07 13:59:09.278 UTC [61] LOG:  execute s14: SELECT "public"."Professor"."id" FROM "public"."Professor" WHERE ("public"."Professor"."id" = $1 AND 1=1)
+2023-08-07 13:59:09.278 UTC [61] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34'
+2023-08-07 13:59:09.281 UTC [61] LOG:  execute s21: UPDATE "public"."Professor" SET "nome" = $1, "email" = $2, "sexo" = $3, "telefone" = $4 WHERE ("public"."Professor"."id" IN ($5) AND ("public"."Professor"."id" = $6 AND 1=1))
+2023-08-07 13:59:09.281 UTC [61] DETAIL:  parameters: $1 = 'reinaldo braga', $2 = 'reinaldoBraga@gmail.com', $3 = 'F', $4 = '11111', $5 = '1e9653fe-020b-496d-96b4-552fcb950e34', $6 = '1e9653fe-020b-496d-96b4-552fcb950e34'
+2023-08-07 13:59:09.286 UTC [61] LOG:  execute s22: SELECT "public"."User"."id", "public"."User"."id_professor" FROM "public"."User" WHERE (("public"."User"."email" = $1 AND 1=1) AND "public"."User"."id_professor" IN ($2)) OFFSET $3
+2023-08-07 13:59:09.286 UTC [61] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1e9653fe-020b-496d-96b4-552fcb950e34', $3 = '0'
+2023-08-07 13:59:09.288 UTC [61] LOG:  statement: ROLLBACK
+2023-08-07 14:00:11.328 UTC [68] LOG:  statement: SELECT CURRENT_SCHEMA() AS schema
+2023-08-07 14:00:11.367 UTC [68] LOG:  statement: select version()
+2023-08-07 14:00:11.372 UTC [68] LOG:  statement: 
+	      SELECT      n.nspname as schema, t.typname as typename, t.oid::int4 as typeid
+	      FROM        pg_type t
+	      LEFT JOIN   pg_catalog.pg_namespace n ON n.oid = t.typnamespace
+	      WHERE       (t.typrelid = 0 OR (SELECT c.relkind = 'c' FROM pg_catalog.pg_class c WHERE c.oid = t.typrelid))
+	      AND     NOT EXISTS(SELECT 1 FROM pg_catalog.pg_type el WHERE el.oid = t.typelem AND el.typarray = t.oid)
+	      AND     n.nspname NOT IN ('pg_catalog', 'information_schema');
+	    
+2023-08-07 14:00:11.442 UTC [68] LOG:  statement: select version()
+2023-08-07 14:00:11.713 UTC [68] LOG:  execute <unnamed>: 
+	    SELECT datname
+	    FROM pg_database
+	    WHERE datistemplate = $1
+	    
+	    ORDER BY datname
+	  
+2023-08-07 14:00:11.713 UTC [68] DETAIL:  parameters: $1 = 'f'
+2023-08-07 14:00:11.897 UTC [69] LOG:  statement: select version()
+2023-08-07 14:00:11.900 UTC [69] LOG:  statement: 
+	    SELECT
+	      t.table_schema as schema,
+	      t.table_name as name,
+	  
+	        pc.relkind as tabletype
+	      FROM information_schema.tables AS t
+	      JOIN pg_class AS pc
+	        ON t.table_name = pc.relname AND quote_ident(t.table_schema) = pc.relnamespace::regnamespace::text
+	      LEFT OUTER JOIN pg_inherits AS i
+	        ON pc.oid = i.inhrelid
+	      WHERE t.table_type NOT LIKE '%VIEW%'
+	      AND i.inhrelid::regclass IS NULL
+	    
+	    
+	    ORDER BY t.table_schema, t.table_name
+	  
+2023-08-07 14:00:12.061 UTC [69] LOG:  statement: 
+	    SELECT
+	      table_schema as schema,
+	      table_name as name
+	    FROM information_schema.views
+	    
+	    ORDER BY table_schema, table_name
+	  
+2023-08-07 14:00:12.070 UTC [69] LOG:  statement: select version()
+2023-08-07 14:00:12.073 UTC [69] LOG:  statement: 
+	    SELECT
+	      schemaname as schema,
+	      matviewname as name
+	    FROM pg_matviews
+	    
+	    order by schemaname, matviewname;
+	  
+2023-08-07 14:00:12.143 UTC [69] LOG:  statement: select version()
+2023-08-07 14:00:12.157 UTC [69] LOG:  statement: 
+	    SELECT
+	      r.specific_name as id,
+	      r.routine_schema as routine_schema,
+	      r.routine_name as name,
+	      r.routine_type as routine_type,
+	      r.data_type as data_type
+	    FROM INFORMATION_SCHEMA.ROUTINES r
+	    where r.routine_schema not in ('sys', 'information_schema',
+	                                'pg_catalog', 'performance_schema')
+	    
+	    ORDER BY routine_schema, routine_name
+	  
+2023-08-07 14:00:12.267 UTC [69] LOG:  statement: 
+	    select
+	        r.routine_schema as routine_schema,
+	        r.specific_name as specific_name,
+	        p.parameter_name as parameter_name,
+	        p.character_maximum_length as char_length,
+	        p.data_type as data_type
+	  from information_schema.routines r
+	  left join information_schema.parameters p
+	            on p.specific_schema = r.routine_schema
+	            and p.specific_name = r.specific_name
+	  where r.routine_schema not in ('sys', 'information_schema',
+	                                'pg_catalog', 'performance_schema')
+	    
+	
+	      AND p.parameter_mode = 'IN'
+	  order by r.routine_schema,
+	          r.specific_name,
+	          p.ordinal_position;
+	
+	  
+2023-08-07 14:00:14.187 UTC [69] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-08-07 14:00:14.187 UTC [69] DETAIL:  parameters: $1 = 'public', $2 = 'User'
+2023-08-07 14:00:14.291 UTC [69] LOG:  execute <unnamed>: 
+	    SELECT
+	        tc.table_schema as from_schema,
+	        tc.table_name as from_table,
+	        kcu.column_name as from_column,
+	        ccu.table_schema AS to_schema,
+	        ccu.table_name AS to_table,
+	        ccu.column_name AS to_column,
+	        tc.constraint_name,
+	        rc.update_rule as update_rule,
+	        rc.delete_rule as delete_rule
+	    FROM
+	        information_schema.table_constraints AS tc
+	        JOIN information_schema.key_column_usage AS kcu
+	          ON tc.constraint_name = kcu.constraint_name
+	          AND tc.table_schema = kcu.table_schema
+	        JOIN information_schema.constraint_column_usage AS ccu
+	          ON ccu.constraint_name = tc.constraint_name
+	          AND ccu.table_schema = tc.table_schema
+	         JOIN information_schema.referential_constraints rc
+	          on tc.constraint_name = rc.constraint_name
+	          and tc.table_schema = rc.constraint_schema
+	    WHERE tc.constraint_type = 'FOREIGN KEY'
+	    AND tc.table_name= $1 and tc.table_schema = $2;
+	
+	  
+2023-08-07 14:00:14.291 UTC [69] DETAIL:  parameters: $1 = 'User', $2 = 'public'
+2023-08-07 14:00:14.305 UTC [69] LOG:  statement: select version()
+2023-08-07 14:00:14.308 UTC [69] LOG:  statement: 
+	    SELECT
+	      a.attname as column_name,
+	      format_type(a.atttypid, a.atttypmod) AS data_type,
+	      a.attnum as position
+	    FROM   pg_index i
+	    JOIN   pg_attribute a ON a.attrelid = i.indrelid
+	                        AND a.attnum = ANY(i.indkey)
+	    WHERE  i.indrelid = '"public"."User"'::regclass
+	    AND    i.indisprimary
+	    ORDER BY a.attnum
+	  
+2023-08-07 14:00:14.428 UTC [69] LOG:  statement: select version()
+2023-08-07 14:00:14.435 UTC [69] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."User"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-08-07 14:02:40.657 UTC [73] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 14:02:40.657 UTC [73] DETAIL:  parameters: $1 = '16537'
+2023-08-07 14:02:40.667 UTC [73] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 14:02:40.667 UTC [73] DETAIL:  parameters: $1 = '16537'
+2023-08-07 14:02:40.673 UTC [73] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:02:40.673 UTC [73] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 14:02:40.685 UTC [73] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 14:02:40.685 UTC [73] DETAIL:  parameters: $1 = '16419'
+2023-08-07 14:02:40.686 UTC [73] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 14:02:40.686 UTC [73] DETAIL:  parameters: $1 = '16419'
+2023-08-07 14:02:40.697 UTC [73] LOG:  execute s3: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:02:40.697 UTC [73] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34', $2 = '1', $3 = '0'
+2023-08-07 14:02:40.705 UTC [73] LOG:  execute s4: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:02:40.705 UTC [73] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 14:02:40.737 UTC [73] LOG:  statement: BEGIN
+2023-08-07 14:02:40.742 UTC [73] LOG:  execute s5: SELECT "public"."Professor"."id" FROM "public"."Professor" WHERE ("public"."Professor"."id" = $1 AND 1=1)
+2023-08-07 14:02:40.742 UTC [73] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34'
+2023-08-07 14:02:40.750 UTC [73] LOG:  execute s6: UPDATE "public"."Professor" SET "nome" = $1, "email" = $2, "sexo" = $3, "telefone" = $4 WHERE ("public"."Professor"."id" IN ($5) AND ("public"."Professor"."id" = $6 AND 1=1))
+2023-08-07 14:02:40.750 UTC [73] DETAIL:  parameters: $1 = 'reinaldo braga', $2 = 'reinaldoBraga@gmail.com', $3 = 'F', $4 = '11111', $5 = '1e9653fe-020b-496d-96b4-552fcb950e34', $6 = '1e9653fe-020b-496d-96b4-552fcb950e34'
+2023-08-07 14:02:40.757 UTC [73] LOG:  execute s7: SELECT "public"."User"."id", "public"."User"."id_professor" FROM "public"."User" WHERE (("public"."User"."email" = $1 AND 1=1) AND "public"."User"."id_professor" IN ($2)) OFFSET $3
+2023-08-07 14:02:40.757 UTC [73] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1e9653fe-020b-496d-96b4-552fcb950e34', $3 = '0'
+2023-08-07 14:02:40.761 UTC [73] LOG:  statement: ROLLBACK
+2023-08-07 14:03:31.867 UTC [29] LOG:  checkpoint starting: time
+2023-08-07 14:03:32.796 UTC [29] LOG:  checkpoint complete: wrote 9 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.851 s, sync=0.016 s, total=0.929 s; sync files=9, longest=0.004 s, average=0.002 s; distance=10 kB, estimate=11 kB
+2023-08-07 14:04:36.574 UTC [76] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 14:04:36.574 UTC [76] DETAIL:  parameters: $1 = '16537'
+2023-08-07 14:04:36.583 UTC [76] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 14:04:36.583 UTC [76] DETAIL:  parameters: $1 = '16537'
+2023-08-07 14:04:36.591 UTC [76] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:04:36.591 UTC [76] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 14:04:36.599 UTC [76] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 14:04:36.599 UTC [76] DETAIL:  parameters: $1 = '16419'
+2023-08-07 14:04:36.601 UTC [76] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 14:04:36.601 UTC [76] DETAIL:  parameters: $1 = '16419'
+2023-08-07 14:04:36.609 UTC [76] LOG:  execute s3: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:04:36.609 UTC [76] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34', $2 = '1', $3 = '0'
+2023-08-07 14:04:36.618 UTC [76] LOG:  execute s4: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:04:36.618 UTC [76] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 14:04:36.636 UTC [76] LOG:  statement: BEGIN
+2023-08-07 14:04:36.641 UTC [76] LOG:  execute s5: SELECT "public"."Professor"."id" FROM "public"."Professor" WHERE ("public"."Professor"."id" = $1 AND 1=1)
+2023-08-07 14:04:36.641 UTC [76] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34'
+2023-08-07 14:04:36.646 UTC [76] LOG:  execute s6: UPDATE "public"."Professor" SET "nome" = $1, "email" = $2, "sexo" = $3, "telefone" = $4 WHERE ("public"."Professor"."id" IN ($5) AND ("public"."Professor"."id" = $6 AND 1=1))
+2023-08-07 14:04:36.646 UTC [76] DETAIL:  parameters: $1 = 'reinaldo braga', $2 = 'reinaldoBraga@gmail.com', $3 = 'F', $4 = '11111', $5 = '1e9653fe-020b-496d-96b4-552fcb950e34', $6 = '1e9653fe-020b-496d-96b4-552fcb950e34'
+2023-08-07 14:04:36.655 UTC [76] LOG:  execute s7: SELECT "public"."User"."id", "public"."User"."id_professor" FROM "public"."User" WHERE (("public"."User"."email" = $1 AND 1=1) AND "public"."User"."id_professor" IN ($2)) OFFSET $3
+2023-08-07 14:04:36.655 UTC [76] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1e9653fe-020b-496d-96b4-552fcb950e34', $3 = '0'
+2023-08-07 14:04:36.657 UTC [76] LOG:  statement: ROLLBACK
+2023-08-07 14:08:31.886 UTC [29] LOG:  checkpoint starting: time
+2023-08-07 14:08:32.409 UTC [29] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.428 s, sync=0.018 s, total=0.524 s; sync files=5, longest=0.010 s, average=0.004 s; distance=4 kB, estimate=10 kB
+2023-08-07 14:13:07.894 UTC [85] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 14:13:07.894 UTC [85] DETAIL:  parameters: $1 = '16537'
+2023-08-07 14:13:07.908 UTC [85] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 14:13:07.908 UTC [85] DETAIL:  parameters: $1 = '16537'
+2023-08-07 14:13:07.916 UTC [85] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:13:07.916 UTC [85] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 14:13:07.926 UTC [85] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 14:13:07.926 UTC [85] DETAIL:  parameters: $1 = '16419'
+2023-08-07 14:13:07.927 UTC [85] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 14:13:07.927 UTC [85] DETAIL:  parameters: $1 = '16419'
+2023-08-07 14:13:07.939 UTC [85] LOG:  execute s3: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:13:07.939 UTC [85] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34', $2 = '1', $3 = '0'
+2023-08-07 14:13:07.946 UTC [85] LOG:  execute s4: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:13:07.946 UTC [85] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 14:13:07.968 UTC [85] LOG:  statement: BEGIN
+2023-08-07 14:13:07.972 UTC [85] LOG:  execute s5: SELECT "public"."Professor"."id" FROM "public"."Professor" WHERE ("public"."Professor"."id" = $1 AND 1=1)
+2023-08-07 14:13:07.972 UTC [85] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34'
+2023-08-07 14:13:07.977 UTC [85] LOG:  execute s6: UPDATE "public"."Professor" SET "nome" = $1, "email" = $2, "sexo" = $3, "telefone" = $4 WHERE ("public"."Professor"."id" IN ($5) AND ("public"."Professor"."id" = $6 AND 1=1))
+2023-08-07 14:13:07.977 UTC [85] DETAIL:  parameters: $1 = 'reinaldo braga', $2 = 'reinaldoBraga@gmail.com', $3 = 'F', $4 = '11111', $5 = '1e9653fe-020b-496d-96b4-552fcb950e34', $6 = '1e9653fe-020b-496d-96b4-552fcb950e34'
+2023-08-07 14:13:07.987 UTC [85] LOG:  execute s7: SELECT "public"."User"."id", "public"."User"."id_professor" FROM "public"."User" WHERE (("public"."User"."email" = $1 AND 1=1) AND "public"."User"."id_professor" IN ($2)) OFFSET $3
+2023-08-07 14:13:07.987 UTC [85] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1e9653fe-020b-496d-96b4-552fcb950e34', $3 = '0'
+2023-08-07 14:13:07.989 UTC [85] LOG:  statement: ROLLBACK
+2023-08-07 14:13:18.648 UTC [86] LOG:  statement: select version()
+2023-08-07 14:13:18.653 UTC [86] LOG:  statement: 
+	    SELECT
+	      t.table_schema as schema,
+	      t.table_name as name,
+	  
+	        pc.relkind as tabletype
+	      FROM information_schema.tables AS t
+	      JOIN pg_class AS pc
+	        ON t.table_name = pc.relname AND quote_ident(t.table_schema) = pc.relnamespace::regnamespace::text
+	      LEFT OUTER JOIN pg_inherits AS i
+	        ON pc.oid = i.inhrelid
+	      WHERE t.table_type NOT LIKE '%VIEW%'
+	      AND i.inhrelid::regclass IS NULL
+	    
+	    
+	    ORDER BY t.table_schema, t.table_name
+	  
+2023-08-07 14:13:18.685 UTC [86] LOG:  statement: 
+	    SELECT
+	      table_schema as schema,
+	      table_name as name
+	    FROM information_schema.views
+	    
+	    ORDER BY table_schema, table_name
+	  
+2023-08-07 14:13:18.691 UTC [86] LOG:  statement: select version()
+2023-08-07 14:13:18.693 UTC [86] LOG:  statement: 
+	    SELECT
+	      schemaname as schema,
+	      matviewname as name
+	    FROM pg_matviews
+	    
+	    order by schemaname, matviewname;
+	  
+2023-08-07 14:13:18.696 UTC [87] LOG:  statement: select version()
+2023-08-07 14:13:18.699 UTC [87] LOG:  statement: 
+	    SELECT
+	      r.specific_name as id,
+	      r.routine_schema as routine_schema,
+	      r.routine_name as name,
+	      r.routine_type as routine_type,
+	      r.data_type as data_type
+	    FROM INFORMATION_SCHEMA.ROUTINES r
+	    where r.routine_schema not in ('sys', 'information_schema',
+	                                'pg_catalog', 'performance_schema')
+	    
+	    ORDER BY routine_schema, routine_name
+	  
+2023-08-07 14:13:18.766 UTC [86] LOG:  statement: select version()
+2023-08-07 14:13:18.783 UTC [87] LOG:  statement: 
+	    select
+	        r.routine_schema as routine_schema,
+	        r.specific_name as specific_name,
+	        p.parameter_name as parameter_name,
+	        p.character_maximum_length as char_length,
+	        p.data_type as data_type
+	  from information_schema.routines r
+	  left join information_schema.parameters p
+	            on p.specific_schema = r.routine_schema
+	            and p.specific_name = r.specific_name
+	  where r.routine_schema not in ('sys', 'information_schema',
+	                                'pg_catalog', 'performance_schema')
+	    
+	
+	      AND p.parameter_mode = 'IN'
+	  order by r.routine_schema,
+	          r.specific_name,
+	          p.ordinal_position;
+	
+	  
+2023-08-07 14:13:18.785 UTC [86] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."User"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-08-07 14:13:18.822 UTC [86] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-08-07 14:13:18.822 UTC [86] DETAIL:  parameters: $1 = 'public', $2 = 'User'
+2023-08-07 14:13:18.912 UTC [86] LOG:  statement: select version()
+2023-08-07 14:13:18.923 UTC [86] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."User"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-08-07 14:13:18.936 UTC [86] LOG:  statement: select version()
+2023-08-07 14:13:18.943 UTC [86] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."User"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-08-07 14:13:19.145 UTC [88] LOG:  statement: select version()
+2023-08-07 14:13:19.148 UTC [88] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."User"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-08-07 14:13:31.519 UTC [29] LOG:  checkpoint starting: time
+2023-08-07 14:13:32.057 UTC [29] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.428 s, sync=0.009 s, total=0.539 s; sync files=5, longest=0.005 s, average=0.002 s; distance=4 kB, estimate=9 kB
+2023-08-07 14:15:11.128 UTC [85] LOG:  statement: SELECT 1
+2023-08-07 14:15:11.130 UTC [85] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:15:11.130 UTC [85] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 14:15:11.136 UTC [85] LOG:  execute s3: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:15:11.136 UTC [85] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34', $2 = '1', $3 = '0'
+2023-08-07 14:15:11.140 UTC [85] LOG:  execute s4: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:15:11.140 UTC [85] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 14:15:11.150 UTC [85] LOG:  statement: BEGIN
+2023-08-07 14:15:11.155 UTC [85] LOG:  execute s5: SELECT "public"."Professor"."id" FROM "public"."Professor" WHERE ("public"."Professor"."id" = $1 AND 1=1)
+2023-08-07 14:15:11.155 UTC [85] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34'
+2023-08-07 14:15:11.158 UTC [85] LOG:  execute s6: UPDATE "public"."Professor" SET "nome" = $1, "email" = $2, "sexo" = $3, "telefone" = $4 WHERE ("public"."Professor"."id" IN ($5) AND ("public"."Professor"."id" = $6 AND 1=1))
+2023-08-07 14:15:11.158 UTC [85] DETAIL:  parameters: $1 = 'reinaldo braga', $2 = 'reinaldoBraga@gmail.com', $3 = 'F', $4 = '11111', $5 = '1e9653fe-020b-496d-96b4-552fcb950e34', $6 = '1e9653fe-020b-496d-96b4-552fcb950e34'
+2023-08-07 14:15:11.160 UTC [85] LOG:  execute s7: SELECT "public"."User"."id", "public"."User"."id_professor" FROM "public"."User" WHERE (("public"."User"."email" = $1 AND 1=1) AND "public"."User"."id_professor" IN ($2)) OFFSET $3
+2023-08-07 14:15:11.160 UTC [85] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1e9653fe-020b-496d-96b4-552fcb950e34', $3 = '0'
+2023-08-07 14:15:11.162 UTC [85] LOG:  statement: ROLLBACK
+2023-08-07 14:15:22.954 UTC [85] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:15:22.954 UTC [85] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 14:15:22.959 UTC [85] LOG:  execute s3: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:15:22.959 UTC [85] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34', $2 = '1', $3 = '0'
+2023-08-07 14:15:22.964 UTC [85] LOG:  execute s4: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:15:22.964 UTC [85] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 14:15:22.973 UTC [85] LOG:  statement: BEGIN
+2023-08-07 14:15:22.976 UTC [85] LOG:  execute s5: SELECT "public"."Professor"."id" FROM "public"."Professor" WHERE ("public"."Professor"."id" = $1 AND 1=1)
+2023-08-07 14:15:22.976 UTC [85] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34'
+2023-08-07 14:15:22.982 UTC [85] LOG:  execute s6: UPDATE "public"."Professor" SET "nome" = $1, "email" = $2, "sexo" = $3, "telefone" = $4 WHERE ("public"."Professor"."id" IN ($5) AND ("public"."Professor"."id" = $6 AND 1=1))
+2023-08-07 14:15:22.982 UTC [85] DETAIL:  parameters: $1 = 'reinaldo braga', $2 = 'reinaldoBraga@gmail.com', $3 = 'F', $4 = '11111', $5 = '1e9653fe-020b-496d-96b4-552fcb950e34', $6 = '1e9653fe-020b-496d-96b4-552fcb950e34'
+2023-08-07 14:15:22.986 UTC [85] LOG:  execute s7: SELECT "public"."User"."id", "public"."User"."id_professor" FROM "public"."User" WHERE (("public"."User"."email" = $1 AND 1=1) AND "public"."User"."id_professor" IN ($2)) OFFSET $3
+2023-08-07 14:15:22.986 UTC [85] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1e9653fe-020b-496d-96b4-552fcb950e34', $3 = '0'
+2023-08-07 14:15:22.989 UTC [85] LOG:  statement: ROLLBACK
+2023-08-07 14:16:18.950 UTC [92] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 14:16:18.950 UTC [92] DETAIL:  parameters: $1 = '16537'
+2023-08-07 14:16:18.964 UTC [92] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 14:16:18.964 UTC [92] DETAIL:  parameters: $1 = '16537'
+2023-08-07 14:16:18.973 UTC [92] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:16:18.973 UTC [92] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 14:16:18.985 UTC [92] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 14:16:18.985 UTC [92] DETAIL:  parameters: $1 = '16419'
+2023-08-07 14:16:18.987 UTC [92] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 14:16:18.987 UTC [92] DETAIL:  parameters: $1 = '16419'
+2023-08-07 14:16:19.000 UTC [92] LOG:  execute s3: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:16:19.000 UTC [92] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34', $2 = '1', $3 = '0'
+2023-08-07 14:16:19.013 UTC [92] LOG:  execute s4: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:16:19.013 UTC [92] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 14:16:19.027 UTC [92] LOG:  statement: BEGIN
+2023-08-07 14:16:19.034 UTC [92] LOG:  execute s5: SELECT "public"."Professor"."id" FROM "public"."Professor" WHERE ("public"."Professor"."id" = $1 AND 1=1)
+2023-08-07 14:16:19.034 UTC [92] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34'
+2023-08-07 14:16:19.038 UTC [92] LOG:  execute s6: UPDATE "public"."Professor" SET "nome" = $1, "email" = $2, "sexo" = $3, "telefone" = $4 WHERE ("public"."Professor"."id" IN ($5) AND ("public"."Professor"."id" = $6 AND 1=1))
+2023-08-07 14:16:19.038 UTC [92] DETAIL:  parameters: $1 = 'reinaldo braga', $2 = 'reinaldoBraga@gmail.com', $3 = 'F', $4 = '11111', $5 = '1e9653fe-020b-496d-96b4-552fcb950e34', $6 = '1e9653fe-020b-496d-96b4-552fcb950e34'
+2023-08-07 14:16:19.044 UTC [92] LOG:  execute s7: SELECT "public"."User"."id", "public"."User"."id_professor" FROM "public"."User" WHERE (("public"."User"."email" = $1 AND 1=1) AND "public"."User"."id_professor" IN ($2)) OFFSET $3
+2023-08-07 14:16:19.044 UTC [92] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1e9653fe-020b-496d-96b4-552fcb950e34', $3 = '0'
+2023-08-07 14:16:19.047 UTC [92] LOG:  statement: ROLLBACK
+2023-08-07 14:18:31.173 UTC [29] LOG:  checkpoint starting: time
+2023-08-07 14:18:31.742 UTC [29] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.428 s, sync=0.019 s, total=0.569 s; sync files=5, longest=0.010 s, average=0.004 s; distance=6 kB, estimate=9 kB
+2023-08-07 14:27:12.681 UTC [104] LOG:  execute s9: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 14:27:12.681 UTC [104] DETAIL:  parameters: $1 = '16419'
+2023-08-07 14:27:12.691 UTC [104] LOG:  execute s10: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 14:27:12.691 UTC [104] DETAIL:  parameters: $1 = '16419'
+2023-08-07 14:27:12.699 UTC [104] LOG:  execute s8: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:27:12.699 UTC [104] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34', $2 = '1', $3 = '0'
+2023-08-07 14:27:38.122 UTC [104] LOG:  statement: SELECT 1
+2023-08-07 14:27:38.124 UTC [104] LOG:  execute s8: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:27:38.124 UTC [104] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34', $2 = '1', $3 = '0'
+2023-08-07 14:30:42.451 UTC [104] LOG:  statement: SELECT 1
+2023-08-07 14:30:42.456 UTC [104] LOG:  execute s9: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 14:30:42.456 UTC [104] DETAIL:  parameters: $1 = '16537'
+2023-08-07 14:30:42.457 UTC [104] LOG:  execute s10: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 14:30:42.457 UTC [104] DETAIL:  parameters: $1 = '16537'
+2023-08-07 14:30:42.463 UTC [104] LOG:  execute s11: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:30:42.463 UTC [104] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 14:30:42.468 UTC [104] LOG:  execute s8: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:30:42.468 UTC [104] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34', $2 = '1', $3 = '0'
+2023-08-07 14:30:42.476 UTC [104] LOG:  execute s12: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:30:42.476 UTC [104] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 14:30:42.486 UTC [104] LOG:  statement: BEGIN
+2023-08-07 14:30:42.497 UTC [104] LOG:  execute s13: SELECT "public"."Professor"."id" FROM "public"."Professor" WHERE ("public"."Professor"."id" = $1 AND 1=1)
+2023-08-07 14:30:42.497 UTC [104] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34'
+2023-08-07 14:30:42.506 UTC [104] LOG:  execute s14: UPDATE "public"."Professor" SET "nome" = $1, "email" = $2 WHERE ("public"."Professor"."id" IN ($3) AND ("public"."Professor"."id" = $4 AND 1=1))
+2023-08-07 14:30:42.506 UTC [104] DETAIL:  parameters: $1 = 'reinaldo braga', $2 = 'reinaldoBraga@gmail.com', $3 = '1e9653fe-020b-496d-96b4-552fcb950e34', $4 = '1e9653fe-020b-496d-96b4-552fcb950e34'
+2023-08-07 14:30:42.513 UTC [104] LOG:  execute s15: SELECT "public"."User"."id", "public"."User"."id_professor" FROM "public"."User" WHERE (("public"."User"."email" = $1 AND 1=1) AND "public"."User"."id_professor" IN ($2)) OFFSET $3
+2023-08-07 14:30:42.513 UTC [104] DETAIL:  parameters: $1 = 'reinaldoBraga@gmail.com', $2 = '1e9653fe-020b-496d-96b4-552fcb950e34', $3 = '0'
+2023-08-07 14:30:42.515 UTC [104] LOG:  statement: ROLLBACK
+2023-08-07 14:30:48.066 UTC [104] LOG:  execute s8: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:30:48.066 UTC [104] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34', $2 = '1', $3 = '0'
+2023-08-07 14:33:31.919 UTC [29] LOG:  checkpoint starting: time
+2023-08-07 14:33:32.462 UTC [29] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.431 s, sync=0.018 s, total=0.544 s; sync files=5, longest=0.010 s, average=0.004 s; distance=5 kB, estimate=9 kB
+2023-08-07 14:34:08.346 UTC [112] LOG:  execute <unnamed>: 
+	    SELECT
+	      table_schema,
+	      table_name,
+	      column_name,
+	      is_nullable,
+	      ordinal_position,
+	      column_default,
+	      CASE
+	        WHEN character_maximum_length is not null  and udt_name != 'text'
+	          THEN CONCAT(udt_name, concat('(', concat(character_maximum_length::varchar(255), ')')))
+	        WHEN datetime_precision is not null THEN
+	          CONCAT(udt_name, concat('(', concat(datetime_precision::varchar(255), ')')))
+	        ELSE udt_name
+	      END as data_type
+	    FROM information_schema.columns
+	    WHERE table_schema = $1 AND table_name = $2
+	    ORDER BY table_schema, table_name, ordinal_position
+	  
+2023-08-07 14:34:08.346 UTC [112] DETAIL:  parameters: $1 = 'public', $2 = 'Aluno'
+2023-08-07 14:34:08.450 UTC [112] LOG:  execute <unnamed>: 
+	    SELECT
+	        tc.table_schema as from_schema,
+	        tc.table_name as from_table,
+	        kcu.column_name as from_column,
+	        ccu.table_schema AS to_schema,
+	        ccu.table_name AS to_table,
+	        ccu.column_name AS to_column,
+	        tc.constraint_name,
+	        rc.update_rule as update_rule,
+	        rc.delete_rule as delete_rule
+	    FROM
+	        information_schema.table_constraints AS tc
+	        JOIN information_schema.key_column_usage AS kcu
+	          ON tc.constraint_name = kcu.constraint_name
+	          AND tc.table_schema = kcu.table_schema
+	        JOIN information_schema.constraint_column_usage AS ccu
+	          ON ccu.constraint_name = tc.constraint_name
+	          AND ccu.table_schema = tc.table_schema
+	         JOIN information_schema.referential_constraints rc
+	          on tc.constraint_name = rc.constraint_name
+	          and tc.table_schema = rc.constraint_schema
+	    WHERE tc.constraint_type = 'FOREIGN KEY'
+	    AND tc.table_name= $1 and tc.table_schema = $2;
+	
+	  
+2023-08-07 14:34:08.450 UTC [112] DETAIL:  parameters: $1 = 'Aluno', $2 = 'public'
+2023-08-07 14:34:08.460 UTC [112] LOG:  statement: select version()
+2023-08-07 14:34:08.463 UTC [112] LOG:  statement: 
+	    SELECT
+	      a.attname as column_name,
+	      format_type(a.atttypid, a.atttypmod) AS data_type,
+	      a.attnum as position
+	    FROM   pg_index i
+	    JOIN   pg_attribute a ON a.attrelid = i.indrelid
+	                        AND a.attnum = ANY(i.indkey)
+	    WHERE  i.indrelid = '"public"."Aluno"'::regclass
+	    AND    i.indisprimary
+	    ORDER BY a.attnum
+	  
+2023-08-07 14:34:08.551 UTC [112] LOG:  statement: select version()
+2023-08-07 14:34:08.560 UTC [112] LOG:  statement: 
+	    SELECT * 
+	    FROM "public"."Aluno"
+	    
+	  
+	    order by "id" asc
+	    LIMIT 100
+	    OFFSET 0
+	    
+2023-08-07 14:34:13.355 UTC [104] LOG:  statement: SELECT 1
+2023-08-07 14:34:13.404 UTC [104] LOG:  execute s16: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:34:13.404 UTC [104] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1', $3 = '0'
+2023-08-07 14:34:13.409 UTC [104] LOG:  statement: BEGIN
+2023-08-07 14:34:13.413 UTC [104] LOG:  execute s17: SELECT "public"."Aluno"."id" FROM "public"."Aluno" WHERE ("public"."Aluno"."id" = $1 AND 1=1)
+2023-08-07 14:34:13.413 UTC [104] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-07 14:34:13.420 UTC [104] LOG:  execute s18: UPDATE "public"."Aluno" SET "nome" = $1 WHERE ("public"."Aluno"."id" IN ($2) AND ("public"."Aluno"."id" = $3 AND 1=1))
+2023-08-07 14:34:13.420 UTC [104] DETAIL:  parameters: $1 = 'john italo', $2 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $3 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-07 14:34:13.425 UTC [104] LOG:  execute s19: SELECT "public"."User"."id", "public"."User"."id_aluno" FROM "public"."User" WHERE (("public"."User"."email" = $1 AND 1=1) AND "public"."User"."id_aluno" IN ($2)) OFFSET $3
+2023-08-07 14:34:13.425 UTC [104] DETAIL:  parameters: $1 = 'jhon_italo2@gmail.com', $2 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $3 = '0'
+2023-08-07 14:34:13.428 UTC [104] LOG:  execute s16: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:34:13.428 UTC [104] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1', $3 = '0'
+2023-08-07 14:34:13.430 UTC [104] LOG:  statement: COMMIT
+2023-08-07 14:34:13.461 UTC [104] LOG:  execute s16: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:34:13.461 UTC [104] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1', $3 = '0'
+2023-08-07 14:34:22.721 UTC [104] LOG:  execute s16: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:34:22.721 UTC [104] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1', $3 = '0'
+2023-08-07 14:34:22.725 UTC [104] LOG:  statement: BEGIN
+2023-08-07 14:34:22.727 UTC [104] LOG:  execute s17: SELECT "public"."Aluno"."id" FROM "public"."Aluno" WHERE ("public"."Aluno"."id" = $1 AND 1=1)
+2023-08-07 14:34:22.727 UTC [104] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-07 14:34:22.729 UTC [104] LOG:  execute s18: UPDATE "public"."Aluno" SET "nome" = $1 WHERE ("public"."Aluno"."id" IN ($2) AND ("public"."Aluno"."id" = $3 AND 1=1))
+2023-08-07 14:34:22.729 UTC [104] DETAIL:  parameters: $1 = 'john italo lucas', $2 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $3 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-07 14:34:22.731 UTC [104] LOG:  execute s19: SELECT "public"."User"."id", "public"."User"."id_aluno" FROM "public"."User" WHERE (("public"."User"."email" = $1 AND 1=1) AND "public"."User"."id_aluno" IN ($2)) OFFSET $3
+2023-08-07 14:34:22.731 UTC [104] DETAIL:  parameters: $1 = 'jhon_italo2@gmail.com', $2 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $3 = '0'
+2023-08-07 14:34:22.734 UTC [104] LOG:  execute s16: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:34:22.734 UTC [104] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1', $3 = '0'
+2023-08-07 14:34:22.737 UTC [104] LOG:  statement: COMMIT
+2023-08-07 14:34:22.742 UTC [104] LOG:  execute s16: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:34:22.742 UTC [104] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1', $3 = '0'
+2023-08-07 14:34:43.377 UTC [104] LOG:  statement: SELECT 1
+2023-08-07 14:34:43.379 UTC [104] LOG:  execute s11: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:34:43.379 UTC [104] DETAIL:  parameters: $1 = 'jhon_italo@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 14:34:43.384 UTC [104] LOG:  execute s16: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:34:43.384 UTC [104] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1', $3 = '0'
+2023-08-07 14:34:43.390 UTC [104] LOG:  execute s20: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:34:43.390 UTC [104] DETAIL:  parameters: $1 = 'jhon_italo@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 14:34:43.393 UTC [104] LOG:  statement: BEGIN
+2023-08-07 14:34:43.394 UTC [104] LOG:  execute s17: SELECT "public"."Aluno"."id" FROM "public"."Aluno" WHERE ("public"."Aluno"."id" = $1 AND 1=1)
+2023-08-07 14:34:43.394 UTC [104] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-07 14:34:43.398 UTC [104] LOG:  execute s21: UPDATE "public"."Aluno" SET "nome" = $1, "email" = $2 WHERE ("public"."Aluno"."id" IN ($3) AND ("public"."Aluno"."id" = $4 AND 1=1))
+2023-08-07 14:34:43.398 UTC [104] DETAIL:  parameters: $1 = 'john italo lucas', $2 = 'jhon_italo@gmail.com', $3 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $4 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-07 14:34:43.401 UTC [104] LOG:  execute s19: SELECT "public"."User"."id", "public"."User"."id_aluno" FROM "public"."User" WHERE (("public"."User"."email" = $1 AND 1=1) AND "public"."User"."id_aluno" IN ($2)) OFFSET $3
+2023-08-07 14:34:43.401 UTC [104] DETAIL:  parameters: $1 = 'jhon_italo2@gmail.com', $2 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $3 = '0'
+2023-08-07 14:34:43.405 UTC [104] LOG:  execute s22: UPDATE "public"."User" SET "email" = $1 WHERE ("public"."User"."id" IN ($2) AND ("public"."User"."email" = $3 AND 1=1))
+2023-08-07 14:34:43.405 UTC [104] DETAIL:  parameters: $1 = 'jhon_italo@gmail.com', $2 = '28087502-247f-4580-80c7-79d7722dda34', $3 = 'jhon_italo2@gmail.com'
+2023-08-07 14:34:43.407 UTC [104] LOG:  execute s16: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:34:43.407 UTC [104] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1', $3 = '0'
+2023-08-07 14:34:43.408 UTC [104] LOG:  statement: COMMIT
+2023-08-07 14:34:43.413 UTC [104] LOG:  execute s16: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:34:43.413 UTC [104] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1', $3 = '0'
+2023-08-07 14:38:31.565 UTC [29] LOG:  checkpoint starting: time
+2023-08-07 14:38:32.137 UTC [29] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.428 s, sync=0.017 s, total=0.572 s; sync files=5, longest=0.009 s, average=0.004 s; distance=12 kB, estimate=12 kB
+2023-08-07 14:40:03.250 UTC [119] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 14:40:03.250 UTC [119] DETAIL:  parameters: $1 = '16537'
+2023-08-07 14:40:03.261 UTC [119] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 14:40:03.261 UTC [119] DETAIL:  parameters: $1 = '16537'
+2023-08-07 14:40:03.267 UTC [119] LOG:  execute s0: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:40:03.267 UTC [119] DETAIL:  parameters: $1 = 'jhon_italo@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 14:40:03.427 UTC [120] LOG:  execute s4: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 14:40:03.427 UTC [120] DETAIL:  parameters: $1 = '16537'
+2023-08-07 14:40:03.434 UTC [120] LOG:  execute s5: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 14:40:03.434 UTC [120] DETAIL:  parameters: $1 = '16537'
+2023-08-07 14:40:03.439 UTC [120] LOG:  execute s3: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:40:03.439 UTC [120] DETAIL:  parameters: $1 = 'jhon_italo@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 14:40:10.535 UTC [120] LOG:  execute s4: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 14:40:10.535 UTC [120] DETAIL:  parameters: $1 = '16419'
+2023-08-07 14:40:10.536 UTC [120] LOG:  execute s5: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 14:40:10.536 UTC [120] DETAIL:  parameters: $1 = '16419'
+2023-08-07 14:40:10.545 UTC [120] LOG:  execute s6: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE 1=1 OFFSET $1
+2023-08-07 14:40:10.545 UTC [120] DETAIL:  parameters: $1 = '0'
+2023-08-07 14:40:22.718 UTC [120] LOG:  statement: SELECT 1
+2023-08-07 14:40:22.722 UTC [120] LOG:  execute s7: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:40:22.722 UTC [120] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34', $2 = '1', $3 = '0'
+2023-08-07 14:41:50.909 UTC [123] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 14:41:50.909 UTC [123] DETAIL:  parameters: $1 = '16419'
+2023-08-07 14:41:50.921 UTC [123] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 14:41:50.921 UTC [123] DETAIL:  parameters: $1 = '16419'
+2023-08-07 14:41:50.928 UTC [123] LOG:  execute s0: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:41:50.928 UTC [123] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34', $2 = '1', $3 = '0'
+2023-08-07 14:43:19.360 UTC [125] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 14:43:19.360 UTC [125] DETAIL:  parameters: $1 = '16419'
+2023-08-07 14:43:19.370 UTC [125] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 14:43:19.370 UTC [125] DETAIL:  parameters: $1 = '16419'
+2023-08-07 14:43:19.380 UTC [125] LOG:  execute s0: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:43:19.380 UTC [125] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34', $2 = '1', $3 = '0'
+2023-08-07 14:43:24.776 UTC [125] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 14:43:24.776 UTC [125] DETAIL:  parameters: $1 = '16537'
+2023-08-07 14:43:24.779 UTC [125] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 14:43:24.779 UTC [125] DETAIL:  parameters: $1 = '16537'
+2023-08-07 14:43:24.785 UTC [125] LOG:  execute s3: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:43:24.785 UTC [125] DETAIL:  parameters: $1 = 'jhon_italo@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 14:43:29.280 UTC [125] LOG:  execute s3: SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."status", "public"."User"."id_departamento", "public"."User"."id_professor", "public"."User"."id_aluno" FROM "public"."User" WHERE "public"."User"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:43:29.280 UTC [125] DETAIL:  parameters: $1 = 'jhon_italo2@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 14:43:29.289 UTC [125] LOG:  execute s4: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:43:29.289 UTC [125] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1', $3 = '0'
+2023-08-07 14:43:29.297 UTC [125] LOG:  execute s5: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."email" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:43:29.297 UTC [125] DETAIL:  parameters: $1 = 'jhon_italo2@gmail.com', $2 = '1', $3 = '0'
+2023-08-07 14:43:29.308 UTC [125] LOG:  statement: BEGIN
+2023-08-07 14:43:29.313 UTC [125] LOG:  execute s6: SELECT "public"."Aluno"."id" FROM "public"."Aluno" WHERE ("public"."Aluno"."id" = $1 AND 1=1)
+2023-08-07 14:43:29.313 UTC [125] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-07 14:43:29.319 UTC [125] LOG:  execute s7: UPDATE "public"."Aluno" SET "nome" = $1, "email" = $2 WHERE ("public"."Aluno"."id" IN ($3) AND ("public"."Aluno"."id" = $4 AND 1=1))
+2023-08-07 14:43:29.319 UTC [125] DETAIL:  parameters: $1 = 'john italo lucas', $2 = 'jhon_italo2@gmail.com', $3 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $4 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-07 14:43:29.333 UTC [125] LOG:  execute s8: SELECT "public"."User"."id", "public"."User"."id_aluno" FROM "public"."User" WHERE (("public"."User"."email" = $1 AND 1=1) AND "public"."User"."id_aluno" IN ($2)) OFFSET $3
+2023-08-07 14:43:29.333 UTC [125] DETAIL:  parameters: $1 = 'jhon_italo@gmail.com', $2 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $3 = '0'
+2023-08-07 14:43:29.337 UTC [125] LOG:  execute s9: UPDATE "public"."User" SET "email" = $1 WHERE ("public"."User"."id" IN ($2) AND ("public"."User"."email" = $3 AND 1=1))
+2023-08-07 14:43:29.337 UTC [125] DETAIL:  parameters: $1 = 'jhon_italo2@gmail.com', $2 = '28087502-247f-4580-80c7-79d7722dda34', $3 = 'jhon_italo@gmail.com'
+2023-08-07 14:43:29.340 UTC [125] LOG:  execute s4: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:43:29.340 UTC [125] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1', $3 = '0'
+2023-08-07 14:43:29.342 UTC [125] LOG:  statement: COMMIT
+2023-08-07 14:43:29.360 UTC [125] LOG:  execute s4: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:43:29.360 UTC [125] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1', $3 = '0'
+2023-08-07 14:43:31.229 UTC [29] LOG:  checkpoint starting: time
+2023-08-07 14:43:31.899 UTC [29] LOG:  checkpoint complete: wrote 6 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.527 s, sync=0.069 s, total=0.670 s; sync files=6, longest=0.030 s, average=0.012 s; distance=12 kB, estimate=12 kB
+2023-08-07 14:43:54.203 UTC [125] LOG:  statement: SELECT 1
+2023-08-07 14:43:54.207 UTC [125] LOG:  execute s4: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:43:54.207 UTC [125] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1', $3 = '0'
+2023-08-07 14:43:54.217 UTC [125] LOG:  statement: BEGIN
+2023-08-07 14:43:54.221 UTC [125] LOG:  execute s6: SELECT "public"."Aluno"."id" FROM "public"."Aluno" WHERE ("public"."Aluno"."id" = $1 AND 1=1)
+2023-08-07 14:43:54.221 UTC [125] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-07 14:43:54.229 UTC [125] LOG:  execute s10: UPDATE "public"."Aluno" SET "nome" = $1 WHERE ("public"."Aluno"."id" IN ($2) AND ("public"."Aluno"."id" = $3 AND 1=1))
+2023-08-07 14:43:54.229 UTC [125] DETAIL:  parameters: $1 = 'john italo lucas', $2 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $3 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-07 14:43:54.239 UTC [125] LOG:  execute s8: SELECT "public"."User"."id", "public"."User"."id_aluno" FROM "public"."User" WHERE (("public"."User"."email" = $1 AND 1=1) AND "public"."User"."id_aluno" IN ($2)) OFFSET $3
+2023-08-07 14:43:54.239 UTC [125] DETAIL:  parameters: $1 = 'jhon_italo2@gmail.com', $2 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $3 = '0'
+2023-08-07 14:43:54.246 UTC [125] LOG:  execute s4: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:43:54.246 UTC [125] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1', $3 = '0'
+2023-08-07 14:43:54.248 UTC [125] LOG:  statement: COMMIT
+2023-08-07 14:43:54.256 UTC [125] LOG:  execute s4: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:43:54.256 UTC [125] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1', $3 = '0'
+2023-08-07 14:45:40.175 UTC [129] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 14:45:40.175 UTC [129] DETAIL:  parameters: $1 = '16419'
+2023-08-07 14:45:40.183 UTC [129] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 14:45:40.183 UTC [129] DETAIL:  parameters: $1 = '16419'
+2023-08-07 14:45:40.189 UTC [129] LOG:  execute s0: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:45:40.189 UTC [129] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1', $3 = '0'
+2023-08-07 14:45:40.202 UTC [129] LOG:  statement: BEGIN
+2023-08-07 14:45:40.207 UTC [129] LOG:  execute s3: SELECT "public"."Aluno"."id" FROM "public"."Aluno" WHERE ("public"."Aluno"."id" = $1 AND 1=1)
+2023-08-07 14:45:40.207 UTC [129] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-07 14:45:40.211 UTC [129] LOG:  execute s4: UPDATE "public"."Aluno" SET "nome" = $1 WHERE ("public"."Aluno"."id" IN ($2) AND ("public"."Aluno"."id" = $3 AND 1=1))
+2023-08-07 14:45:40.211 UTC [129] DETAIL:  parameters: $1 = 'john italo lucas', $2 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $3 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-07 14:45:40.230 UTC [129] LOG:  execute s5: SELECT "public"."User"."id", "public"."User"."id_aluno" FROM "public"."User" WHERE (("public"."User"."email" = $1 AND 1=1) AND "public"."User"."id_aluno" IN ($2)) OFFSET $3
+2023-08-07 14:45:40.230 UTC [129] DETAIL:  parameters: $1 = 'jhon_italo2@gmail.com', $2 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $3 = '0'
+2023-08-07 14:45:40.232 UTC [129] LOG:  execute s0: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:45:40.232 UTC [129] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1', $3 = '0'
+2023-08-07 14:45:40.234 UTC [129] LOG:  statement: COMMIT
+2023-08-07 14:45:40.246 UTC [129] LOG:  execute s0: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:45:40.246 UTC [129] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1', $3 = '0'
+2023-08-07 14:45:51.219 UTC [129] LOG:  execute s6: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE 1=1 OFFSET $1
+2023-08-07 14:45:51.219 UTC [129] DETAIL:  parameters: $1 = '0'
+2023-08-07 14:45:53.798 UTC [129] LOG:  execute s7: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:45:53.798 UTC [129] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34', $2 = '1', $3 = '0'
+2023-08-07 14:46:36.084 UTC [129] LOG:  statement: SELECT 1
+2023-08-07 14:46:36.095 UTC [129] LOG:  execute s7: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:46:36.095 UTC [129] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34', $2 = '1', $3 = '0'
+2023-08-07 14:46:42.067 UTC [129] LOG:  execute s0: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:46:42.067 UTC [129] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1', $3 = '0'
+2023-08-07 14:46:42.073 UTC [129] LOG:  statement: BEGIN
+2023-08-07 14:46:42.075 UTC [129] LOG:  execute s3: SELECT "public"."Aluno"."id" FROM "public"."Aluno" WHERE ("public"."Aluno"."id" = $1 AND 1=1)
+2023-08-07 14:46:42.075 UTC [129] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-07 14:46:42.077 UTC [129] LOG:  execute s4: UPDATE "public"."Aluno" SET "nome" = $1 WHERE ("public"."Aluno"."id" IN ($2) AND ("public"."Aluno"."id" = $3 AND 1=1))
+2023-08-07 14:46:42.077 UTC [129] DETAIL:  parameters: $1 = 'john italo lucas', $2 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $3 = '8cff5ae3-5882-49ac-8318-8218a69666d8'
+2023-08-07 14:46:42.080 UTC [129] LOG:  execute s5: SELECT "public"."User"."id", "public"."User"."id_aluno" FROM "public"."User" WHERE (("public"."User"."email" = $1 AND 1=1) AND "public"."User"."id_aluno" IN ($2)) OFFSET $3
+2023-08-07 14:46:42.080 UTC [129] DETAIL:  parameters: $1 = 'jhon_italo2@gmail.com', $2 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $3 = '0'
+2023-08-07 14:46:42.083 UTC [129] LOG:  execute s0: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:46:42.083 UTC [129] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1', $3 = '0'
+2023-08-07 14:46:42.085 UTC [129] LOG:  statement: COMMIT
+2023-08-07 14:46:42.091 UTC [129] LOG:  execute s0: SELECT "public"."Aluno"."id", "public"."Aluno"."nome", "public"."Aluno"."email", "public"."Aluno"."cpf", "public"."Aluno"."sexo", "public"."Aluno"."telefone", "public"."Aluno"."createdAt", "public"."Aluno"."id_turma", "public"."Aluno"."id_curso" FROM "public"."Aluno" WHERE "public"."Aluno"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:46:42.091 UTC [129] DETAIL:  parameters: $1 = '8cff5ae3-5882-49ac-8318-8218a69666d8', $2 = '1', $3 = '0'
+2023-08-07 14:48:32.001 UTC [29] LOG:  checkpoint starting: time
+2023-08-07 14:48:32.280 UTC [29] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.224 s, sync=0.007 s, total=0.280 s; sync files=3, longest=0.004 s, average=0.003 s; distance=7 kB, estimate=11 kB
+2023-08-07 14:48:56.769 UTC [133] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 14:48:56.769 UTC [133] DETAIL:  parameters: $1 = '16419'
+2023-08-07 14:48:56.781 UTC [133] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 14:48:56.781 UTC [133] DETAIL:  parameters: $1 = '16419'
+2023-08-07 14:48:56.792 UTC [133] LOG:  execute s0: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:48:56.792 UTC [133] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34', $2 = '1', $3 = '0'
+2023-08-07 14:49:02.234 UTC [133] LOG:  execute s0: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:49:02.234 UTC [133] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34', $2 = '1', $3 = '0'
+2023-08-07 14:51:36.900 UTC [137] LOG:  execute s1: SELECT t.typname, t.typtype, t.typelem, r.rngsubtype, t.typbasetype, n.nspname, t.typrelid
+	FROM pg_catalog.pg_type t
+	LEFT OUTER JOIN pg_catalog.pg_range r ON r.rngtypid = t.oid
+	INNER JOIN pg_catalog.pg_namespace n ON t.typnamespace = n.oid
+	WHERE t.oid = $1
+	
+2023-08-07 14:51:36.900 UTC [137] DETAIL:  parameters: $1 = '16419'
+2023-08-07 14:51:36.914 UTC [137] LOG:  execute s2: SELECT enumlabel
+	FROM pg_catalog.pg_enum
+	WHERE enumtypid = $1
+	ORDER BY enumsortorder
+	
+2023-08-07 14:51:36.914 UTC [137] DETAIL:  parameters: $1 = '16419'
+2023-08-07 14:51:36.924 UTC [137] LOG:  execute s0: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:51:36.924 UTC [137] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34', $2 = '1', $3 = '0'
+2023-08-07 14:51:36.938 UTC [137] LOG:  statement: BEGIN
+2023-08-07 14:51:36.943 UTC [137] LOG:  execute s3: SELECT "public"."Professor"."id" FROM "public"."Professor" WHERE ("public"."Professor"."id" = $1 AND 1=1)
+2023-08-07 14:51:36.943 UTC [137] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34'
+2023-08-07 14:51:36.948 UTC [137] LOG:  execute s4: UPDATE "public"."Professor" SET "nome" = $1 WHERE ("public"."Professor"."id" IN ($2) AND ("public"."Professor"."id" = $3 AND 1=1))
+2023-08-07 14:51:36.948 UTC [137] DETAIL:  parameters: $1 = 'reinaldo braga', $2 = '1e9653fe-020b-496d-96b4-552fcb950e34', $3 = '1e9653fe-020b-496d-96b4-552fcb950e34'
+2023-08-07 14:51:36.964 UTC [137] LOG:  execute s5: SELECT "public"."User"."id", "public"."User"."id_professor" FROM "public"."User" WHERE (("public"."User"."email" = $1 AND 1=1) AND "public"."User"."id_professor" IN ($2)) OFFSET $3
+2023-08-07 14:51:36.964 UTC [137] DETAIL:  parameters: $1 = 'reinaldo@gmail.com', $2 = '1e9653fe-020b-496d-96b4-552fcb950e34', $3 = '0'
+2023-08-07 14:51:36.967 UTC [137] LOG:  execute s0: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:51:36.967 UTC [137] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34', $2 = '1', $3 = '0'
+2023-08-07 14:51:36.970 UTC [137] LOG:  statement: COMMIT
+2023-08-07 14:51:36.989 UTC [137] LOG:  execute s0: SELECT "public"."Professor"."id", "public"."Professor"."nome", "public"."Professor"."email", "public"."Professor"."cpf", "public"."Professor"."sexo", "public"."Professor"."telefone", "public"."Professor"."createt_at", "public"."Professor"."id_departamento" FROM "public"."Professor" WHERE "public"."Professor"."id" = $1 LIMIT $2 OFFSET $3
+2023-08-07 14:51:36.989 UTC [137] DETAIL:  parameters: $1 = '1e9653fe-020b-496d-96b4-552fcb950e34', $2 = '1', $3 = '0'
